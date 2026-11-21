@@ -1,0 +1,102 @@
+{
+  "id": "openai.chat/unicode-lone-surrogate-in-names",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "unicode",
+  "description": "Lone surrogates in a tool name and description (wire escapes) are repaired.",
+  "input": null,
+  "input_raw_b64": "eyJtb2RlbCI6Im0iLCJtZXNzYWdlcyI6W3sicm9sZSI6InVzZXIiLCJjb250ZW50IjoieCJ9XSwidG9vbHMiOlt7InR5cGUiOiJmdW5jdGlvbiIsImZ1bmN0aW9uIjp7Im5hbWUiOiJmXHVkODAwIiwiZGVzY3JpcHRpb24iOiJkXHVkYzAwIiwicGFyYW1ldGVycyI6e319fV19",
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "d\ufffd",
+          "name": "f\ufffd",
+          "schema": "{}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NkZO+/vWRuYW1lZGbvv71mc2NoZW1hYnt9aG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZheA==",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "d\ufffd",
+          "name": "f\ufffd",
+          "schema": "{}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NkZO+/vWRuYW1lZGbvv71mc2NoZW1hYnt9aG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZheA==",
+    "keys": {
+      "0": {
+        "head": "00b69616dfc0c5d022f1bdf236f9ae52b4",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "0089daf5a9bc85d1c6ee68e57052872255",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253"
+        ],
+        "nodes": [
+          "00f0c5aa0d5a53cb770abe81d21fa5d653"
+        ],
+        "loose_head": "009c762b6a3f09c0164199d979f714c529",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "004668db01c9f33dc9c6cc752115be7ef6",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4"
+        ],
+        "loose_nodes": [
+          "006b05a05c00544c9d9867330528cc77d7"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ff14f4bd007e7e2db7ddd697769c675679",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ffae2c21d23f54ab1f3af3f50d4902dfe8",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7"
+        ],
+        "nodes": [
+          "ff84f97ea58d9ee9e59816b29e0cd2e2e6"
+        ],
+        "loose_head": "ff7b1fe2e869f26c6dd47f02b4f90cd349",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff391fd2d8b218ec994c9b0d49c4049aaa",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec"
+        ],
+        "loose_nodes": [
+          "ff6a1ff701e72af8ef2c8b2164d5484d83"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

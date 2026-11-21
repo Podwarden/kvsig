@@ -1,0 +1,297 @@
+{
+  "id": "openai.responses/tool-roundtrip",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "basics",
+  "description": "System, tool, reasoning, text, one tool call and its result.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "List /tmp"
+      },
+      {
+        "type": "reasoning",
+        "id": "rs_1",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": "I should call ls"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "Listing now."
+          }
+        ]
+      },
+      {
+        "type": "function_call",
+        "call_id": "c1",
+        "name": "ls",
+        "arguments": "{\"path\": \"/tmp\"}"
+      },
+      {
+        "type": "function_call_output",
+        "call_id": "c1",
+        "output": "a.txt\nb.txt"
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": "thanks"
+      }
+    ],
+    "instructions": "You can use tools.",
+    "tools": [
+      {
+        "type": "function",
+        "name": "ls",
+        "description": "List a directory",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        },
+        "strict": false
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You can use tools."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "List /tmp"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "reasoning",
+              "v": "I should call ls"
+            },
+            {
+              "t": "text",
+              "v": "Listing now."
+            },
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/tmp\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "a.txt\nb.txt"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "thanks"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdnJZb3UgY2FuIHVzZSB0b29scy5ldG9vbHOBo2RkZXNjcExpc3QgYSBkaXJlY3RvcnlkbmFtZWJsc2ZzY2hlbWF4TXsidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsicGF0aCI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJwYXRoIl19aG1lc3NhZ2VzhKJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZpTGlzdCAvdG1womRyb2xlaWFzc2lzdGFudGVwYXJ0c4OiYXRpcmVhc29uaW5nYXZwSSBzaG91bGQgY2FsbCBsc6JhdGR0ZXh0YXZsTGlzdGluZyBub3cupGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NveyJwYXRoIjoiL3RtcCJ9ZG5hbWVibHOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2a2EudHh0CmIudHh0omRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmZ0aGFua3M=",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You can use tools."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "List /tmp"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Listing now."
+            },
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/tmp\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "a.txt b.txt"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "thanks"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdnJZb3UgY2FuIHVzZSB0b29scy5ldG9vbHOBo2RkZXNjcExpc3QgYSBkaXJlY3RvcnlkbmFtZWJsc2ZzY2hlbWF4TXsicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXSwidHlwZSI6Im9iamVjdCJ9aG1lc3NhZ2VzhKJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZpTGlzdCAvdG1womRyb2xlaWFzc2lzdGFudGVwYXJ0c4KiYXRkdGV4dGF2bExpc3Rpbmcgbm93LqRhdGl0b29sX2NhbGxjcmVmAGRhcmdzb3sicGF0aCI6Ii90bXAifWRuYW1lYmxzomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgBlcGFydHOBomF0ZHRleHRhdmthLnR4dCBiLnR4dKJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZmdGhhbmtz",
+    "keys": {
+      "0": {
+        "head": "00b630c6f284a7d78021f6eab1bd1d9a5f",
+        "sys": "00db2a9805321b631c85d90b5cb01b8132",
+        "tools": "00a6f0fc4d3200cad72142381cc1373fac",
+        "msgs": [
+          "0039379590130c49f3baef628f8287d7cb",
+          "004c08074d668c7d3c6300bb3a4fa19385",
+          "0007f5e98c2af79b845c67c8ee2432535f",
+          "009a00e57469fd4e0c3f4a338709251d2b"
+        ],
+        "nodes": [
+          "0000f4cac4f4db06f4dd2fdc5c73bc9723",
+          "004d0b6021efe921fccf376a10570791f1",
+          "00e9ee8beefdd7d45aace04b29221b86e6",
+          "00aaaa0bf82fae8ee096b6d4276ceaa248"
+        ],
+        "loose_head": "00315b6baf6d8c363dbae9bd4ca5631f96",
+        "loose_sys": "008b9fa28cdbc292a0876763f7ccd81d53",
+        "loose_tools": "00c2381d696f32f448d72e68c2ab636a6b",
+        "loose_msgs": [
+          "005af14b19e72807991663736aebbf29e0",
+          "007b382cc2f670b714b31958f903f11d3f",
+          "0003fa4c81bd700a2e910db29bce43927a",
+          "00e9a12fcdd6fdc68915fe6f2a54fba44d"
+        ],
+        "loose_nodes": [
+          "006e47785625b712313f3ef4056199a1c7",
+          "00ce044b0a1976f8382bf71279d7fec535",
+          "0013f8e0ad3cf4f7207f6913a418f25120",
+          "00b1487a901a1d88f53fe0507316c2a1c1"
+        ],
+        "conv": "006345bf7d34d235bbdcc164dd2951b807"
+      },
+      "255": {
+        "head": "ffd250a31944b727701887c2173801b5f9",
+        "sys": "ffbdf69e622b8900718627c3a11c799fd0",
+        "tools": "ff24b0e119a0a56335180c12e8aa192468",
+        "msgs": [
+          "ff4fcec924ed2675f230a438262fef65b2",
+          "ff012e44a9271f9d0e26581deb521c93c7",
+          "ff444c5a35d35a66dae07cea45ed3494b9",
+          "ff96d84758f1a45b96e8cd368a052d228c"
+        ],
+        "nodes": [
+          "ff5012ead1cd003dfbbff41506c95263b8",
+          "ffe8e4febd5114a7b45d9e3cfce97fcc95",
+          "ffa4f1c6bb670bb11dd70622789f5575af",
+          "ff7578e9f02e8e4183067f1862413e0716"
+        ],
+        "loose_head": "ff12879211968f1321c4fa8ded7edc618a",
+        "loose_sys": "ff75139f632881da76ea377db20bc569ba",
+        "loose_tools": "ff7248c7b899560c717b25ed247c64482e",
+        "loose_msgs": [
+          "ff1e4b8e4aea0888c221e4a76f9b8e73a9",
+          "ffbbff56d63717719ddd14f6cc074c61a4",
+          "ff64e846d1f096f4792a8b2ec74dc93f4b",
+          "ff3e8663f77d848c96f543f526282b8851"
+        ],
+        "loose_nodes": [
+          "ffc57b7b0a6e934daf0d47379e74f94b74",
+          "ff89563060b302e4dfbd42dde8602dbe48",
+          "ff6bf09f533ffd0261e839c1c86c28adb4",
+          "ff2a7dc5d742f1d81adfc5e429d2abcdd3"
+        ],
+        "conv": "ffee15a7d0ee0f5328256c840f599fea07"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/tool-roundtrip",
+    "anthropic.messages/tool-roundtrip"
+  ]
+}

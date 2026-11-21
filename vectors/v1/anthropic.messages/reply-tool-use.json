@@ -1,0 +1,343 @@
+{
+  "id": "anthropic.messages/reply-tool-use",
+  "spec": "kvsig/1",
+  "level": 3,
+  "dialect": "anthropic.messages",
+  "category": "reply",
+  "description": "Two tool_use blocks.",
+  "input": {
+    "model": "m",
+    "max_tokens": 9,
+    "tools": [
+      {
+        "name": "ls",
+        "description": "List",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    ],
+    "messages": [
+      {
+        "role": "user",
+        "content": "go"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "toolu_a",
+            "name": "ls",
+            "input": {
+              "path": "/a"
+            }
+          },
+          {
+            "type": "tool_use",
+            "id": "toolu_b",
+            "name": "ls",
+            "input": {
+              "path": "/b"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_b",
+            "content": "B"
+          },
+          {
+            "type": "tool_result",
+            "tool_use_id": "toolu_a",
+            "content": "A"
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/a\"}",
+              "name": "ls"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{\"path\":\"/b\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "B"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "A"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NkTGlzdGRuYW1lYmxzZnNjaGVtYXhNeyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXX1obWVzc2FnZXOEomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOCpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NteyJwYXRoIjoiL2EifWRuYW1lYmxzpGF0aXRvb2xfY2FsbGNyZWYBZGFyZ3NteyJwYXRoIjoiL2IifWRuYW1lYmxzomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgFlcGFydHOBomF0ZHRleHRhdmFComRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgBlcGFydHOBomF0ZHRleHRhdmFB",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/a\"}",
+              "name": "ls"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{\"path\":\"/b\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "B"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "A"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NkTGlzdGRuYW1lYmxzZnNjaGVtYXhNeyJwcm9wZXJ0aWVzIjp7InBhdGgiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsicGF0aCJdLCJ0eXBlIjoib2JqZWN0In1obWVzc2FnZXOEomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOCpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NteyJwYXRoIjoiL2EifWRuYW1lYmxzpGF0aXRvb2xfY2FsbGNyZWYBZGFyZ3NteyJwYXRoIjoiL2IifWRuYW1lYmxzomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgFlcGFydHOBomF0ZHRleHRhdmFComRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgBlcGFydHOBomF0ZHRleHRhdmFB",
+    "keys": {
+      "0": {
+        "head": "0079b8b38ff538438b88b459dbeff18efc",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00828fa98834dba70e90595731077f5724",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf",
+          "004182eba78a15594f3b39fa694e4419d7",
+          "00dcc15c8e5c2c7c70994164ab2f21b531",
+          "008a4831f1694aed5a3652b3ee13a91938"
+        ],
+        "nodes": [
+          "0086d00d6e9bfeaa58be07cef41b724992",
+          "0007b8bbe4a8c17e53aaee01b818911ddf",
+          "0065bfa8a0d194bd8c1b75279a5b01f274",
+          "00ba248678f07c53bfb5510ded8f1c943e"
+        ],
+        "loose_head": "002188aefb8d33ee955d2a9b4f8ca3eae2",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0008230f1778ea9af662e08a863ad6d689",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c",
+          "002dbd2c4bff5a1df2668126218ef51614",
+          "00db77ea4184fdeae3c531d203ae3b01be",
+          "00410de19a4771ad2aad3bf7e85765a755"
+        ],
+        "loose_nodes": [
+          "0041877b202a0ad468b26b229776aa1979",
+          "00edfcbfd652d1bffaf82cf88ca4f7ec0f",
+          "001eb0b1b69cb185650b4714319b88b823",
+          "000a99d1dc397c72810af3900eb25e2c5b"
+        ],
+        "conv": "00820e5a00b3fd3fac2e0ec9c4cf180996"
+      },
+      "255": {
+        "head": "ff0165735353a9f126f30d2ec909189726",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ffa7a1a984959e3a8e67f45cd34c29048c",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988",
+          "ff262da332828272c6aae35ae268bcdf5c",
+          "ff00e1afff3033ce84755674f6ce432677",
+          "ff17d0f091497c32804091eb3777c0c2b8"
+        ],
+        "nodes": [
+          "ff916d1fe56272c799459e339b31d7371f",
+          "ff6416312b71b2d55b0d68229b98cc857c",
+          "ff0352d57f5a63bd7788a72d38fcd141b7",
+          "ff9a7555fa7c9b656c400c5b1c2fc4207c"
+        ],
+        "loose_head": "ff5fb23289e2c4d8664ba5bf35b92228aa",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff7784f1065228856dd567103d7f27139c",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d",
+          "ffe43c046f64116bf219c457fb478f6cc5",
+          "ff5b54d34328f08690d774f4407c3baa77",
+          "ff67748c9b83a763c1197c422a4115f277"
+        ],
+        "loose_nodes": [
+          "ffb83bfa60879581b4b49ff94133639c63",
+          "ff18c49cd8577a7a6c0a37bc86dac03dc1",
+          "ff7e9ea0ca0788335ae7777457469af631",
+          "ffa614e72e6353929c5fd3c5c013c61ba2"
+        ],
+        "conv": "ff0cd2fa6d8caed62f2cbb5ffde3dadf61"
+      }
+    }
+  },
+  "reply": {
+    "response": {
+      "id": "msg_synthetic_1",
+      "type": "message",
+      "role": "assistant",
+      "model": "m",
+      "content": [
+        {
+          "type": "tool_use",
+          "id": "toolu_a",
+          "name": "ls",
+          "input": {
+            "path": "/a"
+          }
+        },
+        {
+          "type": "tool_use",
+          "id": "toolu_b",
+          "name": "ls",
+          "input": {
+            "path": "/b"
+          }
+        }
+      ],
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 3,
+        "output_tokens": 4
+      }
+    },
+    "matches_msg_index": 1,
+    "exact": true,
+    "keys": {
+      "0": {
+        "msg": "004182eba78a15594f3b39fa694e4419d7",
+        "loose_msg": "002dbd2c4bff5a1df2668126218ef51614"
+      },
+      "255": {
+        "msg": "ff262da332828272c6aae35ae268bcdf5c",
+        "loose_msg": "ffe43c046f64116bf219c457fb478f6cc5"
+      }
+    },
+    "canonical_bytes_b64": "omRyb2xlaWFzc2lzdGFudGVwYXJ0c4KkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc217InBhdGgiOiIvYSJ9ZG5hbWVibHOkYXRpdG9vbF9jYWxsY3JlZgFkYXJnc217InBhdGgiOiIvYiJ9ZG5hbWVibHM=",
+    "canonical": {
+      "role": "assistant",
+      "parts": [
+        {
+          "t": "tool_call",
+          "ref": 0,
+          "args": "{\"path\":\"/a\"}",
+          "name": "ls"
+        },
+        {
+          "t": "tool_call",
+          "ref": 1,
+          "args": "{\"path\":\"/b\"}",
+          "name": "ls"
+        }
+      ]
+    }
+  }
+}

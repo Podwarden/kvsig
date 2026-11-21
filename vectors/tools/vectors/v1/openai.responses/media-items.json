@@ -1,0 +1,188 @@
+{
+  "id": "openai.responses/media-items",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "media",
+  "description": "input_image by URL and by file id, input_file by file id and URL.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "input_image",
+            "image_url": "https://example.test/a.png"
+          },
+          {
+            "type": "input_image",
+            "file_id": "file_1"
+          },
+          {
+            "type": "input_file",
+            "file_id": "file_2"
+          },
+          {
+            "type": "input_file",
+            "file_url": "https://example.test/a.pdf"
+          },
+          {
+            "type": "input_image"
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "url",
+              "mime": "",
+              "sha256": {
+                "$hex": "e96adf8d2380587cbd94ba76100abacb96378cc3dd6732886fc961a51269581f"
+              }
+            },
+            {
+              "t": "media",
+              "src": "file_id",
+              "mime": "",
+              "sha256": {
+                "$hex": "a7be244085e5f6c392ddae2bd069d95fe2c4caacf7357e0fb13b9d3cddeb848f"
+              }
+            },
+            {
+              "t": "media",
+              "src": "file_id",
+              "mime": "",
+              "sha256": {
+                "$hex": "760b75c5b8ccebcff12dd66e1a065b2d8066b6320589b51365dcdc1ab6b78553"
+              }
+            },
+            {
+              "t": "media",
+              "src": "url",
+              "mime": "",
+              "sha256": {
+                "$hex": "a712dd5d3dc1bed903165bc8da40b29b2d6020af5fa4c7162771e76e6c12d144"
+              }
+            },
+            {
+              "t": "opaque",
+              "type": "input_image",
+              "sha256": {
+                "$hex": "96ee7f3d5078581332cd6941e5bfc772eb1bf4f16e747fa179c452da25595a95"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOFpGF0ZW1lZGlhY3NyY2N1cmxkbWltZWBmc2hhMjU2WCDpat+NI4BYfL2UunYQCrrLljeMw91nMohvyWGlEmlYH6RhdGVtZWRpYWNzcmNnZmlsZV9pZGRtaW1lYGZzaGEyNTZYIKe+JECF5fbDkt2uK9Bp2V/ixMqs9zV+D7E7nTzd64SPpGF0ZW1lZGlhY3NyY2dmaWxlX2lkZG1pbWVgZnNoYTI1Nlggdgt1xbjM68/xLdZuGgZbLYBmtjIFibUTZdzcGra3hVOkYXRlbWVkaWFjc3JjY3VybGRtaW1lYGZzaGEyNTZYIKcS3V09wb7ZAxZbyNpAspstYCCvX6THFidx525sEtFEo2F0Zm9wYXF1ZWR0eXBla2lucHV0X2ltYWdlZnNoYTI1Nlgglu5/PVB4WBMyzWlB5b/Hcusb9PFudH+hecRS2iVZWpU=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "url",
+              "mime": "",
+              "sha256": {
+                "$hex": "e96adf8d2380587cbd94ba76100abacb96378cc3dd6732886fc961a51269581f"
+              }
+            },
+            {
+              "t": "media",
+              "src": "file_id",
+              "mime": "",
+              "sha256": {
+                "$hex": "a7be244085e5f6c392ddae2bd069d95fe2c4caacf7357e0fb13b9d3cddeb848f"
+              }
+            },
+            {
+              "t": "media",
+              "src": "file_id",
+              "mime": "",
+              "sha256": {
+                "$hex": "760b75c5b8ccebcff12dd66e1a065b2d8066b6320589b51365dcdc1ab6b78553"
+              }
+            },
+            {
+              "t": "media",
+              "src": "url",
+              "mime": "",
+              "sha256": {
+                "$hex": "a712dd5d3dc1bed903165bc8da40b29b2d6020af5fa4c7162771e76e6c12d144"
+              }
+            },
+            {
+              "t": "opaque",
+              "type": "input_image",
+              "sha256": {
+                "$hex": "96ee7f3d5078581332cd6941e5bfc772eb1bf4f16e747fa179c452da25595a95"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOFpGF0ZW1lZGlhY3NyY2N1cmxkbWltZWBmc2hhMjU2WCDpat+NI4BYfL2UunYQCrrLljeMw91nMohvyWGlEmlYH6RhdGVtZWRpYWNzcmNnZmlsZV9pZGRtaW1lYGZzaGEyNTZYIKe+JECF5fbDkt2uK9Bp2V/ixMqs9zV+D7E7nTzd64SPpGF0ZW1lZGlhY3NyY2dmaWxlX2lkZG1pbWVgZnNoYTI1Nlggdgt1xbjM68/xLdZuGgZbLYBmtjIFibUTZdzcGra3hVOkYXRlbWVkaWFjc3JjY3VybGRtaW1lYGZzaGEyNTZYIKcS3V09wb7ZAxZbyNpAspstYCCvX6THFidx525sEtFEo2F0Zm9wYXF1ZWR0eXBla2lucHV0X2ltYWdlZnNoYTI1Nlgglu5/PVB4WBMyzWlB5b/Hcusb9PFudH+hecRS2iVZWpU=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "0049d16a09725c701673b43638f8fe97a6"
+        ],
+        "nodes": [
+          "003d85d47248eabfe5c5b9706939388edc"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00d261eb985132a206ca1207e644a35e6a"
+        ],
+        "loose_nodes": [
+          "00333ddd0eb3062b8d031d45a8df1bb6df"
+        ],
+        "conv": "00563e33503ea5ee71aa2e71882fc96dc5"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffecb42cf4450b4c2f930e8baa65ee7fea"
+        ],
+        "nodes": [
+          "ff54946f10d8bae91c46f202fe3c8a289e"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff999e8d29a5b4f00137cccdbd50121ca0"
+        ],
+        "loose_nodes": [
+          "ff098ce606543487cef6a6c577ddbe9b23"
+        ],
+        "conv": "ffdb7ee88c227423fce00d42e6981564b8"
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "id": "anthropic.messages/size-tiny-cap",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "size-cap",
+  "description": "A cap smaller than the head payload alone.",
+  "options": {
+    "max_bytes": 4
+  },
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "hi"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": true
+  },
+  "equivalent_to": [
+    "openai.chat/size-tiny-cap",
+    "openai.responses/size-tiny-cap"
+  ]
+}

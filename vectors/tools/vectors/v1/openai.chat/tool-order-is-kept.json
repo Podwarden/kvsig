@@ -1,0 +1,136 @@
+{
+  "id": "openai.chat/tool-order-is-kept",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "parts",
+  "description": "The tool list order is part of the head.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "x"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "b",
+          "parameters": {}
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "a",
+          "parameters": {}
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "",
+          "name": "b",
+          "schema": "{}"
+        },
+        {
+          "desc": "",
+          "name": "a",
+          "schema": "{}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4KjZGRlc2NgZG5hbWVhYmZzY2hlbWFie32jZGRlc2NgZG5hbWVhYWZzY2hlbWFie31obWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "",
+          "name": "b",
+          "schema": "{}"
+        },
+        {
+          "desc": "",
+          "name": "a",
+          "schema": "{}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4KjZGRlc2NgZG5hbWVhYmZzY2hlbWFie32jZGRlc2NgZG5hbWVhYWZzY2hlbWFie31obWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4",
+    "keys": {
+      "0": {
+        "head": "005a298fdc42f71632ca59d65160ae5315",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "000c3878822afa3075965ed900fd78a05f",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253"
+        ],
+        "nodes": [
+          "009ddf197e570a18eb2ca90023b36e343c"
+        ],
+        "loose_head": "001345d4835d583481c5414016d79e4b07",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00fe15a309a090b53377697d93572d8c96",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4"
+        ],
+        "loose_nodes": [
+          "002ea3bda6c7777d5f8d9e3ae6239fde04"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ff6e882db5a9b8a5d0e2480b9d0a0788e9",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ffb29cd4479ff08adfde90a2e388c5de9c",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7"
+        ],
+        "nodes": [
+          "ff42441a45e7d026360ae96119ddec290f"
+        ],
+        "loose_head": "ff75e9029096875a701d1b53eec5e65f33",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ffdf1d758eeac1f07650b167f76cfc1d9c",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec"
+        ],
+        "loose_nodes": [
+          "fff9dcb63c65e3886815da24d78ffc3581"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

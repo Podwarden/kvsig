@@ -1,0 +1,170 @@
+{
+  "id": "openai.chat/reasoning-absent",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.chat",
+  "category": "loose",
+  "description": "The text after the rule of loose-reasoning-dropped: the loose ids are equal.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "hi"
+      },
+      {
+        "role": "assistant",
+        "content": "answer"
+      },
+      {
+        "role": "user",
+        "content": "ok"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "answer"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "ok"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJoaaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBomF0ZHRleHRhdmZhbnN3ZXKiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ym9r",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "answer"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "ok"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJoaaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBomF0ZHRleHRhdmZhbnN3ZXKiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ym9r",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f",
+          "0095bcbec20c3587c8e75b1e0342234219",
+          "00c99b191a2e82776ebec0cfa8d37eb718"
+        ],
+        "nodes": [
+          "006491d0329a989358e99dde8528780e23",
+          "004239d0373d2cddf6c1fcc59c6946821e",
+          "00cfc34586b2deae4798d83cd7bac96e19"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022",
+          "0035d06ac0c987fb961a426e64b72d7a3c",
+          "0012b6ac0cb373281b64c77fd438f6c10c"
+        ],
+        "loose_nodes": [
+          "001490ca47858d8292b5845651af0fdd5a",
+          "001216cbcd8ef85aa71d51a792e0bc1ecf",
+          "006d815087a18dc5dc8afa1fd01f75db55"
+        ],
+        "conv": "000ebaf0b536f7e0dec6ee252d7f5bced8"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef",
+          "ffeb01120027a292a9f9a9ab352bc70e56",
+          "ff2a5da6d0fdbedb8c851134230e60c9fb"
+        ],
+        "nodes": [
+          "ff7f825ebbe2b3b39985a96879889f8a63",
+          "ff4aa8d7e4ee19f84200115497c158a1bc",
+          "ff6c967056560addeb27a5c3757aa36ddc"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb",
+          "ff72ed52124bb156877e994e54b3032720",
+          "ff7be71d5222c1e8450e167d7062f72913"
+        ],
+        "loose_nodes": [
+          "ffdd6beca1876ebe9ebe2cae76367ccc6e",
+          "ffcf90919ff9918e9bc06fde981cae4beb",
+          "ff4b33302153045cbdcd6f76a94147e2e1"
+        ],
+        "conv": "ffc1109d357db1ec0cb0ca4f9c6382b713"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "loose_msgs",
+      "other": "openai.chat/loose-reasoning-dropped",
+      "same": true
+    },
+    {
+      "field": "msgs",
+      "other": "openai.chat/loose-reasoning-dropped",
+      "same": false
+    }
+  ]
+}

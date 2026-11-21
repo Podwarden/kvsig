@@ -1,0 +1,256 @@
+{
+  "id": "openai.responses/reply-two-message-items",
+  "spec": "kvsig/1",
+  "level": 3,
+  "dialect": "openai.responses",
+  "category": "reply",
+  "description": "Two assistant message items are one reply message.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "go"
+      },
+      {
+        "type": "message",
+        "id": "msg_1",
+        "role": "assistant",
+        "status": "completed",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "Part one.",
+            "annotations": []
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "id": "msg_1",
+        "role": "assistant",
+        "status": "completed",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "Part two.",
+            "annotations": []
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": "ok"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Part one."
+            },
+            {
+              "t": "text",
+              "v": "Part two."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "ok"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOComF0ZHRleHRhdmlQYXJ0IG9uZS6iYXRkdGV4dGF2aVBhcnQgdHdvLqJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZib2s=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Part one."
+            },
+            {
+              "t": "text",
+              "v": "Part two."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "ok"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOComF0ZHRleHRhdmlQYXJ0IG9uZS6iYXRkdGV4dGF2aVBhcnQgdHdvLqJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZib2s=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf",
+          "00058ad9ceb5893bb9cfbd294b73b78899",
+          "00c99b191a2e82776ebec0cfa8d37eb718"
+        ],
+        "nodes": [
+          "002c19113c17cd3bf808613f6c8acd26dc",
+          "00f2d244eebc530ef466e667d839aa0410",
+          "00f45bc18cf454a770583e9a23bef7859b"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c",
+          "00ac64094b6ece37eb6ab517041999ecb4",
+          "0012b6ac0cb373281b64c77fd438f6c10c"
+        ],
+        "loose_nodes": [
+          "00835340c69a6db5b9f4b1a8eae3e84c4c",
+          "00763b02f1607a8c30f3490db614c84de6",
+          "00179c8b5a81fa80408f5e1b317dc70341"
+        ],
+        "conv": "00820e5a00b3fd3fac2e0ec9c4cf180996"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988",
+          "ff796fa38f21f4a6b604a5d5992c629598",
+          "ff2a5da6d0fdbedb8c851134230e60c9fb"
+        ],
+        "nodes": [
+          "ffd9994a27eace0da91945e380b9cec4a3",
+          "ff5f283d17974d959618641ee3408ea361",
+          "ff684ac675a267f26029652230e3ccd5c8"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d",
+          "ff36ca36b189ba05d00588b5768c7a4cf1",
+          "ff7be71d5222c1e8450e167d7062f72913"
+        ],
+        "loose_nodes": [
+          "ff71734f611f8f8584d6ce226c323c24ac",
+          "ff38c5a7aa62712b268116149c426cebf9",
+          "ff6349350e1036326c5baf68604c31eaa6"
+        ],
+        "conv": "ff0cd2fa6d8caed62f2cbb5ffde3dadf61"
+      }
+    }
+  },
+  "reply": {
+    "response": {
+      "id": "resp_synthetic_1",
+      "object": "response",
+      "model": "m",
+      "status": "completed",
+      "output": [
+        {
+          "type": "message",
+          "id": "msg_1",
+          "role": "assistant",
+          "status": "completed",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Part one.",
+              "annotations": []
+            }
+          ]
+        },
+        {
+          "type": "message",
+          "id": "msg_1",
+          "role": "assistant",
+          "status": "completed",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Part two.",
+              "annotations": []
+            }
+          ]
+        }
+      ],
+      "usage": {
+        "input_tokens": 3,
+        "output_tokens": 4
+      }
+    },
+    "matches_msg_index": 1,
+    "exact": true,
+    "keys": {
+      "0": {
+        "msg": "00058ad9ceb5893bb9cfbd294b73b78899",
+        "loose_msg": "00ac64094b6ece37eb6ab517041999ecb4"
+      },
+      "255": {
+        "msg": "ff796fa38f21f4a6b604a5d5992c629598",
+        "loose_msg": "ff36ca36b189ba05d00588b5768c7a4cf1"
+      }
+    },
+    "canonical_bytes_b64": "omRyb2xlaWFzc2lzdGFudGVwYXJ0c4KiYXRkdGV4dGF2aVBhcnQgb25lLqJhdGR0ZXh0YXZpUGFydCB0d28u",
+    "canonical": {
+      "role": "assistant",
+      "parts": [
+        {
+          "t": "text",
+          "v": "Part one."
+        },
+        {
+          "t": "text",
+          "v": "Part two."
+        }
+      ]
+    }
+  }
+}

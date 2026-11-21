@@ -1,0 +1,232 @@
+{
+  "id": "anthropic.messages/args-member-order",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "anthropic.messages",
+  "category": "args",
+  "description": "Member order is kept in the exact form (integer-like keys included) and sorted in loose.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "compute"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "c1",
+            "name": "calc",
+            "input": {
+              "z": 1,
+              "10": 2,
+              "2": 3,
+              "b": {
+                "y": 1,
+                "x": 2
+              },
+              "a": [
+                {
+                  "d": 1,
+                  "c": 2
+                }
+              ],
+              "\u00e9": 4,
+              "A": 5
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "c1",
+            "content": "done"
+          }
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "name": "calc",
+        "description": "Evaluate",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "x": {}
+          }
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"type\":\"object\",\"properties\":{\"x\":{}}}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "compute"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"z\":1,\"10\":2,\"2\":3,\"b\":{\"y\":1,\"x\":2},\"a\":[{\"d\":1,\"c\":2}],\"\u00e9\":4,\"A\":5}",
+              "name": "calc"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "done"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJ4Ijp7fX19aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZnY29tcHV0ZaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3N4R3sieiI6MSwiMTAiOjIsIjIiOjMsImIiOnsieSI6MSwieCI6Mn0sImEiOlt7ImQiOjEsImMiOjJ9XSwiw6kiOjQsIkEiOjV9ZG5hbWVkY2FsY6Jkcm9sZWR0b29sZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYAZXBhcnRzgaJhdGR0ZXh0YXZkZG9uZQ==",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"properties\":{\"x\":{}},\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "compute"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"10\":2,\"2\":3,\"A\":5,\"a\":[{\"c\":2,\"d\":1}],\"b\":{\"x\":2,\"y\":1},\"z\":1,\"\u00e9\":4}",
+              "name": "calc"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "done"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJwcm9wZXJ0aWVzIjp7IngiOnt9fSwidHlwZSI6Im9iamVjdCJ9aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZnY29tcHV0ZaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3N4R3siMTAiOjIsIjIiOjMsIkEiOjUsImEiOlt7ImMiOjIsImQiOjF9XSwiYiI6eyJ4IjoyLCJ5IjoxfSwieiI6MSwiw6kiOjR9ZG5hbWVkY2FsY6Jkcm9sZWR0b29sZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYAZXBhcnRzgaJhdGR0ZXh0YXZkZG9uZQ==",
+    "keys": {
+      "0": {
+        "head": "00012838425b2f844d94b856f37282a965",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "0007141be383b228c4ca5cd0b9b9aaa735",
+        "msgs": [
+          "00575379dd47bf1a047cbd0d100761400c",
+          "00c2d612330c680b59286c799fee1f2710",
+          "00ab0bab0e92eb14622717fde2b3ba6827"
+        ],
+        "nodes": [
+          "00166e20742d544da19c188b64d7c31926",
+          "006963c52448798e2725f687702035275b",
+          "00e29108dcab1086d52bfcd67bda4610a4"
+        ],
+        "loose_head": "00d8c8d8253308e908a00bf45633c57b20",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00a5758bf800fcd4b1b1e29952186cf6f2",
+        "loose_msgs": [
+          "0040c2cdfc016164bc19411f8d4e728b91",
+          "00f1fea374b0f7765ed72a0a354849a4af",
+          "004d0859d4aae71aa11cb318f7871132f8"
+        ],
+        "loose_nodes": [
+          "002e63c1baf0954e71f6f8d6e1b937c83a",
+          "00a136301dcb2384c0e54acdec96eea083",
+          "0001effd5af9239fa1650807beeb79fc6b"
+        ],
+        "conv": "00c0d003e7448f18ff38e291eb8838d26b"
+      },
+      "255": {
+        "head": "ffbb82722a9e21df04aac0cb1973162d02",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ffdcc2a193a7151a8ede52b0735710274c",
+        "msgs": [
+          "ff221c79d2a226930aeca22ae764d40c59",
+          "ffba18f0b2f0983d704f4fda580639d833",
+          "ff0442874ac79450a9c568d38240c83840"
+        ],
+        "nodes": [
+          "ff1e532beee762f0576f4531750b4b5311",
+          "ff5617b10ba872b32a402d183c113f0b40",
+          "ffd27aa257946f24d2c3c40fb48a0807b9"
+        ],
+        "loose_head": "fffe02d49fb288d01e981eb705035fc27e",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff96b78203b337a20a7c182ba714d6630f",
+        "loose_msgs": [
+          "ff3dd7b620f52a37a8edf031442d49c943",
+          "ff4739e309d01f0e05b095dc89d9e22ff4",
+          "ff283e8894dd139fd878a9aac13dafd098"
+        ],
+        "loose_nodes": [
+          "ff180c4319e4ab6d34976143c9ebcfbbf8",
+          "ff281328695678df84ec4fa6205dab8e21",
+          "fffed57f8dbf724dadcfdca25de3629c89"
+        ],
+        "conv": "ff9a1b3604f96c7bb8e80d414ef3c947f5"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/args-member-order",
+    "openai.responses/args-member-order"
+  ]
+}

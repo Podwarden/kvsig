@@ -1,0 +1,16 @@
+{
+  "id": "openai.chat/body-not-an-object",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "head",
+  "description": "A body that is not an object: no ids.",
+  "input": [
+    1,
+    2
+  ],
+  "input_raw_b64": null,
+  "expect": {
+    "none": true
+  }
+}

@@ -1,0 +1,164 @@
+{
+  "id": "openai.chat/conv-no-opener",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.chat",
+  "category": "conv-anchor",
+  "description": "The same conversation without the volatile opener.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "system",
+        "content": "S"
+      },
+      {
+        "role": "assistant",
+        "content": "Understood"
+      },
+      {
+        "role": "user",
+        "content": "real first question"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Understood"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "real first question"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFTZXRvb2xzgGhtZXNzYWdlc4KiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZqVW5kZXJzdG9vZKJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZzcmVhbCBmaXJzdCBxdWVzdGlvbg==",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Understood"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "real first question"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFTZXRvb2xzgGhtZXNzYWdlc4KiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZqVW5kZXJzdG9vZKJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZzcmVhbCBmaXJzdCBxdWVzdGlvbg==",
+    "keys": {
+      "0": {
+        "head": "00b831865363828bd68585ae54120585d6",
+        "sys": "00a2a4919667dda561709f4c35f80242ec",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00ce069752cd976e96a0e014cd7c33a4a5",
+          "00d575453d9e09d51bf8191b4598da652e"
+        ],
+        "nodes": [
+          "002f6487f6b077931a466dd5df635e8597",
+          "00e7ec648d9f107ef2dbfbdfd4e579ade3"
+        ],
+        "loose_head": "00fee8b82383863ad736c2591951ffa512",
+        "loose_sys": "00a80ab51b88bb666b49f97c25b1562261",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00f8c43235fb6f928d79f02683a616b0be",
+          "005580458a4014e69e89194276dad98be9"
+        ],
+        "loose_nodes": [
+          "005c695ed724ded16681a89216778448d1",
+          "00eaa435a505a710fe18adf768341806b4"
+        ],
+        "conv": "00b15e851fc312a342187805bf94baf5ab"
+      },
+      "255": {
+        "head": "ff12d21581860addbe7a10a314c9c52ba2",
+        "sys": "ffe1813a67aa51468714fa9249d943260c",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff84250e53b39310df2bd4c61e805bf867",
+          "ff5318e340302b0dd20ed16c9f3fc56379"
+        ],
+        "nodes": [
+          "ffb093580aa914a44322b5f3ddbe9b81d1",
+          "ff74a39b09cd4f44f70eb930dbd9e4e12a"
+        ],
+        "loose_head": "ff25bdcb3a78c29c380b14c17d73d893f1",
+        "loose_sys": "ffbb295f18d4142033a12475230c04b9fc",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff0addf48e6579a5013b842a5dd12ba446",
+          "ff1e5a2f450baf359322572ee0c67d8f3c"
+        ],
+        "loose_nodes": [
+          "ff18d75ba9992508aaa57b69dd4f8905a1",
+          "ff9030da216c6e9eb838a4ac9fc2a0670e"
+        ],
+        "conv": "ffd0d3cb99315a557347743266033fdf68"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "conv",
+      "other": "openai.chat/conv-anchor-skips-opener",
+      "same": true
+    },
+    {
+      "field": "msgs",
+      "other": "openai.chat/conv-anchor-skips-opener",
+      "same": false
+    }
+  ]
+}

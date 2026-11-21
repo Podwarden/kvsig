@@ -1,0 +1,194 @@
+{
+  "id": "openai.responses/output-list",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "parts",
+  "description": "function_call_output with a list output.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "role": "user",
+        "content": "x"
+      },
+      {
+        "type": "function_call",
+        "call_id": "c1",
+        "name": "f",
+        "arguments": "{}"
+      },
+      {
+        "type": "function_call_output",
+        "call_id": "c1",
+        "output": [
+          {
+            "type": "input_text",
+            "text": "a"
+          },
+          {
+            "type": "input_text",
+            "text": "b"
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{}",
+              "name": "f"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "a"
+                },
+                {
+                  "t": "text",
+                  "v": "b"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc2J7fWRuYW1lYWaiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4KiYXRkdGV4dGF2YWGiYXRkdGV4dGF2YWI=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{}",
+              "name": "f"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "a"
+                },
+                {
+                  "t": "text",
+                  "v": "b"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc2J7fWRuYW1lYWaiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4KiYXRkdGV4dGF2YWGiYXRkdGV4dGF2YWI=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253",
+          "0010423f245e36fa60ea77c5dd4147d0f4",
+          "00be3aa401ffa600399e5b6840e767ddbb"
+        ],
+        "nodes": [
+          "00b2dfe677816238e90ef2a40e06f620f7",
+          "00a81ffc12ceb4b85e52ed25e4e0c3a26b",
+          "001f535a3358fd2483256b3e655863f52b"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4",
+          "009df26be6dded7ea211b8c0aab2771e9e",
+          "000ad17f17d2de40d3cf6cae743c7e408f"
+        ],
+        "loose_nodes": [
+          "002d7a8dd84f7f99d1409350bb250c6cf9",
+          "00ad252606c6a28cdea4638c6cbe476867",
+          "00b20cdc0165ff24c2007675f3fbbc950d"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7",
+          "ffd3e70d14001df648609d0e71a97f29be",
+          "ff929525127bf2925831679f92d14c4703"
+        ],
+        "nodes": [
+          "ff3f620f0c447fef2751c57bbe698941c0",
+          "ff63b8a60b22e41b377e35d5b0dfe2c88c",
+          "ff5a1aaf52ba6254c2d40ed4670bcbb34e"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec",
+          "ffcd913e70ea6584da2ae8cba980ee81c8",
+          "ff855d16b498ff73ece88f4d2eca010b7c"
+        ],
+        "loose_nodes": [
+          "ffc38a0c74a027167a346af0d779e9d32a",
+          "ff3661f82cc94e271f4bec230823248dc7",
+          "ff9e3fac4b3b940b19177f3142ed49ad82"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

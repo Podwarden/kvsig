@@ -1,0 +1,122 @@
+{
+  "id": "openai.chat/content-adjacent-text-not-merged",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "parts",
+  "description": "Two adjacent text parts stay two parts (not equal to the joined string).",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "a"
+          },
+          {
+            "type": "text",
+            "text": "b"
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "a"
+            },
+            {
+              "t": "text",
+              "v": "b"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOComF0ZHRleHRhdmFhomF0ZHRleHRhdmFi",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "a"
+            },
+            {
+              "t": "text",
+              "v": "b"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOComF0ZHRleHRhdmFhomF0ZHRleHRhdmFi",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00903c74f09548300cdce36e8df1127963"
+        ],
+        "nodes": [
+          "00b6596d8c489da0e988e9ff6b10807119"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00983b31b64ab8e1a67af8a7a2f948b83c"
+        ],
+        "loose_nodes": [
+          "0008e0e9171be840fda6fb7194fcaa6d2b"
+        ],
+        "conv": "005a0cf4cf3359f7b7b86b2824ba9a7448"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffb27d4d84926d614376400b1530e17f82"
+        ],
+        "nodes": [
+          "ff4b4bacab994ea4639a92b63fa4a08e94"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ffcfd59a2809abdf96d1dcd6c27dcad204"
+        ],
+        "loose_nodes": [
+          "ffef840447f4ec2938dc2a0448d613d309"
+        ],
+        "conv": "ffdfd037569e38d5b6de2ce1e7f76f5187"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "msgs",
+      "other": "openai.chat/content-string",
+      "same": false
+    }
+  ]
+}

@@ -1,0 +1,51 @@
+{
+  "id": "openai.responses/depth-129-none",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "depth-cap",
+  "description": "A 129th nested container gives the request no ids.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "go"
+      },
+      {
+        "type": "function_call",
+        "call_id": "c1",
+        "name": "calc",
+        "arguments": "[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]"
+      },
+      {
+        "type": "function_call_output",
+        "call_id": "c1",
+        "output": "x"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "name": "calc",
+        "description": "Evaluate",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "x": {}
+          }
+        },
+        "strict": false
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": true
+  },
+  "equivalent_to": [
+    "openai.chat/depth-129-none",
+    "anthropic.messages/depth-129-none"
+  ]
+}

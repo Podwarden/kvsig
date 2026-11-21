@@ -17,3 +17,11 @@ The library follows SemVer; spec versions are labelled `kvsig/N`.
   the tools. Conversation ids from earlier development builds do not match.
   The labels are not bumped because nothing has been released; from 0.1 on, a
   change like this needs a new label or profile version.
+- Test vectors `vectors/v1`, the conformance runner (`conformance/run.py`, with a
+  Python adapter), the vector generator and an independent cross-check
+  (decision 0004, proposed).
+- **Changed ids (pre-release, intentional), found by the vectors:**
+  tool arguments `NaN`, `Infinity` and `-Infinity` are no longer treated as JSON
+  (they become `args_raw`); an integer of more than 4300 digits is valid JSON and
+  prints as `null` instead of making the arguments `args_raw`; the loose form
+  keeps a message's `name`.

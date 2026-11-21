@@ -1,0 +1,103 @@
+{
+  "id": "anthropic.messages/loose-unclosed-tag",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "anthropic.messages",
+  "category": "loose",
+  "description": "Rule 2: an unclosed tag leaves the rest of the text as it is.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "keep <system-reminder> never closed <environment_context>x</environment_context> end"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "keep <system-reminder> never closed <environment_context>x</environment_context> end"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnhUa2VlcCA8c3lzdGVtLXJlbWluZGVyPiBuZXZlciBjbG9zZWQgPGVudmlyb25tZW50X2NvbnRleHQ+eDwvZW52aXJvbm1lbnRfY29udGV4dD4gZW5k",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "keep <system-reminder> never closed end"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdngna2VlcCA8c3lzdGVtLXJlbWluZGVyPiBuZXZlciBjbG9zZWQgZW5k",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00c8421f86871ad7426afb5f30b8e68866"
+        ],
+        "nodes": [
+          "000cf90d53fb3f9ee2b4f48b1a25829e67"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0081e7655fc62aecede13beba9babcd981"
+        ],
+        "loose_nodes": [
+          "008b612e20df29bce6d7d3101d3d7797dd"
+        ],
+        "conv": "0069bade36180822dd0ef70cd9fb5eea62"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffa0dad69198442479a306f5ba82985a09"
+        ],
+        "nodes": [
+          "ff7497f36a765d723312880b17acf2a6b5"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff24608cb212a3c45f1368ae1b18a85751"
+        ],
+        "loose_nodes": [
+          "ff1aa5cdf56b0c44cd1cca5833b0dfebb5"
+        ],
+        "conv": "ff3eb35263a1b5972597cfeaefa3cbd63b"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/loose-unclosed-tag",
+    "openai.responses/loose-unclosed-tag"
+  ]
+}

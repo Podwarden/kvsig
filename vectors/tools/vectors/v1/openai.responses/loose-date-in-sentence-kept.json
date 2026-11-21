@@ -1,0 +1,103 @@
+{
+  "id": "openai.responses/loose-date-in-sentence-kept",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.responses",
+  "category": "loose",
+  "description": "Rule 3 does not touch dates inside sentences or non-ISO or non-ASCII-digit dates.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "Today's date is 2026-11-21.\n2026-11-21 is a Saturday\n2026-13-45x\n\u0662\u0660\u0662\u0666-11-21"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Today's date is 2026-11-21.\n2026-11-21 is a Saturday\n2026-13-45x\n\u0662\u0660\u0662\u0666-11-21"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnhPVG9kYXkncyBkYXRlIGlzIDIwMjYtMTEtMjEuCjIwMjYtMTEtMjEgaXMgYSBTYXR1cmRheQoyMDI2LTEzLTQ1eArZotmg2aLZpi0xMS0yMQ==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Today's date is 2026-11-21. 2026-11-21 is a Saturday 2026-13-45x \u0662\u0660\u0662\u0666-11-21"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnhPVG9kYXkncyBkYXRlIGlzIDIwMjYtMTEtMjEuIDIwMjYtMTEtMjEgaXMgYSBTYXR1cmRheSAyMDI2LTEzLTQ1eCDZotmg2aLZpi0xMS0yMQ==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "001abac968b98c46bd466ccbd147d7a674"
+        ],
+        "nodes": [
+          "0047210eff9336abbe0c551ad71488b8ce"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "006cc6bb7a9e3027b245f5425fb98dff4a"
+        ],
+        "loose_nodes": [
+          "006a357aa77086d511f48ffb71a8b41ae3"
+        ],
+        "conv": "00eef687678d017554eaf658bc0cf7dd4b"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffa585365be43304b2c26f16b848bd0b16"
+        ],
+        "nodes": [
+          "fff6b9e344c916ecfc2323fc83265524d2"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ffd823d1d00fdd749277f3676520ec3481"
+        ],
+        "loose_nodes": [
+          "ff3541e4a381f941d3c0df4ab8c5a3afa2"
+        ],
+        "conv": "ff17831e8c47d3fc52e63ecffc295dc562"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/loose-date-in-sentence-kept",
+    "anthropic.messages/loose-date-in-sentence-kept"
+  ]
+}

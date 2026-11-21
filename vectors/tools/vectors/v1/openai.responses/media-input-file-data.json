@@ -1,0 +1,131 @@
+{
+  "id": "openai.responses/media-input-file-data",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "media",
+  "description": "input_file data as a data URL and as bare base64.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "input_file",
+            "file_data": "data:application/pdf;base64,JVBERi0xLjQgc3ludGhldGljIGRvY3VtZW50"
+          },
+          {
+            "type": "input_file",
+            "file_data": "JVBERi0xLjQgc3ludGhldGljIGRvY3VtZW50"
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "bytes",
+              "mime": "application/pdf",
+              "sha256": {
+                "$hex": "e2b5619e3d26890ba94afe81311c4cfc6d0fd6705f9729a58bf5ac63c53624e9"
+              }
+            },
+            {
+              "t": "media",
+              "src": "bytes",
+              "mime": "",
+              "sha256": {
+                "$hex": "e2b5619e3d26890ba94afe81311c4cfc6d0fd6705f9729a58bf5ac63c53624e9"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOCpGF0ZW1lZGlhY3NyY2VieXRlc2RtaW1lb2FwcGxpY2F0aW9uL3BkZmZzaGEyNTZYIOK1YZ49JokLqUr+gTEcTPxtD9ZwX5cppYv1rGPFNiTppGF0ZW1lZGlhY3NyY2VieXRlc2RtaW1lYGZzaGEyNTZYIOK1YZ49JokLqUr+gTEcTPxtD9ZwX5cppYv1rGPFNiTp",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "bytes",
+              "mime": "application/pdf",
+              "sha256": {
+                "$hex": "e2b5619e3d26890ba94afe81311c4cfc6d0fd6705f9729a58bf5ac63c53624e9"
+              }
+            },
+            {
+              "t": "media",
+              "src": "bytes",
+              "mime": "",
+              "sha256": {
+                "$hex": "e2b5619e3d26890ba94afe81311c4cfc6d0fd6705f9729a58bf5ac63c53624e9"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOCpGF0ZW1lZGlhY3NyY2VieXRlc2RtaW1lb2FwcGxpY2F0aW9uL3BkZmZzaGEyNTZYIOK1YZ49JokLqUr+gTEcTPxtD9ZwX5cppYv1rGPFNiTppGF0ZW1lZGlhY3NyY2VieXRlc2RtaW1lYGZzaGEyNTZYIOK1YZ49JokLqUr+gTEcTPxtD9ZwX5cppYv1rGPFNiTp",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "009210b689c62a891eb640862ce06f88a0"
+        ],
+        "nodes": [
+          "00e961f727f9c3be249b047c0eac515938"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00d6b7b7d35e4a7029f0ce846a45860fe1"
+        ],
+        "loose_nodes": [
+          "0067d90c9c598d48e680ee3547599d35bc"
+        ],
+        "conv": "00562b0213ce5fc59f2f9d27708f4e9fde"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff5f33e0fa126968452edc0538dc97114a"
+        ],
+        "nodes": [
+          "ffef732b988a7b57adafc9396d8de96737"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff17d9019fe8989f1b5489abb3ec5a4581"
+        ],
+        "loose_nodes": [
+          "ff43dd2b7413926f84c841115f1b7463cb"
+        ],
+        "conv": "ff539c4f39362bb75353c9a3fbf6589bdb"
+      }
+    }
+  }
+}

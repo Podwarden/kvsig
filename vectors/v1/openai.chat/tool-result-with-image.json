@@ -1,0 +1,240 @@
+{
+  "id": "openai.chat/tool-result-with-image",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "media",
+  "description": "An image inside a tool result stays inside it.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "shot"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "c1",
+            "type": "function",
+            "function": {
+              "name": "screenshot",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "c1",
+        "content": [
+          {
+            "type": "text",
+            "text": "Captured"
+          },
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "data:image/png;base64,iVBORw0KGgpzeW50aGV0aWMtaW1hZ2UtMg=="
+            }
+          }
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "screenshot",
+          "description": "Take a screenshot",
+          "parameters": {
+            "type": "object"
+          }
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Take a screenshot",
+          "name": "screenshot",
+          "schema": "{\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "shot"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{}",
+              "name": "screenshot"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "Captured"
+                },
+                {
+                  "t": "media",
+                  "src": "bytes",
+                  "mime": "image/png",
+                  "sha256": {
+                    "$hex": "9dafdc91a920cfcbc6aa30898be8968e88719812a7114c2f6ae7d11358ecd0a8"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NxVGFrZSBhIHNjcmVlbnNob3RkbmFtZWpzY3JlZW5zaG90ZnNjaGVtYXF7InR5cGUiOiJvYmplY3QifWhtZXNzYWdlc4OiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2ZHNob3SiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaRhdGl0b29sX2NhbGxjcmVmAGRhcmdzYnt9ZG5hbWVqc2NyZWVuc2hvdKJkcm9sZWR0b29sZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYAZXBhcnRzgqJhdGR0ZXh0YXZoQ2FwdHVyZWSkYXRlbWVkaWFjc3JjZWJ5dGVzZG1pbWVpaW1hZ2UvcG5nZnNoYTI1Nlggna/ckakgz8vGqjCJi+iWjohxmBKnEUwvaufRE1js0Kg=",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Take a screenshot",
+          "name": "screenshot",
+          "schema": "{\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "shot"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{}",
+              "name": "screenshot"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "Captured"
+                },
+                {
+                  "t": "media",
+                  "src": "bytes",
+                  "mime": "image/png",
+                  "sha256": {
+                    "$hex": "9dafdc91a920cfcbc6aa30898be8968e88719812a7114c2f6ae7d11358ecd0a8"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NxVGFrZSBhIHNjcmVlbnNob3RkbmFtZWpzY3JlZW5zaG90ZnNjaGVtYXF7InR5cGUiOiJvYmplY3QifWhtZXNzYWdlc4OiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2ZHNob3SiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaRhdGl0b29sX2NhbGxjcmVmAGRhcmdzYnt9ZG5hbWVqc2NyZWVuc2hvdKJkcm9sZWR0b29sZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYAZXBhcnRzgqJhdGR0ZXh0YXZoQ2FwdHVyZWSkYXRlbWVkaWFjc3JjZWJ5dGVzZG1pbWVpaW1hZ2UvcG5nZnNoYTI1Nlggna/ckakgz8vGqjCJi+iWjohxmBKnEUwvaufRE1js0Kg=",
+    "keys": {
+      "0": {
+        "head": "00d35c61866a7a0cd50c6ea3cb73ec27a5",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00797331ba1121f9924778c3695043f1db",
+        "msgs": [
+          "002ad1a07c1ca30d89d7aea1a2f0b5280c",
+          "00341fab25147ccca5b6d613cee24c9ac5",
+          "009046b932c406316b4473767aed12c576"
+        ],
+        "nodes": [
+          "00558b45cfa2530e8b60512d1af94c6248",
+          "00ed6c59ad1cce092d6ab47ade8f5b624f",
+          "00e0cee3240f5a49e7717d27e4739b7d71"
+        ],
+        "loose_head": "0057d2f5e71b9135bb7482d8722d8679a5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "004527306c55791fbc1772afc1491e06f1",
+        "loose_msgs": [
+          "00a3d61df4e5517305a570cdeb6a89d675",
+          "00b4747d94c1cac44c7bd7b0557008d3ac",
+          "002ea524cf0297abff63fc3bdafa46ef37"
+        ],
+        "loose_nodes": [
+          "008276675b50b1e917e0f9f9de9d948cf6",
+          "001a4a6908c63d4a742b1d588d73b2e609",
+          "003f62ef7f1c5a42f9f2b9392612b9e48c"
+        ],
+        "conv": "00dc0b223b651fdafdf5256feaf6165c89"
+      },
+      "255": {
+        "head": "ff6e4c87da822a320a3f82f46e99996667",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff30c620f06f95150372d33f30ca0142ad",
+        "msgs": [
+          "ff0695c2a1ba11fa114d5e3197c20f14d1",
+          "ffa8d6dfa2e01fbfedeb13ea708bcda63e",
+          "ffde62f428759e33a24aa3fcd570b592a2"
+        ],
+        "nodes": [
+          "ff0af35c55e3c9a45d5c4a15a8e0bd544e",
+          "ff6dfc148f88e5605956d64aa02dd7ed4a",
+          "ff976a25416408366fad4244e15da2d0c4"
+        ],
+        "loose_head": "ff913bc2a4e32209c0f66a4d4e30f72855",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff036c6102feb4f67c898227cad40c505d",
+        "loose_msgs": [
+          "ff4950a6a8f02b522cceb243bb2854aec6",
+          "ffd606cb784d48c926339274d5937f78ef",
+          "ff44b113e8eca19891d84d2d403efd0864"
+        ],
+        "loose_nodes": [
+          "ff6ea3954b16517f11c8b96592c8c93258",
+          "ff8aecd77b501a461736a64c01213dceb4",
+          "ffb038d0fcb21647903a0c93094417aec1"
+        ],
+        "conv": "ff523dd7a611137fe4e51ba84a9a031a3a"
+      }
+    }
+  },
+  "equivalent_to": [
+    "anthropic.messages/tool-result-with-image",
+    "openai.responses/tool-result-with-image"
+  ]
+}

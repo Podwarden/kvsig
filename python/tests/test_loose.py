@@ -105,3 +105,17 @@ def test_fingerprint_changes_with_the_table_not_just_the_version():
 def test_custom_whitespace_set():
     p = LooseProfile("t/1", (), frozenset({ord(" "), ord("_")}))
     assert loose_text("a__b  c\td", p) == "a b c\td"
+
+
+def test_loose_keeps_the_message_name():
+    c = canonicalize(
+        {
+            "messages": [
+                {"role": "user", "name": "alice", "content": " hi  there "},
+                {"role": "user", "content": "hi there"},
+            ]
+        }
+    )
+    named, plain = loose(c).messages
+    assert named == {"role": "user", "name": "alice", "parts": [{"t": "text", "v": "hi there"}]}
+    assert plain == {"role": "user", "parts": [{"t": "text", "v": "hi there"}]}

@@ -1,0 +1,113 @@
+{
+  "id": "openai.chat/media-data-url-no-comma",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "media",
+  "description": "A data URL without a comma is a plain url reference.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "data:image/png;base64"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "url",
+              "mime": "",
+              "sha256": {
+                "$hex": "32443f5ad27d28bd49e43112c921185b6cae1e44621e4046127f11a6ec4f2d62"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBpGF0ZW1lZGlhY3NyY2N1cmxkbWltZWBmc2hhMjU2WCAyRD9a0n0ovUnkMRLJIRhbbK4eRGIeQEYSfxGm7E8tYg==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "url",
+              "mime": "",
+              "sha256": {
+                "$hex": "32443f5ad27d28bd49e43112c921185b6cae1e44621e4046127f11a6ec4f2d62"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBpGF0ZW1lZGlhY3NyY2N1cmxkbWltZWBmc2hhMjU2WCAyRD9a0n0ovUnkMRLJIRhbbK4eRGIeQEYSfxGm7E8tYg==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00686a25162e7203a17eb7b66e1e39f39c"
+        ],
+        "nodes": [
+          "00a53593fb5bafcbe800ae2d860e1dda7a"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00f329a935d77a9e1110897c719c0a9a7a"
+        ],
+        "loose_nodes": [
+          "00a54929f8677a71e60657e378d07116bc"
+        ],
+        "conv": "000dcb69b5535f6d85b99f149631a30ffb"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff22dc7ac58d1d36242e55de58f6f2304f"
+        ],
+        "nodes": [
+          "ff4e01a40d18b7b35a0f6657f8579de17a"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff290ee00d147d7d9d1fd3454eea4252d2"
+        ],
+        "loose_nodes": [
+          "ff3265be39c4f2ef8998c234147fdd50ad"
+        ],
+        "conv": "ff637fce22f0bfa6f4010d778274763492"
+      }
+    }
+  }
+}

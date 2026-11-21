@@ -1,0 +1,103 @@
+{
+  "id": "anthropic.messages/loose-whitespace-unicode",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "anthropic.messages",
+  "category": "loose",
+  "description": "Rule 4: Unicode White_Space and U+001C to U+001F collapse too.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "a\u00a0\u00a0b\u3000c\u0085d\u2028\u2029e\u001c\u001d\u001e\u001ff\u2003\u202fg"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "a\u00a0\u00a0b\u3000c\u0085d\u2028\u2029e\u001c\u001d\u001e\u001ff\u2003\u202fg"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnggYcKgwqBi44CAY8KFZOKAqOKAqWUcHR4fZuKAg+KAr2c=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "a b c d e f g"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdm1hIGIgYyBkIGUgZiBn",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00361e32c40a344b12abe78ee2da8b59e0"
+        ],
+        "nodes": [
+          "00ac188f8b8882658a7ecd8a660bd67cfd"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "009a64086390993f7faabb8405058f6d7c"
+        ],
+        "loose_nodes": [
+          "00b09a01572bb2f7ef3aee843217a0d683"
+        ],
+        "conv": "002be8fefeaca0e2d0734225105501d16b"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffbe259dfb4ae17d669a409d2ebfd74580"
+        ],
+        "nodes": [
+          "ffd4a72d9c4bc364ddd8cb5153f6875a22"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff4e486f99b24c4024e5425ff8e3d19cee"
+        ],
+        "loose_nodes": [
+          "ff5f85dd185cf6c397aa403dc7603e6a67"
+        ],
+        "conv": "ff9ea282674390a30dfe67bbe2efa6b4d1"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/loose-whitespace-unicode",
+    "openai.responses/loose-whitespace-unicode"
+  ]
+}

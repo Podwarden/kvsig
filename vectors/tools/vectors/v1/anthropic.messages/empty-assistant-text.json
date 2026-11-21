@@ -1,0 +1,223 @@
+{
+  "id": "anthropic.messages/empty-assistant-text",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "parts",
+  "description": "An assistant turn with an empty text and a call: the empty text is dropped.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "go"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "c1",
+            "name": "ls",
+            "input": {
+              "path": "/"
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "c1",
+            "content": "x"
+          }
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "name": "ls",
+        "description": "List a directory",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "x"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXX1obWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NseyJwYXRoIjoiLyJ9ZG5hbWVibHOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2YXg=",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "x"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJwcm9wZXJ0aWVzIjp7InBhdGgiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsicGF0aCJdLCJ0eXBlIjoib2JqZWN0In1obWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NseyJwYXRoIjoiLyJ9ZG5hbWVibHOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2YXg=",
+    "keys": {
+      "0": {
+        "head": "0094c313cf081fa564444233ee8ce0f2ae",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00a6f0fc4d3200cad72142381cc1373fac",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf",
+          "00a20d05e50edb473367706ca1281f69a6",
+          "00659372994ea44578b08efc15b9e31dd2"
+        ],
+        "nodes": [
+          "00f8f641e4417bb27661cde51c705643c2",
+          "00cf0c271ac61455630652fa9e5d546fa7",
+          "009a49f0dbc37f445a65a1fbff3cbbdd5d"
+        ],
+        "loose_head": "0054d7051c6720e90ac29e4d1b58fa4fab",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00c2381d696f32f448d72e68c2ab636a6b",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c",
+          "00d5af8cc2bc3b7f6e508be603e98fedf3",
+          "00047cb85b2f04a4f3f2ffd99d4f9d7e30"
+        ],
+        "loose_nodes": [
+          "00463a5f96e90f82e03263d5324d119535",
+          "004a3dcd11b1f515cc170f39d70308fccd",
+          "00a5c592b4aea0ddf6549638560f39f8b5"
+        ],
+        "conv": "00820e5a00b3fd3fac2e0ec9c4cf180996"
+      },
+      "255": {
+        "head": "ffc5d268cb8a64c726eb5e99647dfaa249",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff24b0e119a0a56335180c12e8aa192468",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988",
+          "ff1060215e9ed6b3d3fce1524575964861",
+          "ffb561a1026b19878aac1772bcdad05b6b"
+        ],
+        "nodes": [
+          "fff0c10bf2114d0e1f3742b43bc9f8af39",
+          "ff6dc362ed28bf66e389c74868eaa0bc01",
+          "ffbb30e62fe60dfb5336fab4abfe9aefda"
+        ],
+        "loose_head": "ff52e49eb401371634a47b2839ffe9db8b",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff7248c7b899560c717b25ed247c64482e",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d",
+          "ff706e095feef90a514ab295d643a5e098",
+          "ff711f6e23bb41c4f582d1e81482dfe4dd"
+        ],
+        "loose_nodes": [
+          "ff40533ed52534b3d45a6cce15e593f19c",
+          "ffe23bedcf99569aef11fcffaa6b9d2ebf",
+          "ff471dfdd9be2be143293fcea3bec29927"
+        ],
+        "conv": "ff0cd2fa6d8caed62f2cbb5ffde3dadf61"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/empty-assistant-text",
+    "openai.responses/empty-assistant-text"
+  ]
+}

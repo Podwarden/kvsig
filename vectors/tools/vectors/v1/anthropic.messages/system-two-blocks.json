@@ -1,0 +1,137 @@
+{
+  "id": "anthropic.messages/system-two-blocks",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "head",
+  "description": "Two system blocks are two parts of one message.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "hi"
+      }
+    ],
+    "system": [
+      {
+        "type": "text",
+        "text": "S1"
+      },
+      {
+        "type": "text",
+        "text": "S2"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S1"
+            },
+            {
+              "t": "text",
+              "v": "S2"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOComF0ZHRleHRhdmJTMaJhdGR0ZXh0YXZiUzJldG9vbHOAaG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiaGk=",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S1"
+            },
+            {
+              "t": "text",
+              "v": "S2"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOComF0ZHRleHRhdmJTMaJhdGR0ZXh0YXZiUzJldG9vbHOAaG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiaGk=",
+    "keys": {
+      "0": {
+        "head": "001cce086fac640835a3d08a3739160217",
+        "sys": "00183132a6dd0c75ea397385c35e62131a",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f"
+        ],
+        "nodes": [
+          "004f0e60666cf66088c87f29f1a7637912"
+        ],
+        "loose_head": "0085276e56bc0099f28d206cb32296160a",
+        "loose_sys": "0099ad65cbdac5f5946acf459f49ba1e5c",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022"
+        ],
+        "loose_nodes": [
+          "00ec663c4f5f07ee758256bd42bad56643"
+        ],
+        "conv": "003c81fe4d5e93eb07d3a9793b2075d305"
+      },
+      "255": {
+        "head": "ff9918bd06e8bbd8ab5583ffb0929faa28",
+        "sys": "ffe0e212b02051409e8fe9a86ffb95d85f",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef"
+        ],
+        "nodes": [
+          "fff171bf87c03de6ccdef1c6b0f8941c46"
+        ],
+        "loose_head": "ff584cad63f8970a86873d11032e13000a",
+        "loose_sys": "ffb1643cb3b0d4b5847e404caded06323b",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb"
+        ],
+        "loose_nodes": [
+          "ff32d7dd0153c33de5ed12c68b82fabcdb"
+        ],
+        "conv": "ff964574b79a57f5d3488b5129dedc561f"
+      }
+    }
+  }
+}

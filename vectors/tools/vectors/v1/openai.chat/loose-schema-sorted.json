@@ -1,0 +1,137 @@
+{
+  "id": "openai.chat/loose-schema-sorted",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.chat",
+  "category": "loose",
+  "description": "Rule 6: tool schemas are sorted in the loose head; the exact head keeps the order.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "hi"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "t",
+          "description": "d",
+          "parameters": {
+            "type": "object",
+            "required": [
+              "a"
+            ],
+            "properties": {
+              "b": {
+                "type": "string"
+              },
+              "a": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "d",
+          "name": "t",
+          "schema": "{\"type\":\"object\",\"required\":[\"a\"],\"properties\":{\"b\":{\"type\":\"string\"},\"a\":{\"type\":\"integer\"}}}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NhZGRuYW1lYXRmc2NoZW1heF57InR5cGUiOiJvYmplY3QiLCJyZXF1aXJlZCI6WyJhIl0sInByb3BlcnRpZXMiOnsiYiI6eyJ0eXBlIjoic3RyaW5nIn0sImEiOnsidHlwZSI6ImludGVnZXIifX19aG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiaGk=",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "d",
+          "name": "t",
+          "schema": "{\"properties\":{\"a\":{\"type\":\"integer\"},\"b\":{\"type\":\"string\"}},\"required\":[\"a\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NhZGRuYW1lYXRmc2NoZW1heF57InByb3BlcnRpZXMiOnsiYSI6eyJ0eXBlIjoiaW50ZWdlciJ9LCJiIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbImEiXSwidHlwZSI6Im9iamVjdCJ9aG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiaGk=",
+    "keys": {
+      "0": {
+        "head": "0055943448596ebcb6bc658b72a6469b78",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "0068f65d5ac6ad15c1e91f55352ba9257e",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f"
+        ],
+        "nodes": [
+          "007bacaac1ec7e1bacc09b9a0a67221774"
+        ],
+        "loose_head": "00ea3bbc90f0ffb91b9325321b1e3d2403",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "005cd2faa2b94612e7ff4e91b9d2c35fdf",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022"
+        ],
+        "loose_nodes": [
+          "001292f1c4446b1326190fde3d9527bd34"
+        ],
+        "conv": "000ebaf0b536f7e0dec6ee252d7f5bced8"
+      },
+      "255": {
+        "head": "ff756c846cf78338ff2330b1a9f6f21d85",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff4adf2898a88919474c175189ffc713b9",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef"
+        ],
+        "nodes": [
+          "ffeb95ff5318c94f904700ba494ce2ba3a"
+        ],
+        "loose_head": "ffa12341b37d971f27ec8c253540b44e7b",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff7f2dcc84d73730bffce89f8d59ed6057",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb"
+        ],
+        "loose_nodes": [
+          "ffa646f58460a73a93fcc797c15ec382b4"
+        ],
+        "conv": "ffc1109d357db1ec0cb0ca4f9c6382b713"
+      }
+    }
+  },
+  "equivalent_to": [
+    "anthropic.messages/loose-schema-sorted",
+    "openai.responses/loose-schema-sorted"
+  ]
+}

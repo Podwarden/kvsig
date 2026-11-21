@@ -1,0 +1,246 @@
+{
+  "id": "openai.chat/multi-turn",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "basics",
+  "description": "Alternating user and assistant text.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "system",
+        "content": "Be brief."
+      },
+      {
+        "role": "user",
+        "content": "Hi"
+      },
+      {
+        "role": "assistant",
+        "content": "Hello! How can I help?"
+      },
+      {
+        "role": "user",
+        "content": "Name a colour"
+      },
+      {
+        "role": "assistant",
+        "content": "Blue"
+      },
+      {
+        "role": "user",
+        "content": "Another"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Be brief."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hi"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hello! How can I help?"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Name a colour"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Blue"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Another"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmlCZSBicmllZi5ldG9vbHOAaG1lc3NhZ2VzhaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiSGmiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZ2SGVsbG8hIEhvdyBjYW4gSSBoZWxwP6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZtTmFtZSBhIGNvbG91cqJkcm9sZWlhc3Npc3RhbnRlcGFydHOBomF0ZHRleHRhdmRCbHVlomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmdBbm90aGVy",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Be brief."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hi"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hello! How can I help?"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Name a colour"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Blue"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Another"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmlCZSBicmllZi5ldG9vbHOAaG1lc3NhZ2VzhaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiSGmiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZ2SGVsbG8hIEhvdyBjYW4gSSBoZWxwP6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZtTmFtZSBhIGNvbG91cqJkcm9sZWlhc3Npc3RhbnRlcGFydHOBomF0ZHRleHRhdmRCbHVlomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmdBbm90aGVy",
+    "keys": {
+      "0": {
+        "head": "0023c5cd39347cbfd3d4714a22c0410d4e",
+        "sys": "00d8ce2e2b7bde27a957207060ddc14290",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00028a666137bbcdedaafec84e9bcad4e6",
+          "00d36d5614b1f82ae3cff55dcb419c850e",
+          "00d7bbc095b0474a601ddfe69c84564bc5",
+          "00063be7e04eaa70ce6eae8b438c014118",
+          "00dbfc717f91e9e26a82a0f84d165e13a3"
+        ],
+        "nodes": [
+          "00e7cbbe725b9a22e037520a01c92add17",
+          "00cecf195f08e47aa364744157b83af140",
+          "0070212e9e9e1b903403cabe7f62ea1c4a",
+          "003e65e841d1fae413f32b278986b62598",
+          "007232111f362b5c3e1316fd9f7f933afe"
+        ],
+        "loose_head": "00ab539035724947c46039e19fb404d6c7",
+        "loose_sys": "000620709b812faeb2867d6b9484d94969",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00b6088c8ca2cd6ec3818b892c32560d9e",
+          "0034aa3afa94f3b429faaf991a4f682f5b",
+          "003f1fe9b0c4a85606314bc0687d0d4fa4",
+          "001df406f43ac6dabc56c072da00379768",
+          "0069b899e4b9336429064a2970efae3b8a"
+        ],
+        "loose_nodes": [
+          "000af725fb6537e124e15e337fce9226c8",
+          "00a3b06796c6b2bfb20def38e3a66bd9c1",
+          "0029d519ffce00ddb804dd7ec38d1da885",
+          "00e6bcd24387d0e16c6ebf863fb7131665",
+          "00ab2ea88889de5b2a8478e64ef47f1e9b"
+        ],
+        "conv": "00e572a7d12797e6e7f277ebf00106591a"
+      },
+      "255": {
+        "head": "ffa60ad4f99ae955fa7407e843d0a8f158",
+        "sys": "ffc115d8f7197ce473d06dd8f4a25a4edb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "fff21bbc4a3611485737e2dc06b7900d90",
+          "fffd09b31e272d91b98305c29e129c2a88",
+          "ff4afbef0f8cb33f762beb43bb8b1ae821",
+          "ff3c22886c34b98af0ada763fb37ab1df9",
+          "ffdd7f2531cd52fbb4f207deb8628628a0"
+        ],
+        "nodes": [
+          "ff5c7d56d854b9da67d65af04d12857dd6",
+          "ff1bdaf00d3034ef85fa32e50d7b589e22",
+          "ffddde03af3d64e53ca3244c1b614fc583",
+          "ff4082c45be3249a600f4569089fb52825",
+          "ffdd3773bbc7d1ca43790db1d25e6898b8"
+        ],
+        "loose_head": "ff586a47737dc0307bdd35d55eb607d686",
+        "loose_sys": "ff0bc1a570ac70a1a166d5335be4df8826",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ffd0d1e9bc1fe0be874f43d79f0fa34307",
+          "ff1507200b052763b279dbde2e61d527aa",
+          "ff6d7ec56b817dc062e58a3263f9ff3974",
+          "ffcaf51cdbfa13bba0e62f7d61bc35b05f",
+          "ff2cabbf5377ebf59c4ec09f467231e9ad"
+        ],
+        "loose_nodes": [
+          "ff6a73d331185ad543516308848b3a1b2c",
+          "ff4eaf4ec2578036a477feebf9f19beae6",
+          "ff4ba778cd8d36745586dfa41500f9c929",
+          "ff7ee8eb26af175ec1cd04acdb721867a1",
+          "ff2010e0e6349c37d8b5179fd7a43aac3e"
+        ],
+        "conv": "ff83fdb0a371ab1015051fc7c0c7c83512"
+      }
+    }
+  },
+  "equivalent_to": [
+    "anthropic.messages/multi-turn",
+    "openai.responses/multi-turn"
+  ]
+}

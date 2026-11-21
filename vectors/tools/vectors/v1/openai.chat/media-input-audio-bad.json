@@ -1,0 +1,112 @@
+{
+  "id": "openai.chat/media-input-audio-bad",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "media",
+  "description": "Invalid audio data: the part is opaque.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "input_audio",
+            "input_audio": {
+              "data": "***",
+              "format": "wav"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "input_audio",
+              "sha256": {
+                "$hex": "0cfbccebf00f1bbebb4ab705020cceb463c3b4ba86747b271b91ecafaaaefc71"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBo2F0Zm9wYXF1ZWR0eXBla2lucHV0X2F1ZGlvZnNoYTI1NlggDPvM6/APG767SrcFAgzOtGPDtLqGdHsnG5Hsr6qu/HE=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "input_audio",
+              "sha256": {
+                "$hex": "0cfbccebf00f1bbebb4ab705020cceb463c3b4ba86747b271b91ecafaaaefc71"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBo2F0Zm9wYXF1ZWR0eXBla2lucHV0X2F1ZGlvZnNoYTI1NlggDPvM6/APG767SrcFAgzOtGPDtLqGdHsnG5Hsr6qu/HE=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00a2089f8e14df9ff2776cbe234d898a53"
+        ],
+        "nodes": [
+          "004fb2a6b0324c016945a2ce96a809abae"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "005879280d252757b431281167907422ea"
+        ],
+        "loose_nodes": [
+          "009ea51e2fd880ca581c037f2f5a4ddb48"
+        ],
+        "conv": "00c94d1fc513cd1f48279aeb5c826c935c"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff957af07d1492090a11aabcf8dc7c5506"
+        ],
+        "nodes": [
+          "fffd23c5251fa0e2beeef87a8c100eed5a"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ffa067fa35d9c777d00cdd002c49d43e11"
+        ],
+        "loose_nodes": [
+          "ffe4bf15b090d1461e72c896a779826c6b"
+        ],
+        "conv": "ffdcf8bd76cb6924ad90645aa2ff0f6e6f"
+      }
+    }
+  }
+}

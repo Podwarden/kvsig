@@ -1,0 +1,232 @@
+{
+  "id": "anthropic.messages/assistant-mixed-order",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "parts",
+  "description": "Text, tool_use, text, tool_use keep their order; refs count tool_use blocks.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "x"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": "one"
+          },
+          {
+            "type": "tool_use",
+            "id": "a",
+            "name": "f",
+            "input": {}
+          },
+          {
+            "type": "text",
+            "text": "two"
+          },
+          {
+            "type": "tool_use",
+            "id": "b",
+            "name": "g",
+            "input": {
+              "k": 1
+            }
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "b",
+            "content": "B"
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "one"
+            },
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{}",
+              "name": "f"
+            },
+            {
+              "t": "text",
+              "v": "two"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{\"k\":1}",
+              "name": "g"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "B"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4SiYXRkdGV4dGF2Y29uZaRhdGl0b29sX2NhbGxjcmVmAGRhcmdzYnt9ZG5hbWVhZqJhdGR0ZXh0YXZjdHdvpGF0aXRvb2xfY2FsbGNyZWYBZGFyZ3NneyJrIjoxfWRuYW1lYWeiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAWVwYXJ0c4GiYXRkdGV4dGF2YUI=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "one"
+            },
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{}",
+              "name": "f"
+            },
+            {
+              "t": "text",
+              "v": "two"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{\"k\":1}",
+              "name": "g"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "B"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4SiYXRkdGV4dGF2Y29uZaRhdGl0b29sX2NhbGxjcmVmAGRhcmdzYnt9ZG5hbWVhZqJhdGR0ZXh0YXZjdHdvpGF0aXRvb2xfY2FsbGNyZWYBZGFyZ3NneyJrIjoxfWRuYW1lYWeiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAWVwYXJ0c4GiYXRkdGV4dGF2YUI=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253",
+          "00d435ef6a7265ed8571fbc8ebd9a9b679",
+          "00dcc15c8e5c2c7c70994164ab2f21b531"
+        ],
+        "nodes": [
+          "00b2dfe677816238e90ef2a40e06f620f7",
+          "00c184a3d2147544d574babfc1054ffd97",
+          "00c70aa2ab9d43884d30300092fe78ccb7"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4",
+          "00522736eab0261e3313cb076c6c950fa4",
+          "00db77ea4184fdeae3c531d203ae3b01be"
+        ],
+        "loose_nodes": [
+          "002d7a8dd84f7f99d1409350bb250c6cf9",
+          "000e4942b776aab56cb85b742e2a4e98fc",
+          "005ff56101507da2c5bac0935a35ce92b6"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7",
+          "ffd75987bbd4a641bcfd20f5cc24f048cd",
+          "ff00e1afff3033ce84755674f6ce432677"
+        ],
+        "nodes": [
+          "ff3f620f0c447fef2751c57bbe698941c0",
+          "ffa54e804311655bb64c38e28304945482",
+          "ff5d076de781a8f860be0d6c9916660ddb"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec",
+          "ff0ed014ed38e969fc5aa90ecb7de530a8",
+          "ff5b54d34328f08690d774f4407c3baa77"
+        ],
+        "loose_nodes": [
+          "ffc38a0c74a027167a346af0d779e9d32a",
+          "ffc96f9152b565ab330f4deef9cd9860be",
+          "ff7ba3783789c0cd32617e467cb9e84236"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

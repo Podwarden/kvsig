@@ -1,0 +1,161 @@
+{
+  "id": "anthropic.messages/tool-types",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "parts",
+  "description": "A custom tool, an explicit custom type, a server tool, and a tool without a schema.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "x"
+      }
+    ],
+    "tools": [
+      {
+        "name": "plain",
+        "description": "d",
+        "input_schema": {
+          "type": "object"
+        }
+      },
+      {
+        "type": "custom",
+        "name": "explicit",
+        "input_schema": {}
+      },
+      {
+        "type": "web_search_20250305",
+        "name": "web_search",
+        "max_uses": 2
+      },
+      {
+        "name": "no_schema"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "d",
+          "name": "plain",
+          "schema": "{\"type\":\"object\"}"
+        },
+        {
+          "desc": "",
+          "name": "explicit",
+          "schema": "{}"
+        },
+        {
+          "def": "{\"type\":\"web_search_20250305\",\"name\":\"web_search\",\"max_uses\":2}",
+          "type": "web_search_20250305"
+        },
+        {
+          "desc": "",
+          "name": "no_schema",
+          "schema": "null"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4SjZGRlc2NhZGRuYW1lZXBsYWluZnNjaGVtYXF7InR5cGUiOiJvYmplY3QifaNkZGVzY2BkbmFtZWhleHBsaWNpdGZzY2hlbWFie32iY2RlZng/eyJ0eXBlIjoid2ViX3NlYXJjaF8yMDI1MDMwNSIsIm5hbWUiOiJ3ZWJfc2VhcmNoIiwibWF4X3VzZXMiOjJ9ZHR5cGVzd2ViX3NlYXJjaF8yMDI1MDMwNaNkZGVzY2BkbmFtZWlub19zY2hlbWFmc2NoZW1hZG51bGxobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "d",
+          "name": "plain",
+          "schema": "{\"type\":\"object\"}"
+        },
+        {
+          "desc": "",
+          "name": "explicit",
+          "schema": "{}"
+        },
+        {
+          "def": "{\"max_uses\":2,\"name\":\"web_search\",\"type\":\"web_search_20250305\"}",
+          "type": "web_search_20250305"
+        },
+        {
+          "desc": "",
+          "name": "no_schema",
+          "schema": "null"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4SjZGRlc2NhZGRuYW1lZXBsYWluZnNjaGVtYXF7InR5cGUiOiJvYmplY3QifaNkZGVzY2BkbmFtZWhleHBsaWNpdGZzY2hlbWFie32iY2RlZng/eyJtYXhfdXNlcyI6MiwibmFtZSI6IndlYl9zZWFyY2giLCJ0eXBlIjoid2ViX3NlYXJjaF8yMDI1MDMwNSJ9ZHR5cGVzd2ViX3NlYXJjaF8yMDI1MDMwNaNkZGVzY2BkbmFtZWlub19zY2hlbWFmc2NoZW1hZG51bGxobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4",
+    "keys": {
+      "0": {
+        "head": "00f8781530ee3aca4ed329c664d1894a3f",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "008578df54ff04ad6b8bc9b23349a364e5",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253"
+        ],
+        "nodes": [
+          "00ec3f5cf1f211b9e4bba4cf75a4fa3fe9"
+        ],
+        "loose_head": "009fc10e1e855a39f5acaeb7454992caf4",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00f5946550c0b5f116ce9a54ab0c82ab6a",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4"
+        ],
+        "loose_nodes": [
+          "00659d42847f9981333a19f43a3f04df36"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ff4d3adbe861db8c8f3bfc4f2ef3b639ed",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff7e2628c2091389195c9cccf784433149",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7"
+        ],
+        "nodes": [
+          "ffce310545faa08884f81dc6f740258fbf"
+        ],
+        "loose_head": "ff3a559dffa03e394897a1e7b8675bf4af",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ffcf6cd4653399cc59d8d2c61b413d61a1",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec"
+        ],
+        "loose_nodes": [
+          "ff11e167c54d20b60986cfc6d6b4c581a4"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

@@ -1,0 +1,103 @@
+{
+  "id": "openai.responses/loose-date-line",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.responses",
+  "category": "loose",
+  "description": "Rule 3: a line holding only an ISO date is removed.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "first\n2026-11-21\nsecond\n  2026-11-22  \nthird"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "first\n2026-11-21\nsecond\n  2026-11-22  \nthird"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdngsZmlyc3QKMjAyNi0xMS0yMQpzZWNvbmQKICAyMDI2LTExLTIyICAKdGhpcmQ=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "first second third"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnJmaXJzdCBzZWNvbmQgdGhpcmQ=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "0049d6ca060cb4d5ab5df3f401334ca11b"
+        ],
+        "nodes": [
+          "00be225e365a804627685489f076abea19"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0004013e289c69c9b9991f6f7ee05ae3a6"
+        ],
+        "loose_nodes": [
+          "00ddd15b7060444c30053f4baa8fd2bd8d"
+        ],
+        "conv": "004ec515a57d6dbcc961d9307297e2d361"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff979434f71c72bf45d6f0516d0877cb25"
+        ],
+        "nodes": [
+          "ff6f3f6fd6ffbbd774c87e3599c4321308"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff2fd1cf4f5334f043ae91c907403f8938"
+        ],
+        "loose_nodes": [
+          "ffda3f404792f9eac148636147ef13a0a2"
+        ],
+        "conv": "ff8ace9a05b12cecd42b4c5998ae387608"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/loose-date-line",
+    "anthropic.messages/loose-date-line"
+  ]
+}

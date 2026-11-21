@@ -1,0 +1,142 @@
+{
+  "id": "openai.chat/non-object-part",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "opaque",
+  "description": "Parts that are not objects: strings are text, the rest opaque.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          "str",
+          5,
+          null,
+          {
+            "type": "text",
+            "text": "t"
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "str"
+            },
+            {
+              "t": "opaque",
+              "type": "part",
+              "sha256": {
+                "$hex": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+              }
+            },
+            {
+              "t": "opaque",
+              "type": "part",
+              "sha256": {
+                "$hex": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+              }
+            },
+            {
+              "t": "text",
+              "v": "t"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOEomF0ZHRleHRhdmNzdHKjYXRmb3BhcXVlZHR5cGVkcGFydGZzaGEyNTZYIO8tEn3je5QrqtBhReVLDGGaHyIyey67z77Hj1Vkr+Odo2F0Zm9wYXF1ZWR0eXBlZHBhcnRmc2hhMjU2WCB0I06Yr+dJj7Xa8fNqwteKzDOUZPlQcDuMAZiS+YK5C6JhdGR0ZXh0YXZhdA==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "str"
+            },
+            {
+              "t": "opaque",
+              "type": "part",
+              "sha256": {
+                "$hex": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+              }
+            },
+            {
+              "t": "opaque",
+              "type": "part",
+              "sha256": {
+                "$hex": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b"
+              }
+            },
+            {
+              "t": "text",
+              "v": "t"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOEomF0ZHRleHRhdmNzdHKjYXRmb3BhcXVlZHR5cGVkcGFydGZzaGEyNTZYIO8tEn3je5QrqtBhReVLDGGaHyIyey67z77Hj1Vkr+Odo2F0Zm9wYXF1ZWR0eXBlZHBhcnRmc2hhMjU2WCB0I06Yr+dJj7Xa8fNqwteKzDOUZPlQcDuMAZiS+YK5C6JhdGR0ZXh0YXZhdA==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00ffc4b5461f4b2752d75383690c01010d"
+        ],
+        "nodes": [
+          "002634745b05a86e2f7451a882b30a623b"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00adfe274d6690c21aacec0ef2bba8f871"
+        ],
+        "loose_nodes": [
+          "00108e3e81b24fc2a88bc7a820beda22ba"
+        ],
+        "conv": "00d9cf380b303308c677f5efebc8d77003"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff3a1e0505baee5376138d0d053193792e"
+        ],
+        "nodes": [
+          "ffe1ae37d71d21c9b3fbd66563c7865b0d"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff0fb985eb3a14c24160679a1d9178cd1a"
+        ],
+        "loose_nodes": [
+          "ff1cb57899dad2b155c4002ad61a540881"
+        ],
+        "conv": "ffc5c43bd7a9238dad269f60edd9eb9a35"
+      }
+    }
+  }
+}

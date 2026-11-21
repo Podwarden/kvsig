@@ -1,0 +1,119 @@
+{
+  "id": "anthropic.messages/cache-control-nested-kept",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "cache-control",
+  "description": "A member named cache_control deeper inside a value is data and is kept.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "mystery",
+            "v": {
+              "cache_control": 1
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "mystery",
+              "sha256": {
+                "$hex": "ea7ca92166e839147c231baa548d22a01d08faa165370c7b8b5dc6e6e7120456"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBo2F0Zm9wYXF1ZWR0eXBlZ215c3Rlcnlmc2hhMjU2WCDqfKkhZug5FHwjG6pUjSKgHQj6oWU3DHuLXcbm5xIEVg==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "mystery",
+              "sha256": {
+                "$hex": "ea7ca92166e839147c231baa548d22a01d08faa165370c7b8b5dc6e6e7120456"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBo2F0Zm9wYXF1ZWR0eXBlZ215c3Rlcnlmc2hhMjU2WCDqfKkhZug5FHwjG6pUjSKgHQj6oWU3DHuLXcbm5xIEVg==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "008ca94341545209f6c880266f97e47833"
+        ],
+        "nodes": [
+          "006187c95b0dd639ef025f41a4567b5b2a"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00374de671fcc44d451dd81d059e32ad17"
+        ],
+        "loose_nodes": [
+          "008539e8922bddf0f20cd585c759c72acf"
+        ],
+        "conv": "00fda2523974eb35e81398504f6bb8b84a"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff142f8538c7b14c5e2239b0bcb6e069a6"
+        ],
+        "nodes": [
+          "ffa3d0c3ef44d3a32e801d7837283a74d5"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ffc63cbf300035a53e685c3871246148ec"
+        ],
+        "loose_nodes": [
+          "ff40770215119ec3ba0a80ae8b4381521c"
+        ],
+        "conv": "ffa8c9fa39ce602a8ac73743e925a35b5f"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "msgs",
+      "other": "anthropic.messages/cache-control-opaque-plain",
+      "same": false
+    }
+  ]
+}

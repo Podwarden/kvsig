@@ -1,0 +1,115 @@
+{
+  "id": "openai.chat/scope-tenant",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "scope",
+  "description": "A tenant scopes the ids.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hello, world"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "scope": {
+    "cache_salt": null,
+    "tenant_b64": "dGVuYW50LTQy",
+    "scope_b64": "8DOV7Rw2RzPD2yNa4OCwMnfSScrJZAxFMwfdJLOH8ps="
+  },
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hello, world"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmxIZWxsbywgd29ybGQ=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hello, world"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmxIZWxsbywgd29ybGQ=",
+    "keys": {
+      "0": {
+        "head": "00e07f0e6157348a75c1b2d350593d4742",
+        "sys": "00650b750c7ce7373d0ebc63549ef0b2fd",
+        "tools": "006a6269b302cf45f5a673a1c459b17bc5",
+        "msgs": [
+          "0068484432afdba9e577af86dc8dc6664b"
+        ],
+        "nodes": [
+          "00c54d4fe783b9909df47c5324595b50e0"
+        ],
+        "loose_head": "00f6b29527f82860c64e948522d9111803",
+        "loose_sys": "004285be706728240cea9cffcaf7fbb742",
+        "loose_tools": "006f34b78615480df91a926c4e81893130",
+        "loose_msgs": [
+          "008f299febef2b42c5db661ba366cb22c5"
+        ],
+        "loose_nodes": [
+          "007f63bb1f3775a21db2e261191203ca97"
+        ],
+        "conv": "008e5cdcc82c1fa8ec6c1b01b352432489"
+      },
+      "255": {
+        "head": "ff5175eca8505dc6bf2946f75bf82ef742",
+        "sys": "ffb4f9b519928b29af818a597269f0a3eb",
+        "tools": "fffdb1e1dd4687dda3515b51e45ab754c1",
+        "msgs": [
+          "ff5ccaa63d1df0a6473329321a889e7799"
+        ],
+        "nodes": [
+          "ff6526aeda25f32c44ebd4dc3ab0f648dd"
+        ],
+        "loose_head": "ff053d670a5ae923ddc282ec95e017e5a5",
+        "loose_sys": "ff76d9c71dc31fbaf045633b1d8e70f4f6",
+        "loose_tools": "ffb6e1686b10628a5ea2a0ccbb72fd5546",
+        "loose_msgs": [
+          "ffceeb9a7d72e3bd5d58671eb851b24f48"
+        ],
+        "loose_nodes": [
+          "ffe5ccfc3390b473e33b2eb6e8f846b6a5"
+        ],
+        "conv": "ff7a78fdf08ddd11b23cec2362cdfb0fbe"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "head",
+      "other": "openai.chat/user-only",
+      "same": false
+    },
+    {
+      "field": "msgs",
+      "other": "openai.chat/user-only",
+      "same": false
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "id": "openai.responses/conv-no-tools",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.responses",
+  "category": "conv-tools-free",
+  "description": "Same again with no tools at all.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "What is the capital of France?"
+      },
+      {
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "Paris."
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": "And Spain?"
+      }
+    ],
+    "instructions": "You answer geography questions."
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You answer geography questions."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "What is the capital of France?"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Paris."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "And Spain?"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdngfWW91IGFuc3dlciBnZW9ncmFwaHkgcXVlc3Rpb25zLmV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdngeV2hhdCBpcyB0aGUgY2FwaXRhbCBvZiBGcmFuY2U/omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GiYXRkdGV4dGF2ZlBhcmlzLqJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZqQW5kIFNwYWluPw==",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You answer geography questions."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "What is the capital of France?"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Paris."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "And Spain?"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdngfWW91IGFuc3dlciBnZW9ncmFwaHkgcXVlc3Rpb25zLmV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdngeV2hhdCBpcyB0aGUgY2FwaXRhbCBvZiBGcmFuY2U/omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GiYXRkdGV4dGF2ZlBhcmlzLqJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZqQW5kIFNwYWluPw==",
+    "keys": {
+      "0": {
+        "head": "0092ff843021dfcb0017d622b22bd4e3ea",
+        "sys": "00028aa4d25b8dec4ea39a544dec3392ab",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00ba56ae2f755ae7619097837334b46b6c",
+          "006c2ab0538d9531d700e67ec8080258f9",
+          "00eb255229ef2f6a08875a9067abff0e2b"
+        ],
+        "nodes": [
+          "00e258ca305adb55919b8ddb1bb7a842c0",
+          "009ef1c2e44cf91178ee69e96ce8826958",
+          "003b84512d291a75083a35fb296adbb924"
+        ],
+        "loose_head": "0056ef3d2bf8eafa184ae857702fb61310",
+        "loose_sys": "0081054e2aed5280c59c1e8bd90f5a61ba",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00140c2bfa33c874f9049afc5a25ff2062",
+          "00023543cb1a7ebf1c82805eb34f517144",
+          "00dce7e8cade5b75a3b97fc2e8fee3de00"
+        ],
+        "loose_nodes": [
+          "002f6e4fd90099f25c7f1252aac2c4597f",
+          "008fffee8ab6cdfb66228c9df03a42b451",
+          "001cac2f1a98bf020a851407d7ef022d96"
+        ],
+        "conv": "00fdd9bdfb7d14a82cb5d7d4d70ac60046"
+      },
+      "255": {
+        "head": "ff7b2a741b608fc4cbf519251942c815b6",
+        "sys": "ff710f6b45e5cb559f0ab2daa18133038e",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff51bbb473b78fd01328eb91df4a9f4932",
+          "ff1ead6961e0167bcc1b3241539d92e34e",
+          "ff7ef4cf73c8392a432a990e695c896512"
+        ],
+        "nodes": [
+          "ff8013e238ebe2338098636d40942cd68c",
+          "ff2f60d89006f8b5cf43859334ab16f0ea",
+          "ffee5428a593b6e8b22805c94a86df25f1"
+        ],
+        "loose_head": "ff5cfc2a79f47d4f35929d7b2933a6bee3",
+        "loose_sys": "ff22f74e429f57a965154ce08b3c5676e3",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff59d30c52e6f529ab5a802ca3a5964a2b",
+          "ff56d0580355c932ac645a1813ee7b225d",
+          "ff1d28898ce6a9070bf665fa9ff50af9ab"
+        ],
+        "loose_nodes": [
+          "ffcb3c8f6ad93045f1709fee914d5d60da",
+          "fffe9dd1baf67cbfea769e9e4b3e42fe07",
+          "ff178c637ddc5486a2068fbe41a587f1ce"
+        ],
+        "conv": "ff4c4a3e6d817e5a32c747aeb261a3be57"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/conv-no-tools",
+    "anthropic.messages/conv-no-tools"
+  ],
+  "relations": [
+    {
+      "field": "conv",
+      "other": "openai.responses/conv-base",
+      "same": true
+    },
+    {
+      "field": "loose_sys",
+      "other": "openai.responses/conv-base",
+      "same": true
+    },
+    {
+      "field": "sys",
+      "other": "openai.responses/conv-base",
+      "same": true
+    },
+    {
+      "field": "loose_tools",
+      "other": "openai.responses/conv-base",
+      "same": false
+    },
+    {
+      "field": "head",
+      "other": "openai.responses/conv-base",
+      "same": false
+    },
+    {
+      "field": "loose_head",
+      "other": "openai.responses/conv-base",
+      "same": false
+    }
+  ]
+}

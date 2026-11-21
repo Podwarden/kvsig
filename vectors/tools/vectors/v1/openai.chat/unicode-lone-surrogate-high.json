@@ -1,0 +1,93 @@
+{
+  "id": "openai.chat/unicode-lone-surrogate-high",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "unicode",
+  "description": "A lone high surrogate escape in a text becomes U+FFFD.",
+  "input": null,
+  "input_raw_b64": "eyJtb2RlbCI6Im0iLCJtZXNzYWdlcyI6W3sicm9sZSI6InVzZXIiLCJjb250ZW50IjoiYVx1ZDgwMGIifV19",
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "a\ufffdb"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmVh77+9Yg==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "a\ufffdb"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmVh77+9Yg==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00d5493be0b41de7201fb81631271a5a59"
+        ],
+        "nodes": [
+          "005b981ae12141584062915e8980f7891d"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0096588d08179bc806d3031289c8c7e1c5"
+        ],
+        "loose_nodes": [
+          "00f9565f1c6bbf9f01f9ff6097d29b85bc"
+        ],
+        "conv": "0078e66027efa25ad63c77be46d34f80cd"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff66007c74556c984f25adb87a4c33d5cc"
+        ],
+        "nodes": [
+          "fff67332cd6cb7e186b8376fa72090b584"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff0ceecbd1fc0b33d0bb56eede5e85f915"
+        ],
+        "loose_nodes": [
+          "ff037d4fff7c0d4a5de295bb021f69af16"
+        ],
+        "conv": "ff24356385cbb8d2d6241fb2a675738651"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/unicode-lone-surrogate-low"
+  ]
+}

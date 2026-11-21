@@ -1,0 +1,54 @@
+name: vectors
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  manifest:
+    name: manifest matches the vector files
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Hashes in manifest.json match the files
+        run: python conformance/run.py --manifest-only
+      - name: Files are exactly what the generator produces
+        run: |
+          pip install cbor2
+          python vectors/tools/generate.py --check
+
+  conformance:
+    name: runner against the Python adapter
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python conformance/run.py -v -- python conformance/adapters/python_adapter.py
+
+  xcheck:
+    name: independent re-derivation (cbor2, hand-built HMAC)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install cbor2
+      - run: python vectors/tools/xcheck.py
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+      - run: uv run --with ruff ruff check vectors/tools conformance
+      - run: uv run --with ruff ruff format --check vectors/tools conformance

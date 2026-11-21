@@ -1,0 +1,158 @@
+{
+  "id": "openai.responses/system-mid-conversation",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "head",
+  "description": "A system item after the first body message stays in the body.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "role": "user",
+        "content": "go"
+      },
+      {
+        "role": "system",
+        "content": "late"
+      },
+      {
+        "role": "user",
+        "content": "more"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "late"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "more"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmRsYXRlomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmRtb3Jl",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "late"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "more"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmRsYXRlomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmRtb3Jl",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf",
+          "00228938af86761d455e8b970f0a1e7e9d",
+          "004bc93d527d854c2fed87a81d21bc5e94"
+        ],
+        "nodes": [
+          "002c19113c17cd3bf808613f6c8acd26dc",
+          "009836216199aedc1ffc2c0038db8da7ea",
+          "00a1ea6f5b1196157fc6f5e1cf76328be0"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c",
+          "0071f80c061b79e91927f124d49b2eec75",
+          "00e2412b8ceb08bcb5358ac50deef26620"
+        ],
+        "loose_nodes": [
+          "00835340c69a6db5b9f4b1a8eae3e84c4c",
+          "004707372d190007b087effc07df2b2f1c",
+          "00951cf13100aad95c6bf03ec0b19b4b47"
+        ],
+        "conv": "00820e5a00b3fd3fac2e0ec9c4cf180996"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988",
+          "ffe824beb17ead81e72f219dc59e1c9809",
+          "ffcf4d4faacfa66ec502f36138f7966060"
+        ],
+        "nodes": [
+          "ffd9994a27eace0da91945e380b9cec4a3",
+          "ffc15ad991e1e0c5f803e310e104038494",
+          "ff8e1dcf64efc4c78b52585b6c0dad5297"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d",
+          "ff4a4e57771fa19f1884e469431b595a64",
+          "ff09c8abbbb3217a24fab36a09715ad6af"
+        ],
+        "loose_nodes": [
+          "ff71734f611f8f8584d6ce226c323c24ac",
+          "ff5074e280b62c720514c2c813bfa7de1c",
+          "ff7b8c7d072072933bbecb30dfe22417f8"
+        ],
+        "conv": "ff0cd2fa6d8caed62f2cbb5ffde3dadf61"
+      }
+    }
+  }
+}

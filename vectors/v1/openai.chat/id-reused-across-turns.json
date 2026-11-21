@@ -1,0 +1,328 @@
+{
+  "id": "openai.chat/id-reused-across-turns",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "tool-refs",
+  "description": "An id is reused in a later turn: each result refs the nearest preceding holder.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "go"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "c1",
+            "type": "function",
+            "function": {
+              "name": "ls",
+              "arguments": "{\"path\":\"/a\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "c1",
+        "content": "first"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "c0",
+            "type": "function",
+            "function": {
+              "name": "ls",
+              "arguments": "{\"path\":\"/x\"}"
+            }
+          },
+          {
+            "id": "c1",
+            "type": "function",
+            "function": {
+              "name": "ls",
+              "arguments": "{\"path\":\"/b\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "c1",
+        "content": "second"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "ls",
+          "description": "List a directory",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/a\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "first"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/x\"}",
+              "name": "ls"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{\"path\":\"/b\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "second"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXX1obWVzc2FnZXOFomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NteyJwYXRoIjoiL2EifWRuYW1lYmxzomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgBlcGFydHOBomF0ZHRleHRhdmVmaXJzdKJkcm9sZWlhc3Npc3RhbnRlcGFydHOCpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NteyJwYXRoIjoiL3gifWRuYW1lYmxzpGF0aXRvb2xfY2FsbGNyZWYBZGFyZ3NteyJwYXRoIjoiL2IifWRuYW1lYmxzomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgFlcGFydHOBomF0ZHRleHRhdmZzZWNvbmQ=",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/a\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "first"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/x\"}",
+              "name": "ls"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{\"path\":\"/b\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "second"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJwcm9wZXJ0aWVzIjp7InBhdGgiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsicGF0aCJdLCJ0eXBlIjoib2JqZWN0In1obWVzc2FnZXOFomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NteyJwYXRoIjoiL2EifWRuYW1lYmxzomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgBlcGFydHOBomF0ZHRleHRhdmVmaXJzdKJkcm9sZWlhc3Npc3RhbnRlcGFydHOCpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NteyJwYXRoIjoiL3gifWRuYW1lYmxzpGF0aXRvb2xfY2FsbGNyZWYBZGFyZ3NteyJwYXRoIjoiL2IifWRuYW1lYmxzomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgFlcGFydHOBomF0ZHRleHRhdmZzZWNvbmQ=",
+    "keys": {
+      "0": {
+        "head": "0094c313cf081fa564444233ee8ce0f2ae",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00a6f0fc4d3200cad72142381cc1373fac",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf",
+          "00058ed9a026691ec9f11ce06d4af743c8",
+          "00d6a7ceb6edcef7f73ce0626401a6664c",
+          "004761321d928b0649de7c2014863562eb",
+          "00bea12eb53fcaf921dc014d058f3d33de"
+        ],
+        "nodes": [
+          "00f8f641e4417bb27661cde51c705643c2",
+          "00bfd90e7df1342d293596fbc58a9d4841",
+          "0094d83f031af2c799d6dda5d4b22da383",
+          "00d4cf186de6242f35164e135835e19e37",
+          "00766d8e62c8a491db4eb789b9ecd89edd"
+        ],
+        "loose_head": "0054d7051c6720e90ac29e4d1b58fa4fab",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00c2381d696f32f448d72e68c2ab636a6b",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c",
+          "00ae13adc54deb6ccb71531f3c79f98acf",
+          "00e8cab842fb1afecd5d572894b35f5916",
+          "001949d939ac3d46181ca51cddd2361192",
+          "0039c53c07504b6c6e21efdb05972c9e02"
+        ],
+        "loose_nodes": [
+          "00463a5f96e90f82e03263d5324d119535",
+          "00d14bd47f1eaf8eff738c20eebf62afb6",
+          "00e191581b7aa1076e2c455fc9f32a792a",
+          "004d9b22c261aa7fa4ae8f09bfcce970b6",
+          "006abee8a09f38f9390d8bc5f395c9fb24"
+        ],
+        "conv": "00820e5a00b3fd3fac2e0ec9c4cf180996"
+      },
+      "255": {
+        "head": "ffc5d268cb8a64c726eb5e99647dfaa249",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff24b0e119a0a56335180c12e8aa192468",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988",
+          "ffa1df45fa402b9d35d0b523cae8277fcc",
+          "ffec0bbe369bc954e578d47f7c8715e0e3",
+          "fff30d1ee388f2c61a6f5c74d12f64cbbc",
+          "ff22f639da1747d4129f24ea11d3129cb1"
+        ],
+        "nodes": [
+          "fff0c10bf2114d0e1f3742b43bc9f8af39",
+          "ff63299d378c41ba481ee6e27f1e9ec150",
+          "ff1fa2150da917360a8cbd5bf7081e5650",
+          "ff801b8025aff3b9f0e7643ba47fe3047d",
+          "ffed8feb1c2c9a938c53e7f1872dd24c5f"
+        ],
+        "loose_head": "ff52e49eb401371634a47b2839ffe9db8b",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff7248c7b899560c717b25ed247c64482e",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d",
+          "ff904eebfbae7dddd39eb9503c6fdf1135",
+          "ff4d87852ca51b8fc3a1a4f31f2257ca87",
+          "ff029d24266192c67974f130a16c522f96",
+          "ff9855f09c1f53a48a2ee5d3e826429de4"
+        ],
+        "loose_nodes": [
+          "ff40533ed52534b3d45a6cce15e593f19c",
+          "ff0e36fabfc6f9e586f2b1f0ea5ef2f397",
+          "ffc7f5d3c44b1ece99eb25ac9afa6e8ffb",
+          "ff7fa5759ef1be77cfc0440221326c4715",
+          "ff6b7e49e091b48cd88bfeea3a03d7bd28"
+        ],
+        "conv": "ff0cd2fa6d8caed62f2cbb5ffde3dadf61"
+      }
+    }
+  },
+  "equivalent_to": [
+    "anthropic.messages/id-reused-across-turns",
+    "openai.responses/id-reused-across-turns"
+  ]
+}

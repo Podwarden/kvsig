@@ -1,0 +1,227 @@
+{
+  "id": "openai.responses/assistant-items-grouped",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "parts",
+  "description": "Reasoning, two assistant messages and a call are one assistant message (known non-equivalence 3).",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "role": "user",
+        "content": "x"
+      },
+      {
+        "type": "reasoning",
+        "id": "r1",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": "t"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "a"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "b"
+          }
+        ]
+      },
+      {
+        "type": "function_call",
+        "call_id": "c1",
+        "name": "f",
+        "arguments": "{}"
+      },
+      {
+        "type": "function_call_output",
+        "call_id": "c1",
+        "output": "r"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "reasoning",
+              "v": "t"
+            },
+            {
+              "t": "text",
+              "v": "a"
+            },
+            {
+              "t": "text",
+              "v": "b"
+            },
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{}",
+              "name": "f"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "r"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4SiYXRpcmVhc29uaW5nYXZhdKJhdGR0ZXh0YXZhYaJhdGR0ZXh0YXZhYqRhdGl0b29sX2NhbGxjcmVmAGRhcmdzYnt9ZG5hbWVhZqJkcm9sZWR0b29sZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYAZXBhcnRzgaJhdGR0ZXh0YXZhcg==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "a"
+            },
+            {
+              "t": "text",
+              "v": "b"
+            },
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{}",
+              "name": "f"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "r"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4OiYXRkdGV4dGF2YWGiYXRkdGV4dGF2YWKkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc2J7fWRuYW1lYWaiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2YXI=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253",
+          "00a7ad80e887a1d05b3bf42783a08a6d2d",
+          "00f11644bf5d12cdc84600731be756981a"
+        ],
+        "nodes": [
+          "00b2dfe677816238e90ef2a40e06f620f7",
+          "00b3c6520916ac31665f15f6ac2d41b5b6",
+          "005068e0f6ed873a5d5230b2b67f262b77"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4",
+          "00fcbe328d7c3b24ff92783ce7b9f51679",
+          "0073cb348825299647b4ab69a8a383c174"
+        ],
+        "loose_nodes": [
+          "002d7a8dd84f7f99d1409350bb250c6cf9",
+          "00a44b63b76e37df47a19047c584c04cb9",
+          "00e6ed919c33d82a8697ae28447195a9a7"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7",
+          "ffbc773db8e9b25cd9802189fd988e4d6f",
+          "ff3d1ef32ab2d32b75670b7e7eb316bf21"
+        ],
+        "nodes": [
+          "ff3f620f0c447fef2751c57bbe698941c0",
+          "ff514ab5b4524dd730ec573d7d9da0a914",
+          "ff1d707ec5fe64d88605639595e08ad363"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec",
+          "ff029a012c5a5a7982585b624947016479",
+          "fff7b8e74c5005dfd4c142ee60dc74005d"
+        ],
+        "loose_nodes": [
+          "ffc38a0c74a027167a346af0d779e9d32a",
+          "ffb1e8bb1e41e995aba1d7ba7f9d283157",
+          "ff61d463082b808073faa17a4cf3544af3"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

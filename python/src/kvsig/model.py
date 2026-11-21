@@ -162,12 +162,23 @@ def opaque(p: Any, budget: Budget, type_: str | None = None) -> Part:
     return {"t": "opaque", "type": t if isinstance(t, str) else "", "sha256": _sha(utf8(text))}
 
 
+def _reject_constant(name: str) -> Any:
+    # json.loads accepts NaN and the infinities; JSON does not.
+    raise ValueError(f"{name} is not a JSON literal")
+
+
+def _parse_int(s: str) -> int | float:
+    # Python refuses int() on more than ~4300 digits. Such a number is valid
+    # JSON and too large for a double: it becomes an infinity, which prints as null.
+    return int(s) if len(s) <= 4000 else float(s)
+
+
 def tool_args(raw: Any, budget: Budget) -> tuple[str, str]:
     """``("args", canonical JSON text)``, or ``("args_raw", raw)`` when a string
     does not parse as JSON."""
     if isinstance(raw, str):
         try:
-            parsed = json.loads(raw)
+            parsed = json.loads(raw, parse_constant=_reject_constant, parse_int=_parse_int)
         except RecursionError as e:
             raise NoIds("tool arguments nest too deep") from e
         except ValueError:

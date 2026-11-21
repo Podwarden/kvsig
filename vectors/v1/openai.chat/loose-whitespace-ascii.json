@@ -1,0 +1,98 @@
+{
+  "id": "openai.chat/loose-whitespace-ascii",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.chat",
+  "category": "loose",
+  "description": "Rule 4: runs of ASCII whitespace collapse to one space and the text is trimmed.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "  a \t\t b\n\n\nc\r\nd \u000b e\f f  "
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "  a \t\t b\n\n\nc\r\nd \u000b e\f f  "
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdngYICBhIAkJIGIKCgpjDQpkIAsgZQwgZiAg",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "a b c d e f"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmthIGIgYyBkIGUgZg==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00056bf5185f137936e906683af355615e"
+        ],
+        "nodes": [
+          "00932694139bcb8b2c1975bcddf2599b2a"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00f4ff57f3cf72ef8fff1118dd75ec3f24"
+        ],
+        "loose_nodes": [
+          "007479a1847b5497933fb7778c76a6692f"
+        ],
+        "conv": "0050b9e2bfeaa8e1be543063394c1d3fbb"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff165da239a9aa74ca1ebfb7d9f4c9cc3c"
+        ],
+        "nodes": [
+          "ff6bc49fe155bb46e2cd46c064cfefcace"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ffb21fcaf6883ed1bb29001c3d8e612125"
+        ],
+        "loose_nodes": [
+          "fff7585b23155f2f9a5f4f24b67cec304c"
+        ],
+        "conv": "ff70c12fc03957ad28e2e2e96818152f70"
+      }
+    }
+  }
+}

@@ -1,0 +1,284 @@
+{
+  "id": "openai.chat/parallel-calls",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "tool-refs",
+  "description": "Two calls in one turn, results in call order.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "both"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "c1",
+            "type": "function",
+            "function": {
+              "name": "ls",
+              "arguments": "{\"path\":\"/a\"}"
+            }
+          },
+          {
+            "id": "c2",
+            "type": "function",
+            "function": {
+              "name": "ls",
+              "arguments": "{\"path\":\"/b\"}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "c1",
+        "content": "A"
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "c2",
+        "content": "B"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "ls",
+          "description": "List a directory",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "both"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/a\"}",
+              "name": "ls"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{\"path\":\"/b\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "A"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "B"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXX1obWVzc2FnZXOEomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmRib3RoomRyb2xlaWFzc2lzdGFudGVwYXJ0c4KkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc217InBhdGgiOiIvYSJ9ZG5hbWVibHOkYXRpdG9vbF9jYWxsY3JlZgFkYXJnc217InBhdGgiOiIvYiJ9ZG5hbWVibHOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2YUGiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAWVwYXJ0c4GiYXRkdGV4dGF2YUI=",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "both"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/a\"}",
+              "name": "ls"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{\"path\":\"/b\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "A"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "B"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJwcm9wZXJ0aWVzIjp7InBhdGgiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsicGF0aCJdLCJ0eXBlIjoib2JqZWN0In1obWVzc2FnZXOEomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmRib3RoomRyb2xlaWFzc2lzdGFudGVwYXJ0c4KkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc217InBhdGgiOiIvYSJ9ZG5hbWVibHOkYXRpdG9vbF9jYWxsY3JlZgFkYXJnc217InBhdGgiOiIvYiJ9ZG5hbWVibHOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2YUGiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAWVwYXJ0c4GiYXRkdGV4dGF2YUI=",
+    "keys": {
+      "0": {
+        "head": "0094c313cf081fa564444233ee8ce0f2ae",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00a6f0fc4d3200cad72142381cc1373fac",
+        "msgs": [
+          "00f63b33f952fa70142227c02f9f2da81e",
+          "004182eba78a15594f3b39fa694e4419d7",
+          "008a4831f1694aed5a3652b3ee13a91938",
+          "00dcc15c8e5c2c7c70994164ab2f21b531"
+        ],
+        "nodes": [
+          "008913dc66e36168de59a3db25bc58000c",
+          "00ea1d9fefd8411c01af43c851794afe70",
+          "000148a9b21d47d5964d57903ab9aab185",
+          "00e74ff0d5c13977b290ab05feee639770"
+        ],
+        "loose_head": "0054d7051c6720e90ac29e4d1b58fa4fab",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00c2381d696f32f448d72e68c2ab636a6b",
+        "loose_msgs": [
+          "002e2dc7c8da73d8595bbc02a680dcaab3",
+          "002dbd2c4bff5a1df2668126218ef51614",
+          "00410de19a4771ad2aad3bf7e85765a755",
+          "00db77ea4184fdeae3c531d203ae3b01be"
+        ],
+        "loose_nodes": [
+          "006751ceb1fa81a3192b15e2b99064c7d5",
+          "006b2b8d947575fdf2b7e4b9b4d81f0bb2",
+          "0025ba83305e848200861057b5601b6eeb",
+          "0020086c10f93bf887cb3e9cc9239543ec"
+        ],
+        "conv": "005801dde9254c58c80660085d5b1a5dca"
+      },
+      "255": {
+        "head": "ffc5d268cb8a64c726eb5e99647dfaa249",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff24b0e119a0a56335180c12e8aa192468",
+        "msgs": [
+          "ff01ebbce0121d559787c7bae308924b81",
+          "ff262da332828272c6aae35ae268bcdf5c",
+          "ff17d0f091497c32804091eb3777c0c2b8",
+          "ff00e1afff3033ce84755674f6ce432677"
+        ],
+        "nodes": [
+          "ff7e9f2715529ea85e81440c293e902c3e",
+          "ff359b59c92b6fd88da984051a66510462",
+          "ff573933e931c10794534f0e1d57001a07",
+          "ff772e17091faff9eb4df158b107126830"
+        ],
+        "loose_head": "ff52e49eb401371634a47b2839ffe9db8b",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff7248c7b899560c717b25ed247c64482e",
+        "loose_msgs": [
+          "ff09d9c8dbf8c16149bfdbbabfb493e3e1",
+          "ffe43c046f64116bf219c457fb478f6cc5",
+          "ff67748c9b83a763c1197c422a4115f277",
+          "ff5b54d34328f08690d774f4407c3baa77"
+        ],
+        "loose_nodes": [
+          "ff3d626a5ff88debdccf6d8aab77ab7923",
+          "fffa336f5c47d4346c7eb94348c982315f",
+          "ff8dddeacbb6ae5d1599522e2306033d4f",
+          "fff66b490a6af5dd143de7745b1afcebb3"
+        ],
+        "conv": "ffc7be3de85a4f465998bb546a2a7787da"
+      }
+    }
+  },
+  "equivalent_to": [
+    "anthropic.messages/parallel-calls",
+    "openai.responses/parallel-calls"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "openai.responses/input-not-list-or-string",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "basics",
+  "description": "An input that is a number: no ids.",
+  "input": {
+    "model": "m",
+    "input": 5
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": true
+  }
+}

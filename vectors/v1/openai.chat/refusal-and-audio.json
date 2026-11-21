@@ -1,0 +1,160 @@
+{
+  "id": "openai.chat/refusal-and-audio",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "opaque",
+  "description": "Assistant refusal and audio fields become opaque parts, after the content.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "x"
+      },
+      {
+        "role": "assistant",
+        "content": "c",
+        "refusal": "no",
+        "audio": {
+          "id": "a1"
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "c"
+            },
+            {
+              "t": "opaque",
+              "type": "refusal",
+              "sha256": {
+                "$hex": "42e2fcdb2e4312d5cfbb9269a46f9e1c48f8ec5680d4d881a2f708fa18b752a4"
+              }
+            },
+            {
+              "t": "opaque",
+              "type": "audio",
+              "sha256": {
+                "$hex": "5cc2b0b4633517b59ff08d134998061ecc5b278ddf09cf26813aea7409d03738"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOComRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4OiYXRkdGV4dGF2YWOjYXRmb3BhcXVlZHR5cGVncmVmdXNhbGZzaGEyNTZYIELi/NsuQxLVz7uSaaRvnhxI+OxWgNTYgaL3CPoYt1Kko2F0Zm9wYXF1ZWR0eXBlZWF1ZGlvZnNoYTI1NlggXMKwtGM1F7Wf8I0TSZgGHsxbJ43fCc8mgTrqdAnQNzg=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "c"
+            },
+            {
+              "t": "opaque",
+              "type": "refusal",
+              "sha256": {
+                "$hex": "42e2fcdb2e4312d5cfbb9269a46f9e1c48f8ec5680d4d881a2f708fa18b752a4"
+              }
+            },
+            {
+              "t": "opaque",
+              "type": "audio",
+              "sha256": {
+                "$hex": "5cc2b0b4633517b59ff08d134998061ecc5b278ddf09cf26813aea7409d03738"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOComRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4OiYXRkdGV4dGF2YWOjYXRmb3BhcXVlZHR5cGVncmVmdXNhbGZzaGEyNTZYIELi/NsuQxLVz7uSaaRvnhxI+OxWgNTYgaL3CPoYt1Kko2F0Zm9wYXF1ZWR0eXBlZWF1ZGlvZnNoYTI1NlggXMKwtGM1F7Wf8I0TSZgGHsxbJ43fCc8mgTrqdAnQNzg=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253",
+          "00bfa613a76a7c14e6862f38bf5bc2c40b"
+        ],
+        "nodes": [
+          "00b2dfe677816238e90ef2a40e06f620f7",
+          "0031a38836a6d6d1c0fb5be0235c42c21f"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4",
+          "003e88d73aa68c49a749bb655593a1e321"
+        ],
+        "loose_nodes": [
+          "002d7a8dd84f7f99d1409350bb250c6cf9",
+          "002f8a3dc3e6c0d53df2e6c9e561c868e1"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7",
+          "ff247890d59d5edfa17296e3110c0a3c5f"
+        ],
+        "nodes": [
+          "ff3f620f0c447fef2751c57bbe698941c0",
+          "ff9df50451ad14b2eb2284dfa3a43cd6d9"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec",
+          "fff18a0ecb2a3a409869855e15365d09b1"
+        ],
+        "loose_nodes": [
+          "ffc38a0c74a027167a346af0d779e9d32a",
+          "ff9f91bcb322826a910c19943a61d01405"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

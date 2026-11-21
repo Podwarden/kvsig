@@ -163,6 +163,23 @@ def test_unparsable_args_are_tagged_raw():
     assert call == {"t": "tool_call", "name": "ls", "args_raw": '{"p": ', "ref": 0}
 
 
+@pytest.mark.parametrize("text", ["NaN", '{"a":NaN}', "[Infinity]", '{"a":-Infinity}'])
+def test_non_json_constants_are_unparsable_args(text):
+    body = _chat()
+    body["messages"][2]["tool_calls"][0]["function"]["arguments"] = text
+    call = _c(body).messages[1]["parts"][1]
+    assert call["args_raw"] == text and "args" not in call
+
+
+@pytest.mark.parametrize("sign", ["", "-"])
+def test_integer_beyond_the_int_digit_limit_prints_null(sign):
+    # More than 4300 digits: Python's int() refuses it, JSON allows it.
+    body = _chat()
+    body["messages"][2]["tool_calls"][0]["function"]["arguments"] = f'{{"x":{sign}{"9" * 5000}}}'
+    call = _c(body).messages[1]["parts"][1]
+    assert call["args"] == '{"x":null}'
+
+
 def test_ref_is_local_so_a_reply_alone_equals_it_in_context():
     body = _chat()
     in_context = _c(body).messages[1]

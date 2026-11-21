@@ -40,7 +40,7 @@ request, and each open question becomes a test vector.
 10. **Privacy considerations.**
 11. **Security considerations.**
 12. **Versioning.**
-13. **Test vectors.** Format and manifest.
+13. **Test vectors.** Format and manifest (draft: [decision 0004](docs/decisions/0004-test-vectors.md)).
 14. **Registries.** Dialects, part types, labels, loose profiles.
 15. **Prior art and acknowledgements.**
 
