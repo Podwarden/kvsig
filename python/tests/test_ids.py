@@ -170,11 +170,11 @@ def test_known_answer_under_test_key():
     assert (i.head, i.msgs[0], i.conv) == KNOWN
 
 
-# Cross-checked against cbor2 (canonical=True) and a hand-built HMAC, 2026-11-20.
+# Cross-checked against cbor2 (canonical=True) and a hand-built HMAC (2026-11-20; conv 2026-11-21).
 KNOWN = (
     "00b831865363828bd68585ae54120585d6",
     "006ab68e2caa01601261dfe441a3bd1f2f",
-    "0088652dfe9eaa2ba5183f380ccfa921da",
+    "00d2b692245d14716f86a4fd413f7e456f",  # conv without tools (decision 0002, 2026-11-21)
 )
 
 
@@ -243,3 +243,23 @@ def test_unexpected_errors_are_logged_not_raised(monkeypatch, caplog):
     with caplog.at_level("ERROR", logger="kvsig"):
         assert kvsig.canonicalize({"messages": []}) is None
     assert "unexpected error" in caplog.text
+
+
+def test_conv_survives_a_tool_added_mid_session():
+    tool = {"type": "function", "function": {"name": "now", "parameters": {"type": "object"}}}
+    before = _body("hi", "more")
+    after = _body("hi", "more", "and the time?")
+    after["tools"] = [tool]
+    a, b = canonicalize(before), canonicalize(after)
+    assert a is not None and b is not None
+    ia, ib = ids(a, K1), ids(b, K1)
+    assert ia.conv == ib.conv
+    # the head and prefix ids do change: a new tool is a different prompt
+    assert ia.head != ib.head and ia.nodes[0] != ib.nodes[0]
+
+
+def test_conv_changes_with_the_system_prompt():
+    a = canonicalize(_body("hi", system="S1"))
+    b = canonicalize(_body("hi", system="S2"))
+    assert a is not None and b is not None
+    assert ids(a, K1).conv != ids(b, K1).conv

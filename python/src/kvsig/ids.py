@@ -119,9 +119,16 @@ def ids(
 
     head = _hasher(key, b"head", scope)(head_enc)
     lhead = c.get(ck + head)
-    if lhead is None:
-        lhead = _hasher(key, lp + b"head", scope)(encode(loose_head(canon, profile)))
+    lsys = c.get(ck + b"s" + head)
+    if lhead is None or lsys is None:
+        lh_payload = loose_head(canon, profile)
+        lhead = _hasher(key, lp + b"head", scope)(encode(lh_payload))
+        # The loose system messages alone, without the tools: the conversation
+        # id is built on this, so adding or removing a tool mid-session (an MCP
+        # server, a feature flag) does not start a new conversation.
+        lsys = _hasher(key, lp + b"sys", scope)(encode({"head": lh_payload["head"]}))
         c.put(ck + head, lhead)
+        c.put(ck + b"s" + head, lsys)
 
     msgs = [h_msg(b) for b in msg_encs]
     nodes: list[bytes] = []
@@ -149,19 +156,19 @@ def ids(
         lnodes.append(ln)
         lprev = ln
         if anchor is None and has_content:
-            anchor = ln
+            anchor = lm
 
-    # The conversation is anchored on the first body message with content in
-    # the loose form, so a constant opener that loosens to nothing (an
-    # environment block, a reminder) does not make every session one
-    # conversation.
+    # The conversation id covers the loose system messages (not the tools) and
+    # the first body message with content in the loose form, so a constant
+    # opener that loosens to nothing (an environment block, a reminder) does not
+    # make every session one conversation.
     conv = None
     if canon.stateful:
         # The body continues history held by the server: prefix and
         # conversation ids would describe a conversation that is not there.
         nodes, lnodes = [], []
     elif anchor is not None:
-        conv = _hasher(key, lp + b"conv", scope)(lhead + anchor).hex()
+        conv = _hasher(key, lp + b"conv", scope)(lsys + anchor).hex()
     return Ids(
         epoch=key.epoch,
         head=head.hex(),
