@@ -1,0 +1,120 @@
+{
+  "id": "openai.chat/scope-other-cache-salt",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "scope",
+  "description": "Another salt gives other ids.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hello, world"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "scope": {
+    "cache_salt": "tenant-b",
+    "tenant_b64": null,
+    "scope_b64": "zYc7DpWEQxssVGn+JMQvVTAhQsRPS6zUIk2gcOZ6UHE="
+  },
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hello, world"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmxIZWxsbywgd29ybGQ=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hello, world"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmxIZWxsbywgd29ybGQ=",
+    "keys": {
+      "0": {
+        "head": "0094932ed2850af5b2cc1a4f7dd2816aa9",
+        "sys": "00d7fbd59826df3539026b9b55f24b6515",
+        "tools": "0062d04350dca971aa1f8ae7187e25d9a7",
+        "msgs": [
+          "001217dcae3d5de689aee89e5394efc422"
+        ],
+        "nodes": [
+          "001867120109fa4ac78ef13f26fc3269f8"
+        ],
+        "loose_head": "004ee67ac2a4693ba81f5b93a8a608c2b7",
+        "loose_sys": "00181c4edb9d598a52b5cfea6192a7ea77",
+        "loose_tools": "00ba75424adfc5607490eb09c85471ec86",
+        "loose_msgs": [
+          "00bbca515eaf48ee9adf39b189c97875b1"
+        ],
+        "loose_nodes": [
+          "00c301207a576cd8fcdc067edddc6ad473"
+        ],
+        "conv": "0050b33761cb8ada967185be4ee94ad3e0"
+      },
+      "255": {
+        "head": "ff94dcf30926a8c533d9d3cef8fa116b3d",
+        "sys": "ff45a403cdcdb70f693835e4dd3c458d22",
+        "tools": "ffa7fc7c978182ecf3ca404fc6dae347f6",
+        "msgs": [
+          "ffbb20ee198e204db338af85728dfc9fa9"
+        ],
+        "nodes": [
+          "ff6f4d3a8170a11f7d816d9b0e65dcf977"
+        ],
+        "loose_head": "ff90117bbeb5b93b9930f892b13ddbcfc0",
+        "loose_sys": "ff6e00e686248936732096cbeb7d287f87",
+        "loose_tools": "ff668c0bef24888d4d49b720e442e04d08",
+        "loose_msgs": [
+          "ff764e0691bcf8cbb24e287eab31309be1"
+        ],
+        "loose_nodes": [
+          "ffba80ffe8bdb17bbb893df6f0dd81251f"
+        ],
+        "conv": "ff7e65977ab8bc0eb9daad7595b1994c54"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "head",
+      "other": "openai.chat/user-only",
+      "same": false
+    },
+    {
+      "field": "msgs",
+      "other": "openai.chat/user-only",
+      "same": false
+    },
+    {
+      "field": "msgs",
+      "other": "openai.chat/scope-cache-salt",
+      "same": false
+    }
+  ]
+}

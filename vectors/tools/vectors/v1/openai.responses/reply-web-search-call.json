@@ -1,0 +1,257 @@
+{
+  "id": "openai.responses/reply-web-search-call",
+  "spec": "kvsig/1",
+  "level": 3,
+  "dialect": "openai.responses",
+  "category": "reply",
+  "description": "A server-side tool item is an opaque part inside the reply.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "search"
+      },
+      {
+        "type": "web_search_call",
+        "id": "ws_1",
+        "status": "completed",
+        "action": {
+          "type": "search",
+          "query": "q"
+        }
+      },
+      {
+        "type": "message",
+        "id": "msg_1",
+        "role": "assistant",
+        "status": "completed",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "Found it.",
+            "annotations": []
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": "thanks"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "search"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "web_search_call",
+              "sha256": {
+                "$hex": "d0ef27750e85d1e633166d870e70cf52461fdb7ba60790a4cb05b6b29438bed0"
+              }
+            },
+            {
+              "t": "text",
+              "v": "Found it."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "thanks"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmZzZWFyY2iiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgqNhdGZvcGFxdWVkdHlwZW93ZWJfc2VhcmNoX2NhbGxmc2hhMjU2WCDQ7yd1DoXR5jMWbYcOcM9SRh/be6YHkKTLBbaylDi+0KJhdGR0ZXh0YXZpRm91bmQgaXQuomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmZ0aGFua3M=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "search"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "web_search_call",
+              "sha256": {
+                "$hex": "d0ef27750e85d1e633166d870e70cf52461fdb7ba60790a4cb05b6b29438bed0"
+              }
+            },
+            {
+              "t": "text",
+              "v": "Found it."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "thanks"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmZzZWFyY2iiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgqNhdGZvcGFxdWVkdHlwZW93ZWJfc2VhcmNoX2NhbGxmc2hhMjU2WCDQ7yd1DoXR5jMWbYcOcM9SRh/be6YHkKTLBbaylDi+0KJhdGR0ZXh0YXZpRm91bmQgaXQuomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmZ0aGFua3M=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00832b9ab7d61f03fe1f2044af65fde126",
+          "00a2cba08164c46bb61dc13400c35429d5",
+          "009a00e57469fd4e0c3f4a338709251d2b"
+        ],
+        "nodes": [
+          "00bf79b088b5f08ad17b7e6df0ccdf05b0",
+          "00079077a26edcb0abc7f9c45eaf5f6eb7",
+          "00360a8f5202778cc8cc74198acd108b14"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00df726ec484152e1953536716307cf777",
+          "0067dca942d2bf0f6fd23bf826d1d5a8db",
+          "00e9a12fcdd6fdc68915fe6f2a54fba44d"
+        ],
+        "loose_nodes": [
+          "000c261a169d7b6379e7369fbed1c8d0e3",
+          "00dc1d1781c12ba77a519b46e8e882b3b3",
+          "00968908416de5cdf528a0dd0f01501508"
+        ],
+        "conv": "0052914b61944c96b96c3e45c8819c2274"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffa8b47b62367fc929663756556895e14e",
+          "ff4b96d9d61612ad73b9ac0cf8fd9b4770",
+          "ff96d84758f1a45b96e8cd368a052d228c"
+        ],
+        "nodes": [
+          "fffecf759f7471e1f2483e485cf0934244",
+          "ffb325552d3fa23384682f2361228266d5",
+          "fffa057726ae67b831d81b5de2f962e9b3"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff3fba95853e4ed575c4077f23721825a9",
+          "fff19843a60901f845bcc7e624d253acd4",
+          "ff3e8663f77d848c96f543f526282b8851"
+        ],
+        "loose_nodes": [
+          "ffa97071a849d2e4d1439337889efaeb40",
+          "ff27149a73a79304383fa1ccc83d7324db",
+          "ff50dfb5dfa77b39ef280e38990ee70842"
+        ],
+        "conv": "ff4c5105b9aff6d913c143a858f6002074"
+      }
+    }
+  },
+  "reply": {
+    "response": {
+      "id": "resp_synthetic_1",
+      "object": "response",
+      "model": "m",
+      "status": "completed",
+      "output": [
+        {
+          "type": "web_search_call",
+          "id": "ws_1",
+          "status": "completed",
+          "action": {
+            "type": "search",
+            "query": "q"
+          }
+        },
+        {
+          "type": "message",
+          "id": "msg_1",
+          "role": "assistant",
+          "status": "completed",
+          "content": [
+            {
+              "type": "output_text",
+              "text": "Found it.",
+              "annotations": []
+            }
+          ]
+        }
+      ],
+      "usage": {
+        "input_tokens": 3,
+        "output_tokens": 4
+      }
+    },
+    "matches_msg_index": 1,
+    "exact": true,
+    "keys": {
+      "0": {
+        "msg": "00a2cba08164c46bb61dc13400c35429d5",
+        "loose_msg": "0067dca942d2bf0f6fd23bf826d1d5a8db"
+      },
+      "255": {
+        "msg": "ff4b96d9d61612ad73b9ac0cf8fd9b4770",
+        "loose_msg": "fff19843a60901f845bcc7e624d253acd4"
+      }
+    },
+    "canonical_bytes_b64": "omRyb2xlaWFzc2lzdGFudGVwYXJ0c4KjYXRmb3BhcXVlZHR5cGVvd2ViX3NlYXJjaF9jYWxsZnNoYTI1Nlgg0O8ndQ6F0eYzFm2HDnDPUkYf23umB5CkywW2spQ4vtCiYXRkdGV4dGF2aUZvdW5kIGl0Lg==",
+    "canonical": {
+      "role": "assistant",
+      "parts": [
+        {
+          "t": "opaque",
+          "type": "web_search_call",
+          "sha256": {
+            "$hex": "d0ef27750e85d1e633166d870e70cf52461fdb7ba60790a4cb05b6b29438bed0"
+          }
+        },
+        {
+          "t": "text",
+          "v": "Found it."
+        }
+      ]
+    }
+  }
+}

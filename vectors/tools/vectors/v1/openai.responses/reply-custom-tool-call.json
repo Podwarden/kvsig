@@ -1,0 +1,224 @@
+{
+  "id": "openai.responses/reply-custom-tool-call",
+  "spec": "kvsig/1",
+  "level": 3,
+  "dialect": "openai.responses",
+  "category": "reply",
+  "description": "A custom tool call keeps its raw input.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "patch it"
+      },
+      {
+        "type": "custom_tool_call",
+        "id": "ct_1",
+        "call_id": "call_k",
+        "name": "patch",
+        "input": "*** Begin ***"
+      },
+      {
+        "type": "custom_tool_call_output",
+        "call_id": "call_k",
+        "output": "applied"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "patch it"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "name": "patch",
+              "args_raw": "*** Begin ***"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "applied"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmhwYXRjaCBpdKJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZG5hbWVlcGF0Y2hoYXJnc19yYXdtKioqIEJlZ2luICoqKqJkcm9sZWR0b29sZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYAZXBhcnRzgaJhdGR0ZXh0YXZnYXBwbGllZA==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "patch it"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "name": "patch",
+              "args_raw": "*** Begin ***"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "applied"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmhwYXRjaCBpdKJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZG5hbWVlcGF0Y2hoYXJnc19yYXdtKioqIEJlZ2luICoqKqJkcm9sZWR0b29sZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYAZXBhcnRzgaJhdGR0ZXh0YXZnYXBwbGllZA==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00535f9de14b8f37256e64b8a30a8724d7",
+          "00358b5dc045627074d8965e01ce45f72c",
+          "00dcc3e58b4a053a8929652a8b9f9ef779"
+        ],
+        "nodes": [
+          "00896252d56a24b6a7739d02c0a4ddb5a6",
+          "009116576abb6b36bb271663fa96660ed7",
+          "00b11067fbae9238a56358a454b44fa67a"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00bb3a93b9948148b372c0c94072e7d4b6",
+          "00e0dd6d30899e1af24cdba10b101a0774",
+          "0062081d630d8c6c602276d607ae87264b"
+        ],
+        "loose_nodes": [
+          "0037eaffea71b1ab49e351c9f32eab5873",
+          "0005ce951840edb8aff2dae345a22190ab",
+          "00966b558688a64e935c8d3560149c414e"
+        ],
+        "conv": "004f8dee9ebb7441f75091c3e2a41ef810"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff525679063d22ce64360c29a76f2860db",
+          "ff226e472aa247d1fe0ab206c0c564d7cb",
+          "ffcf1119cdb3e4f505eb9b60f48d5c87b3"
+        ],
+        "nodes": [
+          "ff1ac2a686534f41cbbe94d0b2eae22ce2",
+          "ffa5eb2bee821c132ef626839fc084f3a8",
+          "ff2a96a0022b453ad8284a9439216cd3d5"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff54168af561be70691bb5ab9d930b342d",
+          "ff727fa95d442070af34a2ea45c97f850c",
+          "ff0d5e4db0f3e04c8c865d26a828d0235f"
+        ],
+        "loose_nodes": [
+          "ff0a332bce1b64a37ead55f023a8ee42e2",
+          "ff84274d46b0fd0024c5e2ab7c3976e1df",
+          "ffc10638dacfec8aa56034edae3689bc43"
+        ],
+        "conv": "fffd393af87e9b0aa480e5d571d99cb231"
+      }
+    }
+  },
+  "reply": {
+    "response": {
+      "id": "resp_synthetic_1",
+      "object": "response",
+      "model": "m",
+      "status": "completed",
+      "output": [
+        {
+          "type": "custom_tool_call",
+          "id": "ct_1",
+          "call_id": "call_k",
+          "name": "patch",
+          "input": "*** Begin ***"
+        }
+      ],
+      "usage": {
+        "input_tokens": 3,
+        "output_tokens": 4
+      }
+    },
+    "matches_msg_index": 1,
+    "exact": true,
+    "keys": {
+      "0": {
+        "msg": "00358b5dc045627074d8965e01ce45f72c",
+        "loose_msg": "00e0dd6d30899e1af24cdba10b101a0774"
+      },
+      "255": {
+        "msg": "ff226e472aa247d1fe0ab206c0c564d7cb",
+        "loose_msg": "ff727fa95d442070af34a2ea45c97f850c"
+      }
+    },
+    "canonical_bytes_b64": "omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GkYXRpdG9vbF9jYWxsY3JlZgBkbmFtZWVwYXRjaGhhcmdzX3Jhd20qKiogQmVnaW4gKioq",
+    "canonical": {
+      "role": "assistant",
+      "parts": [
+        {
+          "t": "tool_call",
+          "ref": 0,
+          "name": "patch",
+          "args_raw": "*** Begin ***"
+        }
+      ]
+    }
+  }
+}

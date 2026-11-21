@@ -1,0 +1,141 @@
+{
+  "id": "openai.chat/reasoning-both-fields",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "parts",
+  "description": "With both fields present, reasoning_content wins.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "x"
+      },
+      {
+        "role": "assistant",
+        "reasoning_content": "A",
+        "reasoning": "B",
+        "content": "c"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "reasoning",
+              "v": "A"
+            },
+            {
+              "t": "text",
+              "v": "c"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOComRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4KiYXRpcmVhc29uaW5nYXZhQaJhdGR0ZXh0YXZhYw==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "c"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOComRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GiYXRkdGV4dGF2YWM=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253",
+          "0064a86ff0343650a52831248bd222d04c"
+        ],
+        "nodes": [
+          "00b2dfe677816238e90ef2a40e06f620f7",
+          "00419872fadf1a80b7476ee8bd98684467"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4",
+          "006cc8c28b049968100c87b77287a28da1"
+        ],
+        "loose_nodes": [
+          "002d7a8dd84f7f99d1409350bb250c6cf9",
+          "002d9c29451f6a96099c7356d01b642169"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7",
+          "ff7830b4dec629a6b4e3eb07cda69da3ad"
+        ],
+        "nodes": [
+          "ff3f620f0c447fef2751c57bbe698941c0",
+          "ffe37e1dc61ecfe669b5e48a4b12c22b32"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec",
+          "ff7afea20ca2a3775fdf120f625566280b"
+        ],
+        "loose_nodes": [
+          "ffc38a0c74a027167a346af0d779e9d32a",
+          "ffce9fc0d8f32e5c3814d269527eaf7d6e"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "msgs",
+      "other": "openai.chat/reasoning-content-field",
+      "same": true
+    }
+  ]
+}

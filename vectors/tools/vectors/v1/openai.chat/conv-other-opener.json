@@ -1,0 +1,225 @@
+{
+  "id": "openai.chat/conv-other-opener",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.chat",
+  "category": "conv-tools-free",
+  "description": "A different first message: a different conversation.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You answer geography questions."
+      },
+      {
+        "role": "user",
+        "content": "What is the capital of Italy?"
+      },
+      {
+        "role": "assistant",
+        "content": "Paris."
+      },
+      {
+        "role": "user",
+        "content": "And Spain?"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "ls",
+          "description": "List a directory",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You answer geography questions."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "What is the capital of Italy?"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Paris."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "And Spain?"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdngfWW91IGFuc3dlciBnZW9ncmFwaHkgcXVlc3Rpb25zLmV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXX1obWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdngdV2hhdCBpcyB0aGUgY2FwaXRhbCBvZiBJdGFseT+iZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZmUGFyaXMuomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmpBbmQgU3BhaW4/",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You answer geography questions."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "What is the capital of Italy?"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Paris."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "And Spain?"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdngfWW91IGFuc3dlciBnZW9ncmFwaHkgcXVlc3Rpb25zLmV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJwcm9wZXJ0aWVzIjp7InBhdGgiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsicGF0aCJdLCJ0eXBlIjoib2JqZWN0In1obWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdngdV2hhdCBpcyB0aGUgY2FwaXRhbCBvZiBJdGFseT+iZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZmUGFyaXMuomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmpBbmQgU3BhaW4/",
+    "keys": {
+      "0": {
+        "head": "00e998159cd91e6a4c6fd24d755afe6ef2",
+        "sys": "00028aa4d25b8dec4ea39a544dec3392ab",
+        "tools": "00a6f0fc4d3200cad72142381cc1373fac",
+        "msgs": [
+          "0073ee3bac041f376b95d3a99e13dfc928",
+          "006c2ab0538d9531d700e67ec8080258f9",
+          "00eb255229ef2f6a08875a9067abff0e2b"
+        ],
+        "nodes": [
+          "006a5c274b065b3667d2162f2ee2fc801f",
+          "009d2f98b10b5901b59b448df4fa5fd9d6",
+          "00c2f3502e72ae5a53ee29505f7b626f5d"
+        ],
+        "loose_head": "0061f795396cbe2929910a40ac568f6624",
+        "loose_sys": "0081054e2aed5280c59c1e8bd90f5a61ba",
+        "loose_tools": "00c2381d696f32f448d72e68c2ab636a6b",
+        "loose_msgs": [
+          "00fa7e9fbb4982fadce317cd237203e5ae",
+          "00023543cb1a7ebf1c82805eb34f517144",
+          "00dce7e8cade5b75a3b97fc2e8fee3de00"
+        ],
+        "loose_nodes": [
+          "00b61206eae6d535460e8c1644ae559e63",
+          "0077784c1bd34380df8ff2e329a072fe9f",
+          "006eaa1a592bf5b11fb894616b3b0e985a"
+        ],
+        "conv": "00cead075d458268b2bfa9c30c10c6e955"
+      },
+      "255": {
+        "head": "ff3ee39af22913aecb451c9f5ff46f49f8",
+        "sys": "ff710f6b45e5cb559f0ab2daa18133038e",
+        "tools": "ff24b0e119a0a56335180c12e8aa192468",
+        "msgs": [
+          "ffac50098d8fb8166eaaa628997f1dd6a0",
+          "ff1ead6961e0167bcc1b3241539d92e34e",
+          "ff7ef4cf73c8392a432a990e695c896512"
+        ],
+        "nodes": [
+          "ff45ac4f80add9d52ccc2272b181bbe7b8",
+          "ff8da2ba81bc79450737c69daf6a6105a0",
+          "ff56e48a7b588b217c39d51921c73f18ac"
+        ],
+        "loose_head": "ff73d5614da03986c50ee2960ddad4ec30",
+        "loose_sys": "ff22f74e429f57a965154ce08b3c5676e3",
+        "loose_tools": "ff7248c7b899560c717b25ed247c64482e",
+        "loose_msgs": [
+          "fffa0d7a6414e251bd8f7820a0b244877b",
+          "ff56d0580355c932ac645a1813ee7b225d",
+          "ff1d28898ce6a9070bf665fa9ff50af9ab"
+        ],
+        "loose_nodes": [
+          "ff0a7874b7449389fe5352b6ac80033906",
+          "ffcff08f117f30fa982d79ba7a6e5b811b",
+          "ff9b7134a87d8d89bbc7663543c13de74d"
+        ],
+        "conv": "ffcec210ff0d4e2e31f91385023bf17621"
+      }
+    }
+  },
+  "equivalent_to": [
+    "anthropic.messages/conv-other-opener",
+    "openai.responses/conv-other-opener"
+  ],
+  "relations": [
+    {
+      "field": "conv",
+      "other": "openai.chat/conv-base",
+      "same": false
+    }
+  ]
+}

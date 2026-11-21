@@ -1,0 +1,208 @@
+{
+  "id": "openai.responses/numbers-exponent-forms",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "numbers",
+  "description": "The 1e21 boundary and small exponents.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "compute"
+      },
+      {
+        "type": "function_call",
+        "call_id": "c1",
+        "name": "calc",
+        "arguments": "{\"x\":[1e20,1e21,1e22,1e-6,1e-7,1E+2,1.5E-10,123456789e-15,5e-324]}"
+      },
+      {
+        "type": "function_call_output",
+        "call_id": "c1",
+        "output": "done"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "name": "calc",
+        "description": "Evaluate",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "x": {}
+          }
+        },
+        "strict": false
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"type\":\"object\",\"properties\":{\"x\":{}}}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "compute"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"x\":[100000000000000000000,1e+21,1e+22,0.000001,1e-7,100,1.5e-10,1.23456789e-7,5e-324]}",
+              "name": "calc"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "done"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJ4Ijp7fX19aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZnY29tcHV0ZaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3N4WHsieCI6WzEwMDAwMDAwMDAwMDAwMDAwMDAwMCwxZSsyMSwxZSsyMiwwLjAwMDAwMSwxZS03LDEwMCwxLjVlLTEwLDEuMjM0NTY3ODllLTcsNWUtMzI0XX1kbmFtZWRjYWxjomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgBlcGFydHOBomF0ZHRleHRhdmRkb25l",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"properties\":{\"x\":{}},\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "compute"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"x\":[100000000000000000000,1e+21,1e+22,0.000001,1e-7,100,1.5e-10,1.23456789e-7,5e-324]}",
+              "name": "calc"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "done"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJwcm9wZXJ0aWVzIjp7IngiOnt9fSwidHlwZSI6Im9iamVjdCJ9aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZnY29tcHV0ZaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3N4WHsieCI6WzEwMDAwMDAwMDAwMDAwMDAwMDAwMCwxZSsyMSwxZSsyMiwwLjAwMDAwMSwxZS03LDEwMCwxLjVlLTEwLDEuMjM0NTY3ODllLTcsNWUtMzI0XX1kbmFtZWRjYWxjomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgBlcGFydHOBomF0ZHRleHRhdmRkb25l",
+    "keys": {
+      "0": {
+        "head": "00012838425b2f844d94b856f37282a965",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "0007141be383b228c4ca5cd0b9b9aaa735",
+        "msgs": [
+          "00575379dd47bf1a047cbd0d100761400c",
+          "00ac1d7e5364059937f20386815062cd43",
+          "00ab0bab0e92eb14622717fde2b3ba6827"
+        ],
+        "nodes": [
+          "00166e20742d544da19c188b64d7c31926",
+          "0049ddfe7a117966a72206ad4b9ef6f20c",
+          "00ff797e069ef7828afe236117ec1f4ebe"
+        ],
+        "loose_head": "00d8c8d8253308e908a00bf45633c57b20",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00a5758bf800fcd4b1b1e29952186cf6f2",
+        "loose_msgs": [
+          "0040c2cdfc016164bc19411f8d4e728b91",
+          "00c76f1cfe1964c2bba884ea905b451ca0",
+          "004d0859d4aae71aa11cb318f7871132f8"
+        ],
+        "loose_nodes": [
+          "002e63c1baf0954e71f6f8d6e1b937c83a",
+          "005fedf24ac9ca59b3c52b63f1280c3fa7",
+          "001bf89e02ed20022186cf462f28ab4a9a"
+        ],
+        "conv": "00c0d003e7448f18ff38e291eb8838d26b"
+      },
+      "255": {
+        "head": "ffbb82722a9e21df04aac0cb1973162d02",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ffdcc2a193a7151a8ede52b0735710274c",
+        "msgs": [
+          "ff221c79d2a226930aeca22ae764d40c59",
+          "ff8183d42db538364ef62bb5bfd1e1591c",
+          "ff0442874ac79450a9c568d38240c83840"
+        ],
+        "nodes": [
+          "ff1e532beee762f0576f4531750b4b5311",
+          "ff0aa76d202fbdf1628d314104a4b68e39",
+          "ff6a22de6e6321542146cbb223fbc259e9"
+        ],
+        "loose_head": "fffe02d49fb288d01e981eb705035fc27e",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff96b78203b337a20a7c182ba714d6630f",
+        "loose_msgs": [
+          "ff3dd7b620f52a37a8edf031442d49c943",
+          "ff2acf8eb3a85f37443fdddcba6345fe0d",
+          "ff283e8894dd139fd878a9aac13dafd098"
+        ],
+        "loose_nodes": [
+          "ff180c4319e4ab6d34976143c9ebcfbbf8",
+          "ffe7d76a50a02f4770f44bb70b87655fd9",
+          "ff8b2e9c90288b3e81058cf520befa0516"
+        ],
+        "conv": "ff9a1b3604f96c7bb8e80d414ef3c947f5"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/numbers-exponent-forms",
+    "anthropic.messages/numbers-exponent-forms"
+  ]
+}

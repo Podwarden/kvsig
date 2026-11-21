@@ -1,0 +1,45 @@
+{
+  "id": "openai.responses/size-over-cap",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "size-cap",
+  "description": "One byte over max_bytes: the request gets no ids.",
+  "options": {
+    "max_bytes": 561
+  },
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "size probe xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      {
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "reply yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": "again"
+      }
+    ],
+    "instructions": "S"
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": true
+  },
+  "equivalent_to": [
+    "openai.chat/size-over-cap",
+    "anthropic.messages/size-over-cap"
+  ]
+}

@@ -1,0 +1,215 @@
+{
+  "id": "openai.chat/args-unparsable-raw-keeps-spaces",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "unparsable-args",
+  "description": "Raw arguments keep every byte, spaces included.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "go"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          {
+            "id": "c1",
+            "type": "function",
+            "function": {
+              "name": "calc",
+              "arguments": "  {\"a\" : 1  "
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "c1",
+        "content": "x"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "calc",
+          "description": "Evaluate",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "x": {}
+            }
+          }
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"type\":\"object\",\"properties\":{\"x\":{}}}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "name": "calc",
+              "args_raw": "  {\"a\" : 1  "
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "x"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJ4Ijp7fX19aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiZ2+iZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaRhdGl0b29sX2NhbGxjcmVmAGRuYW1lZGNhbGNoYXJnc19yYXdsICB7ImEiIDogMSAgomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgBlcGFydHOBomF0ZHRleHRhdmF4",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"properties\":{\"x\":{}},\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "name": "calc",
+              "args_raw": "  {\"a\" : 1  "
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "x"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJwcm9wZXJ0aWVzIjp7IngiOnt9fSwidHlwZSI6Im9iamVjdCJ9aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiZ2+iZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaRhdGl0b29sX2NhbGxjcmVmAGRuYW1lZGNhbGNoYXJnc19yYXdsICB7ImEiIDogMSAgomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgBlcGFydHOBomF0ZHRleHRhdmF4",
+    "keys": {
+      "0": {
+        "head": "00012838425b2f844d94b856f37282a965",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "0007141be383b228c4ca5cd0b9b9aaa735",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf",
+          "003fcf7f960948de9433594298cf376013",
+          "00659372994ea44578b08efc15b9e31dd2"
+        ],
+        "nodes": [
+          "00c2c8102f23a37222da4915e5b2c54ad9",
+          "00d83c8d4dbbb67cb65f6f2cf9fa9c2df7",
+          "00b750c039f4ac39bc66d6e93d3276bd8b"
+        ],
+        "loose_head": "00d8c8d8253308e908a00bf45633c57b20",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00a5758bf800fcd4b1b1e29952186cf6f2",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c",
+          "0046c273b3d01e79edb29e363b8bc436aa",
+          "00047cb85b2f04a4f3f2ffd99d4f9d7e30"
+        ],
+        "loose_nodes": [
+          "0068e5c85ce5df5d567c909ad8f5c94596",
+          "0024aafe47920df09cdaa0b5af723142b1",
+          "005a4ce4d68bc72fde8dafb825e63a1db1"
+        ],
+        "conv": "00820e5a00b3fd3fac2e0ec9c4cf180996"
+      },
+      "255": {
+        "head": "ffbb82722a9e21df04aac0cb1973162d02",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ffdcc2a193a7151a8ede52b0735710274c",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988",
+          "ff707b45a962ac08db132ba188943163ea",
+          "ffb561a1026b19878aac1772bcdad05b6b"
+        ],
+        "nodes": [
+          "ff6ab22c9b1fc738072bdf05bf79fa0a26",
+          "ffee467686974b07a968698d0d84c6f3c5",
+          "ffa65f13c2f43b81b300148828be925bdb"
+        ],
+        "loose_head": "fffe02d49fb288d01e981eb705035fc27e",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff96b78203b337a20a7c182ba714d6630f",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d",
+          "ff1a29b2e4a4688690075d2d1148d25c0d",
+          "ff711f6e23bb41c4f582d1e81482dfe4dd"
+        ],
+        "loose_nodes": [
+          "ff44de47e21bfbca1c1dfe5f2dc6b0a3b1",
+          "ff2f7121c322c948507cc48440fb8e54d3",
+          "ffdcc335afd2a23571cecb2cb482b427c6"
+        ],
+        "conv": "ff0cd2fa6d8caed62f2cbb5ffde3dadf61"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.responses/args-unparsable-raw-keeps-spaces"
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "openai.chat/tools-no-description",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "basics",
+  "description": "A tool whose description is the empty string.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "go"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "noop",
+          "description": "",
+          "parameters": {
+            "type": "object"
+          }
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "",
+          "name": "noop",
+          "schema": "{\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NgZG5hbWVkbm9vcGZzY2hlbWFxeyJ0eXBlIjoib2JqZWN0In1obWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnbw==",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "",
+          "name": "noop",
+          "schema": "{\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NgZG5hbWVkbm9vcGZzY2hlbWFxeyJ0eXBlIjoib2JqZWN0In1obWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnbw==",
+    "keys": {
+      "0": {
+        "head": "0002d365c992e38004908141c732f16862",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00359a4cc8754cd4ca8ce5a4f2578fe654",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf"
+        ],
+        "nodes": [
+          "005fc11b8e201a62d2526d4c3762fec264"
+        ],
+        "loose_head": "002a311fcf495754fd06e5890cd802aa05",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "000b480fc31f74da9df9ba54037260511e",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c"
+        ],
+        "loose_nodes": [
+          "0090729c33cb629d8357ee0ed1f5db9e9a"
+        ],
+        "conv": "00820e5a00b3fd3fac2e0ec9c4cf180996"
+      },
+      "255": {
+        "head": "ff7688885535663b91ec48e46f003b7202",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff6177fd634eda6bf3d831b6705b51a732",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988"
+        ],
+        "nodes": [
+          "ff10cf0f925af3a863a2e7905ce5638fc6"
+        ],
+        "loose_head": "ff3952f1d40726aa8f0dd4d1a79ffa949b",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff4bd1bae626dc1f5345bed3a1c67e5470",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d"
+        ],
+        "loose_nodes": [
+          "ff02b60e6a7c1170595d537ad6091dced3"
+        ],
+        "conv": "ff0cd2fa6d8caed62f2cbb5ffde3dadf61"
+      }
+    }
+  }
+}

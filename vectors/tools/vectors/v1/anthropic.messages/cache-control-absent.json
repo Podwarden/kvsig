@@ -1,0 +1,149 @@
+{
+  "id": "anthropic.messages/cache-control-absent",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "cache-control",
+  "description": "The same request without any cache_control.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "hi"
+      }
+    ],
+    "tools": [
+      {
+        "name": "ls",
+        "description": "List",
+        "input_schema": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    ],
+    "system": "S"
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S"
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFTZXRvb2xzgaNkZGVzY2RMaXN0ZG5hbWVibHNmc2NoZW1heE17InR5cGUiOiJvYmplY3QiLCJwcm9wZXJ0aWVzIjp7InBhdGgiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsicGF0aCJdfWhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymhp",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S"
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFTZXRvb2xzgaNkZGVzY2RMaXN0ZG5hbWVibHNmc2NoZW1heE17InByb3BlcnRpZXMiOnsicGF0aCI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJwYXRoIl0sInR5cGUiOiJvYmplY3QifWhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymhp",
+    "keys": {
+      "0": {
+        "head": "000375d1d1faba8f6b623bbc2a40c4cc30",
+        "sys": "00a2a4919667dda561709f4c35f80242ec",
+        "tools": "00828fa98834dba70e90595731077f5724",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f"
+        ],
+        "nodes": [
+          "00d36c6cde3e30460ce6b14dc6b752eb5a"
+        ],
+        "loose_head": "002d1fe0046eb71c6cd5215f3d0f052a17",
+        "loose_sys": "00a80ab51b88bb666b49f97c25b1562261",
+        "loose_tools": "0008230f1778ea9af662e08a863ad6d689",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022"
+        ],
+        "loose_nodes": [
+          "004aeda139996e79396edb5d1927818c5d"
+        ],
+        "conv": "00d2b692245d14716f86a4fd413f7e456f"
+      },
+      "255": {
+        "head": "ffbb40045038e0b4ab7adadaa5b4c803d8",
+        "sys": "ffe1813a67aa51468714fa9249d943260c",
+        "tools": "ffa7a1a984959e3a8e67f45cd34c29048c",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef"
+        ],
+        "nodes": [
+          "ffa2b22413d7f3b4fce1e5e717b94f2aab"
+        ],
+        "loose_head": "ff5b911ce9fb1251ae11ca8d6afcebc304",
+        "loose_sys": "ffbb295f18d4142033a12475230c04b9fc",
+        "loose_tools": "ff7784f1065228856dd567103d7f27139c",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb"
+        ],
+        "loose_nodes": [
+          "ff7d88e7d10f372f32faed62a3669a4142"
+        ],
+        "conv": "ff70bd39a51b6a2292b5229e8c1d84030d"
+      }
+    }
+  }
+}

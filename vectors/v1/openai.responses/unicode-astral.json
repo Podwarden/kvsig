@@ -1,0 +1,139 @@
+{
+  "id": "openai.responses/unicode-astral",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "unicode",
+  "description": "Astral characters and a ZWJ sequence, kept verbatim.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "x\ud83d\ude00y"
+      },
+      {
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "\ud83d\udc68\u200d\ud83d\udcbb\ud800\udf48"
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x\ud83d\ude00y"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "\ud83d\udc68\u200d\ud83d\udcbb\ud800\udf48"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOComRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmZ48J+YgHmiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZv8J+RqOKAjfCfkrvwkI2I",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x\ud83d\ude00y"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "\ud83d\udc68\u200d\ud83d\udcbb\ud800\udf48"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOComRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmZ48J+YgHmiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZv8J+RqOKAjfCfkrvwkI2I",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00e02d268c8d6bd96e1882e5da1af5ae0f",
+          "0015052d03fc1b697816c8d813ca352ced"
+        ],
+        "nodes": [
+          "004bd8d19b0729fa29133ecec5bf40ff81",
+          "006ee75c11b58354ed02cb9864bc46de3d"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0049ee856db39b4b3a8851d83b267b02b8",
+          "001c8edd5ec888fff8bbbcb4606a6a9d05"
+        ],
+        "loose_nodes": [
+          "002e7dea68e4374be3bde0b28dbad1512d",
+          "002a6ce56ab79ab41cc44ff62a3a682130"
+        ],
+        "conv": "002bd3c169049fc1be70767b05d55caeaa"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff19bd5321804dd1ae146bf84f525cd38e",
+          "ff8cbbe6aaeed3f490508dddb81b658e2e"
+        ],
+        "nodes": [
+          "ff6352cb7a40886c185fcffe5926bf5012",
+          "ff2d3c2ee63e73c212410f5cf84b68a248"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff1aa417786b33025cec55bf3ff70bb5de",
+          "ffa5047ab62ed09e96792352a1750f9793"
+        ],
+        "loose_nodes": [
+          "ff516c0c3b52a98573d0dfbe69ee4d6d5f",
+          "ff1c1df223e0affb1bd83cef54b864d1f1"
+        ],
+        "conv": "ff45fdc6033b1a54aa8a398e83f12481c0"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/unicode-astral",
+    "anthropic.messages/unicode-astral"
+  ]
+}

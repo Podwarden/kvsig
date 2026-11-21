@@ -1,0 +1,113 @@
+{
+  "id": "openai.chat/media-data-url-no-mime",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "media",
+  "description": "No MIME type in the header: mime is empty.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "data:;base64,iVBORw0KGgpzeW50aGV0aWMtaW1hZ2UtMQ=="
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "bytes",
+              "mime": "",
+              "sha256": {
+                "$hex": "1fda2255404990c6a05a7e735d117f76d0ddbca19b867266e0ae9c3ad721677e"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBpGF0ZW1lZGlhY3NyY2VieXRlc2RtaW1lYGZzaGEyNTZYIB/aIlVASZDGoFp+c10Rf3bQ3byhm4ZyZuCunDrXIWd+",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "bytes",
+              "mime": "",
+              "sha256": {
+                "$hex": "1fda2255404990c6a05a7e735d117f76d0ddbca19b867266e0ae9c3ad721677e"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBpGF0ZW1lZGlhY3NyY2VieXRlc2RtaW1lYGZzaGEyNTZYIB/aIlVASZDGoFp+c10Rf3bQ3byhm4ZyZuCunDrXIWd+",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00eef704b98729301f45c9c03dd8c6064c"
+        ],
+        "nodes": [
+          "00e1b149b276e28410b8e253462f8638a0"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "001070ae90a0ac90662193f75a433adbbc"
+        ],
+        "loose_nodes": [
+          "005633653427ed615ed82d7850709f0108"
+        ],
+        "conv": "004814a5a8f8bb7256551b9af19e60849c"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffb47b4fc9bd016382f70a6ed4854bb309"
+        ],
+        "nodes": [
+          "fffe588ed4a92292a426a395a4b81e9c57"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "fffb091184db607756670846cb279a529e"
+        ],
+        "loose_nodes": [
+          "ff8cf459f7646c7a7ba9270094c7af3d27"
+        ],
+        "conv": "ffffbc0e41d7179517b3c8a0c978a1f141"
+      }
+    }
+  }
+}

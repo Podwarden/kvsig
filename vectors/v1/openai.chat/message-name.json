@@ -1,0 +1,132 @@
+{
+  "id": "openai.chat/message-name",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "parts",
+  "description": "A non-empty name is part of the message; an empty one is not.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "name": "alice",
+        "content": "hi"
+      },
+      {
+        "role": "user",
+        "name": "",
+        "content": "hi"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "name": "alice",
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOCo2RuYW1lZWFsaWNlZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2YmhpomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJoaQ==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "name": "alice",
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOCo2RuYW1lZWFsaWNlZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2YmhpomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJoaQ==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "006effd8f66f6b6487d8b9bb01c5499f14",
+          "006ab68e2caa01601261dfe441a3bd1f2f"
+        ],
+        "nodes": [
+          "00e0a14de0c2240545330bb361a04777dc",
+          "0069e62968719fd4b8ddfdcc8a16de2123"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00fe7df913d74d7d8f27fa9a91e811113a",
+          "0030c8d514f10b514ce19f4962d66ed022"
+        ],
+        "loose_nodes": [
+          "00e42bbbd44ab27a8a54e2b33d6b6e966f",
+          "00aae3d469a203398370828a9465473c99"
+        ],
+        "conv": "003d0356a1e964a1d7ebc4020d040bdeaa"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff278c54e4beb5b05c9408586a50d1136a",
+          "ffc57fc60797f078abeac38d67d6aad3ef"
+        ],
+        "nodes": [
+          "ff555acac2b519ecf7cb0e01e1cb3e5665",
+          "ff675d5a5c92014615a3b5ac34fad8cf46"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff560695a8c0572468fb37225a116cf220",
+          "fff3f394cc6774553bf38b6cd1489fabfb"
+        ],
+        "loose_nodes": [
+          "ffd661d565f037fee0197981c3551e80ac",
+          "ff2fc8fd3af795ddd6279edd4f78e63d83"
+        ],
+        "conv": "ffbdd1f4662d9e5f5941f1e89d10d433fd"
+      }
+    }
+  }
+}

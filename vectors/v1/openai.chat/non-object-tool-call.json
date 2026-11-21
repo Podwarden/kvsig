@@ -1,0 +1,200 @@
+{
+  "id": "openai.chat/non-object-tool-call",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "tool-refs",
+  "description": "A tool_calls entry that is not an object still takes an index; the next call is index 1.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "x"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "tool_calls": [
+          5,
+          {
+            "id": "c1",
+            "type": "function",
+            "function": {
+              "name": "a",
+              "arguments": "{}"
+            }
+          }
+        ]
+      },
+      {
+        "role": "tool",
+        "tool_call_id": "c1",
+        "content": "r"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "tool_call",
+              "sha256": {
+                "$hex": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+              }
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{}",
+              "name": "a"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "r"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4KjYXRmb3BhcXVlZHR5cGVpdG9vbF9jYWxsZnNoYTI1Nlgg7y0SfeN7lCuq0GFF5UsMYZofIjJ7LrvPvsePVWSv452kYXRpdG9vbF9jYWxsY3JlZgFkYXJnc2J7fWRuYW1lYWGiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAWVwYXJ0c4GiYXRkdGV4dGF2YXI=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "tool_call",
+              "sha256": {
+                "$hex": "ef2d127de37b942baad06145e54b0c619a1f22327b2ebbcfbec78f5564afe39d"
+              }
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{}",
+              "name": "a"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "r"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4KjYXRmb3BhcXVlZHR5cGVpdG9vbF9jYWxsZnNoYTI1Nlgg7y0SfeN7lCuq0GFF5UsMYZofIjJ7LrvPvsePVWSv452kYXRpdG9vbF9jYWxsY3JlZgFkYXJnc2J7fWRuYW1lYWGiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAWVwYXJ0c4GiYXRkdGV4dGF2YXI=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253",
+          "00045a18631d0b543d318f813238a5b3a6",
+          "00a44770d0857a267c2b8876b8054375e6"
+        ],
+        "nodes": [
+          "00b2dfe677816238e90ef2a40e06f620f7",
+          "001612b139af086e75fa8e7dcdeb744208",
+          "00b71ad812affbf124d94b13dae333fe79"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4",
+          "00a1e7dcb554f23b790136443407a6fd9c",
+          "00eb5d2eef5d644eaa724c5d4e7b8ab9be"
+        ],
+        "loose_nodes": [
+          "002d7a8dd84f7f99d1409350bb250c6cf9",
+          "008cd990706c87660de5162906abd53500",
+          "00fcb31d32b88aab5b8fce89c036f05e85"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7",
+          "ffb53e297f880c73f499b9b178a2fb81aa",
+          "ffd1970c7b07f81f2e0037b2fa2c4a72dc"
+        ],
+        "nodes": [
+          "ff3f620f0c447fef2751c57bbe698941c0",
+          "ffdb73cb34666775a5d14f1db57e8d06e0",
+          "ff444ef45fadea5c9f5dd0a5d7517e5710"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec",
+          "ffa90a00b6543de2824003cc105cab36d7",
+          "ff9601956baf913d3447e594eb95ec17dc"
+        ],
+        "loose_nodes": [
+          "ffc38a0c74a027167a346af0d779e9d32a",
+          "ff6d1a8a29b5418aad9accb4caf633fb4c",
+          "ff0bc080b1dfab273d07789ee5da4f60cf"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

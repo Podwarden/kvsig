@@ -1,0 +1,274 @@
+{
+  "id": "openai.responses/results-out-of-order",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "tool-refs",
+  "description": "Results arrive in the opposite order to the calls; refs are call indexes.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "both"
+      },
+      {
+        "type": "function_call",
+        "call_id": "c1",
+        "name": "ls",
+        "arguments": "{\"path\":\"/a\"}"
+      },
+      {
+        "type": "function_call",
+        "call_id": "c2",
+        "name": "ls",
+        "arguments": "{\"path\":\"/b\"}"
+      },
+      {
+        "type": "function_call_output",
+        "call_id": "c2",
+        "output": "B"
+      },
+      {
+        "type": "function_call_output",
+        "call_id": "c1",
+        "output": "A"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "name": "ls",
+        "description": "List a directory",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        },
+        "strict": false
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "both"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/a\"}",
+              "name": "ls"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{\"path\":\"/b\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "B"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "A"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXX1obWVzc2FnZXOEomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmRib3RoomRyb2xlaWFzc2lzdGFudGVwYXJ0c4KkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc217InBhdGgiOiIvYSJ9ZG5hbWVibHOkYXRpdG9vbF9jYWxsY3JlZgFkYXJnc217InBhdGgiOiIvYiJ9ZG5hbWVibHOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAWVwYXJ0c4GiYXRkdGV4dGF2YUKiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2YUE=",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "both"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/a\"}",
+              "name": "ls"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{\"path\":\"/b\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "B"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "A"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJwcm9wZXJ0aWVzIjp7InBhdGgiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsicGF0aCJdLCJ0eXBlIjoib2JqZWN0In1obWVzc2FnZXOEomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmRib3RoomRyb2xlaWFzc2lzdGFudGVwYXJ0c4KkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc217InBhdGgiOiIvYSJ9ZG5hbWVibHOkYXRpdG9vbF9jYWxsY3JlZgFkYXJnc217InBhdGgiOiIvYiJ9ZG5hbWVibHOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAWVwYXJ0c4GiYXRkdGV4dGF2YUKiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2YUE=",
+    "keys": {
+      "0": {
+        "head": "0094c313cf081fa564444233ee8ce0f2ae",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00a6f0fc4d3200cad72142381cc1373fac",
+        "msgs": [
+          "00f63b33f952fa70142227c02f9f2da81e",
+          "004182eba78a15594f3b39fa694e4419d7",
+          "00dcc15c8e5c2c7c70994164ab2f21b531",
+          "008a4831f1694aed5a3652b3ee13a91938"
+        ],
+        "nodes": [
+          "008913dc66e36168de59a3db25bc58000c",
+          "00ea1d9fefd8411c01af43c851794afe70",
+          "0094b16d917b83c18b82b19c9fad6b90fb",
+          "0001a183bdabfe5933927a425b621aa806"
+        ],
+        "loose_head": "0054d7051c6720e90ac29e4d1b58fa4fab",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00c2381d696f32f448d72e68c2ab636a6b",
+        "loose_msgs": [
+          "002e2dc7c8da73d8595bbc02a680dcaab3",
+          "002dbd2c4bff5a1df2668126218ef51614",
+          "00db77ea4184fdeae3c531d203ae3b01be",
+          "00410de19a4771ad2aad3bf7e85765a755"
+        ],
+        "loose_nodes": [
+          "006751ceb1fa81a3192b15e2b99064c7d5",
+          "006b2b8d947575fdf2b7e4b9b4d81f0bb2",
+          "00f6c8f42a26562fcc722e9ae82a0a3692",
+          "00a369a937dc6c2743a076133441de921e"
+        ],
+        "conv": "005801dde9254c58c80660085d5b1a5dca"
+      },
+      "255": {
+        "head": "ffc5d268cb8a64c726eb5e99647dfaa249",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff24b0e119a0a56335180c12e8aa192468",
+        "msgs": [
+          "ff01ebbce0121d559787c7bae308924b81",
+          "ff262da332828272c6aae35ae268bcdf5c",
+          "ff00e1afff3033ce84755674f6ce432677",
+          "ff17d0f091497c32804091eb3777c0c2b8"
+        ],
+        "nodes": [
+          "ff7e9f2715529ea85e81440c293e902c3e",
+          "ff359b59c92b6fd88da984051a66510462",
+          "ffd88fd4774a6a98bc9dd9be0ad7f7d101",
+          "ffd99263bea7a5b48950d7f17ad29c3843"
+        ],
+        "loose_head": "ff52e49eb401371634a47b2839ffe9db8b",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff7248c7b899560c717b25ed247c64482e",
+        "loose_msgs": [
+          "ff09d9c8dbf8c16149bfdbbabfb493e3e1",
+          "ffe43c046f64116bf219c457fb478f6cc5",
+          "ff5b54d34328f08690d774f4407c3baa77",
+          "ff67748c9b83a763c1197c422a4115f277"
+        ],
+        "loose_nodes": [
+          "ff3d626a5ff88debdccf6d8aab77ab7923",
+          "fffa336f5c47d4346c7eb94348c982315f",
+          "ffb4988071b069413d481cbc2498f3a42a",
+          "ffb4a1c3b494f7f0dc9a8e297d1d994121"
+        ],
+        "conv": "ffc7be3de85a4f465998bb546a2a7787da"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/results-out-of-order",
+    "anthropic.messages/results-out-of-order"
+  ]
+}

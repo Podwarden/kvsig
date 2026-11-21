@@ -1,0 +1,186 @@
+{
+  "id": "openai.responses/conv-anchor-skips-opener",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.responses",
+  "category": "conv-anchor",
+  "description": "The first body message loosens to nothing (a reminder): the anchor is the next one.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "<system-reminder>session context</system-reminder>"
+      },
+      {
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "Understood"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": "real first question"
+      }
+    ],
+    "instructions": "S"
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "<system-reminder>session context</system-reminder>"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Understood"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "real first question"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFTZXRvb2xzgGhtZXNzYWdlc4OiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2eDI8c3lzdGVtLXJlbWluZGVyPnNlc3Npb24gY29udGV4dDwvc3lzdGVtLXJlbWluZGVyPqJkcm9sZWlhc3Npc3RhbnRlcGFydHOBomF0ZHRleHRhdmpVbmRlcnN0b29komRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnNyZWFsIGZpcnN0IHF1ZXN0aW9u",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": []
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Understood"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "real first question"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFTZXRvb2xzgGhtZXNzYWdlc4OiZHJvbGVkdXNlcmVwYXJ0c4CiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZqVW5kZXJzdG9vZKJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZzcmVhbCBmaXJzdCBxdWVzdGlvbg==",
+    "keys": {
+      "0": {
+        "head": "00b831865363828bd68585ae54120585d6",
+        "sys": "00a2a4919667dda561709f4c35f80242ec",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00823cd42806801748891828ec58fbcd4a",
+          "00ce069752cd976e96a0e014cd7c33a4a5",
+          "00d575453d9e09d51bf8191b4598da652e"
+        ],
+        "nodes": [
+          "00f49b3bc790b58bfeb6f13bb0f35bdad6",
+          "0060bfef34f605b1e796b6d7a4a95e5d0e",
+          "002e9d13c61a9b835718fb329f4bf00ee5"
+        ],
+        "loose_head": "00fee8b82383863ad736c2591951ffa512",
+        "loose_sys": "00a80ab51b88bb666b49f97c25b1562261",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00b84b3adcec4747ffc88826d637743899",
+          "00f8c43235fb6f928d79f02683a616b0be",
+          "005580458a4014e69e89194276dad98be9"
+        ],
+        "loose_nodes": [
+          "00a8ca895f2be2d9b2c89db7ac3e0dc0b8",
+          "000add49d9350da5de1671f545da93bd4b",
+          "002b1bfef6a0d610d2376aa86f452bc199"
+        ],
+        "conv": "00b15e851fc312a342187805bf94baf5ab"
+      },
+      "255": {
+        "head": "ff12d21581860addbe7a10a314c9c52ba2",
+        "sys": "ffe1813a67aa51468714fa9249d943260c",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff821eb47688aaf272aa4dce1ea219fc38",
+          "ff84250e53b39310df2bd4c61e805bf867",
+          "ff5318e340302b0dd20ed16c9f3fc56379"
+        ],
+        "nodes": [
+          "ff633c3fb5a4135f38c6050fa67901b9f8",
+          "ff90b1a93c7a8f69418c91e1c39565720c",
+          "ff2da0887f0b8f6bd6e82b2dcbc0f431e7"
+        ],
+        "loose_head": "ff25bdcb3a78c29c380b14c17d73d893f1",
+        "loose_sys": "ffbb295f18d4142033a12475230c04b9fc",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff8fd216fbd450abad36225033b4dc4c65",
+          "ff0addf48e6579a5013b842a5dd12ba446",
+          "ff1e5a2f450baf359322572ee0c67d8f3c"
+        ],
+        "loose_nodes": [
+          "ffce41800c2f468a18c053062a00a8245d",
+          "ff052007e50c14638b39451918895fbcd5",
+          "ffcb629597395df45436f75abb84d1e69b"
+        ],
+        "conv": "ffd0d3cb99315a557347743266033fdf68"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/conv-anchor-skips-opener",
+    "anthropic.messages/conv-anchor-skips-opener"
+  ]
+}

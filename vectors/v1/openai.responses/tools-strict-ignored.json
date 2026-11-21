@@ -1,0 +1,128 @@
+{
+  "id": "openai.responses/tools-strict-ignored",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "parts",
+  "description": "`strict` on a function tool is ignored; other tools are {type, def}.",
+  "input": {
+    "model": "m",
+    "input": "go",
+    "tools": [
+      {
+        "type": "function",
+        "name": "noop",
+        "description": "",
+        "parameters": {
+          "type": "object"
+        },
+        "strict": true
+      },
+      {
+        "type": "web_search_preview",
+        "search_context_size": "low"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "",
+          "name": "noop",
+          "schema": "{\"type\":\"object\"}"
+        },
+        {
+          "def": "{\"type\":\"web_search_preview\",\"search_context_size\":\"low\"}",
+          "type": "web_search_preview"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4KjZGRlc2NgZG5hbWVkbm9vcGZzY2hlbWFxeyJ0eXBlIjoib2JqZWN0In2iY2RlZng5eyJ0eXBlIjoid2ViX3NlYXJjaF9wcmV2aWV3Iiwic2VhcmNoX2NvbnRleHRfc2l6ZSI6ImxvdyJ9ZHR5cGVyd2ViX3NlYXJjaF9wcmV2aWV3aG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiZ28=",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "",
+          "name": "noop",
+          "schema": "{\"type\":\"object\"}"
+        },
+        {
+          "def": "{\"search_context_size\":\"low\",\"type\":\"web_search_preview\"}",
+          "type": "web_search_preview"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4KjZGRlc2NgZG5hbWVkbm9vcGZzY2hlbWFxeyJ0eXBlIjoib2JqZWN0In2iY2RlZng5eyJzZWFyY2hfY29udGV4dF9zaXplIjoibG93IiwidHlwZSI6IndlYl9zZWFyY2hfcHJldmlldyJ9ZHR5cGVyd2ViX3NlYXJjaF9wcmV2aWV3aG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiZ28=",
+    "keys": {
+      "0": {
+        "head": "00adbe4122d2d232d4304ee94cc23bce5d",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00e4315ff7c6a6bda0c2eaa20f48d6830f",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf"
+        ],
+        "nodes": [
+          "00bf55f4d1640b7155748a98191f0cd170"
+        ],
+        "loose_head": "00d5efd488210a31ae5baac9d71f4b948e",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00a7d1318d4cc32a42d496568d50042da6",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c"
+        ],
+        "loose_nodes": [
+          "00e4e843efe3539e7f1e30c66b7557dbf3"
+        ],
+        "conv": "00820e5a00b3fd3fac2e0ec9c4cf180996"
+      },
+      "255": {
+        "head": "ff6247bab50d7b7fe1d89e038c33f44262",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "fff51e2364759cc9b5da4e04c0d5fdb59d",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988"
+        ],
+        "nodes": [
+          "ffb028381a51e85a032eb154689e9e4bcd"
+        ],
+        "loose_head": "ffe65a7da7bb5f3d7a6dc123855ac4b11a",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff51de3aa66629dba3425d6771dd5a3e82",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d"
+        ],
+        "loose_nodes": [
+          "ffad65233a7ebe64e70e602dbce603887b"
+        ],
+        "conv": "ff0cd2fa6d8caed62f2cbb5ffde3dadf61"
+      }
+    }
+  }
+}

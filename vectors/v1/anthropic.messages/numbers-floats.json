@@ -1,0 +1,174 @@
+{
+  "id": "anthropic.messages/numbers-floats",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "numbers",
+  "description": "Floats print as the shortest ECMAScript number.",
+  "input": null,
+  "input_raw_b64": "eyJtb2RlbCI6Im0iLCJtYXhfdG9rZW5zIjo2NCwibWVzc2FnZXMiOlt7InJvbGUiOiJ1c2VyIiwiY29udGVudCI6ImNvbXB1dGUifSx7InJvbGUiOiJhc3Npc3RhbnQiLCJjb250ZW50IjpbeyJ0eXBlIjoidG9vbF91c2UiLCJpZCI6ImMxIiwibmFtZSI6ImNhbGMiLCJpbnB1dCI6eyJ4IjpbMC4xLDEuNSwzLjE0MTU5LDIuNWUtNSwxMDAuMCwxLjBlMiwwLjMwMDAwMDAwMDAwMDAwMDA0XX19XX0seyJyb2xlIjoidXNlciIsImNvbnRlbnQiOlt7InR5cGUiOiJ0b29sX3Jlc3VsdCIsInRvb2xfdXNlX2lkIjoiYzEiLCJjb250ZW50IjoiZG9uZSJ9XX1dLCJ0b29scyI6W3sibmFtZSI6ImNhbGMiLCJkZXNjcmlwdGlvbiI6IkV2YWx1YXRlIiwiaW5wdXRfc2NoZW1hIjp7InR5cGUiOiJvYmplY3QiLCJwcm9wZXJ0aWVzIjp7IngiOnt9fX19XX0=",
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"type\":\"object\",\"properties\":{\"x\":{}}}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "compute"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"x\":[0.1,1.5,3.14159,0.000025,100,100,0.30000000000000004]}",
+              "name": "calc"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "done"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJ4Ijp7fX19aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZnY29tcHV0ZaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3N4PHsieCI6WzAuMSwxLjUsMy4xNDE1OSwwLjAwMDAyNSwxMDAsMTAwLDAuMzAwMDAwMDAwMDAwMDAwMDRdfWRuYW1lZGNhbGOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2ZGRvbmU=",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"properties\":{\"x\":{}},\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "compute"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"x\":[0.1,1.5,3.14159,0.000025,100,100,0.30000000000000004]}",
+              "name": "calc"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "done"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJwcm9wZXJ0aWVzIjp7IngiOnt9fSwidHlwZSI6Im9iamVjdCJ9aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZnY29tcHV0ZaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3N4PHsieCI6WzAuMSwxLjUsMy4xNDE1OSwwLjAwMDAyNSwxMDAsMTAwLDAuMzAwMDAwMDAwMDAwMDAwMDRdfWRuYW1lZGNhbGOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2ZGRvbmU=",
+    "keys": {
+      "0": {
+        "head": "00012838425b2f844d94b856f37282a965",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "0007141be383b228c4ca5cd0b9b9aaa735",
+        "msgs": [
+          "00575379dd47bf1a047cbd0d100761400c",
+          "00eca5e45127e2a21e4cd23feb522fd722",
+          "00ab0bab0e92eb14622717fde2b3ba6827"
+        ],
+        "nodes": [
+          "00166e20742d544da19c188b64d7c31926",
+          "001192a3fc2005577523e062d7bd0cf338",
+          "00937b9b6307d2594ee6b32d7d794736d7"
+        ],
+        "loose_head": "00d8c8d8253308e908a00bf45633c57b20",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00a5758bf800fcd4b1b1e29952186cf6f2",
+        "loose_msgs": [
+          "0040c2cdfc016164bc19411f8d4e728b91",
+          "00ea80969788be06e1b60f19685323935b",
+          "004d0859d4aae71aa11cb318f7871132f8"
+        ],
+        "loose_nodes": [
+          "002e63c1baf0954e71f6f8d6e1b937c83a",
+          "00c99c0a77870dc3a679750db224fa722c",
+          "00549c8cf22d194cee4933670fd3e8ab52"
+        ],
+        "conv": "00c0d003e7448f18ff38e291eb8838d26b"
+      },
+      "255": {
+        "head": "ffbb82722a9e21df04aac0cb1973162d02",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ffdcc2a193a7151a8ede52b0735710274c",
+        "msgs": [
+          "ff221c79d2a226930aeca22ae764d40c59",
+          "ff9942588e20159565a369f85e8e7a2a99",
+          "ff0442874ac79450a9c568d38240c83840"
+        ],
+        "nodes": [
+          "ff1e532beee762f0576f4531750b4b5311",
+          "ff30bdc19c7e1f3af973f03158550ccde3",
+          "ff1b668ece8bcdbe87f0197b5d81a0d295"
+        ],
+        "loose_head": "fffe02d49fb288d01e981eb705035fc27e",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff96b78203b337a20a7c182ba714d6630f",
+        "loose_msgs": [
+          "ff3dd7b620f52a37a8edf031442d49c943",
+          "fffb1f06a8fe7d3414754310da917d441a",
+          "ff283e8894dd139fd878a9aac13dafd098"
+        ],
+        "loose_nodes": [
+          "ff180c4319e4ab6d34976143c9ebcfbbf8",
+          "ff50545dfffa3de43d9471ccda995fb52f",
+          "ffb3253c0132f6ccddfacd14ec0e4a2137"
+        ],
+        "conv": "ff9a1b3604f96c7bb8e80d414ef3c947f5"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/numbers-floats",
+    "openai.responses/numbers-floats"
+  ]
+}

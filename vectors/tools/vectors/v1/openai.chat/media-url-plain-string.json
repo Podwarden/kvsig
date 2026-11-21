@@ -1,0 +1,118 @@
+{
+  "id": "openai.chat/media-url-plain-string",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "media",
+  "description": "image_url given as a bare string.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image_url",
+            "image_url": "https://example.test/a.png"
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "url",
+              "mime": "",
+              "sha256": {
+                "$hex": "e96adf8d2380587cbd94ba76100abacb96378cc3dd6732886fc961a51269581f"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBpGF0ZW1lZGlhY3NyY2N1cmxkbWltZWBmc2hhMjU2WCDpat+NI4BYfL2UunYQCrrLljeMw91nMohvyWGlEmlYHw==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "url",
+              "mime": "",
+              "sha256": {
+                "$hex": "e96adf8d2380587cbd94ba76100abacb96378cc3dd6732886fc961a51269581f"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBpGF0ZW1lZGlhY3NyY2N1cmxkbWltZWBmc2hhMjU2WCDpat+NI4BYfL2UunYQCrrLljeMw91nMohvyWGlEmlYHw==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00b289f582c9f9a597e622b45f9e1d90ad"
+        ],
+        "nodes": [
+          "002f2c5e12902b4b0e302ee463ca432101"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00908ff21446c27579cd265941f8f159fa"
+        ],
+        "loose_nodes": [
+          "00e4f975a58f77dcb41f912d106bc97065"
+        ],
+        "conv": "005954f04ce776019bd9ac3f2746cde8d0"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffc8f8f8b8d832f0e5bf44ba02fa8781d0"
+        ],
+        "nodes": [
+          "ff781d6ed7a3b90c803489b0aa93b1eab4"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ffb049445353a974d569496b6d86c61717"
+        ],
+        "loose_nodes": [
+          "ff23a5055d9cde6795c9e998e3f2dc3a4c"
+        ],
+        "conv": "ff762f6f74583fc0a812750b3532aa182e"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "msgs",
+      "other": "openai.chat/media-url",
+      "same": true
+    }
+  ]
+}

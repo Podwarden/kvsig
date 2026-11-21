@@ -1,0 +1,174 @@
+{
+  "id": "anthropic.messages/numbers-int-limits",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "numbers",
+  "description": "Integers above 2^53 are rounded to a double first.",
+  "input": null,
+  "input_raw_b64": "eyJtb2RlbCI6Im0iLCJtYXhfdG9rZW5zIjo2NCwibWVzc2FnZXMiOlt7InJvbGUiOiJ1c2VyIiwiY29udGVudCI6ImNvbXB1dGUifSx7InJvbGUiOiJhc3Npc3RhbnQiLCJjb250ZW50IjpbeyJ0eXBlIjoidG9vbF91c2UiLCJpZCI6ImMxIiwibmFtZSI6ImNhbGMiLCJpbnB1dCI6eyJ4IjpbOTAwNzE5OTI1NDc0MDk5MSw5MDA3MTk5MjU0NzQwOTkyLDkwMDcxOTkyNTQ3NDA5OTMsLTkwMDcxOTkyNTQ3NDA5OTMsMTIzNDU2Nzg5MDEyMzQ1Njc4OTAxMjM0NTY3ODkwXX19XX0seyJyb2xlIjoidXNlciIsImNvbnRlbnQiOlt7InR5cGUiOiJ0b29sX3Jlc3VsdCIsInRvb2xfdXNlX2lkIjoiYzEiLCJjb250ZW50IjoiZG9uZSJ9XX1dLCJ0b29scyI6W3sibmFtZSI6ImNhbGMiLCJkZXNjcmlwdGlvbiI6IkV2YWx1YXRlIiwiaW5wdXRfc2NoZW1hIjp7InR5cGUiOiJvYmplY3QiLCJwcm9wZXJ0aWVzIjp7IngiOnt9fX19XX0=",
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"type\":\"object\",\"properties\":{\"x\":{}}}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "compute"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"x\":[9007199254740991,9007199254740992,9007199254740992,-9007199254740992,1.2345678901234568e+29]}",
+              "name": "calc"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "done"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJ4Ijp7fX19aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZnY29tcHV0ZaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3N4Y3sieCI6WzkwMDcxOTkyNTQ3NDA5OTEsOTAwNzE5OTI1NDc0MDk5Miw5MDA3MTk5MjU0NzQwOTkyLC05MDA3MTk5MjU0NzQwOTkyLDEuMjM0NTY3ODkwMTIzNDU2OGUrMjldfWRuYW1lZGNhbGOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2ZGRvbmU=",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"properties\":{\"x\":{}},\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "compute"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"x\":[9007199254740991,9007199254740992,9007199254740992,-9007199254740992,1.2345678901234568e+29]}",
+              "name": "calc"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "done"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJwcm9wZXJ0aWVzIjp7IngiOnt9fSwidHlwZSI6Im9iamVjdCJ9aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZnY29tcHV0ZaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3N4Y3sieCI6WzkwMDcxOTkyNTQ3NDA5OTEsOTAwNzE5OTI1NDc0MDk5Miw5MDA3MTk5MjU0NzQwOTkyLC05MDA3MTk5MjU0NzQwOTkyLDEuMjM0NTY3ODkwMTIzNDU2OGUrMjldfWRuYW1lZGNhbGOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2ZGRvbmU=",
+    "keys": {
+      "0": {
+        "head": "00012838425b2f844d94b856f37282a965",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "0007141be383b228c4ca5cd0b9b9aaa735",
+        "msgs": [
+          "00575379dd47bf1a047cbd0d100761400c",
+          "00dd86386210a526d39b6d9972d84b368a",
+          "00ab0bab0e92eb14622717fde2b3ba6827"
+        ],
+        "nodes": [
+          "00166e20742d544da19c188b64d7c31926",
+          "001e48bda105ec4abbba02e6aa28019464",
+          "0094f57dbbded15c1cbeb531c43fb8123c"
+        ],
+        "loose_head": "00d8c8d8253308e908a00bf45633c57b20",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00a5758bf800fcd4b1b1e29952186cf6f2",
+        "loose_msgs": [
+          "0040c2cdfc016164bc19411f8d4e728b91",
+          "00b5ac0563a5d2850ccba65a5f56853e9f",
+          "004d0859d4aae71aa11cb318f7871132f8"
+        ],
+        "loose_nodes": [
+          "002e63c1baf0954e71f6f8d6e1b937c83a",
+          "00a80ba3fd35fbd647151607df17c1d12e",
+          "009aaf04c89e07818156573e5d45ead595"
+        ],
+        "conv": "00c0d003e7448f18ff38e291eb8838d26b"
+      },
+      "255": {
+        "head": "ffbb82722a9e21df04aac0cb1973162d02",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ffdcc2a193a7151a8ede52b0735710274c",
+        "msgs": [
+          "ff221c79d2a226930aeca22ae764d40c59",
+          "ff6a1c82ba0101488064404feef05b9793",
+          "ff0442874ac79450a9c568d38240c83840"
+        ],
+        "nodes": [
+          "ff1e532beee762f0576f4531750b4b5311",
+          "ff288ed484fbbd2c2110c9a79cff955c35",
+          "ffbcdaf97b4c32c8e1f13bf43e57c46a66"
+        ],
+        "loose_head": "fffe02d49fb288d01e981eb705035fc27e",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff96b78203b337a20a7c182ba714d6630f",
+        "loose_msgs": [
+          "ff3dd7b620f52a37a8edf031442d49c943",
+          "ff8fa8c9ed42f84920dca88b1134f9829c",
+          "ff283e8894dd139fd878a9aac13dafd098"
+        ],
+        "loose_nodes": [
+          "ff180c4319e4ab6d34976143c9ebcfbbf8",
+          "ff4c80bdb2cce388c73eaef767f507092b",
+          "ff9328da758521609a7e1f71634c0fdae7"
+        ],
+        "conv": "ff9a1b3604f96c7bb8e80d414ef3c947f5"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/numbers-int-limits",
+    "openai.responses/numbers-int-limits"
+  ]
+}

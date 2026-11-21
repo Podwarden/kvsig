@@ -1,0 +1,139 @@
+{
+  "id": "anthropic.messages/empty-text-block-dropped",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "parts",
+  "description": "Empty user content and empty text blocks leave no parts.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": ""
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "text",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": ""
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": []
+        },
+        {
+          "role": "assistant",
+          "parts": []
+        },
+        {
+          "role": "user",
+          "parts": []
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOAomRyb2xlaWFzc2lzdGFudGVwYXJ0c4CiZHJvbGVkdXNlcmVwYXJ0c4A=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": []
+        },
+        {
+          "role": "assistant",
+          "parts": []
+        },
+        {
+          "role": "user",
+          "parts": []
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOAomRyb2xlaWFzc2lzdGFudGVwYXJ0c4CiZHJvbGVkdXNlcmVwYXJ0c4A=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "000a29b54b20685215b986fef45bd8f909",
+          "00927c173782e7afc47503150ca3956ba5",
+          "000a29b54b20685215b986fef45bd8f909"
+        ],
+        "nodes": [
+          "0068975d8f8fe4ff76d747fbd458d36a4d",
+          "001f01783f999898d96e0d05e258fa78ff",
+          "00f466dfdf2df5dbc31ff96ff579e388d7"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00b84b3adcec4747ffc88826d637743899",
+          "001154ccd19d28573d5249b9e644105e92",
+          "00b84b3adcec4747ffc88826d637743899"
+        ],
+        "loose_nodes": [
+          "006704908a631a1534c2722c4054bd23c5",
+          "00a3c25cb8019b5593db6499512ba417d2",
+          "00a3d9e21edb3697f2bf5b9a3773b4c563"
+        ],
+        "conv": null
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffa008fe01be555623d4ca7f6e4c3675a6",
+          "ffe3c000ca897aba5f542759580a5fae9b",
+          "ffa008fe01be555623d4ca7f6e4c3675a6"
+        ],
+        "nodes": [
+          "ff590c3bf6d279961b8574b46970123121",
+          "ff8c29b64e78193eb856153f521ccd12c5",
+          "ff5d05e3cc8e528330ff6facd475c95c8d"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff8fd216fbd450abad36225033b4dc4c65",
+          "ffbe1615d679e0a8891d124b186f40ca2b",
+          "ff8fd216fbd450abad36225033b4dc4c65"
+        ],
+        "loose_nodes": [
+          "ffe9f2143b718ae0f257336ef32f252c93",
+          "ff0e8dea5c71b191271e6aea8e96a20d10",
+          "ff1f1d930b2989ef48b0492993954d0681"
+        ],
+        "conv": null
+      }
+    }
+  }
+}

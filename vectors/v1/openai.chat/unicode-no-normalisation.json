@@ -1,0 +1,158 @@
+{
+  "id": "openai.chat/unicode-no-normalisation",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "unicode",
+  "description": "NFC and NFD forms stay different; no case folding.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "\u00e9"
+      },
+      {
+        "role": "assistant",
+        "content": "e\u0301"
+      },
+      {
+        "role": "user",
+        "content": "\u0130\u03a3\u03c2\u00df"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "\u00e9"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "e\u0301"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "\u0130\u03a3\u03c2\u00df"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmLDqaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBomF0ZHRleHRhdmNlzIGiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2aMSwzqPPgsOf",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "\u00e9"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "e\u0301"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "\u0130\u03a3\u03c2\u00df"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmLDqaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBomF0ZHRleHRhdmNlzIGiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2aMSwzqPPgsOf",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "005dd62360b1162c86e6ba487f71271c55",
+          "00ae76c405614bc72da8ca80efa786c8b3",
+          "0069c2f7e61c277a585d145952b5e54d5f"
+        ],
+        "nodes": [
+          "00b645ea69d002767e000d42af9d703550",
+          "0029282da35c0e0c00cc5048c72016fe1c",
+          "0072930faf1ac15bc57ec7d3dcbc4de714"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0027a5f739171e0a2633f52b3dd962dffb",
+          "0009652bab30863a3794ab085806d691aa",
+          "003760b3af651127cda1013a6937fe14be"
+        ],
+        "loose_nodes": [
+          "006b583fa8ec618be87f4e702f0b30ea30",
+          "00ac0a0535de5b45df0d986eb4fb9a8736",
+          "003bfea697482ba6a9aec26c4b4b7b0987"
+        ],
+        "conv": "00fd79aaf0201a7277898f4368174938c1"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff08c730035a3e88cb85d096f0f06d7456",
+          "ff680ce11da089cbe010db1b43961fd05c",
+          "ffc9d497425da0802ba7e36e86446cb369"
+        ],
+        "nodes": [
+          "ff440a8cc6ba4cae4d8dda6b20b831d69d",
+          "ff6fc42dec34ff27e15d64b2578c2d8d2b",
+          "ff706142a03f6ca868207bea0d2c39707d"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff684f9c87f7b6df2cd6b86253b516f5a1",
+          "ffcc116fbd148900532cc170bf38377fc6",
+          "ff13ff0ad300dc313e5bc7d3ec6837fd69"
+        ],
+        "loose_nodes": [
+          "ff733c3152661681e14b88dd7571391f4f",
+          "ff480c9216e5ffc8c62c82b3dadd36804b",
+          "ff2c8b64e4a199c9af2ac030b3dda4cc89"
+        ],
+        "conv": "ff12bba225420d19440e92a6ca379f8383"
+      }
+    }
+  }
+}

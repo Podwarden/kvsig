@@ -1,0 +1,132 @@
+{
+  "id": "anthropic.messages/image-data-url",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "media",
+  "description": "An inline PNG, sent as base64 in each dialect.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": "Look at this"
+          },
+          {
+            "type": "image",
+            "source": {
+              "type": "base64",
+              "media_type": "image/png",
+              "data": "iVBORw0KGgpzeW50aGV0aWMtaW1hZ2UtMQ=="
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Look at this"
+            },
+            {
+              "t": "media",
+              "src": "bytes",
+              "mime": "image/png",
+              "sha256": {
+                "$hex": "1fda2255404990c6a05a7e735d117f76d0ddbca19b867266e0ae9c3ad721677e"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOComF0ZHRleHRhdmxMb29rIGF0IHRoaXOkYXRlbWVkaWFjc3JjZWJ5dGVzZG1pbWVpaW1hZ2UvcG5nZnNoYTI1NlggH9oiVUBJkMagWn5zXRF/dtDdvKGbhnJm4K6cOtchZ34=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Look at this"
+            },
+            {
+              "t": "media",
+              "src": "bytes",
+              "mime": "image/png",
+              "sha256": {
+                "$hex": "1fda2255404990c6a05a7e735d117f76d0ddbca19b867266e0ae9c3ad721677e"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOComF0ZHRleHRhdmxMb29rIGF0IHRoaXOkYXRlbWVkaWFjc3JjZWJ5dGVzZG1pbWVpaW1hZ2UvcG5nZnNoYTI1NlggH9oiVUBJkMagWn5zXRF/dtDdvKGbhnJm4K6cOtchZ34=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "006d99233c3b2c8d56a53ee64f8b0cc2c2"
+        ],
+        "nodes": [
+          "00ecc367b7bd4b24ef372dcffd5111e1ef"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "009a6b4c0be6bfaeb1a8106b739124496c"
+        ],
+        "loose_nodes": [
+          "00902f7510f065ff72b9d33601b4990523"
+        ],
+        "conv": "00e275b30a84e78051cc32ac577df03473"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff2c44668836917b3e57a5c0ba77868d29"
+        ],
+        "nodes": [
+          "ff2c858bd646d2238357d22eea0d7d9674"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ffca20d1d10400715dedf6841c0876a0a5"
+        ],
+        "loose_nodes": [
+          "ff83f0b8a308506b4057aac0e09af9086f"
+        ],
+        "conv": "ff389c0342df0871c476c1a036fb69e66c"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/image-data-url",
+    "openai.responses/image-data-url"
+  ]
+}

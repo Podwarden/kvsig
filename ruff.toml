@@ -1,0 +1,7 @@
+# Lint settings for vectors/tools and conformance (python/ has its own in pyproject.toml).
+line-length = 100
+target-version = "py310"
+
+[lint]
+select = ["E", "F", "I", "B", "UP", "BLE"]
+ignore = ["E501", "F403", "F405"]

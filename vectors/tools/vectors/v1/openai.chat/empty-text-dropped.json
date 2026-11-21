@@ -1,0 +1,148 @@
+{
+  "id": "openai.chat/empty-text-dropped",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "parts",
+  "description": "Empty text parts and empty content are dropped.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "text",
+            "text": ""
+          },
+          "x",
+          {
+            "type": "text",
+            "text": ""
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": ""
+      },
+      {
+        "role": "assistant",
+        "content": null
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": []
+        },
+        {
+          "role": "assistant",
+          "parts": []
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlZHVzZXJlcGFydHOAomRyb2xlaWFzc2lzdGFudGVwYXJ0c4A=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": []
+        },
+        {
+          "role": "assistant",
+          "parts": []
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlZHVzZXJlcGFydHOAomRyb2xlaWFzc2lzdGFudGVwYXJ0c4A=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253",
+          "000a29b54b20685215b986fef45bd8f909",
+          "00927c173782e7afc47503150ca3956ba5"
+        ],
+        "nodes": [
+          "00b2dfe677816238e90ef2a40e06f620f7",
+          "00aa7c20c5ebd061f9428bf168e49512d3",
+          "001ae0b1dae55525e8d50d67bec32e7c40"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4",
+          "00b84b3adcec4747ffc88826d637743899",
+          "001154ccd19d28573d5249b9e644105e92"
+        ],
+        "loose_nodes": [
+          "002d7a8dd84f7f99d1409350bb250c6cf9",
+          "00845a9f7b8654578cf007c01b9a925378",
+          "00fa728ee63c376176ace53d9047c5f540"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7",
+          "ffa008fe01be555623d4ca7f6e4c3675a6",
+          "ffe3c000ca897aba5f542759580a5fae9b"
+        ],
+        "nodes": [
+          "ff3f620f0c447fef2751c57bbe698941c0",
+          "ff302941ab033902dfa7e14c75ad1ae55f",
+          "ff73fd75af843b8b0b2662d00a1879f306"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec",
+          "ff8fd216fbd450abad36225033b4dc4c65",
+          "ffbe1615d679e0a8891d124b186f40ca2b"
+        ],
+        "loose_nodes": [
+          "ffc38a0c74a027167a346af0d779e9d32a",
+          "ffaa2bfd2cab278bc0cf30c996d9828b8c",
+          "ff0921af34202060b35a1ea1dcbd68584f"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "id": "openai.responses/instructions-non-string",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "head",
+  "description": "A non-string instructions value is an opaque part of the head system message.",
+  "input": {
+    "model": "m",
+    "input": "go",
+    "instructions": {
+      "a": 1
+    }
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "instructions",
+              "sha256": {
+                "$hex": "015abd7f5cc57a2dd94b7590f04ad8084273905ee33ec5cebeae62276a97f862"
+              }
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBo2F0Zm9wYXF1ZWR0eXBlbGluc3RydWN0aW9uc2ZzaGEyNTZYIAFavX9cxXot2Ut1kPBK2AhCc5Be4z7Fzr6uYidql/hiZXRvb2xzgGhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymdv",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "instructions",
+              "sha256": {
+                "$hex": "015abd7f5cc57a2dd94b7590f04ad8084273905ee33ec5cebeae62276a97f862"
+              }
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBo2F0Zm9wYXF1ZWR0eXBlbGluc3RydWN0aW9uc2ZzaGEyNTZYIAFavX9cxXot2Ut1kPBK2AhCc5Be4z7Fzr6uYidql/hiZXRvb2xzgGhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymdv",
+    "keys": {
+      "0": {
+        "head": "00f25423d4e6d25ca93cf6545de877f5d7",
+        "sys": "00115a3947c1afb1c3d12b6e4903f3d35e",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf"
+        ],
+        "nodes": [
+          "00004c954c0bdda69e106b08782817fcbc"
+        ],
+        "loose_head": "00eb7dc11ede5f57d53a1586fcbcf407be",
+        "loose_sys": "00cb67c2f875d8b3eb91334890d9c6cb22",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c"
+        ],
+        "loose_nodes": [
+          "007920a43073faeced71aeaf2f244ffb5f"
+        ],
+        "conv": "00c12bd7d5755b6d9beedcd1dff763b1f1"
+      },
+      "255": {
+        "head": "ff14ac462568900898cb45890b4ebfb4aa",
+        "sys": "ffbe1762fa0af3bce8bcd1e2ea7e944ca6",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988"
+        ],
+        "nodes": [
+          "ff1e820631bd6b70cf46c61633f64412ac"
+        ],
+        "loose_head": "ff45dc9c3d10f0544e3356d3e806a26b2a",
+        "loose_sys": "ffd2971ef2a7401547c92592d123ebbfc0",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d"
+        ],
+        "loose_nodes": [
+          "ff7525a43bb345ed9042a81640ee885672"
+        ],
+        "conv": "ff2fce801ccfe97900939b6a0f4f6b8e1d"
+      }
+    }
+  }
+}

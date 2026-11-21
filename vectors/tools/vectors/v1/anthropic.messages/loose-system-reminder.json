@@ -1,0 +1,103 @@
+{
+  "id": "anthropic.messages/loose-system-reminder",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "anthropic.messages",
+  "category": "loose",
+  "description": "Rule 2: a system-reminder block is removed (several blocks, text around them).",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "before <system-reminder>one</system-reminder> middle <system-reminder>two</system-reminder> after"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "before <system-reminder>one</system-reminder> middle <system-reminder>two</system-reminder> after"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnhhYmVmb3JlIDxzeXN0ZW0tcmVtaW5kZXI+b25lPC9zeXN0ZW0tcmVtaW5kZXI+IG1pZGRsZSA8c3lzdGVtLXJlbWluZGVyPnR3bzwvc3lzdGVtLXJlbWluZGVyPiBhZnRlcg==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "before middle after"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnNiZWZvcmUgbWlkZGxlIGFmdGVy",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00048128b822622e5487bef8d42742ac3a"
+        ],
+        "nodes": [
+          "002b88bad6807344d780101bf1d35be6d4"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0007f9ffa464de4375403a60afb55256d5"
+        ],
+        "loose_nodes": [
+          "00dbde1f6105e8156bfdcb7866aa8aea86"
+        ],
+        "conv": "002225044ba6fabf48416ca1f649efcf35"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff40fcaaffa620740770ecadc1b04e08d5"
+        ],
+        "nodes": [
+          "ff625083f30e54b6a0318943bb1568e2c1"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "fff95157e46a3598609c1fa1d759eaa3a2"
+        ],
+        "loose_nodes": [
+          "ff4fb19663a2ee6e62ce60bf289f6698ad"
+        ],
+        "conv": "fffadf811e7bdbd469ead1fa99feda443a"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/loose-system-reminder",
+    "openai.responses/loose-system-reminder"
+  ]
+}

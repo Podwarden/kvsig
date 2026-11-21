@@ -1,0 +1,213 @@
+{
+  "id": "openai.chat/reply-refusal",
+  "spec": "kvsig/1",
+  "level": 3,
+  "dialect": "openai.chat",
+  "category": "reply",
+  "description": "A refusal is an opaque part of the reply.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "do it"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "refusal": "I cannot help with that."
+      },
+      {
+        "role": "user",
+        "content": "ok"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "do it"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "refusal",
+              "sha256": {
+                "$hex": "d3500edcd354b965fbddc20ac71014f82cd1e6a79a3f70d3704f6ac784b35a94"
+              }
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "ok"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmVkbyBpdKJkcm9sZWlhc3Npc3RhbnRlcGFydHOBo2F0Zm9wYXF1ZWR0eXBlZ3JlZnVzYWxmc2hhMjU2WCDTUA7c01S5ZfvdwgrHEBT4LNHmp5o/cNNwT2rHhLNalKJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZib2s=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "do it"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "refusal",
+              "sha256": {
+                "$hex": "d3500edcd354b965fbddc20ac71014f82cd1e6a79a3f70d3704f6ac784b35a94"
+              }
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "ok"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmVkbyBpdKJkcm9sZWlhc3Npc3RhbnRlcGFydHOBo2F0Zm9wYXF1ZWR0eXBlZ3JlZnVzYWxmc2hhMjU2WCDTUA7c01S5ZfvdwgrHEBT4LNHmp5o/cNNwT2rHhLNalKJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZib2s=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "006431978c479bb55c9d419c00c022726b",
+          "0045bd85cffe0f75c132d768ac34552d44",
+          "00c99b191a2e82776ebec0cfa8d37eb718"
+        ],
+        "nodes": [
+          "00f863e03db1428ed94bd5638049b5b637",
+          "00b13202920bf3ab323722837114f06470",
+          "00ff2b80a02cde21e78207fa8dc3f17903"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0003e36dce32629f72701ce8eeea19d04d",
+          "00288b1e950411bd024649a2d388682790",
+          "0012b6ac0cb373281b64c77fd438f6c10c"
+        ],
+        "loose_nodes": [
+          "003e4639b2e8b92803ce4b87d96bd86995",
+          "00a5b1b18c8b7a41d862f1a41868c94199",
+          "004c154f4a524337d7926d49a29408a2d2"
+        ],
+        "conv": "00aadc9705e71adcab58613dd41548febe"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "fff9f3a2fa8f1d8c1ba43b7e16050d7b88",
+          "ff8fdd0043303e7846b06ab7464e922a2c",
+          "ff2a5da6d0fdbedb8c851134230e60c9fb"
+        ],
+        "nodes": [
+          "ff88bcb5571ae8325ee4f3b04c7e7de3ec",
+          "ff3d96aa71907353f86876471a00d8b1a0",
+          "ff6d639204f9cc758d453c07bdeb24d3c5"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff8c7660707828ec3ccc4633e8fe323e2a",
+          "ffd20d255df0fba84088b53b5931624861",
+          "ff7be71d5222c1e8450e167d7062f72913"
+        ],
+        "loose_nodes": [
+          "ff4d9254c4aa1cf33ff66729086ab64865",
+          "ffb65888dd17971776b6e8ba5785c648de",
+          "ff6438f6cbbff80397a050dd0c9a2cd343"
+        ],
+        "conv": "ff2c3c5efc1812ca059b222c58e5b463dc"
+      }
+    }
+  },
+  "reply": {
+    "response": {
+      "id": "chatcmpl-synthetic-1",
+      "object": "chat.completion",
+      "model": "m",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": null,
+            "refusal": "I cannot help with that."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 3,
+        "completion_tokens": 4,
+        "total_tokens": 7
+      }
+    },
+    "matches_msg_index": 1,
+    "exact": true,
+    "keys": {
+      "0": {
+        "msg": "0045bd85cffe0f75c132d768ac34552d44",
+        "loose_msg": "00288b1e950411bd024649a2d388682790"
+      },
+      "255": {
+        "msg": "ff8fdd0043303e7846b06ab7464e922a2c",
+        "loose_msg": "ffd20d255df0fba84088b53b5931624861"
+      }
+    },
+    "canonical_bytes_b64": "omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GjYXRmb3BhcXVlZHR5cGVncmVmdXNhbGZzaGEyNTZYINNQDtzTVLll+93CCscQFPgs0eanmj9w03BPaseEs1qU",
+    "canonical": {
+      "role": "assistant",
+      "parts": [
+        {
+          "t": "opaque",
+          "type": "refusal",
+          "sha256": {
+            "$hex": "d3500edcd354b965fbddc20ac71014f82cd1e6a79a3f70d3704f6ac784b35a94"
+          }
+        }
+      ]
+    }
+  }
+}

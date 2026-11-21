@@ -166,7 +166,8 @@ def _parts(parts: list[Part], p: LooseProfile) -> list[Part]:
 
 
 def loose_message(m: Message, profile: LooseProfile = LOOSE_V1) -> Message:
-    return {"role": m["role"], "parts": _parts(m["parts"], profile)}
+    # Everything but the parts (role, name) is kept as it is.
+    return {**m, "parts": _parts(m["parts"], profile)}
 
 
 def _tool(t: dict[str, Any]) -> dict[str, Any]:

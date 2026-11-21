@@ -1,0 +1,210 @@
+{
+  "id": "openai.chat/legacy-functions",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "tool-refs",
+  "description": "Deprecated functions, function_call and role function map to tools, a call and a ref -1 result.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "x"
+      },
+      {
+        "role": "assistant",
+        "content": null,
+        "function_call": {
+          "name": "ls",
+          "arguments": "{\"path\":\"/\"}"
+        }
+      },
+      {
+        "role": "function",
+        "name": "ls",
+        "content": "out"
+      }
+    ],
+    "functions": [
+      {
+        "name": "ls",
+        "description": "List",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "name": "ls",
+          "role": "function",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": -1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "out"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NkTGlzdGRuYW1lYmxzZnNjaGVtYXhNeyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXX1obWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc2x7InBhdGgiOiIvIn1kbmFtZWJsc6NkbmFtZWJsc2Ryb2xlaGZ1bmN0aW9uZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYgZXBhcnRzgaJhdGR0ZXh0YXZjb3V0",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "List",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\"/\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "name": "ls",
+          "role": "function",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": -1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "out"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NkTGlzdGRuYW1lYmxzZnNjaGVtYXhNeyJwcm9wZXJ0aWVzIjp7InBhdGgiOnsidHlwZSI6InN0cmluZyJ9fSwicmVxdWlyZWQiOlsicGF0aCJdLCJ0eXBlIjoib2JqZWN0In1obWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmF4omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc2x7InBhdGgiOiIvIn1kbmFtZWJsc6NkbmFtZWJsc2Ryb2xlaGZ1bmN0aW9uZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYgZXBhcnRzgaJhdGR0ZXh0YXZjb3V0",
+    "keys": {
+      "0": {
+        "head": "0079b8b38ff538438b88b459dbeff18efc",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00828fa98834dba70e90595731077f5724",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253",
+          "00a20d05e50edb473367706ca1281f69a6",
+          "000c2df9f5342d9cb83d2e57f7682cdf8e"
+        ],
+        "nodes": [
+          "00fe22a41dfc0d79c5ec94b24709a88b91",
+          "00a1d1329c69b5a5efab7c1ea846a6b5ed",
+          "0034c32d1b7803c4be07f02f5fac738a90"
+        ],
+        "loose_head": "002188aefb8d33ee955d2a9b4f8ca3eae2",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0008230f1778ea9af662e08a863ad6d689",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4",
+          "00d5af8cc2bc3b7f6e508be603e98fedf3",
+          "001aaf94dad771fee0272f99c73828f9a4"
+        ],
+        "loose_nodes": [
+          "00be460a06bcf8d2e9db4c5433c5297b2a",
+          "0011b54bff8d9df0c75b4f557cfc0a6487",
+          "00fdb19f295d6002eb80c2b656381eead4"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ff0165735353a9f126f30d2ec909189726",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ffa7a1a984959e3a8e67f45cd34c29048c",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7",
+          "ff1060215e9ed6b3d3fce1524575964861",
+          "ff39698d7b0796bb6bc20ff8e4c42d3678"
+        ],
+        "nodes": [
+          "ff3345f22d54f366232ba6b9026738897e",
+          "ff8cea513bb6565c2eeea2fd55f8671a49",
+          "ff87e0cb91385d02c966c8cd20e890af1b"
+        ],
+        "loose_head": "ff5fb23289e2c4d8664ba5bf35b92228aa",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff7784f1065228856dd567103d7f27139c",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec",
+          "ff706e095feef90a514ab295d643a5e098",
+          "ff452c09bb08fc3c06c91db1511eb141ce"
+        ],
+        "loose_nodes": [
+          "ff413c92a053bc386d778051c4f5b1b1f6",
+          "ff22a853d50e7c55848cb8321ad6385059",
+          "ff8745e91e1cdbc9cbb71c66929bc57e0d"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "id": "anthropic.messages/media-base64-bad",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "media",
+  "description": "Invalid base64 in an image source: the block is opaque.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image",
+            "source": {
+              "type": "base64",
+              "media_type": "image/png",
+              "data": "!!!"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "image",
+              "sha256": {
+                "$hex": "940cc299af0d49fde0efad93433996d69b1100f2105687d4a2279c47104e440a"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBo2F0Zm9wYXF1ZWR0eXBlZWltYWdlZnNoYTI1NlgglAzCma8NSf3g762TQzmW1psRAPIQVofUoiecRxBORAo=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "image",
+              "sha256": {
+                "$hex": "940cc299af0d49fde0efad93433996d69b1100f2105687d4a2279c47104e440a"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBo2F0Zm9wYXF1ZWR0eXBlZWltYWdlZnNoYTI1NlgglAzCma8NSf3g762TQzmW1psRAPIQVofUoiecRxBORAo=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "006e5043ca65fcc72faa1e1d82e1179b7c"
+        ],
+        "nodes": [
+          "004ad6a3de0b4355f9e324eb473ad06d94"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00ac0d772d4291b60050af95261b54a72b"
+        ],
+        "loose_nodes": [
+          "003b390cb7a22bb97f1547bcdc36db7ad6"
+        ],
+        "conv": "006db46e0c91222c16f926031aa7ad91be"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "fff290e6f13328eb5bff92d8c39498eea2"
+        ],
+        "nodes": [
+          "ff0ce8378ac1f822ca7f24a45a02b4d5f1"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "fff531857b0e3abe1bc07f6e6dd0968fa6"
+        ],
+        "loose_nodes": [
+          "ff2ed72fd79157dbddc03c5e1057b019ff"
+        ],
+        "conv": "ff78e6f8ec2408bc28eae3523b1a0352bb"
+      }
+    }
+  }
+}

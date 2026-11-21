@@ -1,0 +1,287 @@
+{
+  "id": "anthropic.messages/reply-server-tool-blocks",
+  "spec": "kvsig/1",
+  "level": 3,
+  "dialect": "anthropic.messages",
+  "category": "reply",
+  "description": "Server tool blocks are opaque; citations on text are ignored.",
+  "input": {
+    "model": "m",
+    "max_tokens": 9,
+    "messages": [
+      {
+        "role": "user",
+        "content": "search"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "server_tool_use",
+            "id": "srvtoolu_1",
+            "name": "web_search",
+            "input": {
+              "query": "q"
+            }
+          },
+          {
+            "type": "web_search_tool_result",
+            "tool_use_id": "srvtoolu_1",
+            "content": [
+              {
+                "type": "x"
+              }
+            ]
+          },
+          {
+            "type": "text",
+            "text": "Found it."
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": "thanks"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "search"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "server_tool_use",
+              "sha256": {
+                "$hex": "cd5c43afda022c58efda3e5716a45416ca6f511d0db12655a0d7e8553b39e6a7"
+              }
+            },
+            {
+              "t": "opaque",
+              "type": "web_search_tool_result",
+              "sha256": {
+                "$hex": "8d9bf9882973e927c12522dd6d56b5ee47f818bc5c342e9afe8f991f3ffbb3a6"
+              }
+            },
+            {
+              "t": "text",
+              "v": "Found it."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "thanks"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmZzZWFyY2iiZHJvbGVpYXNzaXN0YW50ZXBhcnRzg6NhdGZvcGFxdWVkdHlwZW9zZXJ2ZXJfdG9vbF91c2Vmc2hhMjU2WCDNXEOv2gIsWO/aPlcWpFQWym9RHQ2xJlWg1+hVOznmp6NhdGZvcGFxdWVkdHlwZXZ3ZWJfc2VhcmNoX3Rvb2xfcmVzdWx0ZnNoYTI1NlggjZv5iClz6SfBJSLdbVa17kf4GLxcNC6a/o+ZHz/7s6aiYXRkdGV4dGF2aUZvdW5kIGl0LqJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZmdGhhbmtz",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "search"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "opaque",
+              "type": "server_tool_use",
+              "sha256": {
+                "$hex": "cd5c43afda022c58efda3e5716a45416ca6f511d0db12655a0d7e8553b39e6a7"
+              }
+            },
+            {
+              "t": "opaque",
+              "type": "web_search_tool_result",
+              "sha256": {
+                "$hex": "8d9bf9882973e927c12522dd6d56b5ee47f818bc5c342e9afe8f991f3ffbb3a6"
+              }
+            },
+            {
+              "t": "text",
+              "v": "Found it."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "thanks"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmZzZWFyY2iiZHJvbGVpYXNzaXN0YW50ZXBhcnRzg6NhdGZvcGFxdWVkdHlwZW9zZXJ2ZXJfdG9vbF91c2Vmc2hhMjU2WCDNXEOv2gIsWO/aPlcWpFQWym9RHQ2xJlWg1+hVOznmp6NhdGZvcGFxdWVkdHlwZXZ3ZWJfc2VhcmNoX3Rvb2xfcmVzdWx0ZnNoYTI1NlggjZv5iClz6SfBJSLdbVa17kf4GLxcNC6a/o+ZHz/7s6aiYXRkdGV4dGF2aUZvdW5kIGl0LqJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZmdGhhbmtz",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00832b9ab7d61f03fe1f2044af65fde126",
+          "0026de120fe0dd875a159dc570b0cc544c",
+          "009a00e57469fd4e0c3f4a338709251d2b"
+        ],
+        "nodes": [
+          "00bf79b088b5f08ad17b7e6df0ccdf05b0",
+          "0016ac397d6b3e8b4a6edacba9157811e3",
+          "00576b199dfd66404431eb7992eac310fa"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00df726ec484152e1953536716307cf777",
+          "009ed81653b427f716be59edaf447b329a",
+          "00e9a12fcdd6fdc68915fe6f2a54fba44d"
+        ],
+        "loose_nodes": [
+          "000c261a169d7b6379e7369fbed1c8d0e3",
+          "00c14f5b23140e371b6321099b65d94be8",
+          "003014095503259c6b9f9323a778da4989"
+        ],
+        "conv": "0052914b61944c96b96c3e45c8819c2274"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffa8b47b62367fc929663756556895e14e",
+          "ffe565ff2b20638ab245b0dfa40fd9a8dc",
+          "ff96d84758f1a45b96e8cd368a052d228c"
+        ],
+        "nodes": [
+          "fffecf759f7471e1f2483e485cf0934244",
+          "ffc4f914dc4f83e18822c83707cda7333c",
+          "ff80d20a707c06f8a1aeeae85d5a367a0d"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff3fba95853e4ed575c4077f23721825a9",
+          "ffb27f921e56c250402abf316bb6befb88",
+          "ff3e8663f77d848c96f543f526282b8851"
+        ],
+        "loose_nodes": [
+          "ffa97071a849d2e4d1439337889efaeb40",
+          "ff6f0166dfa810bcbb9aa5ab45a3e3521d",
+          "ff46bf05c0a28df126c89961e70b707cb1"
+        ],
+        "conv": "ff4c5105b9aff6d913c143a858f6002074"
+      }
+    }
+  },
+  "reply": {
+    "response": {
+      "id": "msg_synthetic_1",
+      "type": "message",
+      "role": "assistant",
+      "model": "m",
+      "content": [
+        {
+          "type": "server_tool_use",
+          "id": "srvtoolu_1",
+          "name": "web_search",
+          "input": {
+            "query": "q"
+          }
+        },
+        {
+          "type": "web_search_tool_result",
+          "tool_use_id": "srvtoolu_1",
+          "content": [
+            {
+              "type": "x"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "text": "Found it.",
+          "citations": [
+            {
+              "type": "x",
+              "cited_text": "y"
+            }
+          ]
+        }
+      ],
+      "stop_reason": "end_turn",
+      "usage": {
+        "input_tokens": 3,
+        "output_tokens": 4
+      }
+    },
+    "matches_msg_index": 1,
+    "exact": true,
+    "keys": {
+      "0": {
+        "msg": "0026de120fe0dd875a159dc570b0cc544c",
+        "loose_msg": "009ed81653b427f716be59edaf447b329a"
+      },
+      "255": {
+        "msg": "ffe565ff2b20638ab245b0dfa40fd9a8dc",
+        "loose_msg": "ffb27f921e56c250402abf316bb6befb88"
+      }
+    },
+    "canonical_bytes_b64": "omRyb2xlaWFzc2lzdGFudGVwYXJ0c4OjYXRmb3BhcXVlZHR5cGVvc2VydmVyX3Rvb2xfdXNlZnNoYTI1NlggzVxDr9oCLFjv2j5XFqRUFspvUR0NsSZVoNfoVTs55qejYXRmb3BhcXVlZHR5cGV2d2ViX3NlYXJjaF90b29sX3Jlc3VsdGZzaGEyNTZYII2b+Ygpc+knwSUi3W1Wte5H+Bi8XDQumv6PmR8/+7OmomF0ZHRleHRhdmlGb3VuZCBpdC4=",
+    "canonical": {
+      "role": "assistant",
+      "parts": [
+        {
+          "t": "opaque",
+          "type": "server_tool_use",
+          "sha256": {
+            "$hex": "cd5c43afda022c58efda3e5716a45416ca6f511d0db12655a0d7e8553b39e6a7"
+          }
+        },
+        {
+          "t": "opaque",
+          "type": "web_search_tool_result",
+          "sha256": {
+            "$hex": "8d9bf9882973e927c12522dd6d56b5ee47f818bc5c342e9afe8f991f3ffbb3a6"
+          }
+        },
+        {
+          "t": "text",
+          "v": "Found it."
+        }
+      ]
+    }
+  }
+}

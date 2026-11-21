@@ -1,0 +1,122 @@
+{
+  "id": "openai.chat/system-user",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "basics",
+  "description": "A system prompt and one user message.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a terse assistant."
+      },
+      {
+        "role": "user",
+        "content": "What is 2+2?"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a terse assistant."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "What is 2+2?"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdngaWW91IGFyZSBhIHRlcnNlIGFzc2lzdGFudC5ldG9vbHOAaG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZsV2hhdCBpcyAyKzI/",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a terse assistant."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "What is 2+2?"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdngaWW91IGFyZSBhIHRlcnNlIGFzc2lzdGFudC5ldG9vbHOAaG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZsV2hhdCBpcyAyKzI/",
+    "keys": {
+      "0": {
+        "head": "00a1ba1c2da969b683f1e270f3f31c71a3",
+        "sys": "004f3a9b7d22491731b02352020b244cbe",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00a33c260f5a8d0230b8cc5f56f25561a7"
+        ],
+        "nodes": [
+          "0014db9b92cbf8879099a13628412e71bf"
+        ],
+        "loose_head": "00f0dcea52f08db32a025c56b57f7394e3",
+        "loose_sys": "00593cfaafe147261e1d0f7721cdc57ad0",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "003659ca053081ebfb7252f1cc84571c53"
+        ],
+        "loose_nodes": [
+          "0091ba44a5a6f28d0b9a30464521c2475d"
+        ],
+        "conv": "00c647e59af433d22834a2b9bee47d8314"
+      },
+      "255": {
+        "head": "fff03f0fe9fdfc3e6e3d769e015e2019c9",
+        "sys": "ff068e24051be338b908754544e97844ac",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffe35a808a99609770417106ae7e5fd785"
+        ],
+        "nodes": [
+          "ff0ad850e0ea5548e0bd5e4dd95a11be41"
+        ],
+        "loose_head": "ff202132b86af9b32a0ae0e4be9af519a4",
+        "loose_sys": "ff722f9a5c2d02152f81ca2caafb0e99c3",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff89ab5337a7a3dbab10e1383bcc916e38"
+        ],
+        "loose_nodes": [
+          "fff12ed0c70439ade939e5bac2e6ad4c3d"
+        ],
+        "conv": "ff054c662bda9b281a4cba18099ef6b3de"
+      }
+    }
+  }
+}

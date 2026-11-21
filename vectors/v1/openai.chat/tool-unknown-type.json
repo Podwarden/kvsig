@@ -1,0 +1,117 @@
+{
+  "id": "openai.chat/tool-unknown-type",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "parts",
+  "description": "A non-function tool is {type, def} with def the canonical JSON text.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "x"
+      }
+    ],
+    "tools": [
+      {
+        "type": "web_search",
+        "search_context_size": "low",
+        "a": [
+          1
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "def": "{\"type\":\"web_search\",\"search_context_size\":\"low\",\"a\":[1]}",
+          "type": "web_search"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GiY2RlZng5eyJ0eXBlIjoid2ViX3NlYXJjaCIsInNlYXJjaF9jb250ZXh0X3NpemUiOiJsb3ciLCJhIjpbMV19ZHR5cGVqd2ViX3NlYXJjaGhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2YXg=",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "def": "{\"a\":[1],\"search_context_size\":\"low\",\"type\":\"web_search\"}",
+          "type": "web_search"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "x"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GiY2RlZng5eyJhIjpbMV0sInNlYXJjaF9jb250ZXh0X3NpemUiOiJsb3ciLCJ0eXBlIjoid2ViX3NlYXJjaCJ9ZHR5cGVqd2ViX3NlYXJjaGhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2YXg=",
+    "keys": {
+      "0": {
+        "head": "00f5af858c38d45aec62eedd57287f58c4",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00540f4c5f717560515754be2252b28c0a",
+        "msgs": [
+          "007c8c737f405786677c38d5843e180253"
+        ],
+        "nodes": [
+          "006ecbf81a8de0c7b736d0d915682f369d"
+        ],
+        "loose_head": "00ce69d126a25c1e88b7dee43b6fcdfaec",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00dac85b7446b3bfe202b6860084d0aa99",
+        "loose_msgs": [
+          "0038724d3e1d06403cfd2f7dff4c3c34d4"
+        ],
+        "loose_nodes": [
+          "008c233f5335c9971e6cfc54d63792e74c"
+        ],
+        "conv": "0029e34309aedfb8d6b4a739e097cc778a"
+      },
+      "255": {
+        "head": "ff121b595c810ae6647aaacdcdc6946084",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff32968f9f6191ebc36404e00702c0e50b",
+        "msgs": [
+          "ff61089863938678d658fc081f63e1bfd7"
+        ],
+        "nodes": [
+          "fff61a20749c7a048466aeda082c8261ea"
+        ],
+        "loose_head": "ff6dfad19ee1bdce6c74c50ea93123aad4",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff7dc4c93e3d4079077d6951987f7b2452",
+        "loose_msgs": [
+          "ff482a652b22c65790bf8ec2d6c87c47ec"
+        ],
+        "loose_nodes": [
+          "ff02602ac1a798fcddc5418039b203cefd"
+        ],
+        "conv": "ff7383cd756237bd39bd076e641664a1ed"
+      }
+    }
+  }
+}

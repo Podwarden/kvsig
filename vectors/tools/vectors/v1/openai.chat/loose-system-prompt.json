@@ -1,0 +1,126 @@
+{
+  "id": "openai.chat/loose-system-prompt",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.chat",
+  "category": "loose",
+  "description": "Loose rules apply to the head too: a system text with a reminder and extra spaces.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are  helpful. <system-reminder>volatile</system-reminder>\n2026-11-21\n"
+      },
+      {
+        "role": "user",
+        "content": "hi"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are  helpful. <system-reminder>volatile</system-reminder>\n2026-11-21\n"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdnhJWW91IGFyZSAgaGVscGZ1bC4gPHN5c3RlbS1yZW1pbmRlcj52b2xhdGlsZTwvc3lzdGVtLXJlbWluZGVyPgoyMDI2LTExLTIxCmV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJoaQ==",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are helpful."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdnBZb3UgYXJlIGhlbHBmdWwuZXRvb2xzgGhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymhp",
+    "keys": {
+      "0": {
+        "head": "008c628b2cacb359a34aa1eaa0ef377a43",
+        "sys": "0081ae83b327cfffb491a37609dab81d2c",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f"
+        ],
+        "nodes": [
+          "00c7ed9228007a25dd1afd08c0a8c165bb"
+        ],
+        "loose_head": "00f4475aba2b080969c124a13606003bcb",
+        "loose_sys": "00817f651e9c3b568d3c5e1f1074d5aa90",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022"
+        ],
+        "loose_nodes": [
+          "00fab548f40a4f5117cad8cf062716b8c4"
+        ],
+        "conv": "006c508bcd97ad0ba1d05a6e7222f7ff97"
+      },
+      "255": {
+        "head": "ff160147ab921c98468faf7e20a8b8200f",
+        "sys": "ff56fd7aca55d6950ded0c9c30f9fdabf1",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef"
+        ],
+        "nodes": [
+          "ffac8a9d382e83404d0f65b2e34b1a5e40"
+        ],
+        "loose_head": "ff50dda66eb309f25aa888ca713784d6d6",
+        "loose_sys": "ff864120bc3595fe10504371e1a189a9db",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb"
+        ],
+        "loose_nodes": [
+          "ff205d46fee011ab0b3396ae74b10f56cd"
+        ],
+        "conv": "ff4a58c6ee8624244614da939416fae585"
+      }
+    }
+  },
+  "equivalent_to": [
+    "anthropic.messages/loose-system-prompt",
+    "openai.responses/loose-system-prompt"
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "id": "openai.responses/instructions-and-system-item",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "head",
+  "description": "instructions come first in the head, then a leading system or developer item.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "developer",
+        "content": "D"
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": "go"
+      }
+    ],
+    "instructions": "I"
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "I"
+            }
+          ]
+        },
+        {
+          "role": "developer",
+          "parts": [
+            {
+              "t": "text",
+              "v": "D"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgqJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFJomRyb2xlaWRldmVsb3BlcmVwYXJ0c4GiYXRkdGV4dGF2YURldG9vbHOAaG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiZ28=",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "I"
+            }
+          ]
+        },
+        {
+          "role": "developer",
+          "parts": [
+            {
+              "t": "text",
+              "v": "D"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgqJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFJomRyb2xlaWRldmVsb3BlcmVwYXJ0c4GiYXRkdGV4dGF2YURldG9vbHOAaG1lc3NhZ2VzgaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZiZ28=",
+    "keys": {
+      "0": {
+        "head": "0040118ac5322551e2faf628cfe35864ba",
+        "sys": "009ada306d9ba6cd5503ba65150990a9f5",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf"
+        ],
+        "nodes": [
+          "0095328deef57496305c458eb8971c24de"
+        ],
+        "loose_head": "00ac3a17a3526bf1e19b7a257142b87171",
+        "loose_sys": "00a9fd4e3ac2b66aa161923a49f0ab5086",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c"
+        ],
+        "loose_nodes": [
+          "0091bdd8189163e798bbcf0c48dc64e588"
+        ],
+        "conv": "0032a6fe8b4d110e3f42a374383c6ec5c7"
+      },
+      "255": {
+        "head": "ff8d51c9d1c18d3f695d8511a7dbcb8a3b",
+        "sys": "ff8fd5db876caa03de25b07669e8346728",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988"
+        ],
+        "nodes": [
+          "ff9e2c15f78a6c5f3327bf55f5d56adf36"
+        ],
+        "loose_head": "fff3f798775af32a17c44b33c630fa5fb3",
+        "loose_sys": "ff2ba20fd0fa10f1a024f76af78ddeda92",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d"
+        ],
+        "loose_nodes": [
+          "ff42535d50286fcb2ce0aa732660ceb5e9"
+        ],
+        "conv": "ffa40862b90d329b57c27f50d3f4ac939f"
+      }
+    }
+  }
+}

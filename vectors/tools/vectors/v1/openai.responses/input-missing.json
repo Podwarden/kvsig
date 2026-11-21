@@ -1,0 +1,15 @@
+{
+  "id": "openai.responses/input-missing",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.responses",
+  "category": "basics",
+  "description": "No input: no ids.",
+  "input": {
+    "model": "m"
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": true
+  }
+}

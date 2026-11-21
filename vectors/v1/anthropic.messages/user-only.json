@@ -1,0 +1,103 @@
+{
+  "id": "anthropic.messages/user-only",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "basics",
+  "description": "A single user message, no system prompt, no tools.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "Hello, world"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hello, world"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmxIZWxsbywgd29ybGQ=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hello, world"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmxIZWxsbywgd29ybGQ=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "0000bf6051d47a6368106ee45ecfd626f6"
+        ],
+        "nodes": [
+          "00f72870edc717c8ffb95c2fcf9c085d01"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "006592fb5bce0d40d5dd305836ed62dd79"
+        ],
+        "loose_nodes": [
+          "00c7cb3103237d0904fe2b643caad34e39"
+        ],
+        "conv": "00370629f5e84b9b5d33ff40ecc4494aba"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff0630db1b80ff2b32f95755b3a5e136ad"
+        ],
+        "nodes": [
+          "ff37b5d3e3130175b69c27ad603e271d26"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff594bfeb8fd86a0ee4ba45a4d2caf3894"
+        ],
+        "loose_nodes": [
+          "ffed1caa639da4645ba6ad6ca38da8c06c"
+        ],
+        "conv": "ff0f99935978cadd546fb992b53e33e8f1"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/user-only",
+    "openai.responses/user-only"
+  ]
+}

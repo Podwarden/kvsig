@@ -1,0 +1,154 @@
+{
+  "id": "openai.responses/conv-anchor-reasoning-only-skipped",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.responses",
+  "category": "conv-anchor",
+  "description": "An assistant turn holding only reasoning is skipped as anchor.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "reasoning",
+        "id": "rs_1",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": "warming up"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": "the actual start"
+      }
+    ],
+    "instructions": "S"
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "reasoning",
+              "v": "warming up"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "the actual start"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFTZXRvb2xzgGhtZXNzYWdlc4KiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGlyZWFzb25pbmdhdmp3YXJtaW5nIHVwomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnB0aGUgYWN0dWFsIHN0YXJ0",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "assistant",
+          "parts": []
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "the actual start"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFTZXRvb2xzgGhtZXNzYWdlc4KiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgKJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZwdGhlIGFjdHVhbCBzdGFydA==",
+    "keys": {
+      "0": {
+        "head": "00b831865363828bd68585ae54120585d6",
+        "sys": "00a2a4919667dda561709f4c35f80242ec",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00d6243664bf95b1afd7346a31affddb58",
+          "00e64844b831c5c46c7fbdad6cc9a5a41c"
+        ],
+        "nodes": [
+          "0065bf383c41f16efced296e545ec88e00",
+          "004cdbc743b92c30ec88b99dec44184313"
+        ],
+        "loose_head": "00fee8b82383863ad736c2591951ffa512",
+        "loose_sys": "00a80ab51b88bb666b49f97c25b1562261",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "001154ccd19d28573d5249b9e644105e92",
+          "009b177428ebae1c7215d38267b4992264"
+        ],
+        "loose_nodes": [
+          "00015cbdd3f7bcd3a3a4e20d71f3641082",
+          "00200ab4916158dbaaa28db171f7c35361"
+        ],
+        "conv": "00082e43bf11a380d788bec886b8024ef4"
+      },
+      "255": {
+        "head": "ff12d21581860addbe7a10a314c9c52ba2",
+        "sys": "ffe1813a67aa51468714fa9249d943260c",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "fff363c4181b4dd4b97e600d2377e7d31a",
+          "ffcf0576cbc8ca149c6e694bef521f98fc"
+        ],
+        "nodes": [
+          "ffff18bfdc6aba077a0dbae3e2f4273187",
+          "ff04c639eb66cc211ba2cc8cf16688b38f"
+        ],
+        "loose_head": "ff25bdcb3a78c29c380b14c17d73d893f1",
+        "loose_sys": "ffbb295f18d4142033a12475230c04b9fc",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ffbe1615d679e0a8891d124b186f40ca2b",
+          "ffe65d7e7e85db2abb627c2bdffbfcf563"
+        ],
+        "loose_nodes": [
+          "ff49d29fbc74bdaaf2a20ba2578e7cb1fc",
+          "ff16c3036641982cf76cc2b186203ea0b5"
+        ],
+        "conv": "ffe0e3e7e8cb5d80ee1fbeed92e842a7e7"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/conv-anchor-reasoning-only-skipped"
+  ]
+}

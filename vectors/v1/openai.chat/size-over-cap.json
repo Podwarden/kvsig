@@ -1,0 +1,36 @@
+{
+  "id": "openai.chat/size-over-cap",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "size-cap",
+  "description": "One byte over max_bytes: the request gets no ids.",
+  "options": {
+    "max_bytes": 561
+  },
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "system",
+        "content": "S"
+      },
+      {
+        "role": "user",
+        "content": "size probe xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
+      },
+      {
+        "role": "assistant",
+        "content": "reply yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy"
+      },
+      {
+        "role": "user",
+        "content": "again"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": true
+  }
+}

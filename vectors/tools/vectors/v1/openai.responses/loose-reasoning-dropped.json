@@ -1,0 +1,184 @@
+{
+  "id": "openai.responses/loose-reasoning-dropped",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.responses",
+  "category": "loose",
+  "description": "Rule 1: reasoning parts are dropped in the loose form only.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": "hi"
+      },
+      {
+        "type": "reasoning",
+        "id": "rs_1",
+        "summary": [
+          {
+            "type": "summary_text",
+            "text": "deep thoughts"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "assistant",
+        "content": [
+          {
+            "type": "output_text",
+            "text": "answer"
+          }
+        ]
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": "ok"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "reasoning",
+              "v": "deep thoughts"
+            },
+            {
+              "t": "text",
+              "v": "answer"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "ok"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJoaaJkcm9sZWlhc3Npc3RhbnRlcGFydHOComF0aXJlYXNvbmluZ2F2bWRlZXAgdGhvdWdodHOiYXRkdGV4dGF2ZmFuc3dlcqJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZib2s=",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "answer"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "ok"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJoaaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBomF0ZHRleHRhdmZhbnN3ZXKiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ym9r",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f",
+          "0074c4c835063ee2f902764a1a72b328f4",
+          "00c99b191a2e82776ebec0cfa8d37eb718"
+        ],
+        "nodes": [
+          "006491d0329a989358e99dde8528780e23",
+          "0081f1d6462d264b24f0bf3f16871ed880",
+          "00d26782636a9234e41dba0e45ac0f4f91"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022",
+          "0035d06ac0c987fb961a426e64b72d7a3c",
+          "0012b6ac0cb373281b64c77fd438f6c10c"
+        ],
+        "loose_nodes": [
+          "001490ca47858d8292b5845651af0fdd5a",
+          "001216cbcd8ef85aa71d51a792e0bc1ecf",
+          "006d815087a18dc5dc8afa1fd01f75db55"
+        ],
+        "conv": "000ebaf0b536f7e0dec6ee252d7f5bced8"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef",
+          "ff45c0a41104afe20064bc72306931d35c",
+          "ff2a5da6d0fdbedb8c851134230e60c9fb"
+        ],
+        "nodes": [
+          "ff7f825ebbe2b3b39985a96879889f8a63",
+          "ff75bfc3305697492886efb19d9a4cb68f",
+          "ff43c6545764d57b5ceb3483f104abb5a8"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb",
+          "ff72ed52124bb156877e994e54b3032720",
+          "ff7be71d5222c1e8450e167d7062f72913"
+        ],
+        "loose_nodes": [
+          "ffdd6beca1876ebe9ebe2cae76367ccc6e",
+          "ffcf90919ff9918e9bc06fde981cae4beb",
+          "ff4b33302153045cbdcd6f76a94147e2e1"
+        ],
+        "conv": "ffc1109d357db1ec0cb0ca4f9c6382b713"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/loose-reasoning-dropped",
+    "anthropic.messages/loose-reasoning-dropped"
+  ]
+}

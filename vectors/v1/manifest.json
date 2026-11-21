@@ -1,0 +1,1584 @@
+{
+  "spec": "kvsig/1",
+  "format": 1,
+  "loose": "loose/1",
+  "status": "draft",
+  "keys": [
+    {
+      "name": "test-0",
+      "epoch": 0,
+      "key_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "key_b64": "AAECAwQFBgcICQoLDA0ODxAREhMUFRYXGBkaGxwdHh8="
+    },
+    {
+      "name": "test-255",
+      "epoch": 255,
+      "key_hex": "202122232425262728292a2b2c2d2e2f303132333435363738393a3b3c3d3e3f",
+      "key_b64": "ICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj8="
+    }
+  ],
+  "count": 223,
+  "files": [
+    {
+      "path": "anthropic.messages/cache-control-absent.json",
+      "sha256": "093e0052f23c052c6f6cd38449df76ad5111777fd44d8dc639d091194120de47",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "cache-control"
+    },
+    {
+      "path": "anthropic.messages/cache-control-ignored.json",
+      "sha256": "b9beb658a6a0593fc1662865e9db7c0f6887cc0e65dcf41fbdb88559542456d9",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "cache-control"
+    },
+    {
+      "path": "anthropic.messages/cache-control-nested-kept.json",
+      "sha256": "f52ac21bcc1bf3027d21dfb6b5c99fb7326252a9fa902c695ce84235dfa62965",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "cache-control"
+    },
+    {
+      "path": "anthropic.messages/cache-control-opaque-plain.json",
+      "sha256": "2a46f8933a1613a181cc8ab1f7567e847650f247dbcff3b293cc3d389ab64b87",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "cache-control"
+    },
+    {
+      "path": "anthropic.messages/cache-control-opaque-top-level.json",
+      "sha256": "3647567e5b072141e3f4be8db5a3297cfeb0ddfd8182cd8b89482fa4fd53cfef",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "cache-control"
+    },
+    {
+      "path": "anthropic.messages/citations-ignored.json",
+      "sha256": "5b970a305d3966421b613dc7533253d73313253b54f9f44a1eded6e5cd50d053",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "parts"
+    },
+    {
+      "path": "anthropic.messages/conv-anchor-skips-opener.json",
+      "sha256": "8854f840f3ac3b3fa759213403b601ad098185c1c3959c6ab9fb84e4ce728578",
+      "level": 2,
+      "dialect": "anthropic.messages",
+      "category": "conv-anchor"
+    },
+    {
+      "path": "anthropic.messages/conv-base.json",
+      "sha256": "4ac719d61c7d75ccb91c709a73ee35357bd8d6de919194b83bfa70924a486f19",
+      "level": 2,
+      "dialect": "anthropic.messages",
+      "category": "conv-tools-free"
+    },
+    {
+      "path": "anthropic.messages/conv-other-tools.json",
+      "sha256": "9c8478361777ec52ef0f6a9ed2c0b59e72a98c77e779731257feb275be5dc0dc",
+      "level": 2,
+      "dialect": "anthropic.messages",
+      "category": "conv-tools-free"
+    },
+    {
+      "path": "anthropic.messages/depth-129-none.json",
+      "sha256": "b296ad5e9aa5210879f3adf8658f89e1f9e421c0a05a4d61652fd9ec68049fb7",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "depth-cap"
+    },
+    {
+      "path": "anthropic.messages/duplicate-keys-args.json",
+      "sha256": "52b847215a6fb899964b968abb9e3c663b659e764d5c042d1dc0d3bc102cef0d",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "duplicate-keys"
+    },
+    {
+      "path": "anthropic.messages/duplicate-keys-tool-input.json",
+      "sha256": "df3e6955b478e738f6ceb516a2a34e2a219bee0fe61c30dce094c44688ad003e",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "duplicate-keys"
+    },
+    {
+      "path": "anthropic.messages/empty-text-block-dropped.json",
+      "sha256": "2ceb4ae5a7a9452ba1ee3aa426097043faf138c334e9eaf4c13d60bd6778c5d9",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "parts"
+    },
+    {
+      "path": "anthropic.messages/id-reused-across-turns.json",
+      "sha256": "d3ff5af32b9146836a9bace3f9ef4cd39d133d350fe63672f3aed50d7ddc2852",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "tool-refs"
+    },
+    {
+      "path": "anthropic.messages/image-data-url.json",
+      "sha256": "581f06cc37934b94ef50a1a061a182381b8abf234ecb461470524d5c2061f978",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "media"
+    },
+    {
+      "path": "anthropic.messages/loose-args-sorted.json",
+      "sha256": "3744b728e12d21f6943b43a6dd6845ec70f150175af5d2d15ac29ec156e1dcce",
+      "level": 2,
+      "dialect": "anthropic.messages",
+      "category": "loose"
+    },
+    {
+      "path": "anthropic.messages/loose-reasoning-dropped.json",
+      "sha256": "ae34ac242cdb7ccbd090ed9bbffa4308f25aa52c858dbdd808a3bbb83b70e7b2",
+      "level": 2,
+      "dialect": "anthropic.messages",
+      "category": "loose"
+    },
+    {
+      "path": "anthropic.messages/loose-system-reminder.json",
+      "sha256": "101e1406fd24e7154bddf1bd7539c2e94314e92df7d173b2a31742d0c6eeea23",
+      "level": 2,
+      "dialect": "anthropic.messages",
+      "category": "loose"
+    },
+    {
+      "path": "anthropic.messages/loose-whitespace-unicode.json",
+      "sha256": "08ec6f840de31f099a8156c0447118dccb96c3722f855980ec5efd8f32e4b0a7",
+      "level": 2,
+      "dialect": "anthropic.messages",
+      "category": "loose"
+    },
+    {
+      "path": "anthropic.messages/media-base64-bad.json",
+      "sha256": "8afc0784385ca99515ce4dbd5178c8cc09c758e9659a5d8464789be478ea0c52",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "media"
+    },
+    {
+      "path": "anthropic.messages/media-base64-wrapped.json",
+      "sha256": "c5b54c21821b0d13393cf05af967cb949a27344e8903007ea301251ca1daee02",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "media"
+    },
+    {
+      "path": "anthropic.messages/media-document.json",
+      "sha256": "83e5776787230913586a72e3c85d39668b207e6cfa55ef06b69a1b33d1085b6a",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "media"
+    },
+    {
+      "path": "anthropic.messages/media-document-with-title.json",
+      "sha256": "c6bae5dda97af65d01678f39990dd8eaf3c6a83eb948c6027898f0d9f1fde27f",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "media"
+    },
+    {
+      "path": "anthropic.messages/media-url-and-file.json",
+      "sha256": "d5260f94c0ccd048d0534a320844af4c9e1640d8752f617d8c8d7f96eec7857d",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "media"
+    },
+    {
+      "path": "anthropic.messages/numbers-floats.json",
+      "sha256": "0970141d9c97a5b849f9faf244f0b2cfc7499293bae6e93cf4e096aaf9c2060a",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "numbers"
+    },
+    {
+      "path": "anthropic.messages/redacted-and-server-blocks.json",
+      "sha256": "8d9051fc41f3d01b59991b8158c2d76c86b0a9bd932439920d16798b56a6ca55",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "opaque"
+    },
+    {
+      "path": "anthropic.messages/reply-server-tool-blocks.json",
+      "sha256": "bdb2c2e98ea8e59c616ff72de835fda658f2d73f2e57d675bda2f0bc15020f20",
+      "level": 3,
+      "dialect": "anthropic.messages",
+      "category": "reply"
+    },
+    {
+      "path": "anthropic.messages/reply-text.json",
+      "sha256": "a994be03caf2e7fe67b094d8fb2213c017ae337e6c58b3bb3fb01aad7384c244",
+      "level": 3,
+      "dialect": "anthropic.messages",
+      "category": "reply"
+    },
+    {
+      "path": "anthropic.messages/reply-thinking-not-sent-back.json",
+      "sha256": "5fb1adf63ca8781615c7500d027e90db5bb9ab04f6bd8b0faa7bb093b5bd0033",
+      "level": 3,
+      "dialect": "anthropic.messages",
+      "category": "reply"
+    },
+    {
+      "path": "anthropic.messages/reply-thinking-sent-back.json",
+      "sha256": "abf6d1830602cd6135e93ca67c40e518756ac1733718d4a6f3c5a8a32a11859a",
+      "level": 3,
+      "dialect": "anthropic.messages",
+      "category": "reply"
+    },
+    {
+      "path": "anthropic.messages/reply-tool-use.json",
+      "sha256": "ae93b211d77e1c49b25aadf75b09fca2255bb89a081033d20a1cefd86d910ad6",
+      "level": 3,
+      "dialect": "anthropic.messages",
+      "category": "reply"
+    },
+    {
+      "path": "anthropic.messages/result-missing-call.json",
+      "sha256": "ccb1bd316b6a69d77670255fb2484219685549ec5631ceb454133b830bf5de19",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "tool-refs"
+    },
+    {
+      "path": "anthropic.messages/results-out-of-order.json",
+      "sha256": "e3a00d8376a7da5974e4d31832a97c128d2e70f77068a398dc30682a7c81c104",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "tool-refs"
+    },
+    {
+      "path": "anthropic.messages/system-blocks.json",
+      "sha256": "9902a21a343b550f093da0ede719e3cad7e495c18e2f996e48a5b3a893d87615",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "head"
+    },
+    {
+      "path": "anthropic.messages/system-empty.json",
+      "sha256": "dfe23a278a6df6bb2679e25de2a2b0dfcc01cabb73e39636a777f0302f2826b4",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "head"
+    },
+    {
+      "path": "anthropic.messages/system-string.json",
+      "sha256": "bab78a4257cacd69e2d676dbf0f46945c51ee0b5717dd433f97f5f3bf9484c43",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "head"
+    },
+    {
+      "path": "anthropic.messages/thinking-other-signature.json",
+      "sha256": "9976809c7d1d84d182b4031b0dde0f4aedefc90a7a60404ddebd97f0ce9de602",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "parts"
+    },
+    {
+      "path": "anthropic.messages/thinking-signature-ignored.json",
+      "sha256": "61ed247c1b8623f4a3f2989b566f785b0ef5e7ae954fb199a0176362f11fe554",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "parts"
+    },
+    {
+      "path": "anthropic.messages/tool-result-blocks.json",
+      "sha256": "ee9c31d826daf90b1fd35b881e758d37e164b01b80a186381370e263c8126b71",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "parts"
+    },
+    {
+      "path": "anthropic.messages/tool-result-error.json",
+      "sha256": "6348fab7567e15aadcbf3fef40421ffea3d90f36c0e380c41911b0f2f916f871",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "parts"
+    },
+    {
+      "path": "anthropic.messages/tool-result-with-image.json",
+      "sha256": "44374437601000215a947885a97922ec9804f999dc52e0010cb0a8784e4d4c18",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "media"
+    },
+    {
+      "path": "anthropic.messages/tool-roundtrip.json",
+      "sha256": "2a5f751ba0bb479ad5cc55a4d341bd6249b58c1b860666e09fd55f4152ca9a52",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "basics"
+    },
+    {
+      "path": "anthropic.messages/tool-types.json",
+      "sha256": "3d59916f00e14a4b8b186e2a4e5c88b450adbf25862c56228af47ed1fffdbb87",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "parts"
+    },
+    {
+      "path": "anthropic.messages/unicode-astral.json",
+      "sha256": "83b79fb20505929bba8a708a778d46dd9880475d0d08cf2c5ad276f514fe4544",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "unicode"
+    },
+    {
+      "path": "anthropic.messages/unicode-lone-surrogate-in-input-key.json",
+      "sha256": "f54353c29d1e89e8944d0fb9d452e7c2cd67d47fdd427ea5590980b957889253",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "unicode"
+    },
+    {
+      "path": "anthropic.messages/unicode-lone-surrogate-in-text.json",
+      "sha256": "52d6e9f21f7a453d4c22b8db26b795bed552e0b452df41081a88a5bc291975a4",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "unicode"
+    },
+    {
+      "path": "anthropic.messages/user-only.json",
+      "sha256": "e02d01d9355d6ddd1aa76495334925a3317df466f175aa0e0f1f28ef6c38cf92",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "basics"
+    },
+    {
+      "path": "anthropic.messages/user-turn-split.json",
+      "sha256": "9662255153e5ba143a69db175abeb97ae20b8ccaccffb25c45890e53238d6e44",
+      "level": 1,
+      "dialect": "anthropic.messages",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.chat/args-huge-digit-string.json",
+      "sha256": "4bcb460bc8e297ca217d060209a9b6789b77e071f7605124e409e29c64d2f405",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "numbers"
+    },
+    {
+      "path": "openai.chat/args-member-order.json",
+      "sha256": "16515f31fc7fc33332c2c4d58567478372f2024ae6de3ca869288cc8f7af2bdf",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "args"
+    },
+    {
+      "path": "openai.chat/args-raw-vs-valid.json",
+      "sha256": "4737e0526c021cd7581a147eb47bd0a3a481567777db9fd326c8323c23570557",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unparsable-args"
+    },
+    {
+      "path": "openai.chat/args-scalar-values.json",
+      "sha256": "0f019aa9504c593e03dfbb448f7a8a330ae9321ad003734dfc0887eb23f41fd2",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "args"
+    },
+    {
+      "path": "openai.chat/args-string-escapes.json",
+      "sha256": "a626e50e68dc5e80e1f26199db296434cafc734ca8958ff4fa2776e44f9e156c",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "args"
+    },
+    {
+      "path": "openai.chat/args-unparsable-empty-string.json",
+      "sha256": "51b228d0542976da96508f530418f2f6ed38f29619d3a891904bc1fd080d1bfa",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unparsable-args"
+    },
+    {
+      "path": "openai.chat/args-unparsable-leading-zero-number.json",
+      "sha256": "d9edbad00fe92a7d0a08f0de49f81f3c6729ee10fcb2974c8d4177ac3d35aab9",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unparsable-args"
+    },
+    {
+      "path": "openai.chat/args-unparsable-nan-literal.json",
+      "sha256": "6737dd9affc288236f9588cbd8aa9bb889676f9177aaf6781ca2f8a0138e1a36",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unparsable-args"
+    },
+    {
+      "path": "openai.chat/args-unparsable-raw-keeps-spaces.json",
+      "sha256": "cb6ef7d5fe957095f5c868c8e386817b1e7ce4ec5bc22a2a4b5e82e2903ad73f",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unparsable-args"
+    },
+    {
+      "path": "openai.chat/args-unparsable-trailing-garbage.json",
+      "sha256": "2ca69968da93e6da7f7bc220400358593b9930d281872f56615945a73e8520f2",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unparsable-args"
+    },
+    {
+      "path": "openai.chat/args-unparsable-truncated.json",
+      "sha256": "78d851e339d88ed8ad5c7db297564b4f2c484d8f2b465b5ae52e6d2315312eec",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unparsable-args"
+    },
+    {
+      "path": "openai.chat/body-not-an-object.json",
+      "sha256": "3c3ed43136c1a8e62822ebe23961c060725af741e25051462b78dd8f19a4dc05",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "head"
+    },
+    {
+      "path": "openai.chat/content-adjacent-text-not-merged.json",
+      "sha256": "c24e68094cd205072d6d75a2ed89932809ed8bfbbe7f9fd09c639e79b964a71e",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "parts"
+    },
+    {
+      "path": "openai.chat/content-parts.json",
+      "sha256": "f7b3ebea9c9b3053a359f3a5cbbe9b385fb2381123f2bed7a74ddfda5bdfa5aa",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "parts"
+    },
+    {
+      "path": "openai.chat/content-string.json",
+      "sha256": "8a7707e59517284f3e470a0589eab7e5df82ffca3ba5bb5c214d6d363b8e0065",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "parts"
+    },
+    {
+      "path": "openai.chat/conv-anchor-reasoning-only-skipped.json",
+      "sha256": "ffa19ee377e37956b1fd3e36d915c94ae6ed399b78662e24e9389a39a4971ccc",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-anchor"
+    },
+    {
+      "path": "openai.chat/conv-anchor-skips-opener.json",
+      "sha256": "8c4ddb9ab3603b1c4c21e52ad2231f395533c53402e24ead39b02e9fe8559588",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-anchor"
+    },
+    {
+      "path": "openai.chat/conv-anchor-tool-call-counts.json",
+      "sha256": "ee97a3b4a4205eef2af71a6b7d599b07047e6c7498beae4f03f8892856bf1ed9",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-anchor"
+    },
+    {
+      "path": "openai.chat/conv-base.json",
+      "sha256": "a753f0d7ecd659aef0629b045161e5dab8416bacda61356af613f9d6947247c6",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-tools-free"
+    },
+    {
+      "path": "openai.chat/conv-longer.json",
+      "sha256": "03d91500bfcae2d064b730e373ca46009daecca0e3ccaf63f5efbfc799d45219",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-tools-free"
+    },
+    {
+      "path": "openai.chat/conv-no-opener.json",
+      "sha256": "a68809b52726e7370e51fbea52ed3bdfb0555cec65aa5537a298c99513f4bafd",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-anchor"
+    },
+    {
+      "path": "openai.chat/conv-none-all-empty.json",
+      "sha256": "66e3dd7c3e461d42c99545f0dac224c6f222b43e4a6e1009a3aa1ba21b4c82cf",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-anchor"
+    },
+    {
+      "path": "openai.chat/conv-other-opener.json",
+      "sha256": "b89380e8013aef4e269170e10e6c0d18aa0af1c744dfd173fcd31be74ad8d152",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-tools-free"
+    },
+    {
+      "path": "openai.chat/conv-other-system.json",
+      "sha256": "0a2806bbfde8f0372b190cc4d98319b4d856712e260ee86f148ffe0136ec81d7",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-tools-free"
+    },
+    {
+      "path": "openai.chat/conv-other-tools.json",
+      "sha256": "140816e5b55cfc8d4af7ec6ddd119754e69326b3df4c817fb45d7c7ff9e94403",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-tools-free"
+    },
+    {
+      "path": "openai.chat/conv-spacing-insensitive.json",
+      "sha256": "55301324fda4a0618db045d0a467fd070dd5f8522a4ade011bcda13388f5e8b2",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "conv-tools-free"
+    },
+    {
+      "path": "openai.chat/custom-tool-call.json",
+      "sha256": "1e74c659c428a4bc1feb90524c97b99f4ce16249e0287cd4b0d5fe5b90b9c083",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.chat/depth-128-ok.json",
+      "sha256": "f3931bfde3456284175d94506c058fe2f30d9fccdfed5b11a99c6660ec6cc289",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "depth-cap"
+    },
+    {
+      "path": "openai.chat/depth-129-none.json",
+      "sha256": "3396ebd19688ccbda009e1eba8a698e36930942f8a2f3b9630c1a61ab8d2eaaa",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "depth-cap"
+    },
+    {
+      "path": "openai.chat/depth-5000-none.json",
+      "sha256": "5251bab58c423c6212003e89c69b826d6e149f46f9cd9fa6d1390085eda46e28",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "depth-cap"
+    },
+    {
+      "path": "openai.chat/depth-scalars-do-not-count.json",
+      "sha256": "e644567e497b9676a69c621e4b40c7ccd486b237cef811ca87c74d59ec471d1f",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "depth-cap"
+    },
+    {
+      "path": "openai.chat/depth-schema-129-none.json",
+      "sha256": "dfd46b1eb7f52ebb04d0b45f498d1fcc3b21de61f9d8d55fc7f998ff7b75723a",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "depth-cap"
+    },
+    {
+      "path": "openai.chat/developer-role-head.json",
+      "sha256": "afe54005f7755583b4bab4dc77b0a922cba681ee295685c566b3675106bd0cf6",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "head"
+    },
+    {
+      "path": "openai.chat/duplicate-keys-args.json",
+      "sha256": "968426aca4c6e00d37b0d625bc4519aa1d9297514af4009778628c1e77aa1a34",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "duplicate-keys"
+    },
+    {
+      "path": "openai.chat/duplicate-keys-message.json",
+      "sha256": "95ef7b69c26c388afeff2a93fbc67470cdb33a977176204f2e936b6e17ab4528",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "duplicate-keys"
+    },
+    {
+      "path": "openai.chat/duplicate-keys-surrogate-merge.json",
+      "sha256": "c4db7413c44b0fc16d4f3257968b63f2e6ee0337f19961b5d27c663e36083fea",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "duplicate-keys"
+    },
+    {
+      "path": "openai.chat/empty-assistant-text.json",
+      "sha256": "bd810201ee432ddf38efc9d8a819f1453ad0c49a412df859e2dcda3590794baf",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "parts"
+    },
+    {
+      "path": "openai.chat/empty-messages.json",
+      "sha256": "dd3f76f654fbc4f4e36fad769b224c332a1fb1a4426d5607754fe684c7958e3b",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "head"
+    },
+    {
+      "path": "openai.chat/empty-text-dropped.json",
+      "sha256": "845b0b12e25d8146b2f3be256ff3c43fdacfc639b85b6eb86f269706cab9c335",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "parts"
+    },
+    {
+      "path": "openai.chat/head-only.json",
+      "sha256": "47534db01e72deb0ebdd352cf5ba8e3cde88f67123af2d9849ba858bcf4f3646",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "head"
+    },
+    {
+      "path": "openai.chat/id-reused-across-turns.json",
+      "sha256": "e94bab615ed60a4a1e48c7760b5993c3bd7df7e6da493372377d0c07b3d7133f",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.chat/image-data-url.json",
+      "sha256": "245ccb9fdc458b1fdadb084cc1a0f4e86703e3817999c522449822959745bc1e",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/legacy-functions.json",
+      "sha256": "923af54f867fe7512692ecae430ffc29a4b5f30fc1219fcbf073d24826dfb473",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.chat/loose-args-sorted.json",
+      "sha256": "6a9beb8da55a65487a3c0afa33430c2ff23d0b3c77de60cd44ff0d6a623cdf6d",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-date-in-sentence-kept.json",
+      "sha256": "2bf97ef2a5a35637428715a2d49e428e374b43610d0e81b44b2859092faf6968",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-date-line.json",
+      "sha256": "584bb2eeda19f196e111ac74e1ae4d4047d779bea48fe934960b9047b28d31fe",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-datetime-lines.json",
+      "sha256": "032841b1ee85e860f5e1c68ba5501724c2cda5f88ba74db9b8ea8b36260da608",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-empty-after-collapse.json",
+      "sha256": "72ecef880ba215adbde21d750c4b0da21ea70dfbb90ab4f2d0e1bc05119c76e3",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-reasoning-dropped.json",
+      "sha256": "3204c5cb23efec452ea4829d7524d9041b9cb0bde4ed66ca6e77fb4102c3642d",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-schema-sorted.json",
+      "sha256": "4c472c49aed10bfeb392c7f18e2dc926cf2280df6a8ce995221f86fd38e86c30",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-system-prompt.json",
+      "sha256": "a33d33fdf22ab851dbee1e019e69e5ccd361ad7e7621accc6db869e494ede7ca",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-system-reminder.json",
+      "sha256": "e310539d6f97ff75e0459bfb769ae7d82d2c313e08e71528491f197dd7c9cd45",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-tag-case-insensitive.json",
+      "sha256": "956e91e78b8953e19dc0204e61f657c2b3ccf56a85561f87bcd27fb05ab16b5a",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-tool-result-text.json",
+      "sha256": "6b8bcb198664adbb464ead4cb2ce32c70e07d91b3b2a1e558fafb042e168c343",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-unclosed-tag.json",
+      "sha256": "f4e0c5d07241c5e109049d3000b6e877c5bd70288ffcf68d78951c3217b9b1cf",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-whitespace-ascii.json",
+      "sha256": "8cbb57640fbfc87571d5000c1e3cf481fbdf5e802649c6c609f2b3fbc308863d",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/loose-whitespace-unicode.json",
+      "sha256": "d53b79e2fb1f5f371c8d771d7409b7016fe48fe812e74090fa8384b4904df29d",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/media-data-url-bad-base64.json",
+      "sha256": "b81fb335fe132b0a506517fa61408b2e35ef4a572ff13141eabcfaca40e5cf53",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/media-data-url-base64-twin.json",
+      "sha256": "847879261dfea73b79b570c6c142000f5a7439b509c230ad05876137c81254af",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/media-data-url-flag-case-params.json",
+      "sha256": "2a921256dfd791d61c9f2ca412827ef3844fa7e75aac9824827c13865299cc90",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/media-data-url-no-mime.json",
+      "sha256": "ed495d907245231f68b047e867536e2aab5fa7a4d686c426e1c249cb0aff4727",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/media-data-url-percent.json",
+      "sha256": "de8d1cf469f038155aa7c903df98b2e36ec0d522d40da756f9d7f57cb80a0848",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/media-data-url-wrapped.json",
+      "sha256": "33cb297a56c78f1ae150c8e35d0ae43a7fd39c0d58aa8fd31f0cd4ea6c55a66f",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/media-file-data-base64.json",
+      "sha256": "60212da16466b85d943e09108f7b11a5db6e368431b6aa6350bc8e22e315bb8d",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/media-input-audio.json",
+      "sha256": "52257aadee3615980b82cd5cd0a40c66002553cc84f58eb76b746fa6e3419e3e",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/media-url.json",
+      "sha256": "8e412747aebc2bcc2ecdacc8d275f87f25d1e47e899af723b156504c7b59341a",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/media-url-vs-file-id.json",
+      "sha256": "263ed608718ed5bbb8976e684a411b4444fd2ec1efc4c70cd5d84db637e6fadc",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/message-name.json",
+      "sha256": "5dfd1b5a20fb0074b8321a3e0cdfa46aa99c56c625aa7af443205bc7e1280a4f",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "parts"
+    },
+    {
+      "path": "openai.chat/multi-turn.json",
+      "sha256": "317432ea848224e342ea4fb19f9c14cc4f4c8597f2fc2e5537c37a6ac4638cc4",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "basics"
+    },
+    {
+      "path": "openai.chat/non-object-message.json",
+      "sha256": "010f84417a915383289358307f55c8b26e78ca535d839aa908edc9297c99d8cd",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "opaque"
+    },
+    {
+      "path": "openai.chat/non-object-tool-call.json",
+      "sha256": "7face5da946c24459cccab6b1ac63ca1ced695c2366fb71f2598044dc03d7a49",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.chat/numbers-exponent-forms.json",
+      "sha256": "98f423306b52cc030f82822fb27dad7df8da6fb45e61aba49aff42f7f87c7113",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "numbers"
+    },
+    {
+      "path": "openai.chat/numbers-floats.json",
+      "sha256": "7d61cb9390ea448f9ff05c56eb188dc7e16f576ad133b42300f8a5abb55a260e",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "numbers"
+    },
+    {
+      "path": "openai.chat/numbers-int-limits.json",
+      "sha256": "fb7532d4466acb9b95bdfaeb3dd53bac2e60fe6a16a3f104909f02c33961b29f",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "numbers"
+    },
+    {
+      "path": "openai.chat/numbers-negative-zero.json",
+      "sha256": "9b93e064e0902ee9546e314df2e407275403548bc174c2ca6f930876dd91e30d",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "numbers"
+    },
+    {
+      "path": "openai.chat/numbers-overflow-null.json",
+      "sha256": "ffef319d65bb86f31f8000ce338f7f676ae7a2f2721dcda0662a698badaff941",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "numbers"
+    },
+    {
+      "path": "openai.chat/reasoning-absent.json",
+      "sha256": "434efbf285d9feaace37d774279597770e07830c356d1721881cb88387d2ed58",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/reasoning-content-field.json",
+      "sha256": "052aea315f3d20815d299bb85da30ef5622bb07c0b3c3bd357d38dceb5e9d5a7",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "parts"
+    },
+    {
+      "path": "openai.chat/reasoning-field-alias.json",
+      "sha256": "6038fde191feff7c3507f3b619229e62c36547ab5af13e4dffb962f71d87b211",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "parts"
+    },
+    {
+      "path": "openai.chat/refusal-and-audio.json",
+      "sha256": "a4d374bfc4b48f5908467ae4abbbb37472b94607fb63533edb956dc61e6ccf30",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "opaque"
+    },
+    {
+      "path": "openai.chat/reminder-absent.json",
+      "sha256": "f324e6e03753424e198a68e598bd4bcd43b00926a695989b9951f46ea21ab07d",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.chat/repeated-id-in-message.json",
+      "sha256": "21362bfa1bfcb4f602ff5d7f2293e953c32e317e949b1c6c69767171a476ed0c",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.chat/reply-reasoning-not-sent-back.json",
+      "sha256": "47e13d37472b8adca2950ba1ab9a148f26174bb28b6cb058e5d3e364453d3a12",
+      "level": 3,
+      "dialect": "openai.chat",
+      "category": "reply"
+    },
+    {
+      "path": "openai.chat/reply-reasoning-sent-back.json",
+      "sha256": "8e717cc73d680bd8600c7e474bb6c42bd574c305ac4c47b80d8d65a5c93492b8",
+      "level": 3,
+      "dialect": "openai.chat",
+      "category": "reply"
+    },
+    {
+      "path": "openai.chat/reply-text.json",
+      "sha256": "49626e5b8f90f9239d8dcee868e87f30673083b8ea620781f50905614e480b63",
+      "level": 3,
+      "dialect": "openai.chat",
+      "category": "reply"
+    },
+    {
+      "path": "openai.chat/reply-tool-calls.json",
+      "sha256": "f352023113ed0bbe2a35e380b4034092b6ad3a298473ebe73d8e34c8d1ccb609",
+      "level": 3,
+      "dialect": "openai.chat",
+      "category": "reply"
+    },
+    {
+      "path": "openai.chat/request-parameters-ignored.json",
+      "sha256": "fc42819b9423be5c031fe49c95efbbd0a86060066b6251590b0912c85902b3c9",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "basics"
+    },
+    {
+      "path": "openai.chat/result-before-call.json",
+      "sha256": "cb7f57b41c398a54a182ea331471fa3f4ce906da2e0866a656baed353c7f36a9",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.chat/result-missing-call.json",
+      "sha256": "6a13639b702ede6edf9e161b090746b8c3792579ae77fb4f2e236e258418d8d5",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.chat/results-out-of-order.json",
+      "sha256": "e1587458514d27b3a160e6c6bced2480ed921c22993fa78d61ace33ff421aebb",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.chat/scope-both.json",
+      "sha256": "67aac1edd4f172815a7bf312b9db63640af9da0b198bbb436e667a42047415da",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "scope"
+    },
+    {
+      "path": "openai.chat/scope-cache-salt.json",
+      "sha256": "358e0a6e8998a4bff6f3fcb87b9e22f1512ddd7739fb8b0344bb542531cb9cef",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "scope"
+    },
+    {
+      "path": "openai.chat/scope-conv.json",
+      "sha256": "56761b756373769b54de5aa3553b056bf907366651ef487ca336ec33e7340fbe",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "scope"
+    },
+    {
+      "path": "openai.chat/scope-empty-values.json",
+      "sha256": "eb2a659606527c1db295a9fedf94e28aaf99bfdc51285e085b7e500a92463fcf",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "scope"
+    },
+    {
+      "path": "openai.chat/scope-tenant.json",
+      "sha256": "a6436fc8ed9664b493835788d2bc29f40644bf7dab9931f4c55d7c7b09abb7a4",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "scope"
+    },
+    {
+      "path": "openai.chat/size-at-cap.json",
+      "sha256": "55539991e6a5aec8e951da5d4010e15866f27ae6440330bf2ae69fbb890ca53d",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "size-cap"
+    },
+    {
+      "path": "openai.chat/size-over-cap.json",
+      "sha256": "fd5568aa5b7392180c5eadffe4b049482ee0e721ad476734fff3e757b9749471",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "size-cap"
+    },
+    {
+      "path": "openai.chat/size-tiny-cap.json",
+      "sha256": "088d040c7f57fd51ad3ee21ca44213183d6d1e77b35fbb790441c74e8b9f10d6",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "size-cap"
+    },
+    {
+      "path": "openai.chat/system-mid-conversation.json",
+      "sha256": "e2882054012b2ade7089358c0e739ae5c20d62cd76d882f98a5f8451cd7e02a4",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "head"
+    },
+    {
+      "path": "openai.chat/system-user.json",
+      "sha256": "2d19af725d41ff4a8588448393f05257c000301b9bb194ce1c0f5a7c223fb1dd",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "basics"
+    },
+    {
+      "path": "openai.chat/tool-call-arguments-missing.json",
+      "sha256": "cb6b43389e8754c8805bd1cbcce9bff0cc6a6c65abec6d657198bbfa84c77318",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unparsable-args"
+    },
+    {
+      "path": "openai.chat/tool-no-parameters.json",
+      "sha256": "2de39344cbf364bd51ad466259f7ed2c91c015222db0c21317a1fc46cedf490a",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "parts"
+    },
+    {
+      "path": "openai.chat/tool-result-with-image.json",
+      "sha256": "25158f65212bb6694bbfa334ebb84a84c0f3b247358fff6d2eedbc65bba3ef44",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "media"
+    },
+    {
+      "path": "openai.chat/tool-roundtrip.json",
+      "sha256": "f7809710f32474c8e1b980e78c07ceb0ad5e07f32190d825cc3b15f92f623776",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "basics"
+    },
+    {
+      "path": "openai.chat/tool-unknown-type.json",
+      "sha256": "d92444a16bfa9854369287b3b43dec218574aba411629cc0dae27c6059704e56",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "parts"
+    },
+    {
+      "path": "openai.chat/tools-no-description.json",
+      "sha256": "18527209d3c5766708e7c83637a26726a33258ec7671f017b37a96fd64a7c233",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "basics"
+    },
+    {
+      "path": "openai.chat/unicode-astral.json",
+      "sha256": "14a3f74cde8a52f097118e75a58c5728dbb793ba0efb117ab81a44d751473125",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-astral-literal.json",
+      "sha256": "cc5869983c376689ccee0d7a7074659b915b39c6a5bbc4cad2936bbe8151555d",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-fffd-literal.json",
+      "sha256": "af20cd6bca5874177550753add78cbf25eecf6efc8b4093f5cab65edb71c07dd",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-last-content-literal.json",
+      "sha256": "d0171bc9daffd4c6a92dede9a9befcd789f433623e55d5ea20ac6c9ef5f5e21d",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "duplicate-keys"
+    },
+    {
+      "path": "openai.chat/unicode-lone-surrogate-high.json",
+      "sha256": "5e3f4b66c730e4578f0d3264e996fa17f98a87dd59bbfd1680ba6d9551d4ea4e",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-lone-surrogate-in-args.json",
+      "sha256": "49d49fb992d1a72329674a483ededbb608eba52d90d777f9c8e964ded5a395f0",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-lone-surrogate-in-names.json",
+      "sha256": "7a7268ff4e6ce106a2a5cc156e7d63c793bdfefd4ff1758930896acff5eb0aa1",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-lone-surrogate-low.json",
+      "sha256": "22265b352a33e05a2ffc606de4f93edae3f6851cf7b42eddbcd70a9a98156eb4",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-nbsp-exact.json",
+      "sha256": "571705860bbd381939afc6081abed513bb8ca4b1b6141a31a0ed933a5fd1f917",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-no-normalisation.json",
+      "sha256": "7c1731e6809e38ad73f3cb6fd70a3d7f7c35613065afd685ca6e82816f3d9ba2",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-reversed-pair.json",
+      "sha256": "05e9011aa956dd2c9d99ca01ed4fcdfa282a1e5be70df4ed66698784cb4076ca",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-separators-1c-1f.json",
+      "sha256": "0d32f1dbe9e299538e57d91cd9c2fa32ed2c3f6e67c1cc14c56a8fd69a7db7c7",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unicode-surrogate-pair-escape.json",
+      "sha256": "d1fa7df395130b13f6b3717fc3e608597935a1e652dddf78b9bcf501f13c1037",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.chat/unknown-content-part.json",
+      "sha256": "9d973db696f2d097e37fe7abe9f1035a712b4808f13cd38b2488dc7bc66f4d68",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "opaque"
+    },
+    {
+      "path": "openai.chat/user-only.json",
+      "sha256": "8130985a42ecca47cc743f646f67081ff262768aef08ff3bdc216d6e6586903d",
+      "level": 1,
+      "dialect": "openai.chat",
+      "category": "basics"
+    },
+    {
+      "path": "openai.chat/whitespace-unicode-collapsed.json",
+      "sha256": "7d185d07cfb24c5e36a38fcc1dfb9637f43487e76284dfcb8a8486d497d1357c",
+      "level": 2,
+      "dialect": "openai.chat",
+      "category": "loose"
+    },
+    {
+      "path": "openai.responses/args-raw-vs-valid.json",
+      "sha256": "8f5de1d84582c5fa1ea74258b91eef4d90650d8b01aea4b404894649d6ea396c",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "unparsable-args"
+    },
+    {
+      "path": "openai.responses/args-unparsable-truncated.json",
+      "sha256": "a761cf92d3bb779f4710be65ae0ef3e8db52171b9d80d06d27eb345f698bb201",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "unparsable-args"
+    },
+    {
+      "path": "openai.responses/assistant-items-grouped.json",
+      "sha256": "bf8170d039596f80c5c2e34e5037293a860243d78555be5fedfaae02275bd92c",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "parts"
+    },
+    {
+      "path": "openai.responses/conv-anchor-reasoning-only-skipped.json",
+      "sha256": "f429cbf633fb339324a5abe0b7ba4c5df8e2f191fbaf0332644e3d31a1e70dda",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "conv-anchor"
+    },
+    {
+      "path": "openai.responses/conv-anchor-skips-opener.json",
+      "sha256": "af10e432dabcfa215090a1a8bb431ef7e9fd46fe23d3eefd810f945c77280424",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "conv-anchor"
+    },
+    {
+      "path": "openai.responses/conv-anchor-tool-call-counts.json",
+      "sha256": "36eb8e81ec718541af95b6fd3783b3255d162d6176f66e4ba2aac2c2f8b512b5",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "conv-anchor"
+    },
+    {
+      "path": "openai.responses/conv-base.json",
+      "sha256": "d975115bfdb2b018ee2f1c2d502a08b54008480e5776ba7a0e08ca1998a7a100",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "conv-tools-free"
+    },
+    {
+      "path": "openai.responses/conv-other-tools.json",
+      "sha256": "ab6f78f8cb9671da6050c69d6ac1864a11583ab6c1d0de96b87c34aa5cb4b48d",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "conv-tools-free"
+    },
+    {
+      "path": "openai.responses/custom-tool-call.json",
+      "sha256": "57167073570b33fc13f2235d1a130956fe9bb3596eb595c11363b8379e566ae3",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.responses/depth-129-none.json",
+      "sha256": "0226c9c3a4a68e0d45f3e9478cb74934d1ad16bf181e2ef89140f1d26b95642c",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "depth-cap"
+    },
+    {
+      "path": "openai.responses/depth-5000-none.json",
+      "sha256": "95b787009f3feb729e285517b1654adc40a9aa14a1624de9e5019097d222ad5b",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "depth-cap"
+    },
+    {
+      "path": "openai.responses/duplicate-keys-args.json",
+      "sha256": "27bc1baf6fcb9eb2feea311b92e9423cdc8f8747721af42d27cb7ec411d58f2f",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "duplicate-keys"
+    },
+    {
+      "path": "openai.responses/duplicate-keys-item.json",
+      "sha256": "fc59a8c169876039a7ed16cf55219ffa3b16f323afe211bfa717b54e286c501a",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "duplicate-keys"
+    },
+    {
+      "path": "openai.responses/id-reused-across-turns.json",
+      "sha256": "c4fa4de58908c15290e0d0750ce9154d58db709d0d6d99583e373796329ec0f6",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.responses/image-data-url.json",
+      "sha256": "f7ed370a9f7e1a6c88dbbd5ddba0a6003d0bccc6e2bfb02f921a7cd0c60f0708",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "media"
+    },
+    {
+      "path": "openai.responses/input-not-list-or-string.json",
+      "sha256": "49dff18e5ebd7105d3e3e408deba4b53137a23344fb5940648c5a41072b713a3",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "basics"
+    },
+    {
+      "path": "openai.responses/input-string.json",
+      "sha256": "b283454eb60643019d1a904bbf8f4e0e7e25116b597c507bded44456fe0ab0c1",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "basics"
+    },
+    {
+      "path": "openai.responses/instructions-and-system-item.json",
+      "sha256": "d3ddebee92af3bd77dcdf8775df9b331ed345169ca2c521237d59587ef459fd3",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "head"
+    },
+    {
+      "path": "openai.responses/instructions-non-string.json",
+      "sha256": "e0342234eb36a0d28d814d8ced7b1cf35effb751fd24ce68487b0f70adf04234",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "head"
+    },
+    {
+      "path": "openai.responses/loose-args-sorted.json",
+      "sha256": "98be30e1e5e32dd19cf839b7b80ea03ba23051491c380d589216147d7d223e22",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "loose"
+    },
+    {
+      "path": "openai.responses/loose-reasoning-dropped.json",
+      "sha256": "8e0a6405d308753cb6a12f9c76573011759e95e7534e072f2d973e236402876d",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "loose"
+    },
+    {
+      "path": "openai.responses/loose-system-reminder.json",
+      "sha256": "fe60d618c84016f913314741ed5d594126c77b7692eca6015da858b648a2393f",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "loose"
+    },
+    {
+      "path": "openai.responses/loose-whitespace-unicode.json",
+      "sha256": "d259407e5bec9e2c4bcdda14e5b06e9f6dc744ba423c6f29d81db1ac798ad410",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "loose"
+    },
+    {
+      "path": "openai.responses/media-input-file-data.json",
+      "sha256": "d117a6a77ad15839a7de06a7f3807ab55525b7e576f5193b867b804161db86c0",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "media"
+    },
+    {
+      "path": "openai.responses/media-items.json",
+      "sha256": "4634c00e5e14925f10ffdebfd9a16acac299294043cef6e3000a475b8dffc108",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "media"
+    },
+    {
+      "path": "openai.responses/not-stateful-null-previous.json",
+      "sha256": "f4e402b66d53d6dcb3f92fef3ec0a59a3d31ade659abb9cf8bacd3bb2186a3ed",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "stateful"
+    },
+    {
+      "path": "openai.responses/numbers-floats.json",
+      "sha256": "075bf5daa2e15ff64c64af627499a2d7f78083c21f7194d8a74df6fc96e1a541",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "numbers"
+    },
+    {
+      "path": "openai.responses/other-item-kinds.json",
+      "sha256": "e610db922b6810b9aa211a4d55b5a44076ffc905a724012acefd26e428bb1993",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "opaque"
+    },
+    {
+      "path": "openai.responses/output-list.json",
+      "sha256": "6eefccfb863b087d8a53cc67e62306e49111194d406188c843889a870f8df773",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "parts"
+    },
+    {
+      "path": "openai.responses/reasoning-empty-no-message.json",
+      "sha256": "f7a3c5c095c4022ede5ad2610e3a4d020941c9fe331a3de43df80111edaa67f5",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "parts"
+    },
+    {
+      "path": "openai.responses/reasoning-encrypted-opaque.json",
+      "sha256": "8d7d67b774e3fe4fcc68bd10d910cba8fff91254812887246fa5c47dd70f39e6",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "opaque"
+    },
+    {
+      "path": "openai.responses/reasoning-summary-joined.json",
+      "sha256": "66f1844f4e409ef122235ff82d4c4509eb1f59098aa9d39d4effc1db755ba375",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "parts"
+    },
+    {
+      "path": "openai.responses/reasoning-text-preferred.json",
+      "sha256": "977085fa66c7843c75a7c7aa2a2dd8834970c34f16b034952bb8f096fb8638d8",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "parts"
+    },
+    {
+      "path": "openai.responses/refusal-part.json",
+      "sha256": "1bc7b9013e539777bc072f5cb88bbe2b17e4a18db1be42650eabd229d2a764d6",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "opaque"
+    },
+    {
+      "path": "openai.responses/reply-function-calls.json",
+      "sha256": "9e9024e98c80a63735b85d23a7defc30b46c358ce65b125176ec8af19a5375eb",
+      "level": 3,
+      "dialect": "openai.responses",
+      "category": "reply"
+    },
+    {
+      "path": "openai.responses/reply-reasoning-not-sent-back.json",
+      "sha256": "c693a42f6fa0932e7ef6f73ba727bd4a3586065d8fb544c4eb6301421920518e",
+      "level": 3,
+      "dialect": "openai.responses",
+      "category": "reply"
+    },
+    {
+      "path": "openai.responses/reply-reasoning-sent-back.json",
+      "sha256": "13c4ddc4b72711dd50ab5b5c6a2dd7d9462a28faaddeeabbf04002d5f9ee2630",
+      "level": 3,
+      "dialect": "openai.responses",
+      "category": "reply"
+    },
+    {
+      "path": "openai.responses/reply-text.json",
+      "sha256": "48a1971c285bea8d427d93847085ba97eea893062217c9104ebe6578178f6d22",
+      "level": 3,
+      "dialect": "openai.responses",
+      "category": "reply"
+    },
+    {
+      "path": "openai.responses/reply-two-message-items.json",
+      "sha256": "0b4296d878179f4dfb52762ffd3f02129e365c190e01d61a05cce5a672d378f1",
+      "level": 3,
+      "dialect": "openai.responses",
+      "category": "reply"
+    },
+    {
+      "path": "openai.responses/reply-web-search-call.json",
+      "sha256": "922c5b6c34a13b1254295ef6af00338d822b670a9bae55bd003d30ae5a878114",
+      "level": 3,
+      "dialect": "openai.responses",
+      "category": "reply"
+    },
+    {
+      "path": "openai.responses/result-missing-call.json",
+      "sha256": "5d8c7c2f86ccc26a82cdc950f0bda4b25a9a08ba7c4611bf127766743ef46c9c",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.responses/results-out-of-order.json",
+      "sha256": "f8fba5e232e0b8d5604cdacd3ecefaf831027ec12a0a485d2d39cd25538c936a",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "tool-refs"
+    },
+    {
+      "path": "openai.responses/server-tool-items-in-turn.json",
+      "sha256": "a9a0eb5bbe68d3d2f439569f642cbf5545d002a517c6a587068aca959af9ef7f",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "parts"
+    },
+    {
+      "path": "openai.responses/stateful-conversation-object.json",
+      "sha256": "49c37e9bd78ad045d273865812c30a532c7c456f79e997727221abd70b4a1ce8",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "stateful"
+    },
+    {
+      "path": "openai.responses/stateful-conversation-string.json",
+      "sha256": "4c093915b28c170201655b352c3d14e0105d7eb02d787ec9a553ab08b635f887",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "stateful"
+    },
+    {
+      "path": "openai.responses/stateful-previous-response.json",
+      "sha256": "92bc67f717d5556020ce8b29cef4e2f27599489455c979815dea4695154462cd",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "stateful"
+    },
+    {
+      "path": "openai.responses/stateful-with-instructions.json",
+      "sha256": "0c20ee172d4aab428a3b53b7246283c214531fb7fbe7c1c72462e1505a699361",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "stateful"
+    },
+    {
+      "path": "openai.responses/tool-result-with-image.json",
+      "sha256": "9509f6145ca2d169825c0bacc8885adecb7ee442ad7ac329f1a9e9ca3f4124e6",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "media"
+    },
+    {
+      "path": "openai.responses/tool-roundtrip.json",
+      "sha256": "f11e807c51f5f0ea57df5407c25b00423142b46a2f9792755d8e2cc33f3d5a9e",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "basics"
+    },
+    {
+      "path": "openai.responses/tools-strict-ignored.json",
+      "sha256": "8d2ea0df6b2f65ff797896f69da2ed76acaae2192e9e6051c321f43c9c411f35",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "parts"
+    },
+    {
+      "path": "openai.responses/unicode-astral.json",
+      "sha256": "90c286a074874235351b6718c8f360cfd115cf5224068741b2fb03d53f404a08",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.responses/unicode-lone-surrogate-in-text.json",
+      "sha256": "fefcf66d9196cc75e2d3ac1fd1f06f7273822e9722cc7af637ef33f1162a5257",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "unicode"
+    },
+    {
+      "path": "openai.responses/user-only.json",
+      "sha256": "4242162ceee0af9e17b1f3ece13683df4d70c0a4222ab620e5484a813d0ac098",
+      "level": 1,
+      "dialect": "openai.responses",
+      "category": "basics"
+    }
+  ]
+}

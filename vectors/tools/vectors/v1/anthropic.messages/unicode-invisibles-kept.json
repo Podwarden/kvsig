@@ -1,0 +1,103 @@
+{
+  "id": "anthropic.messages/unicode-invisibles-kept",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "anthropic.messages",
+  "category": "unicode",
+  "description": "ZWSP, BOM, RLO and LRM are not whitespace: kept even in the loose form.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "a\u200bb\ufeffc\u202ed\u200ee"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "a\u200bb\ufeffc\u202ed\u200ee"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnFh4oCLYu+7v2PigK5k4oCOZQ==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "a\u200bb\ufeffc\u202ed\u200ee"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdnFh4oCLYu+7v2PigK5k4oCOZQ==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "004e18b07f6dd24520f28212c570ccf702"
+        ],
+        "nodes": [
+          "007b2a70691ce65183fab2ef6aa587548d"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "000822bca15bba40f515b4b1646fb88dcf"
+        ],
+        "loose_nodes": [
+          "00f155687580838c8e9d2892fc59f74b26"
+        ],
+        "conv": "00b19713154b498b5c722420fec44940c2"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff62a0f2220137409800eeecd4ce03a7a5"
+        ],
+        "nodes": [
+          "ffb82411b9083b03fcb699a8c4793d9883"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff462f43d34c662ff5c293e8ad3a36a979"
+        ],
+        "loose_nodes": [
+          "ff3b34ad37003f54ae8b7fc0165f9ea631"
+        ],
+        "conv": "ff9a1e7172b8004cda3d007136a890c8ae"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/unicode-invisibles-kept",
+    "openai.responses/unicode-invisibles-kept"
+  ]
+}

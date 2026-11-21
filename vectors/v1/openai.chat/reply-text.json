@@ -1,0 +1,226 @@
+{
+  "id": "openai.chat/reply-text",
+  "spec": "kvsig/1",
+  "level": 3,
+  "dialect": "openai.chat",
+  "category": "reply",
+  "description": "A plain text reply equals the assistant message of the next request.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "system",
+        "content": "S"
+      },
+      {
+        "role": "user",
+        "content": "2+2?"
+      },
+      {
+        "role": "assistant",
+        "content": "Four."
+      },
+      {
+        "role": "user",
+        "content": "thanks"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "2+2?"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Four."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "thanks"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFTZXRvb2xzgGhtZXNzYWdlc4OiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2ZDIrMj+iZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZlRm91ci6iZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2ZnRoYW5rcw==",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "S"
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "2+2?"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Four."
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "thanks"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdmFTZXRvb2xzgGhtZXNzYWdlc4OiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2ZDIrMj+iZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZlRm91ci6iZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2ZnRoYW5rcw==",
+    "keys": {
+      "0": {
+        "head": "00b831865363828bd68585ae54120585d6",
+        "sys": "00a2a4919667dda561709f4c35f80242ec",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00eb63b355965601d0a1b4da7e8be95744",
+          "000bf2a3652329b48bf017740c1f16d21f",
+          "009a00e57469fd4e0c3f4a338709251d2b"
+        ],
+        "nodes": [
+          "00fcc0141ef575559871a0def15d41e7d3",
+          "005709069b9ae61d2f9835cb494d3c0bef",
+          "00e7a7c92cdec1347216a9fbf8a864aa3a"
+        ],
+        "loose_head": "00fee8b82383863ad736c2591951ffa512",
+        "loose_sys": "00a80ab51b88bb666b49f97c25b1562261",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00aaa8cf6614e3b0c1280d4db96b56e782",
+          "00a479546d4776589cc5bbf2ac416371ae",
+          "00e9a12fcdd6fdc68915fe6f2a54fba44d"
+        ],
+        "loose_nodes": [
+          "0073269f2887d9d3e00e8b31fdbb22174d",
+          "004ea4598da8abdf708889e72d0f1b8662",
+          "0040cae9fbc9ed10404d8f78edaec059e5"
+        ],
+        "conv": "00e54c374f8a990e66a9a2aeeedbfdd687"
+      },
+      "255": {
+        "head": "ff12d21581860addbe7a10a314c9c52ba2",
+        "sys": "ffe1813a67aa51468714fa9249d943260c",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff38dc8836f8abb48976ce8d41399f7a7e",
+          "ff5c089470aa0a7defa94cee3fcf5b1271",
+          "ff96d84758f1a45b96e8cd368a052d228c"
+        ],
+        "nodes": [
+          "ff6ecdd2606bcc538601422d12b768d02e",
+          "ffb3c7caa30ae6bcc22e44a7553be2e968",
+          "ff282e6d76b4d910b26e077f75f2b469bc"
+        ],
+        "loose_head": "ff25bdcb3a78c29c380b14c17d73d893f1",
+        "loose_sys": "ffbb295f18d4142033a12475230c04b9fc",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ffa221b36034dd0b1dbae15fc0b034e174",
+          "ffbfff29cc98e2775ad6ed8d3d7ec631bd",
+          "ff3e8663f77d848c96f543f526282b8851"
+        ],
+        "loose_nodes": [
+          "ff30bc8ecbb7157f8d6c6c3c2a4a0e8791",
+          "ffc4b1ee9df455d54dbf2623d83c322ce4",
+          "ff70e856a5ac728a3f1aa0704e01705cc6"
+        ],
+        "conv": "ff51eb777eb72f1cd71c6098cd6c9084ee"
+      }
+    }
+  },
+  "reply": {
+    "response": {
+      "id": "chatcmpl-synthetic-1",
+      "object": "chat.completion",
+      "model": "m",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Four."
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 3,
+        "completion_tokens": 4,
+        "total_tokens": 7
+      }
+    },
+    "matches_msg_index": 1,
+    "exact": true,
+    "keys": {
+      "0": {
+        "msg": "000bf2a3652329b48bf017740c1f16d21f",
+        "loose_msg": "00a479546d4776589cc5bbf2ac416371ae"
+      },
+      "255": {
+        "msg": "ff5c089470aa0a7defa94cee3fcf5b1271",
+        "loose_msg": "ffbfff29cc98e2775ad6ed8d3d7ec631bd"
+      }
+    },
+    "canonical_bytes_b64": "omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GiYXRkdGV4dGF2ZUZvdXIu",
+    "canonical": {
+      "role": "assistant",
+      "parts": [
+        {
+          "t": "text",
+          "v": "Four."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "id": "openai.chat/media-url-vs-file-id",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "openai.chat",
+  "category": "media",
+  "description": "The same string as a URL and as a file id gives two different media parts.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "image_url",
+            "image_url": {
+              "url": "abc123"
+            }
+          },
+          {
+            "type": "file",
+            "file": {
+              "file_id": "abc123"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "url",
+              "mime": "",
+              "sha256": {
+                "$hex": "6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090"
+              }
+            },
+            {
+              "t": "media",
+              "src": "file_id",
+              "mime": "",
+              "sha256": {
+                "$hex": "6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOCpGF0ZW1lZGlhY3NyY2N1cmxkbWltZWBmc2hhMjU2WCBsoT1SynDIg+DwuxAeQlqJ6GJN5R2y0jklk69qhBGAkKRhdGVtZWRpYWNzcmNnZmlsZV9pZGRtaW1lYGZzaGEyNTZYIGyhPVLKcMiD4PC7EB5CWonoYk3lHbLSOSWTr2qEEYCQ",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "media",
+              "src": "url",
+              "mime": "",
+              "sha256": {
+                "$hex": "6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090"
+              }
+            },
+            {
+              "t": "media",
+              "src": "file_id",
+              "mime": "",
+              "sha256": {
+                "$hex": "6ca13d52ca70c883e0f0bb101e425a89e8624de51db2d2392593af6a84118090"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOCpGF0ZW1lZGlhY3NyY2N1cmxkbWltZWBmc2hhMjU2WCBsoT1SynDIg+DwuxAeQlqJ6GJN5R2y0jklk69qhBGAkKRhdGVtZWRpYWNzcmNnZmlsZV9pZGRtaW1lYGZzaGEyNTZYIGyhPVLKcMiD4PC7EB5CWonoYk3lHbLSOSWTr2qEEYCQ",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "001cba1b7d4ee4b41c0da452656c6bab24"
+        ],
+        "nodes": [
+          "000308fc9bd925e18d81553d7e55f421db"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00ec5e01477f1c81a5322d3ceebb7bc2d5"
+        ],
+        "loose_nodes": [
+          "00b38fd97d2a9b304c78c0329294bcbdc5"
+        ],
+        "conv": "00dfb9db4b8b45a46492d9f17aaf0bbd36"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff7271f0ffc0a551f35337278888e24c4c"
+        ],
+        "nodes": [
+          "ff6098c64586aade55ec572171b8c95709"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff8ad88d84b65b5508eb2524c9e94a7857"
+        ],
+        "loose_nodes": [
+          "ff9e42fdc86b634a5f8c91ddfab53e2f9c"
+        ],
+        "conv": "ffa7d12ff462f102d5ebe9a0bedb98f123"
+      }
+    }
+  }
+}

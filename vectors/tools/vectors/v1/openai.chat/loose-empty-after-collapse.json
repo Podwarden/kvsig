@@ -1,0 +1,152 @@
+{
+  "id": "openai.chat/loose-empty-after-collapse",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.chat",
+  "category": "loose",
+  "description": "Rule 5: texts empty after the rules are dropped; the message stays.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "   "
+      },
+      {
+        "role": "assistant",
+        "content": "<system-reminder>only</system-reminder>"
+      },
+      {
+        "role": "user",
+        "content": "real"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "   "
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "<system-reminder>only</system-reminder>"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "real"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmMgICCiZHJvbGVpYXNzaXN0YW50ZXBhcnRzgaJhdGR0ZXh0YXZ4JzxzeXN0ZW0tcmVtaW5kZXI+b25seTwvc3lzdGVtLXJlbWluZGVyPqJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZkcmVhbA==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": []
+        },
+        {
+          "role": "assistant",
+          "parts": []
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "real"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOAomRyb2xlaWFzc2lzdGFudGVwYXJ0c4CiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2ZHJlYWw=",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00c3765f187f39d993163bf73632250a7c",
+          "00e19900965d64b837e45ffafdbc20f2a3",
+          "00649fa28f3817bc3ca5a08f2fb4d5ec52"
+        ],
+        "nodes": [
+          "00f95d214fe3a8dcade8d90a0b37d21537",
+          "001c2307936bd442aad32e1609d19863ff",
+          "0068799c2550e5af249558c7bc8387c84a"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "00b84b3adcec4747ffc88826d637743899",
+          "001154ccd19d28573d5249b9e644105e92",
+          "00d5d8f6708a2d9ac674670c536f6e659b"
+        ],
+        "loose_nodes": [
+          "006704908a631a1534c2722c4054bd23c5",
+          "00a3c25cb8019b5593db6499512ba417d2",
+          "00b1dc3d11589f352b73f0d392710334b1"
+        ],
+        "conv": "005cbe0c109a4b1cc8546bf1c941e87a6c"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff981beee1591e18f6b7728bbf31dd00a8",
+          "ff50178449a6cdd081b469c1d87af87069",
+          "ffddd2f3c8e074d1d13bbf77fe954584e2"
+        ],
+        "nodes": [
+          "ffd1afc7ad40f3241f68f7f23609bcacbe",
+          "ffdd6523b04f75ca767fc7da13eca2bce8",
+          "ff8bc961b4d41dfdf1e267ce6c87d819fb"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff8fd216fbd450abad36225033b4dc4c65",
+          "ffbe1615d679e0a8891d124b186f40ca2b",
+          "ff2824f2a99c2f1d9eb3998fd16abeca10"
+        ],
+        "loose_nodes": [
+          "ffe9f2143b718ae0f257336ef32f252c93",
+          "ff0e8dea5c71b191271e6aea8e96a20d10",
+          "ff03194f4ddcc514a86a5aa1c168576b5d"
+        ],
+        "conv": "ffef41494e7ac44ea3bec14da233c32682"
+      }
+    }
+  },
+  "equivalent_to": [
+    "anthropic.messages/loose-empty-after-collapse",
+    "openai.responses/loose-empty-after-collapse"
+  ]
+}

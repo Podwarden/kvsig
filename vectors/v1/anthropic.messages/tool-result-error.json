@@ -1,0 +1,253 @@
+{
+  "id": "anthropic.messages/tool-result-error",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "parts",
+  "description": "is_error true adds error: true; false adds nothing.",
+  "input": {
+    "model": "m",
+    "max_tokens": 64,
+    "messages": [
+      {
+        "role": "user",
+        "content": "go"
+      },
+      {
+        "role": "assistant",
+        "content": [
+          {
+            "type": "tool_use",
+            "id": "t1",
+            "name": "ls",
+            "input": {}
+          },
+          {
+            "type": "tool_use",
+            "id": "t2",
+            "name": "ls",
+            "input": {}
+          }
+        ]
+      },
+      {
+        "role": "user",
+        "content": [
+          {
+            "type": "tool_result",
+            "tool_use_id": "t1",
+            "content": "boom",
+            "is_error": true
+          },
+          {
+            "type": "tool_result",
+            "tool_use_id": "t2",
+            "content": "fine",
+            "is_error": false
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{}",
+              "name": "ls"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "error": true,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "boom"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "fine"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOEomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOCpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3Nie31kbmFtZWJsc6RhdGl0b29sX2NhbGxjcmVmAWRhcmdzYnt9ZG5hbWVibHOiZHJvbGVkdG9vbGVwYXJ0c4GkYXRrdG9vbF9yZXN1bHRjcmVmAGVlcnJvcvVlcGFydHOBomF0ZHRleHRhdmRib29tomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgFlcGFydHOBomF0ZHRleHRhdmRmaW5l",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "go"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{}",
+              "name": "ls"
+            },
+            {
+              "t": "tool_call",
+              "ref": 1,
+              "args": "{}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "error": true,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "boom"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 1,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "fine"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXOEomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJnb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOCpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3Nie31kbmFtZWJsc6RhdGl0b29sX2NhbGxjcmVmAWRhcmdzYnt9ZG5hbWVibHOiZHJvbGVkdG9vbGVwYXJ0c4GkYXRrdG9vbF9yZXN1bHRjcmVmAGVlcnJvcvVlcGFydHOBomF0ZHRleHRhdmRib29tomRyb2xlZHRvb2xlcGFydHOBo2F0a3Rvb2xfcmVzdWx0Y3JlZgFlcGFydHOBomF0ZHRleHRhdmRmaW5l",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00115f439d20a94969b1c8138fed649daf",
+          "007c53e26943201e352b3a301d32471238",
+          "00d196803ede54cd8c492318046d15e761",
+          "00870dbd1286c7d35eff403acb8e86970b"
+        ],
+        "nodes": [
+          "002c19113c17cd3bf808613f6c8acd26dc",
+          "00e0772686d4b872fa2ad2bdd2e361337d",
+          "00265690e80debe8ad528b2bb65316a04a",
+          "009c3e81bc7282974aa56d5e8f63f4a332"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0063a1e6c1aab9af9f7521b805f620bc8c",
+          "0062ef447472de224e2e1bc5d7889011e1",
+          "005b985b57455ebb082558e7c23f0a59a2",
+          "00c9cff72f36fe1099324cfabf35665278"
+        ],
+        "loose_nodes": [
+          "00835340c69a6db5b9f4b1a8eae3e84c4c",
+          "002a46ca0513d98fe9c98e5ad05bb094f0",
+          "00aa616910afcfb42eb265d64e9303dac9",
+          "00e5eaa878b51a72cfc8ecb14fe9a0d21e"
+        ],
+        "conv": "00820e5a00b3fd3fac2e0ec9c4cf180996"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff7179948db88581c5088f1dae85ee4988",
+          "ffd931165cd59aa07495b0c99e33f087aa",
+          "ff86922c1b95f472c95bfcfe08e1723e61",
+          "ff8b1b47a327a11ac938f370ab4da057a7"
+        ],
+        "nodes": [
+          "ffd9994a27eace0da91945e380b9cec4a3",
+          "ff2a85ab0cf4f55f903d9f0a841c21af57",
+          "ff8c0ce044fb853786718224f0d83572de",
+          "ffeae4e5fb7add44b5a3fd4007ee0d9ac6"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff76073cfa271afcdde720d7c7e2f67d0d",
+          "ffad19fef9b59d64f7f0e6eec7d8a8b99c",
+          "ffbbd00f7cfbf6a88fe89c5d54c0bd4757",
+          "ffb9f6741df5bd8c1919c04a65103b3318"
+        ],
+        "loose_nodes": [
+          "ff71734f611f8f8584d6ce226c323c24ac",
+          "ff70ebe1d93c61193b2394f0e2b3f72c50",
+          "ff577348a53d8ed3d87697170676d119df",
+          "ff1ba1497216cb29bfa40bcd80f882b76e"
+        ],
+        "conv": "ff0cd2fa6d8caed62f2cbb5ffde3dadf61"
+      }
+    }
+  }
+}

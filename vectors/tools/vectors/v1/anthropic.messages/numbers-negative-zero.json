@@ -1,0 +1,174 @@
+{
+  "id": "anthropic.messages/numbers-negative-zero",
+  "spec": "kvsig/1",
+  "level": 1,
+  "dialect": "anthropic.messages",
+  "category": "numbers",
+  "description": "-0 and -0.0 print as 0.",
+  "input": null,
+  "input_raw_b64": "eyJtb2RlbCI6Im0iLCJtYXhfdG9rZW5zIjo2NCwibWVzc2FnZXMiOlt7InJvbGUiOiJ1c2VyIiwiY29udGVudCI6ImNvbXB1dGUifSx7InJvbGUiOiJhc3Npc3RhbnQiLCJjb250ZW50IjpbeyJ0eXBlIjoidG9vbF91c2UiLCJpZCI6ImMxIiwibmFtZSI6ImNhbGMiLCJpbnB1dCI6eyJ4IjpbLTAsLTAuMCwwLC0wZTVdfX1dfSx7InJvbGUiOiJ1c2VyIiwiY29udGVudCI6W3sidHlwZSI6InRvb2xfcmVzdWx0IiwidG9vbF91c2VfaWQiOiJjMSIsImNvbnRlbnQiOiJkb25lIn1dfV0sInRvb2xzIjpbeyJuYW1lIjoiY2FsYyIsImRlc2NyaXB0aW9uIjoiRXZhbHVhdGUiLCJpbnB1dF9zY2hlbWEiOnsidHlwZSI6Im9iamVjdCIsInByb3BlcnRpZXMiOnsieCI6e319fX1dfQ==",
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"type\":\"object\",\"properties\":{\"x\":{}}}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "compute"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"x\":[0,0,0,0]}",
+              "name": "calc"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "done"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJ4Ijp7fX19aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZnY29tcHV0ZaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NveyJ4IjpbMCwwLDAsMF19ZG5hbWVkY2FsY6Jkcm9sZWR0b29sZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYAZXBhcnRzgaJhdGR0ZXh0YXZkZG9uZQ==",
+    "loose": {
+      "head": [],
+      "tools": [
+        {
+          "desc": "Evaluate",
+          "name": "calc",
+          "schema": "{\"properties\":{\"x\":{}},\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "compute"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"x\":[0,0,0,0]}",
+              "name": "calc"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "done"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4GjZGRlc2NoRXZhbHVhdGVkbmFtZWRjYWxjZnNjaGVtYXgneyJwcm9wZXJ0aWVzIjp7IngiOnt9fSwidHlwZSI6Im9iamVjdCJ9aG1lc3NhZ2Vzg6Jkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZnY29tcHV0ZaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NveyJ4IjpbMCwwLDAsMF19ZG5hbWVkY2FsY6Jkcm9sZWR0b29sZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYAZXBhcnRzgaJhdGR0ZXh0YXZkZG9uZQ==",
+    "keys": {
+      "0": {
+        "head": "00012838425b2f844d94b856f37282a965",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "0007141be383b228c4ca5cd0b9b9aaa735",
+        "msgs": [
+          "00575379dd47bf1a047cbd0d100761400c",
+          "006023e668f089fe4383bf6ae9169bc0eb",
+          "00ab0bab0e92eb14622717fde2b3ba6827"
+        ],
+        "nodes": [
+          "00166e20742d544da19c188b64d7c31926",
+          "00308d93b197c4a143d4c19b121da59b5b",
+          "00ba8eca8c25516d62868641ffca7043a0"
+        ],
+        "loose_head": "00d8c8d8253308e908a00bf45633c57b20",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "00a5758bf800fcd4b1b1e29952186cf6f2",
+        "loose_msgs": [
+          "0040c2cdfc016164bc19411f8d4e728b91",
+          "00712c21fe1e96681d158f232c0ac0faf2",
+          "004d0859d4aae71aa11cb318f7871132f8"
+        ],
+        "loose_nodes": [
+          "002e63c1baf0954e71f6f8d6e1b937c83a",
+          "0009a3a430da7e396249ed61f414b75b75",
+          "00e7beaae77e37135beef16c548a85ca4d"
+        ],
+        "conv": "00c0d003e7448f18ff38e291eb8838d26b"
+      },
+      "255": {
+        "head": "ffbb82722a9e21df04aac0cb1973162d02",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ffdcc2a193a7151a8ede52b0735710274c",
+        "msgs": [
+          "ff221c79d2a226930aeca22ae764d40c59",
+          "ff894d87c8aa888c572989e021f8141b9e",
+          "ff0442874ac79450a9c568d38240c83840"
+        ],
+        "nodes": [
+          "ff1e532beee762f0576f4531750b4b5311",
+          "ff03a4882896c72ea896d4b6ccca406415",
+          "ff2c43042cd9f40d9e446e009b9c46d1f9"
+        ],
+        "loose_head": "fffe02d49fb288d01e981eb705035fc27e",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff96b78203b337a20a7c182ba714d6630f",
+        "loose_msgs": [
+          "ff3dd7b620f52a37a8edf031442d49c943",
+          "ff5c3c677f7a4f509dc9cc2e8edc0f1dbe",
+          "ff283e8894dd139fd878a9aac13dafd098"
+        ],
+        "loose_nodes": [
+          "ff180c4319e4ab6d34976143c9ebcfbbf8",
+          "ff2c010ee09c63b36c23365d855ad2d7be",
+          "ffa556f28206b9f1899abda8938d9c984f"
+        ],
+        "conv": "ff9a1b3604f96c7bb8e80d414ef3c947f5"
+      }
+    }
+  },
+  "equivalent_to": [
+    "openai.chat/numbers-negative-zero",
+    "openai.responses/numbers-negative-zero"
+  ]
+}

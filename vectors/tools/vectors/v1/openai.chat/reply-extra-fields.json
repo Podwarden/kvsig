@@ -1,0 +1,204 @@
+{
+  "id": "openai.chat/reply-extra-fields",
+  "spec": "kvsig/1",
+  "level": 3,
+  "dialect": "openai.chat",
+  "category": "reply",
+  "description": "Response-only fields (annotations, null function_call) change nothing.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "user",
+        "content": "hello"
+      },
+      {
+        "role": "assistant",
+        "content": "Hi"
+      },
+      {
+        "role": "user",
+        "content": "more"
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hello"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hi"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "more"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmVoZWxsb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOBomF0ZHRleHRhdmJIaaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZkbW9yZQ==",
+    "loose": {
+      "head": [],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hello"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "text",
+              "v": "Hi"
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "more"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgGV0b29sc4BobWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmVoZWxsb6Jkcm9sZWlhc3Npc3RhbnRlcGFydHOBomF0ZHRleHRhdmJIaaJkcm9sZWR1c2VyZXBhcnRzgaJhdGR0ZXh0YXZkbW9yZQ==",
+    "keys": {
+      "0": {
+        "head": "00d8834118489ee8ca260d07a5049de776",
+        "sys": "00522fa71ad8593b94f64ea89784b931e7",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "00178cf5b6d262bddd31ab16376c18396a",
+          "0016ed28ddacdd800963ee9d6adc5f59e7",
+          "004bc93d527d854c2fed87a81d21bc5e94"
+        ],
+        "nodes": [
+          "003b06fcfd4d1fe76eb32f2e81c73a0107",
+          "00baefed865e889063958ca5e255247d45",
+          "00f5f99e0e9acfbbada995ae4f119d5747"
+        ],
+        "loose_head": "0067e6f30fde75227843104da3ce9b3cd5",
+        "loose_sys": "00b7730351410e86aef84f91a7e148655b",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "007a21b595060811c17463a2ee4199efc2",
+          "004e124ae7704e924bd748bcb2e508d35c",
+          "00e2412b8ceb08bcb5358ac50deef26620"
+        ],
+        "loose_nodes": [
+          "00a9402a7e4d77364a65188483f4d11f82",
+          "00ffd561e91243783f01568b7ca673f5f0",
+          "002d6f9597dd2c3e0d219ebb2f53103a18"
+        ],
+        "conv": "00de4eed8ad3455137fc2fcfab8e1f80c8"
+      },
+      "255": {
+        "head": "ffd5a0cbe918357c0d3dcbf44b2ea9019d",
+        "sys": "ffda361a7c7fa035d99d90582725a347cb",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ff50107140f860fc5418f8723d49875d31",
+          "ff11377ed9e182d6174b4fd93d1cde58bd",
+          "ffcf4d4faacfa66ec502f36138f7966060"
+        ],
+        "nodes": [
+          "ffa5d2a523e6d20bac9f4c3db56fe98e96",
+          "ff17768d9f122fec3cafb1c8b811ca2f20",
+          "ff02e9b3e97cad84a415f3f1ce9dacd0eb"
+        ],
+        "loose_head": "ffe7546a1d123f5224b9f94e8462a035a0",
+        "loose_sys": "ffca461561fd7aa254808883375d828b00",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "ff0ee8e944a16ce388d997194f1b81fbec",
+          "ffa9dfbf706de9ab4ccdc1f3c0ba9834a1",
+          "ff09c8abbbb3217a24fab36a09715ad6af"
+        ],
+        "loose_nodes": [
+          "ffc52bea6ce271cf3898e223a76c1aed41",
+          "ffaabef34fed6af9c1211ff5e16bccad17",
+          "ff65f0839e56f85a438340056ed3b2b78a"
+        ],
+        "conv": "ffa62ae5afab0d9b9d7d78342faf76e4c4"
+      }
+    }
+  },
+  "reply": {
+    "response": {
+      "id": "chatcmpl-synthetic-1",
+      "object": "chat.completion",
+      "model": "m",
+      "choices": [
+        {
+          "index": 0,
+          "message": {
+            "role": "assistant",
+            "content": "Hi",
+            "annotations": [],
+            "function_call": null
+          },
+          "finish_reason": "stop"
+        }
+      ],
+      "usage": {
+        "prompt_tokens": 3,
+        "completion_tokens": 4,
+        "total_tokens": 7
+      }
+    },
+    "matches_msg_index": 1,
+    "exact": true,
+    "keys": {
+      "0": {
+        "msg": "0016ed28ddacdd800963ee9d6adc5f59e7",
+        "loose_msg": "004e124ae7704e924bd748bcb2e508d35c"
+      },
+      "255": {
+        "msg": "ff11377ed9e182d6174b4fd93d1cde58bd",
+        "loose_msg": "ffa9dfbf706de9ab4ccdc1f3c0ba9834a1"
+      }
+    },
+    "canonical_bytes_b64": "omRyb2xlaWFzc2lzdGFudGVwYXJ0c4GiYXRkdGV4dGF2Ykhp",
+    "canonical": {
+      "role": "assistant",
+      "parts": [
+        {
+          "t": "text",
+          "v": "Hi"
+        }
+      ]
+    }
+  }
+}
