@@ -33,6 +33,13 @@ class Ids:
     loose_nodes: tuple[str, ...]
     #: the conversation id: None when no body message has content in the loose form
     conv: str | None
+    #: The two halves of the head, separately: the system/developer messages
+    #: and the tool list. ``head`` covers both; these tell a caller *which* half
+    #: changed between two requests ("same conversation, tools changed").
+    sys: str = ""
+    tools: str = ""
+    loose_sys: str = ""
+    loose_tools: str = ""
 
 
 def scope_from(*, cache_salt: str | None = None, tenant: bytes | None = None) -> bytes:
@@ -118,17 +125,26 @@ def ids(
         msg_encs = tuple(encode(m) for m in canon.messages)
 
     head = _hasher(key, b"head", scope)(head_enc)
-    lhead = c.get(ck + head)
-    lsys = c.get(ck + b"s" + head)
-    if lhead is None or lsys is None:
+    # One cache entry per head: the loose head, loose sys, loose tools, and the
+    # exact sys and tools ids, 17 bytes each.
+    hit = c.get(ck + b"h" + head)
+    if hit is None:
         lh_payload = loose_head(canon, profile)
-        lhead = _hasher(key, lp + b"head", scope)(encode(lh_payload))
-        # The loose system messages alone, without the tools: the conversation
-        # id is built on this, so adding or removing a tool mid-session (an MCP
-        # server, a feature flag) does not start a new conversation.
-        lsys = _hasher(key, lp + b"sys", scope)(encode({"head": lh_payload["head"]}))
-        c.put(ck + head, lhead)
-        c.put(ck + b"s" + head, lsys)
+        hit = b"".join(
+            (
+                _hasher(key, lp + b"head", scope)(encode(lh_payload)),
+                # The loose system messages alone, without the tools: the
+                # conversation id is built on this, so adding or removing a tool
+                # mid-session (an MCP server, tool search) does not start a new
+                # conversation.
+                _hasher(key, lp + b"sys", scope)(encode({"head": lh_payload["head"]})),
+                _hasher(key, lp + b"tools", scope)(encode({"tools": lh_payload["tools"]})),
+                _hasher(key, b"sys", scope)(encode({"head": canon.head})),
+                _hasher(key, b"tools", scope)(encode({"tools": canon.tools})),
+            )
+        )
+        c.put(ck + b"h" + head, hit)
+    lhead, lsys, ltools, xsys, xtools = (hit[i : i + 17] for i in range(0, 85, 17))
 
     msgs = [h_msg(b) for b in msg_encs]
     nodes: list[bytes] = []
@@ -178,6 +194,10 @@ def ids(
         loose_msgs=tuple(x.hex() for x in lmsgs),
         loose_nodes=tuple(x.hex() for x in lnodes),
         conv=conv,
+        sys=xsys.hex(),
+        tools=xtools.hex(),
+        loose_sys=lsys.hex(),
+        loose_tools=ltools.hex(),
     )
 
 

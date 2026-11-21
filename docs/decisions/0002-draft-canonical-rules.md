@@ -95,9 +95,14 @@ H(K, label, scope, payload) = epoch || HMAC-SHA-256(K, "kvsig/1" 0x00 label 0x00
 ```
 
 - Labels: `head`, `msg`, `node`; loose ids use `loose/1:head`,
-  `loose/1:msg`, `loose/1:node`, and the conversation id is built from
-  `loose/1:sys` and `loose/1:conv`.
-- `head` is over the CBOR of `{"head": [...], "tools": [...]}`; `msg` over one
+  `loose/1:msg`, `loose/1:node`. The head halves use `sys` and `tools`
+  (loose: `loose/1:sys`, `loose/1:tools`), and the conversation id
+  `loose/1:conv`.
+- `head` is over the CBOR of `{"head": [...], "tools": [...]}`. Its two halves
+  also get ids of their own: `sys` over `{"head": [...]}` and `tools` over
+  `{"tools": [...]}`, with loose forms `loose/1:sys` and `loose/1:tools`. A
+  caller compares them to tell *which* half of the head changed (see
+  [Reading the ids](../reading-the-ids.md)). `msg` is over one
   message; `node[i]` over `node[i-1] || msg[i]` (raw 17-byte ids), with
   `node[-1] = head`.
 - `conv` is over `loose_sys || loose_msg[a]`. `loose_sys` is the id (label

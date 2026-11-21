@@ -263,3 +263,57 @@ def test_conv_changes_with_the_system_prompt():
     b = canonicalize(_body("hi", system="S2"))
     assert a is not None and b is not None
     assert ids(a, K1).conv != ids(b, K1).conv
+
+
+def test_sys_and_tools_ids_tell_which_half_of_the_head_changed():
+    tool = {"type": "function", "function": {"name": "now", "parameters": {"type": "object"}}}
+    base = canonicalize(_body("hi"))
+    more_tools = canonicalize({**_body("hi"), "tools": [tool]})
+    other_sys = canonicalize(_body("hi", system="S2"))
+    assert base is not None and more_tools is not None and other_sys is not None
+    a, b, c = ids(base, K1), ids(more_tools, K1), ids(other_sys, K1)
+    # a tool change: head and tools differ, sys does not
+    assert a.head != b.head and a.tools != b.tools and a.loose_tools != b.loose_tools
+    assert a.sys == b.sys and a.loose_sys == b.loose_sys
+    # a system-prompt change: head and sys differ, tools do not
+    assert a.head != c.head and a.sys != c.sys and a.tools == c.tools
+    for x in (a.sys, a.tools, a.loose_sys, a.loose_tools):
+        assert len(x) == 34 and x.startswith("01")
+
+
+def test_sys_and_tools_ids_are_cached_correctly():
+    c = canonicalize(_body("hi", "more"))
+    assert c is not None
+    cache = IdCache()
+    first, second = ids(c, K1, cache=cache), ids(c, K1, cache=cache)
+    assert first == second == ids(c, K1)
+
+
+def test_loose_tools_ignore_member_order():
+    def body(schema):
+        return {
+            **_body("hi"),
+            "tools": [{"type": "function", "function": {"name": "f", "parameters": schema}}],
+        }
+
+    a = canonicalize(body({"type": "object", "properties": {}}))
+    b = canonicalize(body({"properties": {}, "type": "object"}))
+    assert a is not None and b is not None
+    ia, ib = ids(a, K1), ids(b, K1)
+    assert ia.tools != ib.tools and ia.loose_tools == ib.loose_tools
+
+
+def test_known_answer_sys_and_tools():
+    """Pins the bytes of the head halves (re-derived with cbor2 and a hand-built
+    HMAC, 2026-11-21)."""
+    c = canonicalize(
+        {"messages": [{"role": "system", "content": "S"}, {"role": "user", "content": "hi"}]}
+    )
+    assert c is not None
+    i = ids(c, TEST_KEY)
+    assert (i.sys, i.tools, i.loose_sys, i.loose_tools) == (
+        "00a2a4919667dda561709f4c35f80242ec",
+        "00b8123629140a8d40193af6ddfacf40e2",
+        "00a80ab51b88bb666b49f97c25b1562261",
+        "0013873c033a9cdeb0443ce650abc1889c",
+    )
