@@ -39,6 +39,10 @@ class Canon:
     head: list[Message]
     tools: list[dict[str, Any]]
     messages: list[Message]
+    #: The request continues server-side history (OpenAI Responses
+    #: ``previous_response_id`` or ``conversation``): the body is not the whole
+    #: conversation, so there are no prefix or conversation ids.
+    stateful: bool = False
     encoded: tuple[bytes, tuple[bytes, ...]] | None = field(default=None, compare=False, repr=False)
 
     def head_payload(self) -> dict[str, Any]:
@@ -111,7 +115,7 @@ def finish(canon: Canon, max_bytes: int) -> Canon | None:
         if total > max_bytes:
             return None
         msgs.append(b)
-    return Canon(canon.head, canon.tools, canon.messages, (head, tuple(msgs)))
+    return Canon(canon.head, canon.tools, canon.messages, canon.stateful, (head, tuple(msgs)))
 
 
 def media_from_url(url: Any) -> Part:
@@ -122,7 +126,7 @@ def media_from_url(url: Any) -> Part:
         meta = header.split(";")
         try:
             if "base64" in (m.strip().lower() for m in meta[1:]):
-                data = base64.b64decode(_B64_WS.sub("", payload), validate=True)
+                data = b64decode(payload)
             else:
                 data = unquote_to_bytes(payload)
             return media_bytes(data, meta[0])
@@ -131,10 +135,29 @@ def media_from_url(url: Any) -> Part:
     return media_ref(url, "url")
 
 
+def without_cache_control(v: Any) -> Any:
+    """``v`` without its own top-level ``cache_control`` member: a cache marker
+    changes where a provider caches, never what the conversation is. Members
+    of that name deeper inside are data and are kept."""
+    if isinstance(v, dict) and "cache_control" in v:
+        return {k: x for k, x in v.items() if k != "cache_control"}
+    return v
+
+
+def b64decode(data: Any) -> bytes:
+    """Strict base64 after removing ASCII whitespace (line-wrapped data is
+    common). Raises ``binascii.Error``/``ValueError`` on anything else."""
+    if not isinstance(data, str):
+        raise ValueError("base64 data must be a string")
+    return base64.b64decode(_B64_WS.sub("", data), validate=True)
+
+
 def opaque(p: Any, budget: Budget, type_: str | None = None) -> Part:
     """A value the dialect mapping does not know: kept, hashed, never dropped.
-    ``type_`` names it when the value carries no ``type`` member."""
+    ``type_`` names it when the value carries no ``type`` member. Cache
+    markers are not part of it."""
     t = type_ if type_ is not None else (p.get("type") if isinstance(p, dict) else None)
+    p = without_cache_control(p)
     text = json_text(p, budget)
     return {"t": "opaque", "type": t if isinstance(t, str) else "", "sha256": _sha(utf8(text))}
 

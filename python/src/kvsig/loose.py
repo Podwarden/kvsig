@@ -190,4 +190,5 @@ def loose(canon: Canon, profile: LooseProfile = LOOSE_V1) -> Canon:
         head=h["head"],
         tools=h["tools"],
         messages=[loose_message(m, profile) for m in canon.messages],
+        stateful=canon.stateful,
     )

@@ -94,15 +94,29 @@ every loose label. There are no harness-specific preamble rules.
 H(K, label, scope, payload) = epoch || HMAC-SHA-256(K, "kvsig/1" 0x00 label 0x00 u8(len(scope)) scope payload)[0:16]
 ```
 
-- Labels: `head`, `msg`, `node`, `conv`; loose ids use `loose/1:head`,
-  `loose/1:msg`, `loose/1:node`, `loose/1:conv`.
-- `head` is over the CBOR of `{"head": [...], "tools": [...]}`; `msg` over one
+- Labels: `head`, `msg`, `node`; loose ids use `loose/1:head`,
+  `loose/1:msg`, `loose/1:node`. The head halves use `sys` and `tools`
+  (loose: `loose/1:sys`, `loose/1:tools`), and the conversation id
+  `loose/1:conv`.
+- `head` is over the CBOR of `{"head": [...], "tools": [...]}`. Its two halves
+  also get ids of their own: `sys` over `{"head": [...]}` and `tools` over
+  `{"tools": [...]}`, with loose forms `loose/1:sys` and `loose/1:tools`. A
+  caller compares them to tell *which* half of the head changed (see
+  [Reading the ids](../reading-the-ids.md)). `msg` is over one
   message; `node[i]` over `node[i-1] || msg[i]` (raw 17-byte ids), with
   `node[-1] = head`.
-- `conv` is over `loose_head || loose_node[a]`, where `a` is the first body
-  message whose loose form still has parts. When no message has, there is no
-  conversation id. (A constant opener that loosens to nothing, such as an
-  environment block, would otherwise give every session the same id.)
+- `conv` is over `loose_sys || loose_msg[a]`. `loose_sys` is the id (label
+  `loose/1:sys`) of the CBOR map `{"head": [...]}` holding the loose head
+  messages **without the tools**; `a` is the first body message whose loose
+  form still has parts. When no message has, there is no conversation id.
+  - A constant opener that loosens to nothing (an environment block, a
+    reminder) would otherwise give every session the same id.
+  - Tools are left out because harnesses add and remove them mid-session (an
+    MCP server, tool search). Measured on recorded traffic (2026-11-21):
+    leaving them out kept the main Codex and OpenCode sessions on one id
+    across an added MCP tool, while subagents, title calls and post-compaction
+    conversations kept ids of their own. Tools stay in the head and prefix
+    ids: a different tool list is a different prompt.
 - The conversation id is the loose one; there is no exact conversation id. It
   identifies *content*, not a session: two users who open with the same
   message under the same head share it, unless a scope separates them.
@@ -116,13 +130,13 @@ H(K, label, scope, payload) = epoch || HMAC-SHA-256(K, "kvsig/1" 0x00 label 0x00
 To be settled with test vectors built from captured traffic of real harnesses
 (Claude Code, Codex, OpenCode, Cline):
 
-1. **Reply linkage on reasoning models.** Clients usually do not send
-   reasoning back, so a reply's exact id differs from the same message in the
-   next request. Proposal: define reply linkage on loose ids only.
+1. **Reply linkage on reasoning models.** A client that does not send
+   reasoning back makes a reply's exact id differ from the same message in
+   the next request. Recorded traffic (2026-11-21): Claude Code, Codex,
+   OpenCode and Cline all sent reasoning back on every earlier turn.
+   Proposal: still define reply linkage on loose ids, which hold either way.
 2. **Dates inside sentences.** `loose/1` removes date-only lines. A date in a
    sentence ("Today's date is ...") survives and would change the
    conversation id daily.
 3. **Tools without parameters.** OpenAI may omit `parameters` (`"null"`
    here); Anthropic always sends a schema. Settle with the Anthropic adapter.
-4. **Tool-list churn.** The loose head includes the full tool list, so a
-   harness that adds or removes a tool mid-session changes the conversation id.

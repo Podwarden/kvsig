@@ -78,6 +78,7 @@ vendor-neutral home.
 | [`python/`](python/) | Reference implementation (pure Python) |
 | [`rust/`](rust/) | Rust core, with Python bindings through PyO3 |
 | [`conformance/`](conformance/) | Runner that checks any implementation against the vectors |
+| [`docs/reading-the-ids.md`](docs/reading-the-ids.md) | What each id identifies, and how to tell what changed between two requests |
 | [`docs/decisions/`](docs/decisions/) | Recorded design decisions |
 
 ## Contributing
