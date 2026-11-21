@@ -10,7 +10,8 @@ from typing import Any
 
 from kvsig._text import scalar
 
-#: Deeper JSON values give no ids (a defined outcome, not an error).
+#: Containers (arrays and objects) may nest this deep; one more level gives
+#: no ids (a defined outcome, not an error). Scalars never count.
 MAX_DEPTH = 128
 
 _SAFE_INT = 1 << 53
@@ -56,13 +57,29 @@ def _number(v: int | float) -> str:
         try:
             return es6_number(float(v))
         except OverflowError:
-            return str(v)
+            # Too large for a double: a JSON parser that reads numbers as
+            # doubles sees an infinity, which prints as null.
+            return "null"
     return es6_number(v)
 
 
+def _members(v: dict[Any, Any], sort: bool) -> list[tuple[str, Any]]:
+    """Members with keys as Unicode scalars. Keys that become equal after
+    surrogate repair are merged: the last value wins, at the first position
+    (the rule JSON parsers apply to duplicate keys)."""
+    merged: dict[str, Any] = {}
+    for k, val in v.items():
+        if not isinstance(k, str):
+            raise TypeError("JSON object keys must be strings")
+        merged[scalar(k)] = val
+    items = list(merged.items())
+    if sort:
+        items.sort(key=lambda kv: kv[0])
+    return items
+
+
 def _dump(v: Any, sort: bool, depth: int, out: list[str]) -> None:
-    if depth > MAX_DEPTH:
-        raise TooDeep
+    """``depth`` is the number of containers enclosing ``v``."""
     if v is None:
         out.append("null")
     elif v is True:
@@ -74,21 +91,19 @@ def _dump(v: Any, sort: bool, depth: int, out: list[str]) -> None:
     elif isinstance(v, (int, float)):
         out.append(_number(v))
     elif isinstance(v, dict):
-        keys = list(v.keys())
-        for k in keys:
-            if not isinstance(k, str):
-                raise TypeError("JSON object keys must be strings")
-        if sort:
-            keys = sorted(keys, key=scalar)
+        if depth >= MAX_DEPTH:
+            raise TooDeep
         out.append("{")
-        for i, k in enumerate(keys):
+        for i, (k, val) in enumerate(_members(v, sort)):
             if i:
                 out.append(",")
-            out.append(encode_basestring(scalar(k)))
+            out.append(encode_basestring(k))
             out.append(":")
-            _dump(v[k], sort, depth + 1, out)
+            _dump(val, sort, depth + 1, out)
         out.append("}")
     elif isinstance(v, (list, tuple)):
+        if depth >= MAX_DEPTH:
+            raise TooDeep
         out.append("[")
         for i, item in enumerate(v):
             if i:
@@ -102,5 +117,5 @@ def _dump(v: Any, sort: bool, depth: int, out: list[str]) -> None:
 def dump(v: Any, *, sort: bool = False) -> str:
     """Canonical JSON text of ``v``. Member order is kept unless ``sort``."""
     out: list[str] = []
-    _dump(v, sort, 1, out)
+    _dump(v, sort, 0, out)
     return "".join(out)

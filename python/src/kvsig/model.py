@@ -11,17 +11,19 @@ import binascii
 import hashlib
 import json
 import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any
 from urllib.parse import unquote_to_bytes
 
 from kvsig import jsontext
 from kvsig._text import utf8
+from kvsig.cbor import encode
 
 HEAD_ROLES = ("system", "developer")
 
-#: Default cap on the characters of text a canonical form may hold.
-DEFAULT_MAX_CHARS = 2 << 20
+#: Default cap on the size of a canonical form: the CBOR bytes of the head
+#: payload plus every body message (exact profile).
+DEFAULT_MAX_BYTES = 2 << 20
 
 Message = dict[str, Any]
 Part = dict[str, Any]
@@ -29,11 +31,18 @@ Part = dict[str, Any]
 
 @dataclass(frozen=True)
 class Canon:
-    """A canonicalised request: head messages, tools, body messages."""
+    """A canonicalised request: head messages, tools, body messages.
+
+    Treat it as immutable: ``encoded`` caches the CBOR of the head payload and
+    of each body message, and is not updated if the lists are changed."""
 
     head: list[Message]
     tools: list[dict[str, Any]]
     messages: list[Message]
+    encoded: tuple[bytes, tuple[bytes, ...]] | None = field(default=None, compare=False, repr=False)
+
+    def head_payload(self) -> dict[str, Any]:
+        return {"head": self.head, "tools": self.tools}
 
 
 class NoIds(Exception):
@@ -41,7 +50,10 @@ class NoIds(Exception):
 
 
 class Budget:
-    """Counts characters of text put into a canonical form."""
+    """An early exit for oversized requests. It counts code points of strings
+    that appear verbatim in the canonical form. Each one encodes to at least as
+    many UTF-8 bytes, so the count never exceeds the CBOR size and the exit
+    never rejects a request the exact byte check would accept."""
 
     __slots__ = ("left",)
 
@@ -85,6 +97,23 @@ def media_ref(ref: str, src: str, mime: str = "") -> Part:
     return {"t": "media", "sha256": _sha(utf8(ref)), "mime": mime.strip().lower(), "src": src}
 
 
+def finish(canon: Canon, max_bytes: int) -> Canon | None:
+    """``canon`` with its encodings attached, or None when they exceed
+    ``max_bytes``. This is the normative size check."""
+    head = encode(canon.head_payload())
+    total = len(head)
+    if total > max_bytes:
+        return None
+    msgs: list[bytes] = []
+    for m in canon.messages:
+        b = encode(m)
+        total += len(b)
+        if total > max_bytes:
+            return None
+        msgs.append(b)
+    return Canon(canon.head, canon.tools, canon.messages, (head, tuple(msgs)))
+
+
 def media_from_url(url: Any) -> Part:
     """A media part for an image/video URL or a ``data:`` URL."""
     url = url if isinstance(url, str) else ""
@@ -102,9 +131,10 @@ def media_from_url(url: Any) -> Part:
     return media_ref(url, "url")
 
 
-def opaque(p: Any, budget: Budget) -> Part:
-    """A part the dialect mapping does not know: kept, hashed, never dropped."""
-    t = p.get("type") if isinstance(p, dict) else None
+def opaque(p: Any, budget: Budget, type_: str | None = None) -> Part:
+    """A value the dialect mapping does not know: kept, hashed, never dropped.
+    ``type_`` names it when the value carries no ``type`` member."""
+    t = type_ if type_ is not None else (p.get("type") if isinstance(p, dict) else None)
     text = json_text(p, budget)
     return {"t": "opaque", "type": t if isinstance(t, str) else "", "sha256": _sha(utf8(text))}
 

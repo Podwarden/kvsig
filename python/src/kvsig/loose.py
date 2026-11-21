@@ -7,12 +7,14 @@ equal by accident.
 
 from __future__ import annotations
 
+import hashlib
 import json
 import re
 from dataclasses import dataclass
 from typing import Any
 
 from kvsig import jsontext
+from kvsig.cbor import encode
 from kvsig.model import Canon, Message, Part
 
 #: The whitespace set the loose profile collapses: the code points for which
@@ -28,12 +30,29 @@ WHITESPACE_V1 = frozenset(
 
 @dataclass(frozen=True)
 class LooseProfile:
+    """A loose-profile table. Validated on construction."""
+
     version: str
     #: (open tag, close tag) blocks removed from text, matched ASCII case-insensitively
     block_tags: tuple[tuple[str, str], ...]
-    #: a text whose collapsed, ASCII-lowercased form starts with one of these is dropped
-    preambles: tuple[str, ...]
     whitespace: frozenset[int]
+
+    def __post_init__(self) -> None:
+        if not self.version or "\x00" in self.version or ":" in self.version:
+            raise ValueError("version must be a non-empty label without NUL or ':'")
+        for pair in self.block_tags:
+            if len(pair) != 2 or not all(isinstance(t, str) and t for t in pair):
+                raise ValueError("block_tags must be (open, close) pairs of non-empty strings")
+        if not self.whitespace or not all(
+            isinstance(c, int) and 0 <= c <= 0x10FFFF and not 0xD800 <= c <= 0xDFFF
+            for c in self.whitespace
+        ):
+            raise ValueError("whitespace must be a non-empty set of Unicode scalar values")
+
+    @property
+    def fingerprint(self) -> bytes:
+        """8 bytes that change with any part of the table (used to key caches)."""
+        return _compiled(self).fingerprint
 
 
 LOOSE_V1 = LooseProfile(
@@ -41,12 +60,6 @@ LOOSE_V1 = LooseProfile(
     block_tags=(
         ("<system-reminder>", "</system-reminder>"),
         ("<environment_context>", "</environment_context>"),
-    ),
-    preambles=(
-        # Aider's few-shot example conversation that opens every edit-format chat.
-        "change the greeting to be more casual",
-        # Aider's reset pair after switching repositories.
-        "i switched to a new code base",
     ),
     whitespace=WHITESPACE_V1,
 )
@@ -61,8 +74,6 @@ _DATE_LINE = re.compile(
 _DATE_AT_START = re.compile(r"[ \t]*[0-9]{4}-[0-9]{2}-[0-9]{2}", re.ASCII)
 _DATE_AFTER_NL = re.compile(r"\n[ \t]*[0-9]{4}-[0-9]{2}-[0-9]{2}", re.ASCII)
 
-_ASCII_LOWER = {c: c + 32 for c in range(ord("A"), ord("Z") + 1)}
-
 
 class _Compiled:
     def __init__(self, p: LooseProfile) -> None:
@@ -71,8 +82,15 @@ class _Compiled:
             (re.compile(re.escape(o), flags), re.compile(re.escape(c), flags))
             for o, c in p.block_tags
         )
-        self.preambles = p.preambles
-        self.scan = max((len(x) for x in p.preambles), default=0)
+        self.fingerprint = hashlib.sha256(
+            encode(
+                {
+                    "version": p.version,
+                    "block_tags": [list(t) for t in p.block_tags],
+                    "whitespace": sorted(p.whitespace),
+                }
+            )
+        ).digest()[:8]
         self.py_split = p.whitespace == WHITESPACE_V1
         self.ws = "".join(chr(c) for c in sorted(p.whitespace))
 
@@ -121,12 +139,7 @@ def loose_text(v: str, profile: LooseProfile = LOOSE_V1) -> str:
             v = _strip_blocks(v, open_re, close_re)
     if _DATE_AT_START.match(v) or _DATE_AFTER_NL.search(v):
         v = _DATE_LINE.sub("", v)
-    norm = _collapse(v, c)
-    if c.preambles:
-        head = norm[: c.scan + 1].translate(_ASCII_LOWER)
-        if any(head.startswith(p) for p in c.preambles):
-            return ""
-    return norm
+    return _collapse(v, c)
 
 
 def _resort(text: str) -> str:

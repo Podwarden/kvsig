@@ -5,7 +5,7 @@ from typing import Any
 
 import pytest
 
-from kvsig import Canon, canonicalize, canonicalize_reply
+from kvsig import Canon, canonicalize, canonicalize_reply, encode
 
 TOOL = {
     "type": "function",
@@ -114,13 +114,19 @@ def test_percent_encoded_and_bad_base64_data_urls():
     assert p["src"] == "url" and p["sha256"] == hashlib.sha256(bad.encode()).digest()
 
 
-def test_head_is_system_and_developer_wherever_they_occur():
+def test_head_is_the_leading_run_of_system_and_developer():
     c = _c(_chat())
     assert [m["role"] for m in c.head] == ["system"]
     assert [m["role"] for m in c.messages] == ["user", "assistant", "tool", "user"]
+    lead = _chat()
+    lead["messages"].insert(1, {"role": "developer", "content": "D"})
+    assert [m["role"] for m in _c(lead).head] == ["system", "developer"]
+    # a later system/developer message stays in the body, in order
     late = _chat()
     late["messages"].insert(3, {"role": "developer", "content": "D"})
-    assert [m["role"] for m in _c(late).head] == ["system", "developer"]
+    lc = _c(late)
+    assert [m["role"] for m in lc.head] == ["system"]
+    assert [m["role"] for m in lc.messages] == ["user", "assistant", "developer", "tool", "user"]
 
 
 def test_tools_neutral_model():
@@ -212,10 +218,32 @@ def test_not_a_chat_body_gives_none(body):
     assert canonicalize(body) is None
 
 
-def test_size_cap_gives_none():
+def test_size_cap_is_exact_on_cbor_bytes():
     body = {"messages": [{"role": "user", "content": "x" * 100}]}
-    assert canonicalize(body, max_chars=99) is None
-    assert canonicalize(body, max_chars=100) is not None
+    c = canonicalize(body)
+    assert c is not None and c.encoded is not None
+    size = len(c.encoded[0]) + sum(len(b) for b in c.encoded[1])
+    assert size == len(encode(c.head_payload())) + len(encode(c.messages[0]))
+    assert canonicalize(body, max_bytes=size) is not None
+    assert canonicalize(body, max_bytes=size - 1) is None
+
+
+def test_size_cap_counts_strings_outside_text():
+    # a huge data-URL header lands in "mime"; a huge role lands in "role"
+    junk = "x" * 5000
+    for body in (
+        {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [{"type": "image_url", "image_url": f"data:{junk};base64,AA=="}],
+                }
+            ]
+        },
+        {"messages": [{"role": junk, "content": "hi"}]},
+    ):
+        assert canonicalize(body, max_bytes=4000) is None
+        assert canonicalize(body) is not None
 
 
 def test_deep_args_give_none():
@@ -245,3 +273,63 @@ def test_canonicalisation_is_linear():
     t0 = time.perf_counter()
     canonicalize({"messages": [{"role": "user", "content": "<system-reminder>" * 50_000}]})
     assert time.perf_counter() - t0 < 1.0
+
+
+def test_legacy_function_call_and_function_role_are_mapped():
+    def body(name: str, args: str) -> dict[str, Any]:
+        return {
+            "messages": [
+                {"role": "user", "content": "go"},
+                {
+                    "role": "assistant",
+                    "content": None,
+                    "function_call": {"name": name, "arguments": args},
+                },
+                {"role": "function", "name": name, "content": "result"},
+            ]
+        }
+
+    a, b = _c(body("a", "{}")), _c(body("b", '{"q":1}'))
+    assert a != b
+    assert a.messages[1]["parts"] == [{"t": "tool_call", "name": "a", "args": "{}", "ref": 0}]
+    assert a.messages[2] == {
+        "role": "function",
+        "name": "a",
+        "parts": [{"t": "tool_result", "ref": -1, "parts": [{"t": "text", "v": "result"}]}],
+    }
+
+
+def test_refusal_and_audio_are_kept_as_opaque():
+    def body(**extra: Any) -> dict[str, Any]:
+        return {"messages": [{"role": "assistant", "content": None, **extra}]}
+
+    r1, r2 = _c(body(refusal="no")), _c(body(refusal="never"))
+    assert r1.messages[0]["parts"][0]["type"] == "refusal" and r1 != r2
+    a1, a2 = _c(body(audio={"id": "x"})), _c(body(audio={"id": "y"}))
+    assert a1.messages[0]["parts"][0]["type"] == "audio" and a1 != a2
+
+
+def test_non_dict_entries_are_opaque_and_keep_their_slot():
+    m = _c({"messages": [{"role": "user", "content": "a"}, 5]})
+    assert m.messages[1] == {"role": "", "parts": [m.messages[1]["parts"][0]]}
+    assert m.messages[1]["parts"][0]["type"] == "message"
+    assert m != _c({"messages": [{"role": "user", "content": "a"}]})
+
+    good = {"id": "g", "type": "function", "function": {"name": "f", "arguments": "{}"}}
+    c = _c(
+        {
+            "messages": [
+                {"role": "assistant", "tool_calls": [None, good]},
+                {"role": "tool", "tool_call_id": "g", "content": "r"},
+            ]
+        }
+    )
+    calls = c.messages[0]["parts"]
+    assert calls[0]["t"] == "opaque" and calls[1]["ref"] == 1
+    assert c.messages[1]["parts"][0]["ref"] == 1
+
+
+def test_message_name_is_kept():
+    a = _c({"messages": [{"role": "user", "name": "alice", "content": "hi"}]})
+    b = _c({"messages": [{"role": "user", "name": "bob", "content": "hi"}]})
+    assert a.messages[0]["name"] == "alice" and a != b

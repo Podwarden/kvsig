@@ -48,19 +48,20 @@ def _content_parts(content: Any, budget: Budget) -> list[Part]:
         if part is not None:
             out.append(part)
 
+    if content is None:
+        return out
     if isinstance(content, str):
         add(text_part(content, budget))
         return out
-    if isinstance(content, dict):
-        out.append(opaque(content, budget))
-        return out
     if not isinstance(content, list):
+        out.append(opaque(content, budget, "content"))
         return out
     for p in content:
         if isinstance(p, str):
             add(text_part(p, budget))
             continue
         if not isinstance(p, dict):
+            out.append(opaque(p, budget, "part"))
             continue
         t = p.get("type")
         if t in _TEXT_TYPES or ("type" not in p and isinstance(p.get("text"), str)):
@@ -97,33 +98,53 @@ def _content_parts(content: Any, budget: Budget) -> list[Part]:
     return out
 
 
-def _tool_call(call: dict[str, Any], ref: int, budget: Budget) -> Part:
-    fn = call.get("function")
-    if isinstance(fn, dict):
-        name = fn.get("name")
-        k, v = tool_args(fn.get("arguments"), budget)
-    else:
-        custom = call.get("custom")
-        custom = custom if isinstance(custom, dict) else {}
-        name = custom.get("name")
-        raw = custom.get("input")
-        k, v = "args_raw", raw if isinstance(raw, str) else ""
-        budget.charge(len(v))
+def _call(name: Any, k: str, v: str, ref: int, budget: Budget) -> Part:
     name = name if isinstance(name, str) else ""
     budget.charge(len(name))
     return {"t": "tool_call", "name": name, k: v, "ref": ref}
 
 
-def message(m: dict[str, Any], seen: dict[str, int], budget: Budget) -> Message:
+def _tool_call(call: Any, ref: int, budget: Budget) -> Part:
+    if not isinstance(call, dict):
+        return opaque(call, budget, "tool_call")
+    fn = call.get("function")
+    if isinstance(fn, dict):
+        k, v = tool_args(fn.get("arguments"), budget)
+        return _call(fn.get("name"), k, v, ref, budget)
+    custom = call.get("custom")
+    if isinstance(custom, dict):
+        raw = custom.get("input")
+        raw = raw if isinstance(raw, str) else ""
+        budget.charge(len(raw))
+        return _call(custom.get("name"), "args_raw", raw, ref, budget)
+    return opaque(call, budget, "tool_call")
+
+
+def message(m: Any, seen: dict[str, int], budget: Budget) -> Message:
     """One chat message. ``seen`` maps tool-call id to its index in the nearest
     preceding assistant message, and is updated by assistant messages."""
+    if not isinstance(m, dict):
+        return {"role": "", "parts": [opaque(m, budget, "message")]}
     role = m.get("role")
     role = role if isinstance(role, str) else ""
-    if role == "tool":
+    budget.charge(len(role))
+    out: Message = {"role": role}
+    name = m.get("name")
+    if isinstance(name, str) and name:
+        budget.charge(len(name))
+        out["name"] = name
+
+    if role == "tool" or role == "function":
+        # A result. "function" is the deprecated form: it names the function
+        # (kept in "name" above) and cannot reference a call.
+        ref = -1
         cid = m.get("tool_call_id")
-        ref = seen.get(cid, -1) if isinstance(cid, str) else -1
+        if role == "tool" and isinstance(cid, str):
+            ref = seen.get(cid, -1)
         result = {"t": "tool_result", "ref": ref, "parts": _content_parts(m.get("content"), budget)}
-        return {"role": role, "parts": [result]}
+        out["parts"] = [result]
+        return out
+
     parts: list[Part] = []
     if role == "assistant":
         for key in ("reasoning_content", "reasoning"):
@@ -133,18 +154,30 @@ def message(m: dict[str, Any], seen: dict[str, int], budget: Budget) -> Message:
                 parts.append({"t": "reasoning", "v": r})
                 break
     parts.extend(_content_parts(m.get("content"), budget))
-    calls = m.get("tool_calls")
-    if role == "assistant" and isinstance(calls, list):
+    if role == "assistant":
+        refusal = m.get("refusal")
+        if refusal is not None:
+            parts.append(opaque({"refusal": refusal}, budget, "refusal"))
+        audio = m.get("audio")
+        if audio is not None:
+            parts.append(opaque(audio, budget, "audio"))
         index = 0
-        for call in calls:
-            if not isinstance(call, dict):
-                continue
-            parts.append(_tool_call(call, index, budget))
-            cid = call.get("id")
-            if isinstance(cid, str):
-                seen[cid] = index
-            index += 1
-    return {"role": role, "parts": parts}
+        calls = m.get("tool_calls")
+        if isinstance(calls, list):
+            for call in calls:
+                parts.append(_tool_call(call, index, budget))
+                if isinstance(call, dict) and isinstance(call.get("id"), str):
+                    seen[call["id"]] = index
+                index += 1
+        fc = m.get("function_call")
+        if fc is not None:
+            if isinstance(fc, dict):
+                k, v = tool_args(fc.get("arguments"), budget)
+                parts.append(_call(fc.get("name"), k, v, index, budget))
+            else:
+                parts.append(opaque(fc, budget, "function_call"))
+    out["parts"] = parts
+    return out
 
 
 def _tool(t: Any, budget: Budget) -> dict[str, Any]:
@@ -176,10 +209,13 @@ def canonicalize(body: dict[str, Any], budget: Budget) -> Canon | None:
     body_msgs: list[Message] = []
     seen: dict[str, int] = {}
     for m in msgs_in:
-        if not isinstance(m, dict):
-            continue
         c = message(m, seen, budget)
-        (head if c["role"] in HEAD_ROLES else body_msgs).append(c)
+        # The head is the leading run of system/developer messages only. A
+        # later one stays in the body, in order, so prefixes stay prefixes.
+        if not body_msgs and c["role"] in HEAD_ROLES:
+            head.append(c)
+        else:
+            body_msgs.append(c)
     return Canon(head=head, tools=tools, messages=body_msgs)
 
 

@@ -41,8 +41,9 @@ def test_integers():
     assert dump(-(2**53)) == "-9007199254740992"
     # beyond 2^53: rounded to a double, then printed as ECMAScript would
     assert dump(2**53 + 1) == "9007199254740992"
-    # too large for a double: full decimal
-    assert dump(10**400) == "1" + "0" * 400
+    # too large for a double: a double-based parser sees Infinity, so null
+    assert dump(10**400) == "null"
+    assert dump(-(10**400)) == "null"
 
 
 def test_member_order_kept_or_sorted():
@@ -67,18 +68,32 @@ def test_lone_surrogate_in_string_and_key():
     assert dump({"\ud800": "x\udfff"}) == '{"\ufffd":"x\ufffd"}'
 
 
-def test_too_deep():
-    v: list = []
-    cur = v
-    for _ in range(jsontext.MAX_DEPTH):
-        cur.append([])
-        cur = cur[0]
-    with pytest.raises(jsontext.TooDeep):
-        dump(v)
-
-
 def test_round_trip_is_a_fixed_point():
     v = json.loads('{"z":1e2,"a":[0.1,-0,1E21,"\\u00e9"],"m":{"y":null}}')
     once = dump(v)
     assert dump(json.loads(once)) == once
     assert once == '{"z":100,"a":[0.1,0,1e+21,"é"],"m":{"y":null}}'
+
+
+def test_keys_equal_after_surrogate_repair_are_merged_last_wins():
+    v = {"\ud800": 1, "b": 2, "\udfff": 3}  # noqa: F601 -- distinct lone surrogates; ruff misreads them
+    assert dump(v) == '{"' + chr(0xFFFD) + '":3,"b":2}'
+    # exact and loose agree on content
+    assert dump(json.loads(dump(v)), sort=True) == dump(v, sort=True)
+
+
+def _nest(n: int, leaf):
+    v = leaf
+    for _ in range(n):
+        v = [v]
+    return v
+
+
+def test_depth_counts_containers_only():
+    # 128 nested containers are allowed, whatever the leaf
+    dump(_nest(jsontext.MAX_DEPTH, 1))
+    dump(_nest(jsontext.MAX_DEPTH - 1, []))  # 128 arrays, the innermost empty
+    with pytest.raises(jsontext.TooDeep):
+        dump(_nest(jsontext.MAX_DEPTH + 1, 1))
+    with pytest.raises(jsontext.TooDeep):
+        dump(_nest(jsontext.MAX_DEPTH, []))  # 129 arrays

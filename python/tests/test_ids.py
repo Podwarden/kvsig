@@ -17,7 +17,7 @@ from kvsig import (
     message_id,
     scope_from,
 )
-from kvsig.loose import LOOSE_V1
+from kvsig.loose import LOOSE_V1, WHITESPACE_V1, LooseProfile
 
 K1 = Key(1, bytes([1]) * 32)
 K2 = Key(2, bytes([2]) * 32)
@@ -176,3 +176,70 @@ KNOWN = (
     "006ab68e2caa01601261dfe441a3bd1f2f",
     "0088652dfe9eaa2ba5183f380ccfa921da",
 )
+
+
+def _conv(*msgs: dict[str, Any]) -> str | None:
+    c = canonicalize({"messages": [{"role": "system", "content": "S"}, *msgs]})
+    assert c is not None
+    return ids(c, K1).conv
+
+
+def test_conv_skips_openers_that_loosen_to_nothing():
+    env = "<environment_context>cwd=/a</environment_context>"
+    a = _conv({"role": "user", "content": env}, {"role": "user", "content": "fix the parser"})
+    b = _conv({"role": "user", "content": env}, {"role": "user", "content": "write a README"})
+    assert a != b
+    # and the anchor is that first real message, wherever later turns go
+    a2 = _conv(
+        {"role": "user", "content": env},
+        {"role": "user", "content": "fix the parser"},
+        {"role": "assistant", "content": "done"},
+    )
+    assert a == a2
+
+
+def test_conv_is_none_when_nothing_has_content():
+    assert _conv({"role": "user", "content": "<system-reminder>r</system-reminder>"}) is None
+
+
+def test_mid_conversation_developer_message_keeps_conv():
+    base = _conv({"role": "user", "content": "hi"}, {"role": "assistant", "content": "yo"})
+    mid = _conv(
+        {"role": "user", "content": "hi"},
+        {"role": "assistant", "content": "yo"},
+        {"role": "developer", "content": "be brief"},
+        {"role": "user", "content": "next"},
+    )
+    assert base == mid
+
+
+def test_ids_all_epochs_honours_the_profile():
+    p = LooseProfile("t/1", (("<x>", "</x>"),), WHITESPACE_V1)
+    c = canonicalize(_body("hi <x>noise</x>"))
+    assert c is not None
+    ring = KeyRing(current=K2, accepted=(K1,))
+    assert ids_all_epochs(c, ring, profile=p)[1] == ids(c, K1, profile=p)
+
+
+def test_cache_is_keyed_by_the_table_not_the_version():
+    p = LooseProfile("loose/1", (("<x>", "</x>"),), WHITESPACE_V1)
+    c = canonicalize(_body("hi <x>noise</x>"))
+    assert c is not None
+    cache = IdCache()
+    default = ids(c, K1, cache=cache)
+    custom = ids(c, K1, cache=cache, profile=p)
+    assert custom == ids(c, K1, profile=p)
+    assert custom.loose_msgs != default.loose_msgs
+
+
+def test_unexpected_errors_are_logged_not_raised(monkeypatch, caplog):
+    import kvsig
+    from kvsig.dialects import openai_chat
+
+    def boom(*a: Any, **k: Any) -> Any:
+        raise KeyError("bug")
+
+    monkeypatch.setattr(openai_chat, "canonicalize", boom)
+    with caplog.at_level("ERROR", logger="kvsig"):
+        assert kvsig.canonicalize({"messages": []}) is None
+    assert "unexpected error" in caplog.text

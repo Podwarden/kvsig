@@ -1,7 +1,9 @@
 import time
 
+import pytest
+
 from kvsig import LOOSE_V1, canonicalize, loose
-from kvsig.loose import WHITESPACE_V1, loose_text
+from kvsig.loose import WHITESPACE_V1, LooseProfile, loose_text
 
 
 def test_whitespace_table_matches_python_isspace():
@@ -37,21 +39,11 @@ def test_whitespace_collapses_and_trims():
     assert loose_text("  a \u00a0\t b\u3000\n") == "a b"
 
 
-def test_preamble_text_is_dropped_but_not_the_next_part():
-    body = {
-        "messages": [
-            {
-                "role": "user",
-                "content": [
-                    {"type": "text", "text": "Change the greeting to be more casual"},
-                    {"type": "text", "text": "real question"},
-                ],
-            }
-        ]
-    }
-    c = canonicalize(body)
-    assert c is not None
-    assert loose(c).messages[0]["parts"] == [{"t": "text", "v": "real question"}]
+def test_no_harness_specific_preambles():
+    # loose/1 keeps ordinary text, whatever it starts with
+    assert (
+        loose_text("I switched to a new code base today") == "I switched to a new code base today"
+    )
 
 
 def test_drops_reasoning_and_sorts_args_and_schema():
@@ -84,3 +76,32 @@ def test_drops_reasoning_and_sorts_args_and_schema():
 
 def test_profile_version_is_named():
     assert LOOSE_V1.version == "loose/1"
+
+
+@pytest.mark.parametrize(
+    "kw",
+    [
+        {"version": ""},
+        {"version": "loose:2"},
+        {"version": "a\x00b"},
+        {"whitespace": frozenset()},
+        {"whitespace": frozenset({0xD800})},
+        {"block_tags": (("<a>",),)},
+        {"block_tags": (("", "</a>"),)},
+    ],
+)
+def test_profiles_are_validated(kw):
+    args = {"version": "x/1", "block_tags": LOOSE_V1.block_tags, "whitespace": WHITESPACE_V1}
+    with pytest.raises(ValueError):
+        LooseProfile(**{**args, **kw})
+
+
+def test_fingerprint_changes_with_the_table_not_just_the_version():
+    other = LooseProfile("loose/1", (("<x>", "</x>"),), WHITESPACE_V1)
+    assert other.version == LOOSE_V1.version
+    assert other.fingerprint != LOOSE_V1.fingerprint
+
+
+def test_custom_whitespace_set():
+    p = LooseProfile("t/1", (), frozenset({ord(" "), ord("_")}))
+    assert loose_text("a__b  c\td", p) == "a b c\td"

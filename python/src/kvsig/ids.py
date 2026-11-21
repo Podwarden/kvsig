@@ -31,7 +31,7 @@ class Ids:
     loose_head: str
     loose_msgs: tuple[str, ...]
     loose_nodes: tuple[str, ...]
-    #: the conversation id: None when the body has no messages
+    #: the conversation id: None when no body message has content in the loose form
     conv: str | None
 
 
@@ -103,32 +103,43 @@ def ids(
 ) -> Ids:
     c: IdCache | _NoCache = cache if cache is not None else _NoCache()
     lp = profile.version.encode() + b":"
-    # Cache keys carry the profile: the same exact id has a different loose id
-    # under another profile.
-    ck = lp
+    # Cache keys carry the profile's fingerprint: the same exact id has a
+    # different loose id under another table.
+    ck = profile.fingerprint
     h_msg = _hasher(key, b"msg", scope)
     h_node = _hasher(key, b"node", scope)
     h_lmsg = _hasher(key, lp + b"msg", scope)
     h_lnode = _hasher(key, lp + b"node", scope)
 
-    head = _hasher(key, b"head", scope)(encode({"head": canon.head, "tools": canon.tools}))
+    if canon.encoded is not None:
+        head_enc, msg_encs = canon.encoded
+    else:
+        head_enc = encode(canon.head_payload())
+        msg_encs = tuple(encode(m) for m in canon.messages)
+
+    head = _hasher(key, b"head", scope)(head_enc)
     lhead = c.get(ck + head)
     if lhead is None:
         lhead = _hasher(key, lp + b"head", scope)(encode(loose_head(canon, profile)))
         c.put(ck + head, lhead)
 
-    msgs = [h_msg(encode(m)) for m in canon.messages]
+    msgs = [h_msg(b) for b in msg_encs]
     nodes: list[bytes] = []
     lmsgs: list[bytes] = []
     lnodes: list[bytes] = []
+    anchor: bytes | None = None
     prev, lprev = head, lhead
     for m, mid in zip(canon.messages, msgs, strict=True):
         prev = h_node(prev + mid)
         nodes.append(prev)
-        lm = c.get(ck + mid)
-        if lm is None:
-            lm = h_lmsg(encode(loose_message(m, profile)))
-            c.put(ck + mid, lm)
+        # The cache value is the loose id plus one flag byte: whether the
+        # loose message still has parts (the conversation anchor rule).
+        hit = c.get(ck + mid)
+        if hit is None:
+            lmsg = loose_message(m, profile)
+            hit = h_lmsg(encode(lmsg)) + (b"\x01" if lmsg["parts"] else b"\x00")
+            c.put(ck + mid, hit)
+        lm, has_content = hit[:-1], hit[-1] == 1
         lmsgs.append(lm)
         # An exact node fixes its whole prefix, so it fixes the loose node too.
         ln = c.get(ck + prev)
@@ -137,10 +148,16 @@ def ids(
             c.put(ck + prev, ln)
         lnodes.append(ln)
         lprev = ln
+        if anchor is None and has_content:
+            anchor = ln
 
+    # The conversation is anchored on the first body message with content in
+    # the loose form, so a constant opener that loosens to nothing (an
+    # environment block, a reminder) does not make every session one
+    # conversation.
     conv = None
-    if lnodes:
-        conv = _hasher(key, lp + b"conv", scope)(lhead + lnodes[0]).hex()
+    if anchor is not None:
+        conv = _hasher(key, lp + b"conv", scope)(lhead + anchor).hex()
     return Ids(
         epoch=key.epoch,
         head=head.hex(),
@@ -154,10 +171,15 @@ def ids(
 
 
 def ids_all_epochs(
-    canon: Canon, ring: KeyRing, scope: bytes = b"", *, cache: IdCache | None = None
+    canon: Canon,
+    ring: KeyRing,
+    scope: bytes = b"",
+    *,
+    cache: IdCache | None = None,
+    profile: LooseProfile = LOOSE_V1,
 ) -> dict[int, Ids]:
     """Ids under every key of ``ring``, for lookups during a rotation."""
-    return {k.epoch: ids(canon, k, scope, cache=cache) for k in ring.keys()}
+    return {k.epoch: ids(canon, k, scope, cache=cache, profile=profile) for k in ring.keys()}
 
 
 def message_id(
