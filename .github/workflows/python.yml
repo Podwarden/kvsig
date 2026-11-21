@@ -1,0 +1,30 @@
+name: python
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13"]
+    defaults:
+      run:
+        working-directory: python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - run: uv run --with pytest pytest -q
+      - run: uv run --with ruff ruff check .
+      - run: uv run --with ruff ruff format --check .
+      - name: Cross-check CBOR against an independent encoder
+        run: uv run --with pytest --with cbor2 pytest -q tests/test_cbor_xcheck.py
