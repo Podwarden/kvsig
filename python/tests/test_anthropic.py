@@ -130,3 +130,61 @@ def test_server_tools_keep_their_definition_without_cache_control():
             }
         ]
     )
+
+
+def test_line_wrapped_base64_matches_chat():
+    import base64
+
+    from kvsig import canonicalize as canon
+
+    raw = base64.b64encode(b"PNGDATA" * 20).decode()
+    wrapped = "\n".join(raw[i : i + 40] for i in range(0, len(raw), 40))
+    a = _c(
+        _msgs(
+            {
+                "role": "user",
+                "content": [
+                    {
+                        "type": "image",
+                        "source": {"type": "base64", "media_type": "image/png", "data": wrapped},
+                    }
+                ],
+            }
+        )
+    )
+    chat = canon(
+        {
+            "messages": [
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "image_url", "image_url": {"url": "data:image/png;base64," + raw}}
+                    ],
+                }
+            ]
+        }
+    )
+    assert chat is not None
+    assert a.messages[0]["parts"][0]["t"] == "media"
+    assert a.messages[0]["parts"] == chat.messages[0]["parts"]
+
+
+def test_cache_control_is_stripped_only_at_the_top_of_a_block():
+    def block(inner):
+        return {
+            "type": "mcp_tool_use",
+            "id": "m",
+            "name": "q",
+            "input": {"cache_control": inner},
+            "cache_control": {"type": "ephemeral"},
+        }
+
+    a = _c(_msgs({"role": "assistant", "content": [block("one")]})).messages[0]["parts"][0]
+    b = _c(_msgs({"role": "assistant", "content": [block("two")]})).messages[0]["parts"][0]
+    c = _c(
+        _msgs(
+            {"role": "assistant", "content": [{**block("one"), "cache_control": {"type": "other"}}]}
+        )
+    ).messages[0]["parts"][0]
+    assert a != b  # a data field named cache_control is content
+    assert a == c  # the block's own cache marker is not

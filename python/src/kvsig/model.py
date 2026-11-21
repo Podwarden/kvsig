@@ -126,7 +126,7 @@ def media_from_url(url: Any) -> Part:
         meta = header.split(";")
         try:
             if "base64" in (m.strip().lower() for m in meta[1:]):
-                data = base64.b64decode(_B64_WS.sub("", payload), validate=True)
+                data = b64decode(payload)
             else:
                 data = unquote_to_bytes(payload)
             return media_bytes(data, meta[0])
@@ -136,13 +136,20 @@ def media_from_url(url: Any) -> Part:
 
 
 def without_cache_control(v: Any) -> Any:
-    """``v`` without ``cache_control`` members at any depth: a cache marker
-    changes where a provider caches, never what the conversation is."""
-    if isinstance(v, dict):
-        return {k: without_cache_control(x) for k, x in v.items() if k != "cache_control"}
-    if isinstance(v, list):
-        return [without_cache_control(x) for x in v]
+    """``v`` without its own top-level ``cache_control`` member: a cache marker
+    changes where a provider caches, never what the conversation is. Members
+    of that name deeper inside are data and are kept."""
+    if isinstance(v, dict) and "cache_control" in v:
+        return {k: x for k, x in v.items() if k != "cache_control"}
     return v
+
+
+def b64decode(data: Any) -> bytes:
+    """Strict base64 after removing ASCII whitespace (line-wrapped data is
+    common). Raises ``binascii.Error``/``ValueError`` on anything else."""
+    if not isinstance(data, str):
+        raise ValueError("base64 data must be a string")
+    return base64.b64decode(_B64_WS.sub("", data), validate=True)
 
 
 def opaque(p: Any, budget: Budget, type_: str | None = None) -> Part:
@@ -150,10 +157,7 @@ def opaque(p: Any, budget: Budget, type_: str | None = None) -> Part:
     ``type_`` names it when the value carries no ``type`` member. Cache
     markers are not part of it."""
     t = type_ if type_ is not None else (p.get("type") if isinstance(p, dict) else None)
-    try:
-        p = without_cache_control(p)
-    except RecursionError as e:
-        raise NoIds("value nests too deep") from e
+    p = without_cache_control(p)
     text = json_text(p, budget)
     return {"t": "opaque", "type": t if isinstance(t, str) else "", "sha256": _sha(utf8(text))}
 

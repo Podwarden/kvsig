@@ -95,3 +95,58 @@ def test_unknown_items_are_opaque_and_kept():
 
 def test_not_a_responses_body_gives_none():
     assert canonicalize({"messages": []}, "openai.responses") is None
+
+
+def test_loose_keeps_the_stateful_flag():
+    from kvsig import loose
+
+    c = _c({"input": "more", "previous_response_id": "r1"})
+    assert loose(c).stateful
+    i = ids(loose(c), TEST_KEY)
+    assert i.nodes == () and i.conv is None
+
+
+def test_server_tool_items_stay_inside_the_assistant_turn_and_replies_match():
+    from kvsig import canonicalize_reply, message_id
+
+    out = [
+        {"type": "reasoning", "summary": [{"type": "summary_text", "text": "look it up"}]},
+        {
+            "type": "web_search_call",
+            "id": "ws_1",
+            "status": "completed",
+            "action": {"type": "search", "query": "x"},
+        },
+        {
+            "type": "message",
+            "role": "assistant",
+            "content": [{"type": "output_text", "text": "found"}],
+        },
+    ]
+    c = _c(
+        {"input": [{"role": "user", "content": "q"}, *out, {"role": "user", "content": "thanks"}]}
+    )
+    assert [m["role"] for m in c.messages] == ["user", "assistant", "user"]
+    assert [p["t"] for p in c.messages[1]["parts"]] == ["reasoning", "opaque", "text"]
+    reply = canonicalize_reply({"output": out}, "openai.responses")
+    assert reply is not None
+    assert message_id(reply, TEST_KEY) == ids(c, TEST_KEY).msgs[1]
+
+
+def test_empty_reasoning_item_opens_no_message():
+    c = _c(
+        {
+            "input": [
+                {"role": "user", "content": "q"},
+                {"type": "reasoning", "summary": []},
+                {"role": "user", "content": "q2"},
+            ]
+        }
+    )
+    assert [m["role"] for m in c.messages] == ["user", "user"]
+
+
+def test_non_string_instructions_are_kept_as_opaque():
+    a = _c({"input": "hi", "instructions": [{"type": "x", "v": 1}]})
+    b = _c({"input": "hi", "instructions": [{"type": "x", "v": 2}]})
+    assert a.head[0]["parts"][0]["type"] == "instructions" and a != b

@@ -14,7 +14,6 @@ Completions and through Anthropic Messages gives the same canonical form:
 
 from __future__ import annotations
 
-import base64
 import binascii
 from typing import Any
 
@@ -24,6 +23,7 @@ from kvsig.model import (
     Canon,
     Message,
     Part,
+    b64decode,
     json_text,
     media_bytes,
     media_ref,
@@ -44,9 +44,7 @@ def _source(block: dict[str, Any], budget: Budget) -> Part:
     if kind == "base64":
         data = src.get("data")
         try:
-            return media_bytes(
-                base64.b64decode(data if isinstance(data, str) else "", validate=True), mime
-            )
+            return media_bytes(b64decode(data), mime)
         except (binascii.Error, ValueError):
             return opaque(block, budget)
     if kind == "text" and isinstance(src.get("data"), str):

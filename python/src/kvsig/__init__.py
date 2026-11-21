@@ -59,6 +59,9 @@ _ADAPTERS: dict[str, Any] = {
 }
 
 
+assert set(_ADAPTERS) == set(SUPPORTED), "dialects.SUPPORTED and _ADAPTERS disagree"
+
+
 def _adapter(dialect: str) -> Any:
     a = _ADAPTERS.get(dialect)
     if a is None:

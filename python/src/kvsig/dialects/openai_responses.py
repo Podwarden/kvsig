@@ -19,7 +19,6 @@ through Responses gives the same canonical form:
 
 from __future__ import annotations
 
-import base64
 import binascii
 from typing import Any
 
@@ -29,6 +28,7 @@ from kvsig.model import (
     Canon,
     Message,
     Part,
+    b64decode,
     json_text,
     media_bytes,
     media_from_url,
@@ -40,6 +40,19 @@ from kvsig.model import (
 
 _TEXT_TYPES = ("input_text", "output_text", "text")
 _ASSISTANT_SIDE = ("reasoning", "function_call", "custom_tool_call")
+#: Items the provider produces inside an assistant turn (server-side tools):
+#: opaque parts of that turn, so a reply and the next request group alike.
+_SERVER_ITEMS = (
+    "web_search_call",
+    "file_search_call",
+    "computer_call",
+    "code_interpreter_call",
+    "image_generation_call",
+    "local_shell_call",
+    "mcp_call",
+    "mcp_list_tools",
+    "mcp_approval_request",
+)
 _OUTPUTS = ("function_call_output", "custom_tool_call_output")
 
 
@@ -49,7 +62,7 @@ def _file(p: dict[str, Any], budget: Budget) -> Part:
         if data.startswith("data:"):
             return media_from_url(data)
         try:
-            return media_bytes(base64.b64decode(data, validate=True), "")
+            return media_bytes(b64decode(data), "")
         except (binascii.Error, ValueError):
             return opaque(p, budget)
     for key, src in (("file_id", "file_id"), ("file_url", "url")):
@@ -125,7 +138,7 @@ def _is_assistant_side(item: Any) -> bool:
     if not isinstance(item, dict):
         return False
     t = item.get("type")
-    if t in _ASSISTANT_SIDE:
+    if t in _ASSISTANT_SIDE or t in _SERVER_ITEMS:
         return True
     return t in (None, "message") and item.get("role") == "assistant"
 
@@ -154,11 +167,14 @@ class _Builder:
             return
         t = it.get("type")
         if _is_assistant_side(it):
-            g = self._assistant()
             if t == "reasoning":
                 p = _reasoning(it, b)
                 if p is not None:
-                    g["parts"].append(p)
+                    self._assistant()["parts"].append(p)
+                return
+            g = self._assistant()
+            if t in _SERVER_ITEMS:
+                g["parts"].append(opaque(it, b))
             elif t in ("function_call", "custom_tool_call"):
                 name = it.get("name")
                 name = name if isinstance(name, str) else ""
@@ -219,6 +235,8 @@ def canonicalize(body: dict[str, Any], budget: Budget) -> Canon | None:
     if isinstance(instr, str) and instr:
         tp = text_part(instr, budget)
         head.append({"role": "system", "parts": [tp] if tp else []})
+    elif instr is not None and not isinstance(instr, str):
+        head.append({"role": "system", "parts": [opaque(instr, budget, "instructions")]})
     bld = _Builder(budget)
     for it in items:
         bld.item(it)

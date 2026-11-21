@@ -2,7 +2,6 @@
 
 from __future__ import annotations
 
-import base64
 import binascii
 from typing import Any
 
@@ -12,6 +11,7 @@ from kvsig.model import (
     Canon,
     Message,
     Part,
+    b64decode,
     json_text,
     media_bytes,
     media_from_url,
@@ -32,7 +32,7 @@ def _file(p: dict[str, Any], budget: Budget) -> Part:
             if data.startswith("data:"):
                 return media_from_url(data)
             try:
-                return media_bytes(base64.b64decode(data, validate=True), "")
+                return media_bytes(b64decode(data), "")
             except (binascii.Error, ValueError):
                 return opaque(p, budget)
         fid = f.get("file_id")
@@ -77,7 +77,7 @@ def _content_parts(content: Any, budget: Budget) -> list[Part]:
             a = p["input_audio"]
             fmt = a.get("format")
             try:
-                data = base64.b64decode(a.get("data") or "", validate=True)
+                data = b64decode(a.get("data") or "")
             except (binascii.Error, ValueError, TypeError):
                 out.append(opaque(p, budget))
                 continue

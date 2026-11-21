@@ -32,19 +32,26 @@ and its result.
 - Tools: a tool without a `type` (or `type: custom`) becomes
   `{name, desc, schema}` from `input_schema`. A server tool (`web_search_*`,
   `bash_*`, ...) becomes `{type, def}`.
-- `cache_control` is ignored everywhere, including inside opaque values and
-  server-tool definitions. `citations` are ignored.
+- A block's own `cache_control` marker is ignored everywhere, including on
+  opaque blocks and server-tool definitions. A member named `cache_control`
+  deeper inside a value is data and is kept. `citations` are ignored.
 
 ## OpenAI Responses (`openai.responses`)
 
-- `instructions` is the head's first system message; a leading run of
+- `instructions` is the head's first system message (a non-string value is an
+  opaque part of it); a leading run of
   `system`/`developer` message items follows it in the head. `input` given as
   a string is one user message.
 - A run of consecutive assistant-side items (`reasoning`, assistant `message`,
-  `function_call`, `custom_tool_call`) is one assistant message, in item order.
+  `function_call`, `custom_tool_call`, and server-side tool items such as
+  `web_search_call`, `file_search_call`, `computer_call`, `mcp_call`) is one
+  assistant message, in item order. Server-side tool items are opaque parts of
+  that message, so a reply and the next request that carries it back group
+  the same way.
 - `reasoning` becomes one reasoning part: its `reasoning_text` content, or
   else its `summary_text` parts, joined by a blank line. An item with only
-  `encrypted_content` is opaque.
+  `encrypted_content` is opaque. An item with neither is empty and opens no
+  message.
 - `function_call` becomes `tool_call` (arguments as in Chat Completions);
   `custom_tool_call` becomes `tool_call` with `args_raw`. `call_id` sets the
   reference, like a Chat `tool_calls[].id`.
@@ -59,6 +66,12 @@ and its result.
   but no prefix or conversation ids.
 - Tools: `type: function` becomes `{name, desc, schema}` from `parameters`;
   `strict` is ignored. Other tools become `{type, def}`.
+
+## Base64
+
+Inline base64 data (images, documents, files, audio) is decoded after
+removing ASCII whitespace, in every dialect, so line-wrapped data hashes the
+same as unwrapped data.
 
 ## Known non-equivalences
 
