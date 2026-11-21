@@ -39,6 +39,10 @@ class Canon:
     head: list[Message]
     tools: list[dict[str, Any]]
     messages: list[Message]
+    #: The request continues server-side history (OpenAI Responses
+    #: ``previous_response_id`` or ``conversation``): the body is not the whole
+    #: conversation, so there are no prefix or conversation ids.
+    stateful: bool = False
     encoded: tuple[bytes, tuple[bytes, ...]] | None = field(default=None, compare=False, repr=False)
 
     def head_payload(self) -> dict[str, Any]:
@@ -111,7 +115,7 @@ def finish(canon: Canon, max_bytes: int) -> Canon | None:
         if total > max_bytes:
             return None
         msgs.append(b)
-    return Canon(canon.head, canon.tools, canon.messages, (head, tuple(msgs)))
+    return Canon(canon.head, canon.tools, canon.messages, canon.stateful, (head, tuple(msgs)))
 
 
 def media_from_url(url: Any) -> Part:
@@ -131,10 +135,25 @@ def media_from_url(url: Any) -> Part:
     return media_ref(url, "url")
 
 
+def without_cache_control(v: Any) -> Any:
+    """``v`` without ``cache_control`` members at any depth: a cache marker
+    changes where a provider caches, never what the conversation is."""
+    if isinstance(v, dict):
+        return {k: without_cache_control(x) for k, x in v.items() if k != "cache_control"}
+    if isinstance(v, list):
+        return [without_cache_control(x) for x in v]
+    return v
+
+
 def opaque(p: Any, budget: Budget, type_: str | None = None) -> Part:
     """A value the dialect mapping does not know: kept, hashed, never dropped.
-    ``type_`` names it when the value carries no ``type`` member."""
+    ``type_`` names it when the value carries no ``type`` member. Cache
+    markers are not part of it."""
     t = type_ if type_ is not None else (p.get("type") if isinstance(p, dict) else None)
+    try:
+        p = without_cache_control(p)
+    except RecursionError as e:
+        raise NoIds("value nests too deep") from e
     text = json_text(p, budget)
     return {"t": "opaque", "type": t if isinstance(t, str) else "", "sha256": _sha(utf8(text))}
 

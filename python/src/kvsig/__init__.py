@@ -12,7 +12,9 @@ from typing import Any, TypeVar
 
 from kvsig.cbor import encode
 from kvsig.dialects import SUPPORTED, Dialect
+from kvsig.dialects import anthropic_messages as _anthropic_messages
 from kvsig.dialects import openai_chat as _openai_chat
+from kvsig.dialects import openai_responses as _openai_responses
 from kvsig.ids import SPEC_LABEL, IdCache, Ids, ids, ids_all_epochs, message_id, scope_from
 from kvsig.keys import TEST_KEY, InMemoryKeyProvider, Key, KeyProvider, KeyRing
 from kvsig.loose import LOOSE_V1, LooseProfile, loose
@@ -21,6 +23,7 @@ from kvsig.model import DEFAULT_MAX_BYTES, Budget, Canon, Message, NoIds, finish
 __all__ = [
     "DEFAULT_MAX_BYTES",
     "LOOSE_V1",
+    "SUPPORTED",
     "SPEC_LABEL",
     "TEST_KEY",
     "Canon",
@@ -49,9 +52,18 @@ log = logging.getLogger("kvsig")
 T = TypeVar("T")
 
 
-def _check(dialect: str) -> None:
-    if dialect not in SUPPORTED:
+_ADAPTERS: dict[str, Any] = {
+    "openai.chat": _openai_chat,
+    "anthropic.messages": _anthropic_messages,
+    "openai.responses": _openai_responses,
+}
+
+
+def _adapter(dialect: str) -> Any:
+    a = _ADAPTERS.get(dialect)
+    if a is None:
         raise NotImplementedError(f"dialect {dialect!r} is not implemented in this release")
+    return a
 
 
 def _fail_open(what: str, fn: Callable[[], T | None]) -> T | None:
@@ -73,12 +85,12 @@ def canonicalize(
     """The canonical form of a request body, or None when the request gets no
     ids: not a chat body, over ``max_bytes`` of canonical CBOR, or nested too
     deep. Raises only for an unknown ``dialect``."""
-    _check(dialect)
+    adapter = _adapter(dialect)
 
     def run() -> Canon | None:
         if not isinstance(body, dict):
             return None
-        c = _openai_chat.canonicalize(body, Budget(max_bytes))
+        c = adapter.canonicalize(body, Budget(max_bytes))
         return None if c is None else finish(c, max_bytes)
 
     return _fail_open("canonicalize", run)
@@ -88,13 +100,17 @@ def canonicalize_reply(
     message: Any, dialect: Dialect = "openai.chat", *, max_bytes: int = DEFAULT_MAX_BYTES
 ) -> Message | None:
     """A response's assistant message, canonicalised alone, so that its
-    ``message_id`` equals the id of the same message in the next request."""
-    _check(dialect)
+    ``message_id`` equals the id of the same message in the next request.
+
+    ``message`` is the assistant message (``openai.chat``: ``choices[i].message``),
+    the whole response (``anthropic.messages``), or the whole response with its
+    ``output`` items (``openai.responses``)."""
+    adapter = _adapter(dialect)
 
     def run() -> Message | None:
         if not isinstance(message, dict):
             return None
-        m = _openai_chat.reply(message, Budget(max_bytes))
+        m = adapter.reply(message, Budget(max_bytes))
         return m if len(encode(m)) <= max_bytes else None
 
     return _fail_open("canonicalize_reply", run)

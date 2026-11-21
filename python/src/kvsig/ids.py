@@ -156,7 +156,11 @@ def ids(
     # environment block, a reminder) does not make every session one
     # conversation.
     conv = None
-    if anchor is not None:
+    if canon.stateful:
+        # The body continues history held by the server: prefix and
+        # conversation ids would describe a conversation that is not there.
+        nodes, lnodes = [], []
+    elif anchor is not None:
         conv = _hasher(key, lp + b"conv", scope)(lhead + anchor).hex()
     return Ids(
         epoch=key.epoch,

@@ -254,7 +254,7 @@ def test_deep_args_give_none():
 
 def test_unknown_dialect_raises():
     with pytest.raises(NotImplementedError):
-        canonicalize({"messages": []}, "anthropic.messages")
+        canonicalize({"messages": []}, "openai.completions")
 
 
 def test_hostile_values_never_raise():
