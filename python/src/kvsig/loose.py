@@ -36,6 +36,9 @@ class LooseProfile:
     #: (open tag, close tag) blocks removed from text, matched ASCII case-insensitively
     block_tags: tuple[tuple[str, str], ...]
     whitespace: frozenset[int]
+    #: (from, to) message roles: a message whose role is ``from`` reads as
+    #: ``to`` in the loose form. Empty in ``loose/1``.
+    role_map: tuple[tuple[str, str], ...] = ()
 
     def __post_init__(self) -> None:
         if not self.version or "\x00" in self.version or ":" in self.version:
@@ -48,6 +51,11 @@ class LooseProfile:
             for c in self.whitespace
         ):
             raise ValueError("whitespace must be a non-empty set of Unicode scalar values")
+        for pair in self.role_map:
+            if len(pair) != 2 or not all(isinstance(r, str) and r for r in pair):
+                raise ValueError("role_map must be (from, to) pairs of non-empty strings")
+        if len({f for f, _ in self.role_map}) != len(self.role_map):
+            raise ValueError("role_map must map each role at most once")
 
     @property
     def fingerprint(self) -> bytes:
@@ -62,6 +70,15 @@ LOOSE_V1 = LooseProfile(
         ("<environment_context>", "</environment_context>"),
     ),
     whitespace=WHITESPACE_V1,
+)
+
+#: ``loose/1`` plus one rule: a ``developer`` message reads as a ``system``
+#: message (decision 0005, proposed). Not the default while 0005 is open.
+LOOSE_V2 = LooseProfile(
+    version="loose/2",
+    block_tags=LOOSE_V1.block_tags,
+    whitespace=WHITESPACE_V1,
+    role_map=(("developer", "system"),),
 )
 
 # A line holding only an ISO date or date-time. Lines end at LF only.
@@ -82,15 +99,15 @@ class _Compiled:
             (re.compile(re.escape(o), flags), re.compile(re.escape(c), flags))
             for o, c in p.block_tags
         )
-        self.fingerprint = hashlib.sha256(
-            encode(
-                {
-                    "version": p.version,
-                    "block_tags": [list(t) for t in p.block_tags],
-                    "whitespace": sorted(p.whitespace),
-                }
-            )
-        ).digest()[:8]
+        table: dict[str, Any] = {
+            "version": p.version,
+            "block_tags": [list(t) for t in p.block_tags],
+            "whitespace": sorted(p.whitespace),
+        }
+        if p.role_map:
+            table["role_map"] = [list(t) for t in p.role_map]
+        self.fingerprint = hashlib.sha256(encode(table)).digest()[:8]
+        self.roles = dict(p.role_map)
         self.py_split = p.whitespace == WHITESPACE_V1
         self.ws = "".join(chr(c) for c in sorted(p.whitespace))
 
@@ -166,8 +183,13 @@ def _parts(parts: list[Part], p: LooseProfile) -> list[Part]:
 
 
 def loose_message(m: Message, profile: LooseProfile = LOOSE_V1) -> Message:
-    # Everything but the parts (role, name) is kept as it is.
-    return {**m, "parts": _parts(m["parts"], profile)}
+    # Everything but the parts (role, name) is kept as it is, except a role the
+    # profile's role map renames.
+    out: Message = {**m, "parts": _parts(m["parts"], profile)}
+    roles = _compiled(profile).roles
+    if roles and m["role"] in roles:
+        out["role"] = roles[m["role"]]
+    return out
 
 
 def _tool(t: dict[str, Any]) -> dict[str, Any]:

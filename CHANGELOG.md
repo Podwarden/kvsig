@@ -25,3 +25,12 @@ The library follows SemVer; spec versions are labelled `kvsig/N`.
   (they become `args_raw`); an integer of more than 4300 digits is valid JSON and
   prints as `null` instead of making the arguments `args_raw`; the loose form
   keeps a message's `name`.
+- Decision 0005 (proposed): a `loose/2` profile that reads a `developer`
+  message as a `system` message, so a system prompt sent as Responses
+  `instructions`, as a leading developer item, or as a Chat `system` or
+  `developer` message gives one conversation id. Shipped as `LOOSE_V2`
+  (`LooseProfile.role_map`); `LOOSE_V1` stays the default and unchanged.
+- Vectors `system-as-instructions`, `system-as-developer-item`,
+  `system-as-system-message` and `system-as-developer-message` pin the
+  `loose/1` behaviour: the instructions and developer shapes have different
+  head ids and conversation ids. No existing vector changed.

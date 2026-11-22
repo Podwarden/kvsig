@@ -1,0 +1,154 @@
+{
+  "id": "openai.chat/system-as-system-message",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.chat",
+  "category": "head",
+  "description": "The same system prompt as a Chat system message.",
+  "input": {
+    "model": "m",
+    "messages": [
+      {
+        "role": "system",
+        "content": "You are a coding agent.\n\nAnswer briefly."
+      },
+      {
+        "role": "user",
+        "content": "hi"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "ls",
+          "description": "List a directory",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path"
+            ]
+          }
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a coding agent.\n\nAnswer briefly."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdngoWW91IGFyZSBhIGNvZGluZyBhZ2VudC4KCkFuc3dlciBicmllZmx5LmV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXX1obWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJoaQ==",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a coding agent. Answer briefly."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdngnWW91IGFyZSBhIGNvZGluZyBhZ2VudC4gQW5zd2VyIGJyaWVmbHkuZXRvb2xzgaNkZGVzY3BMaXN0IGEgZGlyZWN0b3J5ZG5hbWVibHNmc2NoZW1heE17InByb3BlcnRpZXMiOnsicGF0aCI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJwYXRoIl0sInR5cGUiOiJvYmplY3QifWhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymhp",
+    "keys": {
+      "0": {
+        "head": "0084e536801819f044ec3f89bbea8b9bcd",
+        "sys": "0005a43479586143e4922748cfa3a72947",
+        "tools": "00a6f0fc4d3200cad72142381cc1373fac",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f"
+        ],
+        "nodes": [
+          "00809316f4c9a07b5e0a288c4d10ffc6db"
+        ],
+        "loose_head": "00d3223118869802e924fab2b82d021789",
+        "loose_sys": "00e4f8effe330ca5bd6f9f4734f1136353",
+        "loose_tools": "00c2381d696f32f448d72e68c2ab636a6b",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022"
+        ],
+        "loose_nodes": [
+          "00f3cabd9c2fb3e6dd6c5217d0e9701fbd"
+        ],
+        "conv": "0073200d36528c813bc3156c0bc5f8a790"
+      },
+      "255": {
+        "head": "ff5c52396827c25de81bc459ffcfac5daf",
+        "sys": "ff3bab52a2e558736c1ca0da499100d35f",
+        "tools": "ff24b0e119a0a56335180c12e8aa192468",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef"
+        ],
+        "nodes": [
+          "ff03968377ade18393b95b72e486b37396"
+        ],
+        "loose_head": "ff0f120546b6a906d9be0ec84a9c2fb5ab",
+        "loose_sys": "ffb7602254a90bbd080c8ad7f5f8d37cc5",
+        "loose_tools": "ff7248c7b899560c717b25ed247c64482e",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb"
+        ],
+        "loose_nodes": [
+          "ff1eeaab04d66e3d94e73be511709b49ad"
+        ],
+        "conv": "ffdf7089b1e703bee882c7b2ab9d733963"
+      }
+    }
+  }
+}

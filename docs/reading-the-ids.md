@@ -46,6 +46,13 @@ Compare request A with a later request B from the same client.
 | different `conv`, same `sys` | A new conversation under the same system prompt: a new session, or a compaction that replaced the history with a summary. |
 | different `conv`, different `sys` | A different agent: a subagent, a title-generation call, another tool. |
 
+One exception to the last row: under `loose/1` the role of a system message
+is part of its identity, so a client that moves the same system prompt from
+`system` (or Responses `instructions`) to a `developer` message gets a new
+`sys` and a new `conv`, as OpenCode 2.3.2 did. The proposed `loose/2` profile
+reads `developer` as `system` and keeps the conversation id; exact ids change
+either way. See [decision 0005](decisions/0005-developer-role-in-the-loose-form.md).
+
 A cache-aware router can use the third column directly. For example, a request
 with the same `conv` but a new `tools` id still belongs on the replica that
 served the conversation, because the system-prompt part of its prompt is still

@@ -17,12 +17,13 @@ from kvsig.dialects import openai_chat as _openai_chat
 from kvsig.dialects import openai_responses as _openai_responses
 from kvsig.ids import SPEC_LABEL, IdCache, Ids, ids, ids_all_epochs, message_id, scope_from
 from kvsig.keys import TEST_KEY, InMemoryKeyProvider, Key, KeyProvider, KeyRing
-from kvsig.loose import LOOSE_V1, LooseProfile, loose
+from kvsig.loose import LOOSE_V1, LOOSE_V2, LooseProfile, loose
 from kvsig.model import DEFAULT_MAX_BYTES, Budget, Canon, Message, NoIds, finish
 
 __all__ = [
     "DEFAULT_MAX_BYTES",
     "LOOSE_V1",
+    "LOOSE_V2",
     "SUPPORTED",
     "SPEC_LABEL",
     "TEST_KEY",
