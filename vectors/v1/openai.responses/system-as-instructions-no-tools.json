@@ -1,0 +1,125 @@
+{
+  "id": "openai.responses/system-as-instructions-no-tools",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.responses",
+  "category": "head",
+  "description": "A tool-less side request (a session title): system prompt in instructions, no tools.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "hi"
+          }
+        ]
+      }
+    ],
+    "instructions": "You are a title generator. Reply with a short title only."
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a title generator. Reply with a short title only."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdng5WW91IGFyZSBhIHRpdGxlIGdlbmVyYXRvci4gUmVwbHkgd2l0aCBhIHNob3J0IHRpdGxlIG9ubHkuZXRvb2xzgGhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymhp",
+    "loose": {
+      "head": [
+        {
+          "role": "system",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a title generator. Reply with a short title only."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWZzeXN0ZW1lcGFydHOBomF0ZHRleHRhdng5WW91IGFyZSBhIHRpdGxlIGdlbmVyYXRvci4gUmVwbHkgd2l0aCBhIHNob3J0IHRpdGxlIG9ubHkuZXRvb2xzgGhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymhp",
+    "keys": {
+      "0": {
+        "head": "00cfacc728b558ee1bd6d0c1f7f967d022",
+        "sys": "0034ff5f079f2a560a396565d96341ca6c",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f"
+        ],
+        "nodes": [
+          "0027a1f850984af81d8d85a1bf9584fe5b"
+        ],
+        "loose_head": "008cb4d0422d31af0efbb20b498cf64b18",
+        "loose_sys": "00925e1062c37de5a75a7b0357d641c392",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022"
+        ],
+        "loose_nodes": [
+          "001d6724b44b3ec7626b12edbb19486ca1"
+        ],
+        "conv": "0026100f7dda5eb88fda67c845b27e8820"
+      },
+      "255": {
+        "head": "ffebe0bf5cd5d1978f3462b64eab8060ef",
+        "sys": "ff04f1651445e9b8710ce71d9dda49d271",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef"
+        ],
+        "nodes": [
+          "ff1ea33d8054e642b204dae40767e13b41"
+        ],
+        "loose_head": "fff26675011c0a88c8ee793a05dd249e83",
+        "loose_sys": "ff27324db4c0142d23d6430c20bc1d28ae",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb"
+        ],
+        "loose_nodes": [
+          "ff22ad3d6cd957f3b22768a0f5048c0f6b"
+        ],
+        "conv": "ffaec271fdb74a87fa25e78d2686284cf4"
+      }
+    }
+  }
+}

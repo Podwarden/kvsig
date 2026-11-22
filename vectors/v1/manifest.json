@@ -17,7 +17,7 @@
       "key_b64": "ICEiIyQlJicoKSorLC0uLzAxMjM0NTY3ODk6Ozw9Pj8="
     }
   ],
-  "count": 227,
+  "count": 232,
   "files": [
     {
       "path": "anthropic.messages/cache-control-absent.json",
@@ -1560,8 +1560,43 @@
       "category": "head"
     },
     {
+      "path": "openai.responses/system-as-developer-item-no-tools.json",
+      "sha256": "a547f23168f121faca05f05ee7b51bd153beac661d7c6b9a3352dfd8bbc5b718",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "head"
+    },
+    {
+      "path": "openai.responses/system-as-developer-item-request-options.json",
+      "sha256": "f4b6d512410fb1f578e94a3bf78a714ffc9da444afbf59d1dfa0d9e045d127a3",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "head"
+    },
+    {
+      "path": "openai.responses/system-as-developer-item-tool-turn.json",
+      "sha256": "a929c7d6bc7615d9532375aea03954f8b5e99189acc64a06c8c2cdcc97665be7",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "head"
+    },
+    {
       "path": "openai.responses/system-as-instructions.json",
       "sha256": "7fd60b4ae5cfee6e919f12631f589d4fc9e6a214de06e3ebed079c0f5b61f7b7",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "head"
+    },
+    {
+      "path": "openai.responses/system-as-instructions-no-tools.json",
+      "sha256": "9cf9dbe1dc528e98571930b33b9ea8e82b83f799ed92c4b1e03f9943d9e3ca35",
+      "level": 2,
+      "dialect": "openai.responses",
+      "category": "head"
+    },
+    {
+      "path": "openai.responses/system-as-instructions-tool-turn.json",
+      "sha256": "c2fcfa903919e4ea9998602fae826106da8e359c86cc56754d90eea0a1db1b3a",
       "level": 2,
       "dialect": "openai.responses",
       "category": "head"

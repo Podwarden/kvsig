@@ -34,3 +34,8 @@ The library follows SemVer; spec versions are labelled `kvsig/N`.
   `system-as-system-message` and `system-as-developer-message` pin the
   `loose/1` behaviour: the instructions and developer shapes have different
   head ids and conversation ids. No existing vector changed.
+- Vectors `system-as-developer-item-request-options`,
+  `system-as-instructions-tool-turn`, `system-as-developer-item-tool-turn`,
+  `system-as-instructions-no-tools` and `system-as-developer-item-no-tools`:
+  Responses request options, a tool turn and a tool-less request under both
+  system prompt shapes. No existing vector changed.
