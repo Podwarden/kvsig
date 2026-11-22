@@ -1,0 +1,127 @@
+name: release-js
+
+# Publishes the TypeScript package @kvsig/core to npm with trusted publishing
+# (OIDC): no npm token is stored anywhere, and npm attaches a provenance
+# attestation. See RELEASING.md ("TypeScript package") for the one-time setup.
+#
+# - Push a tag js-vX.Y.Z (matching js/package.json): build, test, publish.
+# - Run the workflow by hand ("Run workflow"): build, test, npm publish --dry-run.
+
+on:
+  push:
+    tags: ["js-v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build, test and pack
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: js
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: js/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: The tag matches the package version
+        if: github.event_name == 'push'
+        run: |
+          version=$(node -p "require('./package.json').version")
+          echo "tag ${GITHUB_REF_NAME}, package ${version}"
+          test "${GITHUB_REF_NAME}" = "js-v${version}"
+      - name: VERSION in src/index.ts matches package.json
+        run: |
+          version=$(node -p "require('./package.json').version")
+          grep -q "export const VERSION = \"${version}\";" src/index.ts
+      - name: The CHANGELOG has an entry for this version
+        run: |
+          version=$(node -p "require('./package.json').version")
+          grep -q "^### @kvsig/core ${version} " ../CHANGELOG.md
+      - run: cmp ../LICENSE LICENSE && cmp ../NOTICE NOTICE
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm pack
+      - name: Conformance runner against the packed build
+        working-directory: .
+        run: |
+          mkdir -p /tmp/consumer && cd /tmp/consumer && npm init -y > /dev/null
+          npm install "$GITHUB_WORKSPACE"/js/kvsig-core-*.tgz
+          cd "$GITHUB_WORKSPACE"
+          KVSIG_JS_DIST=/tmp/consumer/node_modules/@kvsig/core/dist/index.js \
+            python conformance/run.py -v -- node conformance/adapters/ts_adapter.mjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: npm-package
+          path: js/kvsig-core-*.tgz
+          if-no-files-found: error
+
+  test:
+    name: unit tests (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        node: ["18", "20", "22"]
+    defaults:
+      run:
+        working-directory: js
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: js/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  publish:
+    name: publish to npm
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/@kvsig/core
+    permissions:
+      contents: read
+      id-token: write # the OIDC token npm trusted publishing exchanges
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22.14"
+          registry-url: "https://registry.npmjs.org"
+      - name: npm 11.5.1 or later (needed for trusted publishing)
+        run: npm install -g npm@11.6.2 && npm --version
+      - uses: actions/download-artifact@v4
+        with:
+          name: npm-package
+          path: dist
+      - name: Publish (skipped when this version is already on npm)
+        env:
+          DRY_RUN: ${{ github.event_name != 'push' }}
+        run: |
+          tgz=$(ls dist/kvsig-core-*.tgz)
+          version=$(tar -xzOf "$tgz" package/package.json | node -p "JSON.parse(require('fs').readFileSync(0)).version")
+          if npm view "@kvsig/core@${version}" version > /dev/null 2>&1; then
+            echo "@kvsig/core@${version} is already published; nothing to do"
+            exit 0
+          fi
+          if [ "$DRY_RUN" = "true" ]; then
+            npm publish "$tgz" --access public --dry-run
+          else
+            npm publish "$tgz" --access public
+          fi

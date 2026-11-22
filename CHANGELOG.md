@@ -5,7 +5,16 @@ The library follows SemVer; spec versions are labelled `kvsig/N`.
 
 ## Unreleased
 
-Nothing yet.
+### @kvsig/core 0.1.0 (TypeScript, draft 0.1 of `kvsig/1`)
+
+A second, independent implementation in TypeScript, in `js/`, for npm as
+`@kvsig/core` (`npm install @kvsig/core`). Pure TypeScript, no runtime
+dependencies, ESM and CommonJS builds with type declarations, Node 18 or later
+and other JavaScript runtimes. It passes all 232 vectors of `vectors/v1`
+(revision 0.1) at Level 3 for the three dialects, and gives the same `loose/2`
+ids as the Python `LOOSE_V2`. Conformance adapter:
+`conformance/adapters/ts_adapter.mjs`. Released on `js-v*` tags; see
+RELEASING.md. No change to the spec, the vectors or the Python package.
 
 ## 0.1.0 (draft 0.1 of `kvsig/1`)
 
