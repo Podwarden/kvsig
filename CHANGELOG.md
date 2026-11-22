@@ -5,6 +5,41 @@ The library follows SemVer; spec versions are labelled `kvsig/N`.
 
 ## Unreleased
 
+Nothing yet.
+
+## 0.1.0 (draft 0.1 of `kvsig/1`)
+
+The first release. The Python package is published on PyPI as `kvsig`
+(`pip install kvsig`), pure Python, no runtime dependencies, typed, for Python
+3.10 to 3.13.
+
+What 0.1 promises (full text: SPEC.md, "Versioning and compatibility"):
+
+- **Stable ids.** Under the spec label `kvsig/1` and the loose profile
+  `loose/1` (the default), the canonical bytes and ids pinned by `vectors/v1`
+  revision 0.1 (232 vectors) do not change in any later release. A change to
+  them ships under a new label or loose profile version, with its own vectors.
+- **Experimental `loose/2`.** `LOOSE_V2` (decision 0005, proposed) is included,
+  has no vectors yet, and may change until the decision is accepted.
+- **Defaults.** Changing the default loose profile is a breaking change: before
+  1.0 it happens only in a minor release, with a CHANGELOG entry.
+
+Changes in this release:
+
+- The spec status is "draft 0.1". Until each section of SPEC.md is written, the
+  decisions 0001 to 0005 and the vectors are the rules, and the vectors win
+  where the two disagree. New section: Versioning and compatibility.
+- `vectors/v1/manifest.json` gains `"revision": "0.1"`. No vector file changed.
+  The conformance runner prints the vector set revision and the adapter
+  version (new optional `version` field of the `info` answer).
+- `kvsig.__version__`. Package metadata for PyPI; the wheel ships `py.typed`,
+  `LICENSE` and `NOTICE`.
+- A release workflow: tag `vX.Y.Z` builds the sdist and wheel, tests the built
+  wheel on Python 3.10 to 3.13, runs the conformance runner against it and
+  publishes to PyPI with Trusted Publishing. A manual run publishes to TestPyPI.
+
+Everything below was developed before 0.1.0:
+
 - Repository created: licences, governance, specification outline.
 - Decision 0001: canonical bytes are a restricted deterministic CBOR profile.
 - Decision 0002 (proposed): draft canonical rules.

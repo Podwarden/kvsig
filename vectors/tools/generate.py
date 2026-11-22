@@ -33,6 +33,9 @@ import python_adapter as ref  # noqa: E402
 OUT = ROOT / "vectors" / "v1"
 SPEC = "kvsig/1"
 FORMAT = 1
+#: The vector set revision. It moves with the draft revision of the spec; a
+#: revision may add vectors but never changes an existing expected value.
+REVISION = "0.1"
 TEST_KEYS = [
     {"name": "test-0", "epoch": 0, "key_hex": bytes(range(32)).hex()},
     {"name": "test-255", "epoch": 255, "key_hex": bytes(range(32, 64)).hex()},
@@ -255,6 +258,7 @@ def generate() -> dict[str, bytes]:
         "format": FORMAT,
         "loose": "loose/1",
         "status": "draft",
+        "revision": REVISION,
         "keys": TEST_KEYS,
         "count": len(entries),
         "files": entries,

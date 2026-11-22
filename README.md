@@ -4,7 +4,8 @@
 
 [![Code licence: Apache-2.0](https://img.shields.io/badge/code-Apache--2.0-blue.svg)](LICENSE)
 [![Spec licence: CC BY 4.0](https://img.shields.io/badge/spec-CC%20BY%204.0-lightgrey.svg)](LICENSE-SPEC)
-[![Status: draft](https://img.shields.io/badge/status-draft%2C%20pre--0.1-orange.svg)](SPEC.md)
+[![Status: draft 0.1](https://img.shields.io/badge/status-draft%200.1-orange.svg)](SPEC.md#versioning-and-compatibility)
+[![PyPI](https://img.shields.io/pypi/v/kvsig.svg)](https://pypi.org/project/kvsig/)
 
 ```mermaid
 flowchart LR
@@ -14,9 +15,25 @@ flowchart LR
   D --> E["ids: head · message · prefix · conversation"]
 ```
 
-**[Read the draft specification](SPEC.md).** Nothing is installable yet: the
-first release (`0.1.0`, Python with a Rust core) is published once the spec
-draft and its test vectors are in this repository.
+**[Read the draft specification](SPEC.md).** The reference library is on PyPI:
+
+```bash
+pip install kvsig
+```
+
+```python
+from kvsig import Key, canonicalize, ids
+
+key = Key.generate(epoch=1)  # one per deployment; every id depends on it
+canon = canonicalize(request_body, "anthropic.messages")  # None means "no ids"
+if canon is not None:
+    i = ids(canon, key)
+    i.conv  # conversation id: stable across turns, reminders, dates and tool changes
+    i.nodes[-1]  # id of the whole prefix, like a git commit
+    i.sys, i.tools  # the two halves of the head: which one changed?
+```
+
+More in the [Python package README](python/README.md).
 
 ## The problem
 
@@ -60,9 +77,21 @@ kvsig defines that:
 
 ## Status
 
-Draft, version 0.x. Ids may change between 0.x releases. Version 1.0 freezes
-spec v1 after a period of real traffic and an outside review; from then on the
-test vectors are immutable.
+Draft 0.1, reference library 0.1.0. What 0.1 promises:
+
+- **Ids are stable.** Under the spec label `kvsig/1` and the default loose
+  profile `loose/1`, the canonical bytes and ids pinned by the
+  [`vectors/v1`](vectors/) test vectors (revision 0.1) do not change in any
+  later release. A change to them ships as a new label or profile version.
+- **`loose/2` is experimental.** It ships as `LOOSE_V2`, has no vectors yet, and
+  may change until [decision 0005](docs/decisions/0005-developer-role-in-the-loose-form.md)
+  is accepted.
+- **The text is incomplete.** Until each section of [SPEC.md](SPEC.md) is
+  written, the [decisions](docs/decisions/) and the vectors are the rules.
+
+The full policy: [Versioning and compatibility](SPEC.md#versioning-and-compatibility).
+Version 1.0 freezes the text of spec v1 after a period of real traffic and an
+outside review.
 
 The scheme comes from the conversation-identity layer of
 [LM Warden](https://github.com/Podwarden/lm-warden), where it routes agent
@@ -75,11 +104,12 @@ vendor-neutral home.
 |---|---|
 | [`SPEC.md`](SPEC.md) | The normative specification (draft) |
 | [`vectors/`](vectors/) | Test vectors, one directory per spec version |
-| [`python/`](python/) | Reference implementation (pure Python) |
-| [`rust/`](rust/) | Rust core, with Python bindings through PyO3 |
+| [`python/`](python/) | Reference implementation (pure Python), released on PyPI as `kvsig` |
+| [`rust/`](rust/) | Rust core, with Python bindings through PyO3 (not released yet) |
 | [`conformance/`](conformance/) | Runner that checks any implementation against the vectors |
 | [`docs/reading-the-ids.md`](docs/reading-the-ids.md) | What each id identifies, and how to tell what changed between two requests |
 | [`docs/decisions/`](docs/decisions/) | Recorded design decisions |
+| [`CHANGELOG.md`](CHANGELOG.md), [`RELEASING.md`](RELEASING.md) | Release history, and how a release is published |
 
 ## Contributing
 

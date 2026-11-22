@@ -67,6 +67,7 @@ Request: `{"op":"info"}`.
 
 Response: `{"ok":true,"name":"my-impl","spec":"kvsig/1","levels":2,"dialects":["openai.chat"]}`
 
+`version` (optional) is your implementation's version; the runner prints it.
 `levels` is the highest level you claim (1, 2 or 3). `dialects` lists what you
 implement. The runner skips vectors for other dialects and vectors above your
 level. A user can lower the level with `--level`.
@@ -175,5 +176,6 @@ is an ordinary `none: true` answer.
 ## Claiming conformance
 
 Conformance is self-declared. Run the runner at the level you claim and link
-its output in your README. List your implementation in an issue on this
+its output in your README. Name the vector set revision the runner prints (for
+example `kvsig/1 revision 0.1`): a later revision may add vectors. List your implementation in an issue on this
 repository.

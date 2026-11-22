@@ -4,30 +4,61 @@ build-backend = "hatchling.build"
 
 [project]
 name = "kvsig"
-version = "0.0.1.dev0"
-description = "Keyed, content-derived ids for LLM chat conversations (reference implementation)"
+dynamic = ["version"]
+description = "Keyed, content-derived ids for LLM chat conversations: the kvsig reference implementation"
 readme = "README.md"
 requires-python = ">=3.10"
 license = "Apache-2.0"
-license-files = ["LICENSE"]
+license-files = ["LICENSE", "NOTICE"]
 authors = [{ name = "The PodWarden Team" }]
+keywords = [
+  "llm",
+  "conversation-id",
+  "session-affinity",
+  "prompt-cache",
+  "gateway",
+  "routing",
+  "openai",
+  "anthropic",
+  "hmac",
+]
 classifiers = [
-  "Development Status :: 2 - Pre-Alpha",
+  "Development Status :: 3 - Alpha",
   "Intended Audience :: Developers",
+  "Operating System :: OS Independent",
   "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3 :: Only",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Software Development :: Libraries",
   "Typing :: Typed",
 ]
 dependencies = []
 
 [project.urls]
+Homepage = "https://github.com/Podwarden/kvsig"
 Source = "https://github.com/Podwarden/kvsig"
 Specification = "https://github.com/Podwarden/kvsig/blob/main/SPEC.md"
+"Test vectors" = "https://github.com/Podwarden/kvsig/tree/main/vectors"
+Changelog = "https://github.com/Podwarden/kvsig/blob/main/CHANGELOG.md"
+Issues = "https://github.com/Podwarden/kvsig/issues"
 
 [dependency-groups]
 dev = ["pytest>=8", "ruff>=0.6"]
 
+[tool.hatch.version]
+path = "src/kvsig/__init__.py"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/kvsig"]
+
+[tool.hatch.build.targets.sdist]
+include = ["src/kvsig", "tests", "README.md", "LICENSE", "NOTICE", "pyproject.toml"]
+exclude = ["__pycache__", "*.py[cod]"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
