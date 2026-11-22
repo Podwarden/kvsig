@@ -1,0 +1,223 @@
+{
+  "id": "openai.responses/system-as-developer-item-request-options",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.responses",
+  "category": "head",
+  "description": "system-as-developer-item plus per-session request options (prompt_cache_key, include, store: false, max_output_tokens, stream). None of them is content and store: false is not stateful: every id equals system-as-developer-item.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "developer",
+        "content": "You are a coding agent.\n\nAnswer briefly."
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "hi"
+          }
+        ]
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "name": "ls",
+        "description": "List a directory",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    ],
+    "prompt_cache_key": "ses_synthetic0000000000000001",
+    "include": [
+      "reasoning.encrypted_content"
+    ],
+    "store": false,
+    "max_output_tokens": 32000,
+    "stream": true
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "developer",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a coding agent.\n\nAnswer briefly."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWlkZXZlbG9wZXJlcGFydHOBomF0ZHRleHRhdngoWW91IGFyZSBhIGNvZGluZyBhZ2VudC4KCkFuc3dlciBicmllZmx5LmV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXX1obWVzc2FnZXOBomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJoaQ==",
+    "loose": {
+      "head": [
+        {
+          "role": "developer",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a coding agent. Answer briefly."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWlkZXZlbG9wZXJlcGFydHOBomF0ZHRleHRhdngnWW91IGFyZSBhIGNvZGluZyBhZ2VudC4gQW5zd2VyIGJyaWVmbHkuZXRvb2xzgaNkZGVzY3BMaXN0IGEgZGlyZWN0b3J5ZG5hbWVibHNmc2NoZW1heE17InByb3BlcnRpZXMiOnsicGF0aCI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJwYXRoIl0sInR5cGUiOiJvYmplY3QifWhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymhp",
+    "keys": {
+      "0": {
+        "head": "007849bf3927b734ea7d3a09eb4351069a",
+        "sys": "00bd6ebbb6146b357ec3706de3e68861d1",
+        "tools": "00a6f0fc4d3200cad72142381cc1373fac",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f"
+        ],
+        "nodes": [
+          "003b128c99ba20ceea0b2291c498eb4aa2"
+        ],
+        "loose_head": "0048ac23d433e7540bddad2c4534664945",
+        "loose_sys": "008de3cc6e69b259cd2b255f8d5b9d6206",
+        "loose_tools": "00c2381d696f32f448d72e68c2ab636a6b",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022"
+        ],
+        "loose_nodes": [
+          "008617cbf2fc993d965e670d40e4511247"
+        ],
+        "conv": "00554368c36c6272f633c01f4d9cb2a4ce"
+      },
+      "255": {
+        "head": "ffce8cd726486adde3ba8b9485505f3aaa",
+        "sys": "ff2310b9df1c071382f9fa0c61a3921764",
+        "tools": "ff24b0e119a0a56335180c12e8aa192468",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef"
+        ],
+        "nodes": [
+          "ff902a7249c00f586b683848774288b449"
+        ],
+        "loose_head": "ff95433e296ea87b6cb6fc6cc7358e4f86",
+        "loose_sys": "fffe44aa418f1c6d5d37a2ebca5f4e5522",
+        "loose_tools": "ff7248c7b899560c717b25ed247c64482e",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb"
+        ],
+        "loose_nodes": [
+          "ff5531f4bfa5f63c396d23edad5a427176"
+        ],
+        "conv": "ff3df97fe3294e02de374af5a9b0d6a3c3"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "head",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    },
+    {
+      "field": "sys",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    },
+    {
+      "field": "tools",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    },
+    {
+      "field": "msgs",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    },
+    {
+      "field": "nodes",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    },
+    {
+      "field": "loose_head",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    },
+    {
+      "field": "loose_sys",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    },
+    {
+      "field": "loose_tools",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    },
+    {
+      "field": "loose_msgs",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    },
+    {
+      "field": "loose_nodes",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    },
+    {
+      "field": "conv",
+      "other": "openai.responses/system-as-developer-item",
+      "same": true
+    }
+  ]
+}

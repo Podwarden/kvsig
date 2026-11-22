@@ -1558,3 +1558,78 @@ for f in ("sys", "head", "nodes", "loose_sys", "loose_head", "loose_nodes", "con
 for f in ("sys", "head", "nodes", "loose_sys", "loose_head", "conv"):
     relate(_r + "system-as-developer-item", f, _c + "system-as-developer-message", True)
     relate(_r + "system-as-instructions", f, _c + "system-as-system-message", True)
+
+# More Responses shapes around the two system prompt positions: the request
+# options a coding agent sends with every turn, a tool turn, and a tool-less
+# side request (such as a session title), each under `instructions` and under
+# a leading developer item with string content. These are loose/1 relations;
+# in a loose/2 set, loose_sys, loose_head, loose_nodes and conv of each
+# developer-item / instructions pair are equal instead (decision 0005).
+_SP_DEV = {"type": "message", "role": "developer", "content": _SP}
+_SP_OPTS = dict(
+    prompt_cache_key="ses_synthetic0000000000000001",
+    include=["reasoning.encrypted_content"],
+    store=False,
+    max_output_tokens=32000,
+    stream=True,
+)
+_SP_TURN = [
+    _SP_USER,
+    {"type": "function_call", "call_id": "call_1", "name": "ls", "arguments": '{"path": "."}'},
+    {"type": "function_call_output", "call_id": "call_1", "output": "README.md\nsrc"},
+]
+_SP_TITLE = "You are a title generator. Reply with a short title only."
+add(
+    RESP,
+    "system-as-developer-item-request-options",
+    2,
+    "head",
+    "system-as-developer-item plus per-session request options (prompt_cache_key, "
+    "include, store: false, max_output_tokens, stream). None of them is content and "
+    "store: false is not stateful: every id equals system-as-developer-item.",
+    resp([_SP_DEV, _SP_USER], tools=_SP_RESP_TOOLS, **_SP_OPTS),
+)
+_opts, _base = _r + "system-as-developer-item-request-options", _r + "system-as-developer-item"
+for f in ("head", "sys", "tools", "msgs", "nodes", "loose_head", "loose_sys"):
+    relate(_opts, f, _base, True)
+for f in ("loose_tools", "loose_msgs", "loose_nodes", "conv"):
+    relate(_opts, f, _base, True)
+add(
+    RESP,
+    "system-as-instructions-tool-turn",
+    2,
+    "head",
+    "A tool turn (user, function_call, function_call_output) after the system prompt in instructions.",
+    resp(_SP_TURN, instructions=_SP, tools=_SP_RESP_TOOLS),
+)
+add(
+    RESP,
+    "system-as-developer-item-tool-turn",
+    2,
+    "head",
+    "The same tool turn after the same system prompt as a leading developer item. Body "
+    "ids match system-as-instructions-tool-turn; head-derived ids differ under loose/1.",
+    resp([_SP_DEV, *_SP_TURN], tools=_SP_RESP_TOOLS),
+)
+add(
+    RESP,
+    "system-as-instructions-no-tools",
+    2,
+    "head",
+    "A tool-less side request (a session title): system prompt in instructions, no tools.",
+    resp([_SP_USER], instructions=_SP_TITLE),
+)
+add(
+    RESP,
+    "system-as-developer-item-no-tools",
+    2,
+    "head",
+    "The same tool-less request with the system prompt as a leading developer item.",
+    resp([{"type": "message", "role": "developer", "content": _SP_TITLE}, _SP_USER]),
+)
+for _s in ("tool-turn", "no-tools"):
+    _dev, _ins = _r + "system-as-developer-item-" + _s, _r + "system-as-instructions-" + _s
+    for f in ("tools", "msgs", "loose_tools", "loose_msgs"):
+        relate(_dev, f, _ins, True)
+    for f in ("sys", "head", "nodes", "loose_sys", "loose_head", "loose_nodes", "conv"):
+        relate(_dev, f, _ins, False)

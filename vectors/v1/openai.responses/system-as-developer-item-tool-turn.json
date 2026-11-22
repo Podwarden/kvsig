@@ -1,0 +1,295 @@
+{
+  "id": "openai.responses/system-as-developer-item-tool-turn",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.responses",
+  "category": "head",
+  "description": "The same tool turn after the same system prompt as a leading developer item. Body ids match system-as-instructions-tool-turn; head-derived ids differ under loose/1.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "developer",
+        "content": "You are a coding agent.\n\nAnswer briefly."
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "hi"
+          }
+        ]
+      },
+      {
+        "type": "function_call",
+        "call_id": "call_1",
+        "name": "ls",
+        "arguments": "{\"path\": \".\"}"
+      },
+      {
+        "type": "function_call_output",
+        "call_id": "call_1",
+        "output": "README.md\nsrc"
+      }
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "name": "ls",
+        "description": "List a directory",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "path"
+          ]
+        }
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "developer",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a coding agent.\n\nAnswer briefly."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"type\":\"object\",\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"]}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\".\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "README.md\nsrc"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWlkZXZlbG9wZXJlcGFydHOBomF0ZHRleHRhdngoWW91IGFyZSBhIGNvZGluZyBhZ2VudC4KCkFuc3dlciBicmllZmx5LmV0b29sc4GjZGRlc2NwTGlzdCBhIGRpcmVjdG9yeWRuYW1lYmxzZnNjaGVtYXhNeyJ0eXBlIjoib2JqZWN0IiwicHJvcGVydGllcyI6eyJwYXRoIjp7InR5cGUiOiJzdHJpbmcifX0sInJlcXVpcmVkIjpbInBhdGgiXX1obWVzc2FnZXODomRyb2xlZHVzZXJlcGFydHOBomF0ZHRleHRhdmJoaaJkcm9sZWlhc3Npc3RhbnRlcGFydHOBpGF0aXRvb2xfY2FsbGNyZWYAZGFyZ3NseyJwYXRoIjoiLiJ9ZG5hbWVibHOiZHJvbGVkdG9vbGVwYXJ0c4GjYXRrdG9vbF9yZXN1bHRjcmVmAGVwYXJ0c4GiYXRkdGV4dGF2bVJFQURNRS5tZApzcmM=",
+    "loose": {
+      "head": [
+        {
+          "role": "developer",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a coding agent. Answer briefly."
+            }
+          ]
+        }
+      ],
+      "tools": [
+        {
+          "desc": "List a directory",
+          "name": "ls",
+          "schema": "{\"properties\":{\"path\":{\"type\":\"string\"}},\"required\":[\"path\"],\"type\":\"object\"}"
+        }
+      ],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        },
+        {
+          "role": "assistant",
+          "parts": [
+            {
+              "t": "tool_call",
+              "ref": 0,
+              "args": "{\"path\":\".\"}",
+              "name": "ls"
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "parts": [
+            {
+              "t": "tool_result",
+              "ref": 0,
+              "parts": [
+                {
+                  "t": "text",
+                  "v": "README.md src"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWlkZXZlbG9wZXJlcGFydHOBomF0ZHRleHRhdngnWW91IGFyZSBhIGNvZGluZyBhZ2VudC4gQW5zd2VyIGJyaWVmbHkuZXRvb2xzgaNkZGVzY3BMaXN0IGEgZGlyZWN0b3J5ZG5hbWVibHNmc2NoZW1heE17InByb3BlcnRpZXMiOnsicGF0aCI6eyJ0eXBlIjoic3RyaW5nIn19LCJyZXF1aXJlZCI6WyJwYXRoIl0sInR5cGUiOiJvYmplY3QifWhtZXNzYWdlc4OiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2YmhpomRyb2xlaWFzc2lzdGFudGVwYXJ0c4GkYXRpdG9vbF9jYWxsY3JlZgBkYXJnc2x7InBhdGgiOiIuIn1kbmFtZWJsc6Jkcm9sZWR0b29sZXBhcnRzgaNhdGt0b29sX3Jlc3VsdGNyZWYAZXBhcnRzgaJhdGR0ZXh0YXZtUkVBRE1FLm1kIHNyYw==",
+    "keys": {
+      "0": {
+        "head": "007849bf3927b734ea7d3a09eb4351069a",
+        "sys": "00bd6ebbb6146b357ec3706de3e68861d1",
+        "tools": "00a6f0fc4d3200cad72142381cc1373fac",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f",
+          "00b32fa6b6476a84717320141e4bdf4c70",
+          "00b632a66ce6442043aaa1fd41590b572a"
+        ],
+        "nodes": [
+          "003b128c99ba20ceea0b2291c498eb4aa2",
+          "0005e7c2a06c59be119d996d3751d4eb6d",
+          "009ebc81b6f066bbf9ea592479b8d1faaf"
+        ],
+        "loose_head": "0048ac23d433e7540bddad2c4534664945",
+        "loose_sys": "008de3cc6e69b259cd2b255f8d5b9d6206",
+        "loose_tools": "00c2381d696f32f448d72e68c2ab636a6b",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022",
+          "009787e8c50f88148ef2d2f6a0113a1e7d",
+          "0039888045acb9ba2d9f6ed1ee63cb9b8d"
+        ],
+        "loose_nodes": [
+          "008617cbf2fc993d965e670d40e4511247",
+          "00e820936a9da674c910d2e1e19cc039de",
+          "004ad01e0f96dcf74d151181acf6d1ec14"
+        ],
+        "conv": "00554368c36c6272f633c01f4d9cb2a4ce"
+      },
+      "255": {
+        "head": "ffce8cd726486adde3ba8b9485505f3aaa",
+        "sys": "ff2310b9df1c071382f9fa0c61a3921764",
+        "tools": "ff24b0e119a0a56335180c12e8aa192468",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef",
+          "ff30f303462cef7d2a94bc885c7ee27b1c",
+          "ff8907d3609023dd828320e22e55c47f4b"
+        ],
+        "nodes": [
+          "ff902a7249c00f586b683848774288b449",
+          "ffa120ffb43939303d51dae12d761cc8ef",
+          "ffa5a61fc8ba34e073d092a184b255359e"
+        ],
+        "loose_head": "ff95433e296ea87b6cb6fc6cc7358e4f86",
+        "loose_sys": "fffe44aa418f1c6d5d37a2ebca5f4e5522",
+        "loose_tools": "ff7248c7b899560c717b25ed247c64482e",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb",
+          "ff51fa5dfd7665f4bf282f92c6f68c0773",
+          "ffbdad21a8f1262c14f44d6eb6a317292d"
+        ],
+        "loose_nodes": [
+          "ff5531f4bfa5f63c396d23edad5a427176",
+          "fffa35a9594d95e3066f2e00aa6bd95492",
+          "ff74c563b20cae5c096df622704739b04e"
+        ],
+        "conv": "ff3df97fe3294e02de374af5a9b0d6a3c3"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "tools",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": true
+    },
+    {
+      "field": "msgs",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": true
+    },
+    {
+      "field": "loose_tools",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": true
+    },
+    {
+      "field": "loose_msgs",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": true
+    },
+    {
+      "field": "sys",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": false
+    },
+    {
+      "field": "head",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": false
+    },
+    {
+      "field": "nodes",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": false
+    },
+    {
+      "field": "loose_sys",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": false
+    },
+    {
+      "field": "loose_head",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": false
+    },
+    {
+      "field": "loose_nodes",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": false
+    },
+    {
+      "field": "conv",
+      "other": "openai.responses/system-as-instructions-tool-turn",
+      "same": false
+    }
+  ]
+}

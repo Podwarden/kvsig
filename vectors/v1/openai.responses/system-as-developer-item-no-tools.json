@@ -1,0 +1,186 @@
+{
+  "id": "openai.responses/system-as-developer-item-no-tools",
+  "spec": "kvsig/1",
+  "level": 2,
+  "dialect": "openai.responses",
+  "category": "head",
+  "description": "The same tool-less request with the system prompt as a leading developer item.",
+  "input": {
+    "model": "m",
+    "input": [
+      {
+        "type": "message",
+        "role": "developer",
+        "content": "You are a title generator. Reply with a short title only."
+      },
+      {
+        "type": "message",
+        "role": "user",
+        "content": [
+          {
+            "type": "input_text",
+            "text": "hi"
+          }
+        ]
+      }
+    ]
+  },
+  "input_raw_b64": null,
+  "expect": {
+    "none": false,
+    "stateful": false,
+    "canonical": {
+      "head": [
+        {
+          "role": "developer",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a title generator. Reply with a short title only."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "canonical_bytes_b64": "o2RoZWFkgaJkcm9sZWlkZXZlbG9wZXJlcGFydHOBomF0ZHRleHRhdng5WW91IGFyZSBhIHRpdGxlIGdlbmVyYXRvci4gUmVwbHkgd2l0aCBhIHNob3J0IHRpdGxlIG9ubHkuZXRvb2xzgGhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymhp",
+    "loose": {
+      "head": [
+        {
+          "role": "developer",
+          "parts": [
+            {
+              "t": "text",
+              "v": "You are a title generator. Reply with a short title only."
+            }
+          ]
+        }
+      ],
+      "tools": [],
+      "messages": [
+        {
+          "role": "user",
+          "parts": [
+            {
+              "t": "text",
+              "v": "hi"
+            }
+          ]
+        }
+      ]
+    },
+    "loose_bytes_b64": "o2RoZWFkgaJkcm9sZWlkZXZlbG9wZXJlcGFydHOBomF0ZHRleHRhdng5WW91IGFyZSBhIHRpdGxlIGdlbmVyYXRvci4gUmVwbHkgd2l0aCBhIHNob3J0IHRpdGxlIG9ubHkuZXRvb2xzgGhtZXNzYWdlc4GiZHJvbGVkdXNlcmVwYXJ0c4GiYXRkdGV4dGF2Ymhp",
+    "keys": {
+      "0": {
+        "head": "007ec1b5bab8b3574889033aa961f4c6b8",
+        "sys": "008c64fcf3d4dc3c635d4087631f779471",
+        "tools": "00b8123629140a8d40193af6ddfacf40e2",
+        "msgs": [
+          "006ab68e2caa01601261dfe441a3bd1f2f"
+        ],
+        "nodes": [
+          "00108402c716468d240e4e83fce5661774"
+        ],
+        "loose_head": "00cdde22f1fb963a9a89b225d4c82708e2",
+        "loose_sys": "00f8886f8cd75aee5ba157462cfcdad120",
+        "loose_tools": "0013873c033a9cdeb0443ce650abc1889c",
+        "loose_msgs": [
+          "0030c8d514f10b514ce19f4962d66ed022"
+        ],
+        "loose_nodes": [
+          "0057ac0e404ac2e5823a2fa75064b3b40a"
+        ],
+        "conv": "00bc13ec1156a775a98d8d15b62975b03e"
+      },
+      "255": {
+        "head": "ffa8f9a835b7c63b6b617d766e565a71cf",
+        "sys": "ff618dd4b77269e299a886805963833d0a",
+        "tools": "ff16e617a3559d24138bbed6f9caa145bc",
+        "msgs": [
+          "ffc57fc60797f078abeac38d67d6aad3ef"
+        ],
+        "nodes": [
+          "ff09543abd79fecda4e2e7136c51b7ecb1"
+        ],
+        "loose_head": "ff2d47376edeeb4d87a4bcebf0b26be3b2",
+        "loose_sys": "ff1bd5e911d0f08a78644adfd43ac9eb7d",
+        "loose_tools": "ff9b185ea736f2560aeb33981ada6d8954",
+        "loose_msgs": [
+          "fff3f394cc6774553bf38b6cd1489fabfb"
+        ],
+        "loose_nodes": [
+          "ff55cc69704c290a09f488680d4cee804f"
+        ],
+        "conv": "ff6ff5ac97c97a4c20d1444ed8fd2a8e00"
+      }
+    }
+  },
+  "relations": [
+    {
+      "field": "tools",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": true
+    },
+    {
+      "field": "msgs",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": true
+    },
+    {
+      "field": "loose_tools",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": true
+    },
+    {
+      "field": "loose_msgs",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": true
+    },
+    {
+      "field": "sys",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": false
+    },
+    {
+      "field": "head",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": false
+    },
+    {
+      "field": "nodes",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": false
+    },
+    {
+      "field": "loose_sys",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": false
+    },
+    {
+      "field": "loose_head",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": false
+    },
+    {
+      "field": "loose_nodes",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": false
+    },
+    {
+      "field": "conv",
+      "other": "openai.responses/system-as-instructions-no-tools",
+      "same": false
+    }
+  ]
+}
