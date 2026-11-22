@@ -1,0 +1,78 @@
+{
+  "name": "@kvsig/core",
+  "version": "0.1.0",
+  "description": "Keyed, content-derived ids for LLM chat conversations (kvsig/1): an independent TypeScript implementation for OpenAI Chat Completions, OpenAI Responses and Anthropic Messages.",
+  "license": "Apache-2.0",
+  "author": "PodWarden Team",
+  "homepage": "https://github.com/Podwarden/kvsig/tree/main/js#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Podwarden/kvsig.git",
+    "directory": "js"
+  },
+  "bugs": {
+    "url": "https://github.com/Podwarden/kvsig/issues"
+  },
+  "keywords": [
+    "kvsig",
+    "llm",
+    "conversation-id",
+    "prompt-cache",
+    "session-affinity",
+    "openai",
+    "anthropic",
+    "hmac",
+    "cbor"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist/index.js",
+    "dist/index.cjs",
+    "dist/index.d.ts",
+    "dist/index.d.cts",
+    "README.md",
+    "LICENSE",
+    "NOTICE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "conformance": "cd .. && python3 conformance/run.py -- node conformance/adapters/ts_adapter.mjs",
+    "prepack": "npm run build"
+  },
+  "devDependencies": {
+    "@types/node": "18.19.130",
+    "tsup": "8.5.0",
+    "typescript": "5.8.3",
+    "vite": "6.3.5",
+    "vitest": "3.2.4"
+  },
+  "overrides": {
+    "vite": "$vite"
+  }
+}

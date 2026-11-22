@@ -7,6 +7,7 @@ protocol, so an implementation in any language needs only a thin adapter.
 ```
 python conformance/run.py [--level N] [--only TEXT] [-v] -- <adapter command>
 python conformance/run.py -- python conformance/adapters/python_adapter.py
+python conformance/run.py -- node conformance/adapters/ts_adapter.mjs   # after: cd js && npm ci && npm run build
 python conformance/run.py --manifest-only        # no adapter: hashes only
 ```
 
