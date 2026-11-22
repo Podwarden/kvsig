@@ -1496,3 +1496,65 @@ for _base, _slug, _turns in _TWINS:
     )
     relate("openai.chat/" + _slug, "loose_msgs", "openai.chat/" + _base, True)
     relate("openai.chat/" + _slug, "msgs", "openai.chat/" + _base, False)
+
+# system prompt shapes (decision 0005): one system prompt sent as Responses
+# `instructions`, as a leading Responses `developer` item, and as a Chat
+# `system` or `developer` message. Under loose/1 the role is kept, so the
+# instructions shape and the developer shapes are different heads and
+# different conversations; each pairs with its Chat twin.
+_SP = "You are a coding agent.\n\nAnswer briefly."
+_SP_RESP_TOOLS = [
+    {"type": "function", "name": "ls", "description": "List a directory", "parameters": SCHEMA}
+]
+_SP_CHAT_TOOLS = [
+    {
+        "type": "function",
+        "function": {"name": "ls", "description": "List a directory", "parameters": SCHEMA},
+    }
+]
+_SP_USER = {"type": "message", "role": "user", "content": [{"type": "input_text", "text": "hi"}]}
+add(
+    RESP,
+    "system-as-instructions",
+    2,
+    "head",
+    "The system prompt in instructions: a head system message.",
+    resp([_SP_USER], instructions=_SP, tools=_SP_RESP_TOOLS),
+)
+add(
+    RESP,
+    "system-as-developer-item",
+    2,
+    "head",
+    "The same system prompt as a leading developer item: a head developer message. "
+    "The role is kept in the exact and loose/1 forms, so sys, head and conv differ "
+    "from system-as-instructions.",
+    resp(
+        [{"type": "message", "role": "developer", "content": _SP}, _SP_USER],
+        tools=_SP_RESP_TOOLS,
+    ),
+)
+add(
+    CHAT,
+    "system-as-system-message",
+    2,
+    "head",
+    "The same system prompt as a Chat system message.",
+    chat([{"role": "system", "content": _SP}, usr("hi")], tools=_SP_CHAT_TOOLS),
+)
+add(
+    CHAT,
+    "system-as-developer-message",
+    2,
+    "head",
+    "The same system prompt as a Chat developer message.",
+    chat([{"role": "developer", "content": _SP}, usr("hi")], tools=_SP_CHAT_TOOLS),
+)
+_r, _c = RESP + "/", CHAT + "/"
+for f in ("msgs", "tools", "loose_msgs", "loose_tools"):
+    relate(_r + "system-as-developer-item", f, _r + "system-as-instructions", True)
+for f in ("sys", "head", "nodes", "loose_sys", "loose_head", "loose_nodes", "conv"):
+    relate(_r + "system-as-developer-item", f, _r + "system-as-instructions", False)
+for f in ("sys", "head", "nodes", "loose_sys", "loose_head", "conv"):
+    relate(_r + "system-as-developer-item", f, _c + "system-as-developer-message", True)
+    relate(_r + "system-as-instructions", f, _c + "system-as-system-message", True)

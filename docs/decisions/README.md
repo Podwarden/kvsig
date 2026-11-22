@@ -10,3 +10,4 @@ discussed.
 | [0002](0002-draft-canonical-rules.md) | Draft canonical rules (JSON text, data model, loose profile, ids) | proposed |
 | [0003](0003-dialect-mappings.md) | Dialect mappings: Anthropic Messages and OpenAI Responses | proposed |
 | [0004](0004-test-vectors.md) | Test vectors: format, keys and the first set | proposed |
+| [0005](0005-developer-role-in-the-loose-form.md) | The developer role in the loose form (`loose/2`) | proposed |
