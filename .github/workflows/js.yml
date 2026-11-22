@@ -1,0 +1,83 @@
+name: js
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: build, test and conformance (Node ${{ matrix.node }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node: ["18", "20", "22"]
+    defaults:
+      run:
+        working-directory: js
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+          cache-dependency-path: js/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: js/LICENSE and js/NOTICE are copies of the root files
+        run: cmp ../LICENSE LICENSE && cmp ../NOTICE NOTICE
+      - run: npm ci
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build
+      - name: Conformance runner against the build (all 232 vectors, Level 3)
+        working-directory: .
+        run: python conformance/run.py -v -- node conformance/adapters/ts_adapter.mjs
+
+  package:
+    name: npm pack carries exactly the whitelisted files and loads as ESM and CJS
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: js
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: js/package-lock.json
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: npm ci
+      - run: npm pack
+      - name: dist imports nothing but @noble/hashes (no Node built-ins)
+        run: |
+          grep -hoE "(from |require\()['\"][^'\"]+['\"]" dist/index.js dist/index.cjs | sort -u | tee imports.txt
+          ! grep -vE "['\"]@noble/hashes/(sha2|hmac)['\"]" imports.txt
+      - name: The tarball holds only dist, README, LICENSE, NOTICE and package.json
+        run: |
+          tar -tzf kvsig-core-*.tgz | LC_ALL=C sort > files.txt
+          cat files.txt
+          printf '%s\n' package/LICENSE package/NOTICE package/README.md package/dist/index.cjs \
+            package/dist/index.d.cts package/dist/index.d.ts package/dist/index.js package/package.json | LC_ALL=C sort > want.txt
+          diff want.txt files.txt
+      - name: Install the tarball into a clean project and import it both ways
+        run: |
+          mkdir -p /tmp/consumer && cd /tmp/consumer && npm init -y > /dev/null
+          npm install "$GITHUB_WORKSPACE"/js/kvsig-core-*.tgz
+          node -e "const k = require('@kvsig/core'); if (k.VERSION !== require('@kvsig/core/package.json').version) process.exit(1)"
+          node --input-type=module -e "import { ids, canonicalize, TEST_KEY } from '@kvsig/core'; const i = ids(canonicalize({messages: [{role: 'user', content: 'Hello, world'}]}, 'openai.chat'), TEST_KEY); console.log(i.msgs)"
+      - name: Conformance runner against the installed package
+        working-directory: .
+        run: KVSIG_JS_DIST=/tmp/consumer/node_modules/@kvsig/core/dist/index.js python conformance/run.py -- node conformance/adapters/ts_adapter.mjs

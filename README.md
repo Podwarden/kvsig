@@ -33,7 +33,9 @@ if canon is not None:
     i.sys, i.tools  # the two halves of the head: which one changed?
 ```
 
-More in the [Python package README](python/README.md).
+More in the [Python package README](python/README.md). A TypeScript
+implementation for Node, browsers, Deno, Bun and edge runtimes is in
+[`js/`](js/README.md) (`npm install @kvsig/core`).
 
 ## The problem
 
@@ -105,6 +107,7 @@ vendor-neutral home.
 | [`SPEC.md`](SPEC.md) | The normative specification (draft) |
 | [`vectors/`](vectors/) | Test vectors, one directory per spec version |
 | [`python/`](python/) | Reference implementation (pure Python), released on PyPI as `kvsig` |
+| [`js/`](js/) | Independent TypeScript implementation, for npm as `@kvsig/core` |
 | [`rust/`](rust/) | Rust core, with Python bindings through PyO3 (not released yet) |
 | [`conformance/`](conformance/) | Runner that checks any implementation against the vectors |
 | [`docs/reading-the-ids.md`](docs/reading-the-ids.md) | What each id identifies, and how to tell what changed between two requests |
