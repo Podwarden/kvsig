@@ -74,5 +74,8 @@
   },
   "overrides": {
     "vite": "$vite"
+  },
+  "dependencies": {
+    "@noble/hashes": "1.8.0"
   }
 }

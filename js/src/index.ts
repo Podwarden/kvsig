@@ -1,8 +1,8 @@
 // kvsig: keyed, content-derived ids for LLM chat conversations.
 //
 // An independent TypeScript implementation of the kvsig specification
-// (`kvsig/1`, draft 0.1). Pure functions, no runtime dependencies. Hostile
-// input never throws: it yields null.
+// (`kvsig/1`, draft 0.1). Pure functions; the only runtime dependency is
+// @noble/hashes. Hostile input never throws: it yields null.
 
 import { encode as cborEncode, type CborValue } from "./cbor.js";
 import * as anthropicMessages from "./dialects/anthropic-messages.js";

@@ -8,13 +8,17 @@ The library follows SemVer; spec versions are labelled `kvsig/N`.
 ### @kvsig/core 0.1.0 (TypeScript, draft 0.1 of `kvsig/1`)
 
 A second, independent implementation in TypeScript, in `js/`, for npm as
-`@kvsig/core` (`npm install @kvsig/core`). Pure TypeScript, no runtime
-dependencies, ESM and CommonJS builds with type declarations, Node 18 or later
+`@kvsig/core` (`npm install @kvsig/core`). Pure TypeScript with one runtime
+dependency (`@noble/hashes` 1.8.0, for SHA-256 and HMAC), ESM and CommonJS builds with type declarations, Node 18 or later
 and other JavaScript runtimes. It passes all 232 vectors of `vectors/v1`
 (revision 0.1) at Level 3 for the three dialects, and gives the same `loose/2`
 ids as the Python `LOOSE_V2`. Conformance adapter:
 `conformance/adapters/ts_adapter.mjs`. Released on `js-v*` tags; see
 RELEASING.md. No change to the spec, the vectors or the Python package.
+
+A request body with `NaN` or `Infinity` gets no ids here (strict RFC 8259
+parsing of raw bodies), while the Python 0.1 package accepts them. Decided for
+0.2: Python will match and a vector will pin it.
 
 ## 0.1.0 (draft 0.1 of `kvsig/1`)
 

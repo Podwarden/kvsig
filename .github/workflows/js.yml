@@ -61,6 +61,10 @@ jobs:
           python-version: "3.12"
       - run: npm ci
       - run: npm pack
+      - name: dist imports nothing but @noble/hashes (no Node built-ins)
+        run: |
+          grep -hoE "(from |require\()['\"][^'\"]+['\"]" dist/index.js dist/index.cjs | sort -u | tee imports.txt
+          ! grep -vE "['\"]@noble/hashes/(sha2|hmac)['\"]" imports.txt
       - name: The tarball holds only dist, README, LICENSE, NOTICE and package.json
         run: |
           tar -tzf kvsig-core-*.tgz | LC_ALL=C sort > files.txt

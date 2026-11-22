@@ -12,11 +12,12 @@ tell which conversation each request belongs to, which prefix it shares with an
 earlier request, and whether the system prompt or the tools changed, the same
 way in OpenAI Chat Completions, OpenAI Responses and Anthropic Messages.
 
-- Pure TypeScript, no runtime dependencies, no native code.
+- Pure TypeScript, no native code. One runtime dependency,
+  [`@noble/hashes`](https://github.com/paulmillr/noble-hashes) (audited,
+  itself dependency-free), for SHA-256 and HMAC.
 - ESM and CommonJS builds with type declarations.
 - Node 18 or later, browsers, Deno, Bun and edge runtimes. Ids are computed
-  synchronously (a built-in SHA-256 and HMAC, checked against `node:crypto` and
-  the NIST and RFC 4231 test vectors).
+  synchronously (no async Web Crypto round trip).
 
 ## Install
 
@@ -65,7 +66,8 @@ const canon = canonicalize(rawBodyBytes, "anthropic.messages");
 
 The library parses it with its own strict, order-preserving JSON parser
 (duplicate members: the last value wins, at the first position; lone
-surrogates become U+FFFD), as decision 0002 requires.
+surrogates become U+FFFD), as decision 0002 requires. It is strict RFC 8259:
+a body holding `NaN` or `Infinity` gets no ids.
 
 **Node 18.** `Key.generate` needs Web Crypto on `globalThis`, which Node 18 does
 not expose by default. Use `new Key(epoch, crypto.randomBytes(32))` from
