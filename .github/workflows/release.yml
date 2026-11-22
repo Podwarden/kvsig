@@ -1,0 +1,131 @@
+name: release
+
+# Publishes the Python package with PyPI Trusted Publishing (OIDC): no API
+# token is stored anywhere. See RELEASING.md for the one-time setup.
+#
+# - Push a tag vX.Y.Z (matching kvsig.__version__): build, test, publish to PyPI.
+# - Run the workflow by hand ("Run workflow"): build, test, publish to TestPyPI.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: build sdist and wheel
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: The tag matches the package version
+        if: github.event_name == 'push'
+        run: |
+          version=$(sed -n 's/^__version__ = "\(.*\)"$/\1/p' python/src/kvsig/__init__.py)
+          echo "tag ${GITHUB_REF_NAME}, package ${version}"
+          test "${GITHUB_REF_NAME}" = "v${version}"
+      - name: The CHANGELOG has an entry for this version
+        run: |
+          version=$(sed -n 's/^__version__ = "\(.*\)"$/\1/p' python/src/kvsig/__init__.py)
+          grep -q "^## ${version} " CHANGELOG.md
+      - run: cmp LICENSE python/LICENSE && cmp NOTICE python/NOTICE
+      - run: python -m pip install build twine
+      - run: python -m build python --outdir dist
+      - run: python -m twine check --strict dist/*
+      - name: The wheel carries py.typed, LICENSE and NOTICE
+        run: |
+          unzip -l dist/*.whl
+          unzip -l dist/*.whl | grep -q 'kvsig/py.typed'
+          unzip -l dist/*.whl | grep -q 'licenses/LICENSE'
+          unzip -l dist/*.whl | grep -q 'licenses/NOTICE'
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          if-no-files-found: error
+
+  test:
+    name: test the built wheel (Python ${{ matrix.python }})
+    needs: build
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: true
+      matrix:
+        python: ["3.10", "3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: Install the wheel into a clean venv
+        run: |
+          python -m venv /tmp/venv
+          /tmp/venv/bin/pip install dist/*.whl pytest cbor2
+          /tmp/venv/bin/python -c "import kvsig, sys; print(kvsig.__version__, kvsig.__file__)"
+      # Run from outside the checkout so the tests import the installed wheel,
+      # not python/src.
+      - name: Unit tests against the wheel
+        working-directory: /tmp
+        run: /tmp/venv/bin/python -m pytest -q -p no:cacheprovider "$GITHUB_WORKSPACE/python/tests"
+      - name: Conformance runner against the wheel
+        run: |
+          status=0
+          /tmp/venv/bin/python conformance/run.py -v -- \
+            /tmp/venv/bin/python conformance/adapters/python_adapter.py > conformance.txt || status=$?
+          cat conformance.txt
+          test "$status" -eq 0
+          grep -q "kvsig-python $(/tmp/venv/bin/python -c 'import kvsig; print(kvsig.__version__)')" conformance.txt
+      - name: Vector files are what the generator produces; independent cross-check
+        run: |
+          /tmp/venv/bin/python vectors/tools/generate.py --check
+          /tmp/venv/bin/python vectors/tools/xcheck.py
+
+  publish-testpypi:
+    name: publish to TestPyPI (manual run)
+    if: github.event_name == 'workflow_dispatch'
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/project/kvsig/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+
+  publish-pypi:
+    name: publish to PyPI (tag)
+    if: github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v')
+    needs: [build, test]
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/project/kvsig/
+    permissions:
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - uses: pypa/gh-action-pypi-publish@release/v1

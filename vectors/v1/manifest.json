@@ -3,6 +3,7 @@
   "format": 1,
   "loose": "loose/1",
   "status": "draft",
+  "revision": "0.1",
   "keys": [
     {
       "name": "test-0",

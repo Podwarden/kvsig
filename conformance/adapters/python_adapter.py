@@ -59,6 +59,7 @@ def handle(req: dict[str, Any]) -> dict[str, Any]:
         return {
             "ok": True,
             "name": "kvsig-python",
+            "version": getattr(kvsig, "__version__", None),
             "spec": kvsig.SPEC_LABEL,
             "levels": LEVELS,
             "dialects": DIALECTS,

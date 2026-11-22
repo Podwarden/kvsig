@@ -1,7 +1,8 @@
 """kvsig: keyed, content-derived ids for LLM chat conversations.
 
-Reference implementation of the kvsig specification (draft). Pure functions,
-no third-party dependencies. Hostile input never raises: it yields ``None``.
+Reference implementation of the kvsig specification (``kvsig/1``, draft 0.1).
+Pure functions, no third-party dependencies. Hostile input never raises: it
+yields ``None``.
 """
 
 from __future__ import annotations
@@ -20,6 +21,8 @@ from kvsig.keys import TEST_KEY, InMemoryKeyProvider, Key, KeyProvider, KeyRing
 from kvsig.loose import LOOSE_V1, LOOSE_V2, LooseProfile, loose
 from kvsig.model import DEFAULT_MAX_BYTES, Budget, Canon, Message, NoIds, finish
 
+__version__ = "0.1.0"
+
 __all__ = [
     "DEFAULT_MAX_BYTES",
     "LOOSE_V1",
@@ -27,6 +30,7 @@ __all__ = [
     "SUPPORTED",
     "SPEC_LABEL",
     "TEST_KEY",
+    "__version__",
     "Canon",
     "Dialect",
     "IdCache",

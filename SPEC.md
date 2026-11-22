@@ -1,8 +1,14 @@
 # Content-Derived Conversation Identifiers for LLM Chat APIs (kvsig/1)
 
-**Status: working draft. Not stable. Do not implement against it yet.**
-Labels, byte encodings and ids in this document will change before spec v1 is
-frozen. Version 1.0 of the reference library marks the freeze.
+**Status: draft 0.1 of `kvsig/1`.** The rules are not complete as prose yet,
+but the ids they produce are pinned: see
+[Versioning and compatibility](#versioning-and-compatibility). Version 1.0 of
+the reference library marks the freeze of the text.
+
+Until each section below is written, the normative rules are the decisions in
+[docs/decisions](docs/decisions/) (0001 to 0005) as of this revision, and the
+test vectors in [vectors/v1](vectors/). Where the two disagree, the vectors win
+and the disagreement is a bug in the text.
 
 Licence: [CC BY 4.0](LICENSE-SPEC).
 
@@ -39,10 +45,54 @@ request, and each open question becomes a test vector.
    conversation id across dialects), Level 3 (reply linkage).
 10. **Privacy considerations.**
 11. **Security considerations.**
-12. **Versioning.**
+12. **Versioning.** Written: see [Versioning and compatibility](#versioning-and-compatibility).
 13. **Test vectors.** Format and manifest (draft: [decision 0004](docs/decisions/0004-test-vectors.md)).
 14. **Registries.** Dialects, part types, labels, loose profiles.
 15. **Prior art and acknowledgements.**
 
 Annexes (informative): OpenTelemetry mapping, reference pseudo-code, key file
 format, lineage edge vocabulary.
+
+## Versioning and compatibility
+
+This section applies from draft 0.1 (reference library 0.1.0) on.
+
+There are three version numbers, and they move independently:
+
+| Name | Example | What it versions |
+|---|---|---|
+| Spec label | `kvsig/1` | Canonical form, canonical bytes, id derivation. It is hashed into every id. |
+| Loose profile | `loose/1`, `loose/2` | The loose table. Its name is hashed into every loose id. |
+| Draft revision and library version | draft 0.1, `kvsig` 0.1.0 | The text, the vector set revision and an implementation. |
+
+**What is stable.** For the spec label `kvsig/1` and the loose profile
+`loose/1`, the canonical bytes and every id given by the vectors in
+`vectors/v1` (vector set revision 0.1, 232 vectors, listed in
+`vectors/v1/manifest.json` with their hashes) are fixed. An implementation
+that passes them today keeps passing them. Specifically:
+
+1. No release changes the canonical bytes or the ids of any input under an
+   existing spec label and loose profile. A change that would, including one
+   that comes out of accepting a proposed decision, is published under a new
+   label (`kvsig/2`) or a new loose profile (`loose/3`), with its own vector
+   set. The old label or profile stays available by name.
+2. The expected values of an existing vector never change. New vectors may be
+   added to `vectors/v1`, in a new vector set revision, only when they pin
+   what the current rules already give.
+3. A reference library that disagrees with a vector has a bug, and the fix
+   is a patch release.
+4. Changing the library's *default* profile (for example to `loose/2`) is a
+   breaking change: before 1.0 it happens only in a minor release (0.x to
+   0.x+1), with a "Changed defaults" entry in the CHANGELOG.
+
+**What is not stable yet.**
+
+- `loose/2` (decision 0005, proposed) ships in the reference library as
+  `LOOSE_V2` but is experimental. It has no vector set, and its ids may change
+  until the decision is accepted and a `loose/2` vector set is published.
+- Dialects, part types and request fields that no vector covers. Their
+  behaviour is the reference library's, and a later vector may pin it.
+- The Python API outside the ids it returns. It follows SemVer from 0.1.0 with
+  the 0.x rule: a minor release may change the API, a patch release does not.
+
+After the freeze (1.0) the vectors of a frozen spec version are immutable.

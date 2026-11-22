@@ -211,16 +211,19 @@ def main() -> int:
         print("vector set is not self-consistent:", *rel, sep="\n  ")
         return 2
     keys = man["keys"]
+    vector_set = f"{man.get('spec')} revision {man.get('revision', 'unversioned')}"
 
     a = Adapter(cmd)
     try:
         info = a.call({"op": "info"})
         level = args.level or info["levels"]
         dialects = list(info["dialects"])
+        version = f" {info['version']}" if info.get("version") else ""
         print(
-            f"adapter {info.get('name')}  spec {info.get('spec')}  level {level}  "
+            f"adapter {info.get('name')}{version}  spec {info.get('spec')}  level {level}  "
             f"dialects {', '.join(dialects)}"
         )
+        print(f"vectors {vector_set}")
         cells: dict[tuple[int, str], list[int]] = {}
         failures = []
         for v in vecs:
@@ -262,7 +265,7 @@ def main() -> int:
     if len(failures) > len(shown):
         print(f"... {len(failures) - len(shown)} more (use -v)")
     if not failures:
-        print(f"Level {level} conformant for: {', '.join(dialects)}")
+        print(f"Level {level} conformant for: {', '.join(dialects)} (vectors {vector_set})")
     return 1 if failures else 0
 
 

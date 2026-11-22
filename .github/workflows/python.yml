@@ -20,8 +20,8 @@ jobs:
         working-directory: python
     steps:
       - uses: actions/checkout@v4
-      - name: python/LICENSE is a copy of the root LICENSE
-        run: cmp ../LICENSE LICENSE
+      - name: python/LICENSE and python/NOTICE are copies of the root files
+        run: cmp ../LICENSE LICENSE && cmp ../NOTICE NOTICE
       - uses: astral-sh/setup-uv@v6
         with:
           python-version: ${{ matrix.python }}
@@ -30,3 +30,21 @@ jobs:
       - run: uv run --with ruff ruff format --check .
       - name: Cross-check CBOR against an independent encoder
         run: uv run --with pytest --with cbor2 pytest -q tests/test_cbor_xcheck.py
+
+  package:
+    name: sdist and wheel build and pass twine check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install build twine
+      - run: python -m build python --outdir dist
+      - run: python -m twine check --strict dist/*
+      - name: The wheel carries py.typed, LICENSE and NOTICE
+        run: |
+          unzip -l dist/*.whl
+          unzip -l dist/*.whl | grep -q 'kvsig/py.typed'
+          unzip -l dist/*.whl | grep -q 'licenses/LICENSE'
+          unzip -l dist/*.whl | grep -q 'licenses/NOTICE'
